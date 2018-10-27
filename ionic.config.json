@@ -1,0 +1,7 @@
+{
+  "name": "cadeOnibus",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
