@@ -1,10 +1,7 @@
-import { HomePage } from './../home/home';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { RegisterPage } from './../register/register';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { User } from '../../models/user';
-import { Observable } from 'rxjs';
 
 @IonicPage()
 @Component({
@@ -14,6 +11,7 @@ import { Observable } from 'rxjs';
 export class LoginPage {
 
   user = {} as User;
+
   constructor(
     private navCtrl: NavController,
     private navParams: NavParams,
@@ -25,11 +23,14 @@ export class LoginPage {
     console.log('ionViewDidLoad LoginPage');
   }
 
+  public register(): void {
+    this.navCtrl.push('RegisterPage');
+  }
+
   /**
-   * @author UnDer7
    * Realiza o login utilizando email e senha.
    * Se a operação for realizada com sucesso o usuário sera redirecionado pra HomePage
-   * @param user - Usuario
+   * @param user - Model User
    */
   public async login(user: User) {
     this.fireAuth.auth.signInWithEmailAndPassword(user.email, user.password).then(success => {
@@ -39,15 +40,15 @@ export class LoginPage {
       }
     }).catch(fail => {
       console.log('Erro ao realizar login!\nERROR: ', fail)
-      this.isValid(fail.code);
+      this.showToast(fail.code);
     })
   }
 
-  public register(): void {
-    this.navCtrl.push('RegisterPage');
-  }
-
-  public isValid(code: string){
+  /**
+   * Mostra um Toast se o login falhar
+   * @param code - {fail.code} Resposta da Promise
+   */
+  private showToast(code: string): void{
     if(code === 'auth/user-not-found'){
       this.toast.create({
         message: `Usuário não cadastro`,

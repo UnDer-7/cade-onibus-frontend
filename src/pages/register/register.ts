@@ -1,4 +1,3 @@
-import { LoginPage } from './../login/login';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { User } from '../../models/user';
@@ -24,17 +23,11 @@ export class RegisterPage {
     console.log('ionViewDidLoad RegisterPage');
   }
 
-  // public async register(user: User) {
-  //   //Fazer função assíncrona
-  //   console.table(user);
-  //   try {
-  //     const result = await this.fireAuth.auth.createUserWithEmailAndPassword(user.email, user.password);
-  //     console.log("Registro cadastrado com sucesso:\n", result);
-  //   } catch (e) {
-  //     console.log("Erro:", e);
-  //   }
-  // }
-
+  /**
+   * @author UnDer7
+   * Registra um usuário no firebase utilizando email/senha
+   * @param user - Model User
+   */
   public async register(user: User) {
     const result = await this.fireAuth.auth.createUserWithEmailAndPassword(user.email, user.password).then(success => {
       console.log('Cadastro realizado com sucesso\nRETORNO: ', success);
@@ -45,11 +38,15 @@ export class RegisterPage {
       this.navCtrl.setRoot('LoginPage');
     }).catch(fail => {
       console.log('%cFalha ao realizar cadastro', 'color:red', '\nERROR: ', fail);
-     this.isValid(fail.code);
+     this.showToast(fail.code);
     })
   }
 
-  public isValid(code: string){
+  /**
+   * Mostra um Toast se o cadastro falhar
+   * @param code - {fail.code} Resposta da Promise
+   */
+  private showToast(code: string): void{
     if(code === 'auth/email-already-in-use'){
       this.toast.create({
         message: `Email já cadastrado!`,
