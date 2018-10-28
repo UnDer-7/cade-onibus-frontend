@@ -10,6 +10,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { FIREBASE_CONFIG } from '../config/config';
+import { GoogleMaps} from '@ionic-native/google-maps'
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { FIREBASE_CONFIG } from '../config/config';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AngularFireAuth
+    AngularFireAuth,
+    GoogleMaps
   ]
 })
 export class AppModule {}

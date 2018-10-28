@@ -29,7 +29,7 @@ export class RegisterPage {
    * @param user - Model User
    */
   public async register(user: User) {
-    const result = await this.fireAuth.auth.createUserWithEmailAndPassword(user.email, user.password).then(success => {
+    this.fireAuth.auth.createUserWithEmailAndPassword(user.email, user.password).then(success => {
       console.log('Cadastro realizado com sucesso\nRETORNO: ', success);
       this.toast.create({
         message: `Cadastro realizado com sucesso!`,
