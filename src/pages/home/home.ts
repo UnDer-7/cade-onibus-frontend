@@ -2,6 +2,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { Component, ViewChild } from '@angular/core';
 import { NavController, ToastController, Platform } from 'ionic-angular';
 import { IonicPage } from 'ionic-angular/navigation/ionic-page';
+import { Geolocation } from '@ionic-native/geolocation';
 import {
   GoogleMaps,
   GoogleMap,
@@ -12,6 +13,7 @@ import {
   Environment,
   GoogleMapOptions
 } from "@ionic-native/google-maps";
+
 
 @IonicPage()
 @Component({
@@ -27,7 +29,8 @@ export class HomePage {
     private fireAuth: AngularFireAuth,
     private toast: ToastController,
     private googleMaps: GoogleMaps,
-    private platform: Platform) {
+    private platform: Platform,
+    private geolocation: Geolocation) {
   }
 
   ionViewWillEnter() {
@@ -41,8 +44,22 @@ export class HomePage {
 
   ngAfterViewInit() {
     this.platform.ready().then(() => {
-      this.initMap();
-    })
+      this.geolocation.getCurrentPosition().then((resp) => {
+        const userLat = resp.coords.latitude;
+        const userLong = resp.coords.longitude;
+        console.log(resp);
+        this.initMap(userLat, userLong);
+       }).catch((error) => {
+         console.log('Error getting location', error);
+       });
+      // let watch = this.geolocation.watchPosition();
+      //   watch.subscribe((data) => {
+      //   // data can be a set of coordinates, or an error (if an error occurred).
+      //   // data.coords.latitude
+      //   // data.coords.longitude
+      //   console.log(`${new Date()}`+ data.coords.latitude +'<>'+ data.coords.longitude)
+      // });
+    });
   }
 
   /**
@@ -50,13 +67,13 @@ export class HomePage {
    * {Comando pra subir: $ ionic cordova run browser -l}
    * Fonte: https://github.com/ionic-team/ionic-native-google-maps
    */
-  private initMap(): void {
+  private initMap(lat, long): void {
     this.options = {
       controls: {
         mapToolbar: true,
         myLocationButton: true,
         myLocation: true,
-        compass: true
+        compass: true,
       }
     }
     console.log("OPTIONS: ", this.options);
@@ -67,7 +84,7 @@ export class HomePage {
       'API_KEY_FOR_BROWSER_DEBUG': 'AIzaSyChUwZ9OrlG3w2AvQ-m-533sT_K5o9Vd3Y'
     });
     this.map.one(GoogleMapsEvent.MAP_READY).then((data: any) => {
-      let coordinates: LatLng = new LatLng(-15.641637, -47.824363);
+      let coordinates: LatLng = new LatLng(lat, long);
       let position = {
         target: coordinates,
         zoom: 15
