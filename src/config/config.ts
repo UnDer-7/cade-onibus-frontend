@@ -1,6 +1,6 @@
 export  const FIREBASE_CONFIG = {
     fire: {
-        apiKey: "AIzaSyBpx9bslAyBrrBlUfhJOP4pBbfeonav3Ek",
+        apiKey: "AIzaSyDKXgLgK6Y3I2Bk1q6115Ou_KpJAQmTQi4",
         authDomain: "cadeonibus-d602d.firebaseapp.com",
         databaseURL: "https://cadeonibus-d602d.firebaseio.com",
         projectId: "cadeonibus-d602d",

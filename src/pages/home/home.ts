@@ -80,8 +80,8 @@ export class HomePage {
     this.map = this.googleMaps.create('map_canvas', this.options);
     //Necessário para rodar no browser
     Environment.setEnv({
-      'API_KEY_FOR_BROWSER_RELEASE': 'AIzaSyChUwZ9OrlG3w2AvQ-m-533sT_K5o9Vd3Y',
-      'API_KEY_FOR_BROWSER_DEBUG': 'AIzaSyChUwZ9OrlG3w2AvQ-m-533sT_K5o9Vd3Y'
+      'API_KEY_FOR_BROWSER_RELEASE': 'AIzaSyCGkX2HYO4qWEQQJq7z9YKPuJZW2LhAhUU',
+      'API_KEY_FOR_BROWSER_DEBUG': 'AIzaSyCGkX2HYO4qWEQQJq7z9YKPuJZW2LhAhUU'
     });
     this.map.one(GoogleMapsEvent.MAP_READY).then((data: any) => {
       let coordinates: LatLng = new LatLng(lat, long);
