@@ -1,6 +1,6 @@
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import {IonicPage, MenuController, NavController, NavParams, ToastController} from 'ionic-angular';
 import { User } from '../../models/user';
 
 @IonicPage()
@@ -16,17 +16,20 @@ export class LoginPage {
     private navCtrl: NavController,
     private navParams: NavParams,
     private fireAuth: AngularFireAuth,
-    private toast: ToastController) {
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
+    private toast: ToastController,
+    private menu: MenuController) {
   }
 
   public register(): void {
     this.navCtrl.push('RegisterPage');
   }
 
+  ionViewWillEnter() {
+    this.menu.swipeEnable(false);
+  }
+  ionViewDidLeave() {
+    this.menu.swipeEnable(true);
+  }
   /**
    * Realiza o login utilizando email e senha.
    * Se a operação for realizada com sucesso o usuário sera redirecionado pra HomePage
