@@ -12,6 +12,8 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { FIREBASE_CONFIG } from '../config/config';
 import { GoogleMaps} from '@ionic-native/google-maps'
+import {AuthService} from "../service/securityService/auth.service";
+import {StorageService} from "../service/securityService/storage.service";
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { GoogleMaps} from '@ionic-native/google-maps'
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AngularFireAuth,
     GoogleMaps,
-    Geolocation
+    Geolocation,
+    AuthService,
+    StorageService
   ]
 })
 export class AppModule {}

@@ -2,6 +2,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { Component } from '@angular/core';
 import {IonicPage, MenuController, NavController, NavParams, ToastController} from 'ionic-angular';
 import { User } from '../../models/user';
+import {AuthService} from "../../service/securityService/auth.service";
 
 @IonicPage()
 @Component({
@@ -10,14 +11,16 @@ import { User } from '../../models/user';
 })
 export class LoginPage {
 
-  user = {} as User;
+  user: User;
 
   constructor(
     private navCtrl: NavController,
     private navParams: NavParams,
     private fireAuth: AngularFireAuth,
     private toast: ToastController,
-    private menu: MenuController) {
+    private menu: MenuController,
+    private authService: AuthService) {
+    this.user = new User();
   }
 
   public register(): void {
@@ -38,11 +41,10 @@ export class LoginPage {
   public async login(user: User) {
     this.fireAuth.auth.signInWithEmailAndPassword(user.email, user.password).then(success => {
       if (success) {
-        console.log('login realizado com sucesso!\nRETORNO: ', success);
+        this.authService.successfulLogin(success.user.email);
         this.navCtrl.setRoot('HomePage');
       }
     }).catch(fail => {
-      console.log('Erro ao realizar login!\nERROR: ', fail)
       this.showToast(fail.code);
     })
   }
