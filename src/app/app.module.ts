@@ -10,6 +10,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabaseModule } from 'angularfire2/database'
 import { FIREBASE_CONFIG } from '../config/config';
 import { GoogleMaps} from '@ionic-native/google-maps'
 import {AuthService} from "../service/securityService/auth.service";
@@ -22,7 +23,8 @@ import {StorageService} from "../service/securityService/storage.service";
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    AngularFireModule.initializeApp(FIREBASE_CONFIG.fire)
+    AngularFireModule.initializeApp(FIREBASE_CONFIG.fire),
+    AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

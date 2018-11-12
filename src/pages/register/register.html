@@ -17,5 +17,13 @@
       <ion-label floating>Senha</ion-label>
       <ion-input type="password" [(ngModel)]="user.password"></ion-input>
     </ion-item>
+    <ion-item>
+      <ion-label floating>Nome</ion-label>
+      <ion-input type="text" [(ngModel)]="user.nome"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Linha</ion-label>
+      <ion-input type="text" [(ngModel)]="user.linha"></ion-input>
+    </ion-item>
     <button ion-button block (click)="register(user)">Register</button>
 </ion-content>

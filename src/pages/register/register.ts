@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { User } from '../../models/user';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 @IonicPage()
 @Component({
@@ -10,13 +11,15 @@ import { AngularFireAuth } from 'angularfire2/auth';
 })
 export class RegisterPage {
 
-  user = {} as User;
+  public user: User = new User();
+  private PATH = 'users/';
 
   constructor(
     private navCtrl: NavController,
     private navParams: NavParams,
     private fireAuth: AngularFireAuth,
-    private toast: ToastController) {
+    private toast: ToastController,
+    private db: AngularFireDatabase) {
   }
 
   ionViewDidLoad() {
@@ -29,17 +32,17 @@ export class RegisterPage {
    * @param user - Model User
    */
   public async register(user: User) {
-    this.fireAuth.auth.createUserWithEmailAndPassword(user.email, user.password).then(success => {
-      console.log('Cadastro realizado com sucesso\nRETORNO: ', success);
-      this.toast.create({
-        message: `Cadastro realizado com sucesso!`,
-        duration: 3000
-      }).present()
-      this.navCtrl.setRoot('LoginPage');
-    }).catch(fail => {
-      console.log('%cFalha ao realizar cadastro', 'color:red', '\nERROR: ', fail);
-     this.showToast(fail.code);
-    })
+    this.saveProfile(user);
+    // this.fireAuth.auth.createUserWithEmailAndPassword(user.email, user.password).then(success => {
+    //   this.toast.create({
+    //     message: `Cadastro realizado com sucesso!`,
+    //     duration: 3000
+    //   }).present();
+    //   this.navCtrl.setRoot('LoginPage');
+    // }).catch(fail => {
+    //   console.log('%cFalha ao realizar cadastro', 'color:red', '\nERROR: ', fail);
+    //  this.showToast(fail.code);
+    // })
   }
 
   /**
@@ -63,5 +66,14 @@ export class RegisterPage {
         duration: 3000
       }).present()
     }
+  }
+
+  private saveProfile(user: User){
+    console.log("OBJ PRA SALVAR: ", user);
+    return new Promise((resolve, reject) => {
+      this.db.list(this.PATH).update(user.email, {name: user.nome, email: user.email, linha: user.linha})
+        .then(() => console.log("salvou"))
+        .catch((e) => console.log("error: ", e))
+    });
   }
 }
