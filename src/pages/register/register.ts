@@ -32,24 +32,25 @@ export class RegisterPage {
    * @param user - Model User
    */
   public async register(user: User) {
-    this.saveProfile(user);
-    // this.fireAuth.auth.createUserWithEmailAndPassword(user.email, user.password).then(success => {
-    //   this.toast.create({
-    //     message: `Cadastro realizado com sucesso!`,
-    //     duration: 3000
-    //   }).present();
-    //   this.navCtrl.setRoot('LoginPage');
-    // }).catch(fail => {
-    //   console.log('%cFalha ao realizar cadastro', 'color:red', '\nERROR: ', fail);
-    //  this.showToast(fail.code);
-    // })
+    this.fireAuth.auth.createUserWithEmailAndPassword(user.email, user.password).then(success => {
+      this.toast.create({
+        message: `Cadastro realizado com sucesso!`,
+        duration: 3000
+      }).present();
+      this.navCtrl.setRoot('LoginPage');
+      this.saveProfile(user, success.user.uid);
+    }).catch(fail => {
+      console.log('%cFalha ao realizar cadastro', 'color:red', '\nERROR: ', fail);
+     this.showValidationToast(fail.code);
+     console.log('NOT!');
+    })
   }
 
   /**
    * Mostra um Toast se o cadastro falhar
    * @param code - {fail.code} Resposta da Promise
    */
-  private showToast(code: string): void{
+  private showValidationToast(code: string): void{
     if(code === 'auth/email-already-in-use'){
       this.toast.create({
         message: `Email já cadastrado!`,
@@ -68,10 +69,11 @@ export class RegisterPage {
     }
   }
 
-  private saveProfile(user: User){
-    console.log("OBJ PRA SALVAR: ", user);
+  private saveProfile(user: User, uid: string){
+    //ENCRIPITAR SENHA
+    this.user.password = null;
     return new Promise((resolve, reject) => {
-      this.db.list(this.PATH).update(user.email, {name: user.nome, email: user.email, linha: user.linha})
+      this.db.object(this.PATH + uid).update({user})
         .then(() => console.log("salvou"))
         .catch((e) => console.log("error: ", e))
     });
