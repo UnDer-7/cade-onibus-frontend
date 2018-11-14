@@ -4,13 +4,13 @@ import {STORAGE_KEYS} from "../../config/config";
 
 @Injectable()
 export class StorageService {
-
+  email: string;
   public getLocalUser(): string{
-    let email = localStorage.getItem(STORAGE_KEYS.localUserEmail);
-    if(email === null){
+    this.email = localStorage.getItem(STORAGE_KEYS.localUserEmail);
+    if(this.email === null){
       return null;
     }else {
-      return email;
+      return this.email;
     }
   }
 

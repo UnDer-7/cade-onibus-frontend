@@ -22,8 +22,9 @@ import {r} from "@angular/core/src/render3";
 export class ProfilePage {
   // localUser = {} as LocalUser;
   localUser: LocalUser;
-  user: User;
+  user = new User();
   PATH = 'users/';
+  regex: RegExp = /["]/g;
   constructor(
     private navCtrl: NavController,
     private navParams: NavParams,
@@ -38,12 +39,17 @@ export class ProfilePage {
     console.log('User: ', this.user);
   }
 
-  public getUser(): User{
-    this.db.object(this.PATH + 'Ktm4mUypgreTo7InvdjFQrARJVE2/').valueChanges().subscribe(res => {
-      console.log("RES: ", res);
+  public getUser(){
+    this.loadUser().subscribe((res) => {
+      console.log('Res: ', res);
       this.user = res;
-    });
-    console.log("getUser: ", this.user);
-    return this.user
+    })
+  }
+  // FAZER UMA SERVICE PARA O FIREBASE DATABE
+  public loadUser(): Observable<User>{
+
+    console.log('UID: ', this.storageService.getLocalUser().replace(this.regex, ''));
+
+    return this.db.object(this.PATH + this.storageService.getLocalUser().replace(this.regex, '/') + '/user').valueChanges();
   }
 }

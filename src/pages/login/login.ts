@@ -41,7 +41,7 @@ export class LoginPage {
   public async login(user: User) {
     this.fireAuth.auth.signInWithEmailAndPassword(user.email, user.password).then(success => {
       if (success) {
-        this.authService.successfulLogin(success.user.email);
+        this.authService.successfulLogin(success.user.uid);
         this.navCtrl.setRoot('HomePage');
       }
     }).catch(fail => {

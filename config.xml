@@ -3,7 +3,7 @@
     <name>cadeOnibus</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://192.168.15.6:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -88,6 +88,7 @@
     </plugin>
     <allow-navigation href="http://192.168.25.179:8100" sessionid="9c404cfa" />
     <allow-navigation href="http://192.168.15.4:8100" sessionid="89312bcf" />
+    <allow-navigation href="http://192.168.15.6:8100" sessionid="377b25ad" />
+    <engine name="browser" spec="5.0.4" />
     <engine name="android" spec="7.1.1" />
-    <engine name="browser" spec="~5.0.4" />
 </widget>
