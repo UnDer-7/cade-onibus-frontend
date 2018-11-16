@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
 import {StorageService} from '../../service/securityService/storage.service';
 import {LocalUser} from "../../models/local_user";
 import { AngularFireDatabase } from 'angularfire2/database';
@@ -26,17 +26,20 @@ export class ProfilePage {
     private navCtrl: NavController,
     private navParams: NavParams,
     private storageService: StorageService,
-    private userService: UserService) {
+    private userService: UserService,
+    private loadingCtrl: LoadingController ) {
   }
 
   ionViewDidLoad() {
-    this.getUser();
-  }
-
-  public getUser(){
-    this.loadUser().subscribe(res => {
-      this.user = res;
+    let loading = this.loadingCtrl.create({
+      content: `Carregando dados...`,
     });
+
+    loading.present();
+    this.loadUser().subscribe( res => {
+      this.user = res;
+      loading.dismissAll();
+    })
   }
 
   public loadUser(){
