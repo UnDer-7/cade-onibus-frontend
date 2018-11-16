@@ -11,5 +11,5 @@ export  const FIREBASE_CONFIG = {
 };
 
 export const STORAGE_KEYS = {
-  localUserEmail: "localUserEmail"
+  localUserUID: "localUserUID"
 };

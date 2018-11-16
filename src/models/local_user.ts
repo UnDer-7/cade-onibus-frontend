@@ -1,5 +1,5 @@
 export class LocalUser {
   constructor(
-    public email?: string
+    public uid?: string
   ){ }
 }

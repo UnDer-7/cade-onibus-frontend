@@ -6,6 +6,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import {Observable} from "rxjs";
 import {User} from "../../models/user";
 import {r} from "@angular/core/src/render3";
+import {UserService} from "../../service/modelService/user.service";
 
 /**
  * Generated class for the ProfilePage page.
@@ -20,36 +21,25 @@ import {r} from "@angular/core/src/render3";
   templateUrl: 'profile.html',
 })
 export class ProfilePage {
-  // localUser = {} as LocalUser;
-  localUser: LocalUser;
   user = new User();
-  PATH = 'users/';
-  regex: RegExp = /["]/g;
   constructor(
     private navCtrl: NavController,
     private navParams: NavParams,
     private storageService: StorageService,
-    private db: AngularFireDatabase) {
-    this.localUser = new LocalUser();
-    this.localUser.email = this.storageService.getLocalUser();
+    private userService: UserService) {
   }
 
   ionViewDidLoad() {
     this.getUser();
-    console.log('User: ', this.user);
   }
 
   public getUser(){
-    this.loadUser().subscribe((res) => {
-      console.log('Res: ', res);
+    this.loadUser().subscribe(res => {
       this.user = res;
-    })
+    });
   }
-  // FAZER UMA SERVICE PARA O FIREBASE DATABE
-  public loadUser(): Observable<User>{
 
-    console.log('UID: ', this.storageService.getLocalUser().replace(this.regex, ''));
-
-    return this.db.object(this.PATH + this.storageService.getLocalUser().replace(this.regex, '/') + '/user').valueChanges();
+  public loadUser(){
+    return this.userService.getUser(this.storageService.getLocalUser());
   }
 }

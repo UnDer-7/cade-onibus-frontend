@@ -4,21 +4,21 @@ import {STORAGE_KEYS} from "../../config/config";
 
 @Injectable()
 export class StorageService {
-  email: string;
+  uid: string;
   public getLocalUser(): string{
-    this.email = localStorage.getItem(STORAGE_KEYS.localUserEmail);
-    if(this.email === null){
+    this.uid = localStorage.getItem(STORAGE_KEYS.localUserUID);
+    if(this.uid === null){
       return null;
     }else {
-      return this.email;
+      return this.uid;
     }
   }
 
-  public setLocalUser(email: string){
-    if(email == null){
-      localStorage.removeItem(STORAGE_KEYS.localUserEmail);
+  public setLocalUser(uid: string){
+    if(uid == null){
+      localStorage.removeItem(STORAGE_KEYS.localUserUID);
     }else {
-      localStorage.setItem(STORAGE_KEYS.localUserEmail, JSON.stringify(email));
+      localStorage.setItem(STORAGE_KEYS.localUserUID, JSON.stringify(uid));
     }
   }
 }

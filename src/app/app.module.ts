@@ -15,6 +15,7 @@ import { FIREBASE_CONFIG } from '../config/config';
 import { GoogleMaps} from '@ionic-native/google-maps'
 import {AuthService} from "../service/securityService/auth.service";
 import {StorageService} from "../service/securityService/storage.service";
+import {UserService} from "../service/modelService/user.service";
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import {StorageService} from "../service/securityService/storage.service";
     GoogleMaps,
     Geolocation,
     AuthService,
-    StorageService
+    StorageService,
+    UserService
   ]
 })
 export class AppModule {}

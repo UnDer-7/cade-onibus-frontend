@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
-import { User } from '../../models/user';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase } from 'angularfire2/database';
+import {Component} from '@angular/core';
+import {IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
+import {User} from '../../models/user';
+import {AngularFireAuth} from 'angularfire2/auth';
+import {UserService} from "../../service/modelService/user.service";
 
 @IonicPage()
 @Component({
@@ -19,7 +19,7 @@ export class RegisterPage {
     private navParams: NavParams,
     private fireAuth: AngularFireAuth,
     private toast: ToastController,
-    private db: AngularFireDatabase) {
+    private userService: UserService) {
   }
 
   ionViewDidLoad() {
@@ -27,22 +27,15 @@ export class RegisterPage {
   }
 
   /**
-   * @author UnDer7
    * Registra um usuário no firebase utilizando email/senha
    * @param user - Model User
    */
-  public async register(user: User) {
+  public register(user: User) {
     this.fireAuth.auth.createUserWithEmailAndPassword(user.email, user.password).then(success => {
-      this.toast.create({
-        message: `Cadastro realizado com sucesso!`,
-        duration: 3000
-      }).present();
-      this.navCtrl.setRoot('LoginPage');
       this.saveProfile(user, success.user.uid);
     }).catch(fail => {
-      console.log('%cFalha ao realizar cadastro', 'color:red', '\nERROR: ', fail);
-     this.showValidationToast(fail.code);
-     console.log('NOT!');
+      console.error(`Falha ao realizar cadastro\n ${fail}`);
+      this.showValidationToast(fail.code);
     })
   }
 
@@ -50,18 +43,18 @@ export class RegisterPage {
    * Mostra um Toast se o cadastro falhar
    * @param code - {fail.code} Resposta da Promise
    */
-  private showValidationToast(code: string): void{
-    if(code === 'auth/email-already-in-use'){
+  private showValidationToast(code: string): void {
+    if (code === 'auth/email-already-in-use') {
       this.toast.create({
         message: `Email já cadastrado!`,
         duration: 3000
       }).present()
-    }else if(code === 'auth/weak-password'){
+    } else if (code === 'auth/weak-password') {
       this.toast.create({
         message: `Senha deve ter no minimo 6 dígitos!`,
         duration: 3000
       }).present()
-    }else if(code === 'auth/invalid-email'){
+    } else if (code === 'auth/invalid-email') {
       this.toast.create({
         message: `Email invalido!`,
         duration: 3000
@@ -69,13 +62,25 @@ export class RegisterPage {
     }
   }
 
-  private saveProfile(user: User, uid: string){
-    //ENCRIPITAR SENHA
-    this.user.password = null;
-    return new Promise((resolve, reject) => {
-      this.db.object(this.PATH + uid).update({user})
-        .then(() => console.log("salvou"))
-        .catch((e) => console.log("error: ", e))
-    });
+  /**
+   * Salva um novo usuario no firebase Realtime Databese
+   * @param User
+   * @param uid - ID do usuario gerado na hora de realizar o cadastro dele no firebase Authentication
+   */
+  private saveProfile(user: User, uid: string) {
+    user.password = null;
+    this.userService.saveUser(user, uid).then(() => {
+      this.navCtrl.setRoot('LoginPage');
+      this.toast.create({
+        message: `Cadastro realizado com sucesso!`,
+        duration: 3000
+      }).present();
+    }).catch(fail => {
+      console.error('Erro ao salvar no firebase:\n', fail);
+      this.toast.create({
+        message: `Falha ao realizar o cadastro!`,
+        duration: 3000
+      }).present();
+    })
   }
 }
