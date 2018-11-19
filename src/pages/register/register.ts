@@ -3,6 +3,7 @@ import {IonicPage, NavController, NavParams, ToastController} from 'ionic-angula
 import {User} from '../../models/user';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {UserService} from "../../service/modelService/user.service";
+import {AuthService} from "../../service/securityService/auth.service";
 
 @IonicPage()
 @Component({
@@ -19,7 +20,8 @@ export class RegisterPage {
     private navParams: NavParams,
     private fireAuth: AngularFireAuth,
     private toast: ToastController,
-    private userService: UserService) {
+    private userService: UserService,
+    private authService: AuthService) {
   }
 
   ionViewDidLoad() {
@@ -31,7 +33,7 @@ export class RegisterPage {
    * @param user - Model User
    */
   public register(user: User) {
-    this.fireAuth.auth.createUserWithEmailAndPassword(user.email, user.password).then(success => {
+    this.authService.register(user).then(success => {
       this.saveProfile(user, success.user.uid);
     }).catch(fail => {
       console.error(`Falha ao realizar cadastro\n ${fail}`);

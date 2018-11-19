@@ -34,12 +34,6 @@ export class HomePage {
   }
 
   ionViewWillEnter() {
-    this.fireAuth.authState.subscribe(result => {
-      this.toast.create({
-        message: `Bem vindo ao CadeÔnibus, ${result.email}`,
-        duration: 3000
-      }).present();
-    });
   }
 
   ngAfterViewInit() {
