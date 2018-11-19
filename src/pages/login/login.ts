@@ -1,6 +1,6 @@
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Component } from '@angular/core';
-import {IonicPage, MenuController, NavController, NavParams, ToastController} from 'ionic-angular';
+import {IonicPage, LoadingController, MenuController, NavController, NavParams, ToastController} from 'ionic-angular';
 import { User } from '../../models/user';
 import {AuthService} from "../../service/securityService/auth.service";
 
@@ -19,7 +19,8 @@ export class LoginPage {
     private fireAuth: AngularFireAuth,
     private toast: ToastController,
     private menu: MenuController,
-    private authService: AuthService) {
+    private authService: AuthService,
+    private loadingCtrl: LoadingController) {
     this.user = new User();
   }
 
@@ -39,12 +40,17 @@ export class LoginPage {
    * @param user - Model User
    */
   public async login(user: User) {
+    let loading = this.loadingCtrl.create();
+
+    loading.present();
     this.authService.logIn(user).then(success => {
       if (success) {
         this.authService.successfulLogin(success.user.uid);
+        loading.dismissAll();
         this.navCtrl.setRoot('HomePage');
       }
     }).catch(fail => {
+      loading.dismissAll();
       this.showToast(fail.code);
     })
   }
