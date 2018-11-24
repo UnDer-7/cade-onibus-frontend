@@ -11,16 +11,18 @@
 <ion-content padding>
   <ion-item>
     <ion-label floating>Nome</ion-label>
-    <ion-input type="text" [ngModel]="user?.nome" [disabled]="true"> </ion-input>
+    <ion-input type="text" [(ngModel)]="user.nome" [disabled]=!isEdit> </ion-input>
   </ion-item>
   <ion-item>
     <ion-label floating>Email</ion-label>
-    <ion-input type="text" [ngModel]="user?.email" [disabled]="true"> </ion-input>
+    <ion-input type="text" [(ngModel)]="user.email" [disabled]=!isEdit> </ion-input>
   </ion-item>
   <ion-item>
     <ion-label floating>Linha</ion-label>
-    <ion-input type="text" [ngModel]="user?.linha" [disabled]="true"> </ion-input>
+    <ion-input type="text" [(ngModel)]="user.linha" [disabled]=!isEdit> </ion-input>
   </ion-item>
+  <button ion-button block (click)="editUser()" [color]="editColor">{{  isEdit ? 'Confirmar Alterações' : 'Alterar Dados'}}</button>
+  <button ion-button block *ngIf="isEdit">Alterar senha</button>
   <br>
   <br>
 </ion-content>

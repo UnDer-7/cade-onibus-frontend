@@ -48,6 +48,7 @@ export class MyApp {
   public sair() {
     this.authService.logout().then(() => {
       this.nav.setRoot('LoginPage');
+      localStorage.clear();
     });
   }
 }

@@ -1,6 +1,6 @@
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Component, ViewChild } from '@angular/core';
-import { NavController, ToastController, Platform } from 'ionic-angular';
+import {NavController, ToastController, Platform, LoadingController} from 'ionic-angular';
 import { IonicPage } from 'ionic-angular/navigation/ionic-page';
 import { Geolocation } from '@ionic-native/geolocation';
 import {
@@ -30,21 +30,26 @@ export class HomePage {
     private toast: ToastController,
     private googleMaps: GoogleMaps,
     private platform: Platform,
-    private geolocation: Geolocation) {
+    private geolocation: Geolocation,
+    private loadingCtrl: LoadingController) {
   }
 
   ionViewWillEnter() {
   }
 
-  ngAfterViewInit() {
+  ionViewDidLoad() {
+    let loading = this.loadingCtrl.create();
+    loading.present();
     this.platform.ready().then(() => {
       this.geolocation.getCurrentPosition().then((resp) => {
         const userLat = resp.coords.latitude;
         const userLong = resp.coords.longitude;
         console.log(resp);
         this.initMap(userLat, userLong);
+        loading.dismissAll();
        }).catch((error) => {
          console.log('Error getting location', error);
+        loading.dismissAll();
        });
       // let watch = this.geolocation.watchPosition();
       //   watch.subscribe((data) => {

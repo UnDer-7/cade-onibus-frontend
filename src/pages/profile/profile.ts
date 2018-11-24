@@ -8,13 +8,6 @@ import {User} from "../../models/user";
 import {r} from "@angular/core/src/render3";
 import {UserService} from "../../service/modelService/user.service";
 
-/**
- * Generated class for the ProfilePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-profile',
@@ -22,6 +15,10 @@ import {UserService} from "../../service/modelService/user.service";
 })
 export class ProfilePage {
   user = new User();
+  isEdit = false;
+  editColor: string;
+  index: number  = 0;
+
   constructor(
     private navCtrl: NavController,
     private navParams: NavParams,
@@ -31,10 +28,7 @@ export class ProfilePage {
   }
 
   ionViewDidLoad() {
-    let loading = this.loadingCtrl.create({
-      content: `Carregando dados...`,
-    });
-
+    let loading = this.loadingCtrl.create();
     loading.present();
     this.loadUser().subscribe( res => {
       this.user = res;
@@ -42,7 +36,28 @@ export class ProfilePage {
     })
   }
 
-  public loadUser(){
+  public editUser() {
+    this.index += 1;
+    this.isEdit = true;
+    this.editColor = 'secondary';
+    let loading = this.loadingCtrl.create();
+    console.log('index', this.index);
+
+    if (this.index > 1) {
+      loading.present();
+      this.userService.updateUser(this.user, this.storageService.getLocalUser()).then(() => {
+        this.isEdit = false;
+        this.editColor = 'primary';
+        loading.dismissAll();
+      }).catch(fail => {
+        console.error('Error ao atualizar usuario: ', fail);
+        loading.dismissAll();
+      });
+      this.index = 0;
+    }
+  }
+
+  private loadUser(){
     return this.userService.getUser(this.storageService.getLocalUser());
   }
 }
