@@ -1,12 +1,9 @@
 import {Component} from '@angular/core';
-import {IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
+import {IonicPage, LoadingController, ModalController, NavController, NavParams} from 'ionic-angular';
 import {StorageService} from '../../service/securityService/storage.service';
-import {LocalUser} from "../../models/local_user";
-import { AngularFireDatabase } from 'angularfire2/database';
-import {Observable} from "rxjs";
 import {User} from "../../models/user";
-import {r} from "@angular/core/src/render3";
 import {UserService} from "../../service/modelService/user.service";
+import {PasswordModelPage} from "../password-model/password-model";
 
 @IonicPage()
 @Component({
@@ -24,7 +21,8 @@ export class ProfilePage {
     private navParams: NavParams,
     private storageService: StorageService,
     private userService: UserService,
-    private loadingCtrl: LoadingController ) {
+    private loadingCtrl: LoadingController,
+    private modelCtrl: ModalController) {
   }
 
   ionViewDidLoad() {
@@ -57,6 +55,14 @@ export class ProfilePage {
     }
   }
 
+  public changePassword() {
+    let passwordModal = this.modelCtrl.create(PasswordModelPage, {}, {cssClass: 'password-modal'});
+    passwordModal.present();
+
+    passwordModal.onDidDismiss(data => {
+      console.log('Data: ', data)
+    })
+  }
   private loadUser(){
     return this.userService.getUser(this.storageService.getLocalUser());
   }

@@ -22,7 +22,7 @@
     <ion-input type="text" [(ngModel)]="user.linha" [disabled]=!isEdit> </ion-input>
   </ion-item>
   <button ion-button block (click)="editUser()" [color]="editColor">{{  isEdit ? 'Confirmar Alterações' : 'Alterar Dados'}}</button>
-  <button ion-button block *ngIf="isEdit">Alterar senha</button>
+  <button ion-button block *ngIf="isEdit" (click)="changePassword()">Alterar senha</button>
   <br>
   <br>
 </ion-content>

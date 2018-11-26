@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
+import {IonicPage, MenuController, NavController, NavParams, ToastController} from 'ionic-angular';
 import {User} from '../../models/user';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {UserService} from "../../service/modelService/user.service";
@@ -21,7 +21,15 @@ export class RegisterPage {
     private fireAuth: AngularFireAuth,
     private toast: ToastController,
     private userService: UserService,
-    private authService: AuthService) {
+    private authService: AuthService,
+    private menu: MenuController) {
+  }
+
+  ionViewWillEnter() {
+    this.menu.swipeEnable(false);
+  }
+  ionViewDidLeave() {
+    this.menu.swipeEnable(true);
   }
 
   ionViewDidLoad() {

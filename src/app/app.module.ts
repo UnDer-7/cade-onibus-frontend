@@ -16,10 +16,12 @@ import { GoogleMaps} from '@ionic-native/google-maps'
 import {AuthService} from "../service/securityService/auth.service";
 import {StorageService} from "../service/securityService/storage.service";
 import {UserService} from "../service/modelService/user.service";
+import {PasswordModelPage} from "../pages/password-model/password-model";
 
 @NgModule({
   declarations: [
-    MyApp
+    MyApp,
+    PasswordModelPage
   ],
   imports: [
     BrowserModule,
@@ -29,7 +31,8 @@ import {UserService} from "../service/modelService/user.service";
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp
+    MyApp,
+    PasswordModelPage
   ],
   providers: [
     StatusBar,
