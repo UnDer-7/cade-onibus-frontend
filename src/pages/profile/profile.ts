@@ -56,7 +56,7 @@ export class ProfilePage {
   }
 
   public changePassword() {
-    let passwordModal = this.modelCtrl.create(PasswordModelPage, {}, {cssClass: 'password-modal'});
+    let passwordModal = this.modelCtrl.create(PasswordModelPage, {}, {cssClass: 'password-modal', showBackdrop: false});
     passwordModal.present();
 
     passwordModal.onDidDismiss(data => {

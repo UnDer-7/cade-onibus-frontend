@@ -31,7 +31,7 @@ www/
 $RECYCLE.BIN/
 
 config.xml
-
+package.json
 .DS_Store
 Thumbs.db
 UserInterfaceState.xcuserstate

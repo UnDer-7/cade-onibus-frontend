@@ -21,9 +21,24 @@ ion-app .nav-decor{
 
 .password-modal{
   position: absolute;
-  width: 90% ;
-  height: 65% ;
-  top: 20% ;
-  left: 5% ;
+  //Componente
+  width: 92%;
+  height: 35%;
+  //Margem
+  top: 14%;
+  left: 4%;
+  ion-title {
+    text-align: center;
+  }
+  ion-content {
+    background-color: rgba(51,147,255,0.95);
+  }
+  ion-item {
+    color: rgba(0,0,0,1);
+    background-color: rgba(101,173,255,0.95);
+  }
+  ion-label {
+    color: rgba(0,0,0,1) !important;
+  }
 }
 
