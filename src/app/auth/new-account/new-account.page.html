@@ -41,9 +41,9 @@
                   <ion-icon slot="end" (click)="showPassword()" [name]="passwordIcon"></ion-icon>
                   <ion-input
                     required
-                    type="password"
                     placeholder="Senha"
                     name="password"
+                    [type]="passwordType"
                     [(ngModel)]="user.password">
                   </ion-input>
                 </ion-item>

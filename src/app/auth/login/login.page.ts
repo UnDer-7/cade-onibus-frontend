@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import { AuthService } from '../auth.service';
-import { authRoutes } from '../auth.route';
 
 @Component({
   selector: 'app-login',
@@ -9,6 +8,8 @@ import { authRoutes } from '../auth.route';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+  public passwordIcon = 'eye-off';
+  public passwordType = 'password';
 
   constructor(
     private router: Router,
@@ -24,5 +25,15 @@ export class LoginPage implements OnInit {
 
   public newAccount(): void {
     this.router.navigate(['/auth/new-account']);
+  }
+
+  public showPassword(): void {
+    if (this.passwordIcon === 'eye-off') {
+      this.passwordIcon = 'eye';
+      this.passwordType = 'text';
+    } else {
+      this.passwordIcon = 'eye-off';
+      this.passwordType = 'password';
+    }
   }
 }
