@@ -20,7 +20,12 @@
                   <ion-input type="email" placeholder="E-mail"></ion-input>
                 </ion-item>
                 <ion-item color="light">
-                  <ion-input type="password" placeholder="Password"></ion-input>
+                  <ion-icon slot="end" (click)="showPassword()" [name]="passwordIcon"></ion-icon>
+                  <ion-input
+                    required
+                    placeholder="Senha"
+                    name="password"
+                    [type]="passwordType"></ion-input>
                 </ion-item>
                 <div padding-vertical>
                   <ion-button type="submit" expand="block" color="primary">Entrar</ion-button>

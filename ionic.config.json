@@ -1,5 +1,7 @@
 {
   "name": "cade-onibus-frontend",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }

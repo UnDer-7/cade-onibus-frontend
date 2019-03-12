@@ -1,6 +1,5 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {User} from '../user.model';
-import {NgForm} from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { User } from '../user.model';
 
 @Component({
   selector: 'app-new-account',
@@ -8,9 +7,9 @@ import {NgForm} from '@angular/forms';
   styleUrls: ['./new-account.page.scss'],
 })
 export class NewAccountPage implements OnInit {
-
   public user: User;
-  public passwordIcon = 'eye';
+  public passwordIcon = 'eye-off';
+  public passwordType = 'password';
 
   constructor() {
     this.user = new User();
@@ -24,6 +23,12 @@ export class NewAccountPage implements OnInit {
   }
 
   public showPassword(): void {
-    this.passwordIcon = 'eye-off';
+    if (this.passwordIcon === 'eye-off') {
+      this.passwordIcon = 'eye';
+      this.passwordType = 'text';
+    } else {
+      this.passwordIcon = 'eye-off';
+      this.passwordType = 'password';
+    }
   }
 }
