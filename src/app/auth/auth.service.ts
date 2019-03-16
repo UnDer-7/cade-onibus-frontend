@@ -6,6 +6,5 @@ export class AuthService {
   constructor() { }
 
   public tst (): void {
-    console.log('SERVICE WORKS!');
   }
 }

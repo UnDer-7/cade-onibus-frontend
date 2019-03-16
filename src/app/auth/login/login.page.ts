@@ -8,16 +8,15 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  public passwordIcon = 'eye-off';
-  public passwordType = 'password';
+  public passwordIcon: string = 'eye-off';
+  public passwordType: string = 'password';
 
   constructor(
     private router: Router,
     private authService: AuthService
   ) { }
 
-  ngOnInit() {
-  }
+  public ngOnInit(): void { }
 
   public login(): void {
     this.authService.tst();

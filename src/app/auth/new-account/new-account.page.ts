@@ -8,18 +8,17 @@ import { User } from '../user.model';
 })
 export class NewAccountPage implements OnInit {
   public user: User;
-  public passwordIcon = 'eye-off';
-  public passwordType = 'password';
+  public passwordIcon: string = 'eye-off';
+  public passwordType: string = 'password';
 
   constructor() {
     this.user = new User();
   }
 
-  ngOnInit() {
+  public ngOnInit(): void {
   }
 
   public save(): void {
-    console.log('USer: ', this.user);
   }
 
   public showPassword(): void {

@@ -3,6 +3,51 @@
     "codelyzer"
   ],
   "rules": {
+    "member-access": true,
+    "member-ordering": {
+      "options": {
+        "order": "fields-first"
+      }
+    },
+    "typedef": [
+      true,
+      "call-signature",
+      "arrow-call-signature",
+      "parameter",
+      "variable-declaration",
+      "member-variable-declaration",
+      "object-destructuring",
+      "array-destructuring",
+      "property-declaration"
+    ],
+    "unified-signatures": true,
+    "await-promise": true,
+    "curly": [true, "ignore-same-line"],
+    "function-constructor": true,
+    "import-blacklist": [
+      true,
+      "rxjs",
+      "lodash"
+    ],
+    "no-arg": true,
+    "no-bitwise": true,
+    "no-conditional-assignment": true,
+    "no-console": [
+      true,
+      "debug",
+      "info",
+      "time",
+      "timeEnd",
+      "trace"
+    ],
+    "no-construct": true,
+    "no-duplicate-super": true,
+    "no-duplicate-switch-case": true,
+    "no-duplicate-variable": [true, "check-parameters"],
+    "no-eval": true,
+    "ban-ts-ignore": false,
+
+
     "arrow-return-shorthand": true,
     "callable-types": true,
     "class-name": true,
@@ -10,16 +55,11 @@
       true,
       "check-space"
     ],
-    "curly": true,
     "deprecation": {
       "severity": "warn"
     },
     "eofline": true,
     "forin": true,
-    "import-blacklist": [
-      true,
-      "rxjs/Rx"
-    ],
     "import-spacing": true,
     "indent": [
       true,
@@ -30,39 +70,9 @@
     "max-line-length": [
       true,
       140
-    ],
-    "member-access": false,
-    "member-ordering": [
-      true,
-      {
-        "order": [
-          "static-field",
-          "instance-field",
-          "static-method",
-          "instance-method"
-        ]
-      }
-    ],
-    "no-arg": true,
-    "no-bitwise": true,
-    "no-console": [
-      true,
-      "debug",
-      "info",
-      "time",
-      "timeEnd",
-      "trace"
-    ],
-    "no-construct": true,
+      ],
     "no-debugger": true,
-    "no-duplicate-super": true,
-    "no-empty": false,
     "no-empty-interface": true,
-    "no-eval": true,
-    "no-inferrable-types": [
-      true,
-      "ignore-params"
-    ],
     "no-misused-new": true,
     "no-non-null-assertion": true,
     "no-redundant-jsdoc": true,
@@ -107,7 +117,6 @@
         "variable-declaration": "nospace"
       }
     ],
-    "unified-signatures": true,
     "variable-name": false,
     "whitespace": [
       true,
