@@ -1,9 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { User } from '../user.model';
 import { AuthService } from '../auth.service';
-import { Validate } from '../../util/validate.js';
+import { Validate } from '../../../util/validate.js';
 import { ModalController, ToastController } from '@ionic/angular';
-import { FindBusPage } from '../../find-bus/find-bus.page';
+import { FindBusPage } from '../../modal/find-bus/find-bus.page';
+import { UtilService } from '../../../util/util.service';
+import { utils } from 'protractor';
+import { Onibus } from '../../onibus.modal';
 
 @Component({
   selector: 'app-new-account',
@@ -18,17 +21,20 @@ export class NewAccountPage implements OnInit {
   constructor(
     private authService: AuthService,
     private toastCtrl: ToastController,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private util: UtilService
   ) {
     this.user = new User();
+    this.user.onibus = new Array<Onibus>();
   }
 
   public ngOnInit(): void {
+    console.log('INIT');
   }
 
   public save(): void {
     if (this.validations()) {
-      console.log('SALVOU');
+      console.log('SALVOU', this.user);
       // this.authService.create(this.user).subscribe(res => {
       //   console.log('RES: ', res);
       // });
@@ -36,8 +42,12 @@ export class NewAccountPage implements OnInit {
   }
 
   public async showLines(): Promise<any> {
-    // const modal = await this.modalCtrl.create();
-    // return await modal.present();
+    const modal = await this.modalCtrl.create({
+      component: FindBusPage
+    });
+    await modal.present();
+    const { data }: any = await modal.onWillDismiss();
+    this.user.onibus = data;
   }
 
   public showPassword(): void {
@@ -51,31 +61,26 @@ export class NewAccountPage implements OnInit {
   }
 
   private validations(): boolean {
-    if (!(this.user.email && this.user.password)) {
-      this.presentToast('Preencha todos os campos', 1700);
+
+    if (!(this.user.email && this.user.password && this.user.name)) {
+      this.util.showToast('Preencha todos os campos', 'danger');
       return false;
+
     }
 
     if (!Validate.email(this.user.email)) {
-      this.presentToast('E-mail invalido');
+      this.util.showToast('E-mail invalido', 'danger');
       return false;
     }
 
     if (this.user.password.length < 5) {
-      this.presentToast('Senha tem que ter no minimo 5 caracteres', 2500);
+      this.util.showToast('Senha tem que ter no minimo 5 caracteres', 'danger');
+      return false;
+    }
+    if (this.user.onibus.length < 1) {
+      this.util.showToast('Selecione ao menos um ônibus', 'danger');
       return false;
     }
     return true;
-  }
-
-  private async presentToast(msg: string, duration: number = 2000): Promise<any> {
-    const toast = await this.toastCtrl.create({
-      message: msg,
-      duration: duration,
-      color: 'danger',
-      position: 'top',
-      translucent: true
-    });
-    toast.present();
   }
 }

@@ -43,6 +43,22 @@
                   [(ngModel)]="user.password">
                 </ion-input>
               </ion-item>
+              <ion-grid>
+                <ion-row>
+                  <ion-col size="12">
+                    <ion-item text-center color="light" *ngIf="user.onibus.length > 0">
+                      <ion-label>Linha</ion-label>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col justify-content-center size="12">
+                    <ion-item color="Light" *ngFor="let linhas of user.onibus">
+                      <ion-label color="success"text-wrap>{{ linhas.numero }} | {{ linhas.descricao }}</ion-label>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
               <div padding-vertical>
                 <ion-button
                   type="button"
