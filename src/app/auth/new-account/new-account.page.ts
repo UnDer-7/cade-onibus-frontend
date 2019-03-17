@@ -36,10 +36,8 @@ export class NewAccountPage implements OnInit {
   }
 
   public async showLines(): Promise<any> {
-    const modal = await this.modalCtrl.create({
-      component: FindBusPage
-    });
-    return await modal.present();
+    // const modal = await this.modalCtrl.create();
+    // return await modal.present();
   }
 
   public showPassword(): void {
