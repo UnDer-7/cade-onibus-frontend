@@ -7,21 +7,23 @@ import { LoginPage } from './login/login.page';
 import { NewAccountPage } from './new-account/new-account.page';
 import { AuthService } from './auth.service';
 import { authRoutes } from './auth.route';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(authRoutes)
+    RouterModule.forChild(authRoutes),
+    HttpClientModule
+  ],
+  providers: [
+    AuthService,
   ],
   declarations: [
     LoginPage,
     NewAccountPage
   ],
-  providers: [
-    AuthService
-  ]
 })
 export class AuthModule {
 }

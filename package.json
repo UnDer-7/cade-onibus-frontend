@@ -5,7 +5,7 @@
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --baseHref=/ --open=true --poll 200",
+    "start": "ng serve --baseHref=/ --open=true --poll 200 --proxyConfig proxy.conf.json",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",

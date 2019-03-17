@@ -7,54 +7,69 @@
 </ion-header>
 
 <ion-content color="medium">
-  <form name="editForm" role="form" (ngSubmit)="save()">
+  <ion-grid>
+    <ion-row>
+      <ion-col sizeSm="12" sizeMd="12" sizeLg="4" offsetLg="4">
+        <div style="padding-top: 20%">
+          <ion-card text-center color="light">
+            <ion-card-header>
+              <ion-card-title text-center>Nova Conta</ion-card-title>
+            </ion-card-header>
+
+            <ion-card-content>
+              <ion-item color="light">
+                <ion-input
+                  email="true"
+                  name="email"
+                  type="email"
+                  placeholder="E-mail"
+                  [(ngModel)]="user.email">
+                </ion-input>
+              </ion-item>
+              <ion-item color="light">
+                <ion-input
+                  name="name"
+                  type="text"
+                  placeholder="Nome"
+                  [(ngModel)]="user.name">
+                </ion-input>
+              </ion-item>
+              <ion-item color="light">
+                <ion-icon slot="end" (click)="showPassword()" [name]="passwordIcon"></ion-icon>
+                <ion-input
+                  placeholder="Senha"
+                  name="password"
+                  [type]="passwordType"
+                  [(ngModel)]="user.password">
+                </ion-input>
+              </ion-item>
+              <div padding-vertical>
+                <ion-button
+                  type="button"
+                  expand="block"
+                  fill="outline"
+                  color="secondary"
+                  (click)="showLines()">
+                  Selecione sua linha
+                </ion-button>
+              </div>
+            </ion-card-content>
+          </ion-card>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color="dark">
     <ion-grid>
       <ion-row>
-        <ion-col sizeSm="12" sizeMd="12" sizeLg="4" offsetLg="4">
-          <div style="padding-top: 20%">
-            <ion-card text-center color="light">
-              <ion-card-header>
-                <ion-card-title text-center>Nova Conta</ion-card-title>
-              </ion-card-header>
-
-              <ion-card-content>
-                <ion-item color="light">
-                  <ion-input
-                    required
-                    email="true"
-                    name="email"
-                    type="email"
-                    placeholder="E-mail"
-                    [(ngModel)]="user.email">
-                  </ion-input>
-                </ion-item>
-                <ion-item color="light">
-                  <ion-input
-                    required
-                    name="name"
-                    type="text"
-                    placeholder="Nome"
-                    [(ngModel)]="user.name">
-                  </ion-input>
-                </ion-item>
-                <ion-item color="light">
-                  <ion-icon slot="end" (click)="showPassword()" [name]="passwordIcon"></ion-icon>
-                  <ion-input
-                    required
-                    placeholder="Senha"
-                    name="password"
-                    [type]="passwordType"
-                    [(ngModel)]="user.password">
-                  </ion-input>
-                </ion-item>
-                <div padding-vertical>
-                  <ion-button type="submit" expand="block" color="primary">Entrar</ion-button>
-                </div>
-              </ion-card-content>
-            </ion-card>
-          </div>
+        <ion-col size="6" offset="3">
+          <ion-button type="button" expand="block" fill="clear" color="primary" (click)="save()">Criar conta
+          </ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>
-  </form>
-</ion-content>
+  </ion-toolbar>
+</ion-footer>

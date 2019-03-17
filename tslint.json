@@ -14,7 +14,6 @@
       "call-signature",
       "arrow-call-signature",
       "parameter",
-      "variable-declaration",
       "member-variable-declaration",
       "object-destructuring",
       "array-destructuring",

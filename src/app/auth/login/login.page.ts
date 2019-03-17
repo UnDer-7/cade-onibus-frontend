@@ -19,7 +19,6 @@ export class LoginPage implements OnInit {
   public ngOnInit(): void { }
 
   public login(): void {
-    this.authService.tst();
   }
 
   public newAccount(): void {
