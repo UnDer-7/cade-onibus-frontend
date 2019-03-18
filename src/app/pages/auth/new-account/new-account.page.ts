@@ -1,12 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { User } from '../user.model';
 import { AuthService } from '../auth.service';
 import { Validate } from '../../../util/validate.js';
 import { ModalController, ToastController } from '@ionic/angular';
 import { FindBusPage } from '../../modal/find-bus/find-bus.page';
 import { UtilService } from '../../../util/util.service';
-import { utils } from 'protractor';
 import { Onibus } from '../../onibus.modal';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-account',
@@ -22,22 +22,26 @@ export class NewAccountPage implements OnInit {
     private authService: AuthService,
     private toastCtrl: ToastController,
     private modalCtrl: ModalController,
-    private util: UtilService
+    private util: UtilService,
+    private route: Router
   ) {
     this.user = new User();
     this.user.onibus = new Array<Onibus>();
   }
 
   public ngOnInit(): void {
-    console.log('INIT');
   }
 
   public save(): void {
     if (this.validations()) {
-      console.log('SALVOU', this.user);
-      // this.authService.create(this.user).subscribe(res => {
-      //   console.log('RES: ', res);
-      // });
+      this.authService.create(this.user).subscribe(res => {
+        this.util.showToast('Conta criado com sucesso', 'success');
+        this.route.navigate(['/auth/login']);
+      }, err => {
+        if (err.error === 'User already exists') {
+          this.util.showToast('Já existe um usuário com esse e-mail');
+        }
+      });
     }
   }
 

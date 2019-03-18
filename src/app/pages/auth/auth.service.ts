@@ -14,6 +14,10 @@ export class AuthService {
   ) {
   }
 
+  public login(user: User): Observable<User> {
+    return this.http.post(this.authUrl, user);
+  }
+
   public create(user: User): Observable<User> {
     return this.http.post(this.resourceUrl, user);
   }
