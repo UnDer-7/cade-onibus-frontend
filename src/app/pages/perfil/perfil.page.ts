@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PerfilService } from './perfil.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-perfil',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PerfilPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    private perfilService: PerfilService,
+    private router: Router
+  ) { }
 
-  ngOnInit() {
+  public ngOnInit(): void {
+    this.getUser();
   }
 
+  public sendToHome(): void {
+    this.router.navigate(['home']);
+  }
+
+  private getUser(): void {
+    console.log('INIT');
+    this.perfilService.findUser();
+  }
 }

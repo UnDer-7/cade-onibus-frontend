@@ -6,6 +6,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { PerfilPage } from './perfil.page';
+import { HttpClientModule } from '@angular/common/http';
+import { PerfilService } from './perfil.service';
 
 const routes: Routes = [
   {
@@ -19,8 +21,12 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    HttpClientModule
   ],
-  declarations: [PerfilPage]
+  declarations: [PerfilPage],
+  providers: [
+    PerfilService
+  ]
 })
 export class PerfilPageModule {}

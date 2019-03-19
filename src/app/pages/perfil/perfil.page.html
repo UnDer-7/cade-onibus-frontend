@@ -1,9 +1,34 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>perfil</ion-title>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-menu-toggle>
+        <ion-button>
+          <ion-icon slot="icon-only" name="menu"></ion-icon>
+        </ion-button>
+      </ion-menu-toggle>
+    </ion-buttons>
+    <ion-title text-center>Cadê Ônibus</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-menu contentId="main">
+  <ion-button color="dark" (click)="sendToHome()">Home</ion-button>
+  <ion-router-outlet id="main"></ion-router-outlet>
+</ion-menu>
 
+<ion-content padding color="medium">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-label>Password</ion-label>
+        .........
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-label>E-mail</ion-label>
+        admin@admin.admin
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

@@ -27,6 +27,7 @@ export class LoginPage implements OnInit {
   public login(): void {
     console.log('user: ', this.user);
     this.authService.login(this.user).subscribe(res => {
+      console.log('res: ', res);
       this.router.navigate(['/home']);
     }, err => {
       if (err.error === 'User not found') {

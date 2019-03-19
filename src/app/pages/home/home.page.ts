@@ -19,6 +19,6 @@ export class HomePage {
   }
 
   public sendToPerfil(): void {
-    this.router.navigate(['/perfil']);
+    this.router.navigate(['perfil']);
   }
 }
