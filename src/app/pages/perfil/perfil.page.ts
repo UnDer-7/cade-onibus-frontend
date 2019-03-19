@@ -23,7 +23,8 @@ export class PerfilPage implements OnInit {
   }
 
   private getUser(): void {
-    console.log('INIT');
-    this.perfilService.findUser();
+    this.perfilService.findUser().subscribe(res => {
+      console.log('res: ', res);
+    });
   }
 }

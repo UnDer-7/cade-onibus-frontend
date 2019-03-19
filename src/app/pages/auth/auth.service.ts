@@ -6,15 +6,15 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class AuthService {
-  public authUrl: string = environment.apiUrl + '/login';
-  public resourceUrl: string = environment.apiUrl + '/users';
+  private authUrl: string = environment.apiUrl + '/login';
+  private resourceUrl: string = environment.apiUrl + '/users';
 
   constructor(
     private http: HttpClient
   ) {
   }
 
-  public login(user: User): Observable<User> {
+  public login(user: User): Observable<any> {
     return this.http.post(this.authUrl, user);
   }
 

@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import { AuthService } from '../auth.service';
 import { User } from '../user.model';
 import { UtilService } from '../../../util/util.service';
+import { TokenService } from '../../../Token.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginPage implements OnInit {
   constructor(
     private router: Router,
     private authService: AuthService,
-    private util: UtilService
+    private util: UtilService,
+    private tokenService: TokenService
   ) {
     this.user = new User();
   }
@@ -27,10 +29,11 @@ export class LoginPage implements OnInit {
   public login(): void {
     console.log('user: ', this.user);
     this.authService.login(this.user).subscribe(res => {
-      console.log('res: ', res);
+      this.tokenService.token = res.token;
       this.router.navigate(['/home']);
     }, err => {
-      if (err.error === 'User not found') {
+      console.log(err.status);
+      if (err.status === 400) {
         this.util.showToast('Credenciais incorretas', 'danger');
       }
     });

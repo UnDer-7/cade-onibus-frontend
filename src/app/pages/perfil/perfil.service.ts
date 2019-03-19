@@ -1,10 +1,18 @@
 import { Injectable } from '@angular/core';
+import { environment } from '../../../environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { User } from '../auth/user.model';
 
 @Injectable()
 export class PerfilService {
-  constructor() { }
+  private resourceUrl: string = environment.apiUrl + '/users';
 
-  public findUser(): void {
-    console.log('SERVICE WORKS');
+  constructor(
+    private http: HttpClient
+  ) { }
+
+  public findUser(): Observable<User> {
+    return this.http.get(this.resourceUrl);
   }
 }

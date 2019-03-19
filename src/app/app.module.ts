@@ -11,6 +11,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { FindBusPageModule } from './pages/modal/find-bus/find-bus.module';
 import { UtilService } from './util/util.service';
 import { TokenService } from './Token.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenApiService } from './Interceptors/Token-api.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,7 +27,12 @@ import { TokenService } from './Token.service';
     SplashScreen,
     UtilService,
     TokenService,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenApiService,
+      multi: true
+    },
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   ],
   bootstrap: [AppComponent]
 })
