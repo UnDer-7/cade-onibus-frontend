@@ -31,9 +31,7 @@ export class FindBusPage implements OnInit {
 
   public searchBus(): void {
     this.findBusService.findBus(this.linha).subscribe((res: Onibus[]) => {
-      this.onibus = res;
-
-      this.removeDuplicate();
+      this.onibus = this.removeDuplicates(res, 'numero');
 
       if (this.onibus.length < 1) {
         this.utilService.showToast('Nenhum onibus encontrado');
@@ -75,21 +73,9 @@ export class FindBusPage implements OnInit {
     }
   }
 
-  private removeDuplicate(): void {
-    // const numeros: string[] =  uniq(this.onibus.map(onibus => onibus.numero));
-    // console.log('UNIQ ', numeros);
-    // const tst = numeros.filter((item, index) => {
-    //   return this.onibus.find((element: Onibus) => {
-    //     return element.numero === item;
-    //   });
-    // });
-
-    // const tst = this.onibus.filter(item => {
-      // return numeros.includes(item.numero);
-    // });
-    // this.onibus.filter(item => {
-    //   return item.numero === numeros;
-    // });
-    // const unique = uniqWith(this.onibus, this.onibus.);
+  private removeDuplicates(myArr, prop) {
+    return myArr.filter((obj, pos, arr) => {
+        return arr.map(mapObj => mapObj[prop]).indexOf(obj[prop]) === pos;
+    });
   }
 }
