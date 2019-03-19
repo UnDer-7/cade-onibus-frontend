@@ -1,0 +1,55 @@
+<ion-list *ngIf="onibus.length > 0">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="3">
+        <ion-item-divider>
+          <ion-label>Número</ion-label>
+        </ion-item-divider>
+      </ion-col>
+      <ion-col size="4">
+        <ion-item-divider>
+          <ion-label>Descrição</ion-label>
+        </ion-item-divider>
+      </ion-col>
+      <ion-col size="3">
+        <ion-item-divider>
+          <ion-label>Tarifa</ion-label>
+        </ion-item-divider>
+      </ion-col>
+    </ion-row>
+
+    <ion-item-divider *ngFor="let onibus of onibus; let i = index">
+      <div class="ion-activatable" style="position: relative">
+        <ion-ripple-effect></ion-ripple-effect>
+        <ion-row>
+          <ion-col size="3">
+            <ion-item lines="none">
+              <ion-label color="secondary">
+                {{ onibus.numero }}
+              </ion-label>
+            </ion-item>
+          </ion-col>
+          <ion-col size="4">
+            <ion-item lines="none">
+              <ion-label color="secondary" text-wrap>
+                {{ onibus.descricao }}
+              </ion-label>
+            </ion-item>
+          </ion-col>
+          <ion-col size="2.2">
+            <ion-item lines="none">
+              <ion-label color="secondary">
+                {{ onibus.faixaTarifaria.tarifa }}
+              </ion-label>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+          </ion-col>
+          <ion-item lines="none">
+            <ion-checkbox color="light" no-padding (click)="onBusSelection($event.srcElement.checked, i)"></ion-checkbox>
+          </ion-item>
+        </ion-row>
+      </div>
+    </ion-item-divider>
+  </ion-grid>
+</ion-list>
