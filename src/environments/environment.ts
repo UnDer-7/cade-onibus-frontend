@@ -5,7 +5,8 @@
 // @ts-ignore
 export const environment = {
   production: false,
-  apiUrl: '/api'
+  apiUrl: '/api',
+  dftrans: 'https://www.sistemas.dftrans.df.gov.br/'
 };
 
 /*

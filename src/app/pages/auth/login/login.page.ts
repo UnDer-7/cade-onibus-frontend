@@ -27,7 +27,6 @@ export class LoginPage implements OnInit {
   public ngOnInit(): void { }
 
   public login(): void {
-    console.log('user: ', this.user);
     this.authService.login(this.user).subscribe(res => {
       this.tokenService.token = res.token;
       this.router.navigate(['/home']);

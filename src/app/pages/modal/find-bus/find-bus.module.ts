@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { FindBusPage } from './find-bus.page';
 import { FindBusService } from './find-bus.service';
+import {HttpClientModule} from '@angular/common/http';
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
+    HttpClientModule
   ],
   declarations: [FindBusPage],
   providers: [

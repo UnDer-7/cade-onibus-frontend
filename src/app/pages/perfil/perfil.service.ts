@@ -12,7 +12,7 @@ export class PerfilService {
     private http: HttpClient
   ) { }
 
-  public findUser(): Observable<User> {
-    return this.http.get(this.resourceUrl);
+  public findUser(id: string): Observable<User> {
+    return this.http.get<User>(`${this.resourceUrl}/${id}`);
   }
 }

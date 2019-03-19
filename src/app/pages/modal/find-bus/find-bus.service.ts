@@ -2,10 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Onibus } from '../../onibus.modal';
+import {environment} from '../../../../environments/environment';
 
 @Injectable()
 export class FindBusService {
-  private resourceUrl: string = 'https://www.sistemas.dftrans.df.gov.br/linha/find/';
+  private resourceUrl: string = environment.dftrans + 'linha/find/';
+
   constructor(
     private http: HttpClient
   ) { }
