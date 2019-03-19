@@ -1,9 +1,18 @@
 <ion-header>
   <ion-toolbar color="dark">
-    <ion-title text-center>Cadê Ônibus</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-toggle>
+        <ion-button>
+          <ion-icon slot="icon-only" name="menu"></ion-icon>
+        </ion-button>
+      </ion-menu-toggle>
+    </ion-buttons>
+    <ion-title>Cadê Ônibus</ion-title>
   </ion-toolbar>
 </ion-header>
+
 <ion-menu contentId="main">
+  <ion-button>Perfil</ion-button>
   <ion-router-outlet id="main"></ion-router-outlet>
 </ion-menu>
 <ion-content padding color="medium">
