@@ -11,7 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { FindBusPageModule } from './pages/modal/find-bus/find-bus.module';
 import { UtilService } from './util/util.service';
 import { TokenService } from './Token.service';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { TokenApiService } from './Interceptors/Token-api.service';
 
 @NgModule({
@@ -21,7 +21,9 @@ import { TokenApiService } from './Interceptors/Token-api.service';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    FindBusPageModule],
+    HttpClientModule,
+    FindBusPageModule
+  ],
   providers: [
     StatusBar,
     SplashScreen,

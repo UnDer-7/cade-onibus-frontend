@@ -6,7 +6,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { PerfilPage } from './perfil.page';
-import { HttpClientModule } from '@angular/common/http';
 import { PerfilService } from './perfil.service';
 
 const routes: Routes = [
@@ -22,7 +21,6 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
-    HttpClientModule
   ],
   declarations: [PerfilPage],
   providers: [
