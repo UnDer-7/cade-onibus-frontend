@@ -71,7 +71,7 @@ export class FindBusPage implements OnInit {
     }
   }
 
-  private removeDuplicates(myArr, prop) {
+  private removeDuplicates(myArr: Onibus[], prop: string): Array<Onibus> {
     return myArr.filter((obj, pos, arr) => {
         return arr.map(mapObj => mapObj[prop]).indexOf(obj[prop]) === pos;
     });
