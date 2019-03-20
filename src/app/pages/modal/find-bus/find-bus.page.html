@@ -16,6 +16,8 @@
   </ion-item>
   <br>
   <br>
+  <ion-spinner name="bubbles"></ion-spinner>
+  <app-bus-list *ngIf="onibus.length > 0" [onibus]="onibus"></app-bus-list>
 </ion-content>
 
 <ion-footer>

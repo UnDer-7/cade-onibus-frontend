@@ -29,6 +29,11 @@ export class PerfilPage implements OnInit {
     this.router.navigate(['home']);
   }
 
+  public logout(): void {
+    this.tokenService.removeItem();
+    this.router.navigate(['auth/login']);
+  }
+
   private getUser(): void {
     const id = this.tokenService.decodeToken()._id;
     this.perfilService.findUser(id).subscribe(res => {

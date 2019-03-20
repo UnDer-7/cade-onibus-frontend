@@ -12,11 +12,16 @@
 </ion-header>
 
 <ion-menu contentId="main">
-  <ion-button color="dark" (click)="sendToHome()">Home</ion-button>
+  <ion-content>
+    <ion-list>
+      <ion-button color="dark" expand="block" (click)="sendToHome()">Home</ion-button>
+      <ion-button color="dark" expand="block" (click)="logout()">Sair</ion-button>
+    </ion-list>
+  </ion-content>
   <ion-router-outlet id="main"></ion-router-outlet>
 </ion-menu>
 
-<ion-content padding color="medium">
+<ion-content color="medium">
   <ion-card color="light">
     <ion-card-header>
       <ion-card color="dark" padding-vertical>
@@ -25,18 +30,13 @@
       </ion-card>
     </ion-card-header>
     <ion-card-content text-center>
-      <ion-label>Seus Ônibus</ion-label>
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-            <ion-label>Número: 517</ion-label>
-            <br>
-            <ion-label>Descrição: Sobradinho II (Buritis - DF-150) / W3 Norte - Sul</ion-label>
-          </ion-col>
-          <ion-col>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+      <ion-title>
+        <ion-label>Suas Linhas</ion-label>
+      </ion-title>
+      <app-bus-list
+        [onibus]="user.onibus"
+        [disableCheckBox]=false>
+      </app-bus-list>
     </ion-card-content>
   </ion-card>
 </ion-content>

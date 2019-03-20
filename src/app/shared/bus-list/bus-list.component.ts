@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Onibus } from '../../pages/onibus.modal';
 
 @Component({
   selector: 'app-bus-list',
@@ -6,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./bus-list.component.scss'],
 })
 export class BusListComponent implements OnInit {
+  @Input() public onibus: Array<Onibus>;
+  @Input() public disableCheckBox: boolean = true;
 
   constructor() { }
 
-  ngOnInit() {}
+  public ngOnInit(): void {
+    console.log('ONIBUS: ', this.onibus);
+  }
 
+  public onBusSelection(): void {}
 }

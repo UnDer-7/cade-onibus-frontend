@@ -1,10 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
 import { Onibus } from '../../onibus.modal';
 import { FindBusService } from './find-bus.service';
 import { UtilService } from '../../../util/util.service';
-import uniqWith from 'lodash/uniqWith';
-import isEqual from 'lodash/isEqual';
 
 @Component({
   selector: 'app-find-bus',

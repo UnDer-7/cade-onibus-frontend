@@ -8,6 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { FindBusPage } from './find-bus.page';
 import { FindBusService } from './find-bus.service';
 import {HttpClientModule} from '@angular/common/http';
+import { SharedModule } from '../../../shared/shared.module';
 
 const routes: Routes = [
   {
@@ -22,7 +23,8 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
-    HttpClientModule
+    HttpClientModule,
+    SharedModule.forRoot()
   ],
   declarations: [FindBusPage],
   providers: [
