@@ -46,7 +46,7 @@
           <ion-col>
           </ion-col>
           <ion-item lines="none" *ngIf="disableCheckBox">
-            <ion-checkbox color="light" no-padding (click)="onBusSelection($event.srcElement.checked, i)"></ion-checkbox>
+            <ion-checkbox color="light" no-padding (click)="checkBoxClicked($event.srcElement.checked, i)"></ion-checkbox>
           </ion-item>
         </ion-row>
       </div>

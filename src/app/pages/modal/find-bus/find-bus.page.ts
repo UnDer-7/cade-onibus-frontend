@@ -1,17 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { ModalController, ToastController } from '@ionic/angular';
-import { Onibus } from '../../onibus.modal';
-import { FindBusService } from './find-bus.service';
-import { UtilService } from '../../../util/util.service';
+import {Component, OnInit} from '@angular/core';
+import {ModalController, ToastController} from '@ionic/angular';
+import {Onibus} from '../../onibus.modal';
+import {FindBusService} from './find-bus.service';
+import {UtilService} from '../../../util/util.service';
 
 @Component({
   selector: 'app-find-bus',
   templateUrl: './find-bus.page.html',
-  styleUrls: ['./find-bus.page.scss'],
 })
 export class FindBusPage implements OnInit {
   public onibus: Array<Onibus>;
   public linha: string;
+  public isLoading: boolean;
   private onibusAdded: Array<Onibus>;
 
   constructor(
@@ -20,6 +20,7 @@ export class FindBusPage implements OnInit {
     private toastCtrl: ToastController,
     private utilService: UtilService
   ) {
+    this.isLoading = false;
     this.onibus = new Array<Onibus>();
     this.onibusAdded = new Array<Onibus>();
   }
@@ -28,12 +29,14 @@ export class FindBusPage implements OnInit {
   }
 
   public searchBus(): void {
+      this.isLoading = true;
     this.findBusService.findBus(this.linha).subscribe((res: Onibus[]) => {
       this.onibus = this.removeDuplicates(res, 'numero');
 
       if (this.onibus.length < 1) {
         this.utilService.showToast('Nenhum onibus encontrado');
       }
+      this.isLoading = false;
     });
   }
 
@@ -57,7 +60,9 @@ export class FindBusPage implements OnInit {
    * @param checkbox - Se a checkbox esta selecionada ou não.
    * @param index - Index do array de Onibus que veio do df-trans.
    */
-  public onBusSelection(checkbox: boolean, index: number): void {
+  public onBusSelection(event: Object): void {
+    // @ts-ignore
+    const {checkbox, index} = event;
     if (checkbox) {
       this.onibusAdded = this.onibusAdded.filter(item => {
         return item.numero !== this.onibus[index].numero;
@@ -73,7 +78,7 @@ export class FindBusPage implements OnInit {
 
   private removeDuplicates(myArr: Onibus[], prop: string): Array<Onibus> {
     return myArr.filter((obj, pos, arr) => {
-        return arr.map(mapObj => mapObj[prop]).indexOf(obj[prop]) === pos;
+      return arr.map(mapObj => mapObj[prop]).indexOf(obj[prop]) === pos;
     });
   }
 }

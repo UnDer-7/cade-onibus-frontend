@@ -16,8 +16,12 @@
   </ion-item>
   <br>
   <br>
-  <ion-spinner name="bubbles"></ion-spinner>
-  <app-bus-list *ngIf="onibus.length > 0" [onibus]="onibus"></app-bus-list>
+  <ion-spinner color="primary" name="bubbles" *ngIf="isLoading"></ion-spinner>
+  <app-bus-list
+    *ngIf="onibus.length > 0"
+    [onibus]="onibus"
+    (checkBoxValue)="onBusSelection($event)">
+  </app-bus-list>
 </ion-content>
 
 <ion-footer>

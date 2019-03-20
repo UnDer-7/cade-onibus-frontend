@@ -31,7 +31,6 @@ export class LoginPage implements OnInit {
       this.tokenService.token = res.token;
       this.router.navigate(['/home']);
     }, err => {
-      console.log(err.status);
       if (err.status === 400) {
         this.util.showToast('Credenciais incorretas', 'danger');
       }
