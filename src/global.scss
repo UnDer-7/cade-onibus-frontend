@@ -24,3 +24,21 @@ ion-spinner {
   bottom: 0;
   right: 0;
 }
+
+:root {
+  --ion-color-whith: #e5ecff;
+  --ion-color-whith-rgb: 229,236,255;
+  --ion-color-whith-contrast: #000000;
+  --ion-color-whith-contrast-rgb: 0,0,0;
+  --ion-color-whith-shade: #cad0e0;
+  --ion-color-whith-tint: #e8eeff;
+}
+
+.ion-color-whith {
+  --ion-color-base: var(--ion-color-whith) !important;
+  --ion-color-base-rgb: var(--ion-color-whith-rgb) !important;
+  --ion-color-contrast: var(--ion-color-whith-contrast) !important;
+  --ion-color-contrast-rgb: var(--ion-whith-gold-contrast-rgb) !important;
+  --ion-color-shade: var(--ion-color-whith-shade) !important;
+  --ion-color-tint: var(--ion-color-whith-tint) !important;
+}

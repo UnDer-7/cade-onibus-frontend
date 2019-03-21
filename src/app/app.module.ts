@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -13,6 +13,10 @@ import { UtilService } from './util/util.service';
 import { TokenService } from './Token.service';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { TokenApiService } from './Interceptors/Token-api.service';
+import {registerLocaleData} from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+
+registerLocaleData(localePt, 'pt-BR');
 
 @NgModule({
   declarations: [AppComponent],
@@ -34,7 +38,10 @@ import { TokenApiService } from './Interceptors/Token-api.service';
       useClass: TokenApiService,
       multi: true
     },
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    {
+      provide: RouteReuseStrategy,
+      useClass: IonicRouteStrategy
+    }
   ],
   bootstrap: [AppComponent]
 })

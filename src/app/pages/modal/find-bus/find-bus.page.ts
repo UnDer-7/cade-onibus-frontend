@@ -37,7 +37,7 @@ export class FindBusPage implements OnInit {
         this.utilService.showToast('Nenhum onibus encontrado');
       }
       this.isLoading = false;
-    });
+    }, err => this.isLoading = false);
   }
 
   public async closeModal(): Promise<any> {
