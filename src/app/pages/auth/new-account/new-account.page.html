@@ -45,17 +45,23 @@
               </ion-item>
               <ion-grid>
                 <ion-row>
-                  <ion-col size="12">
-                    <ion-item text-center color="light" *ngIf="user.onibus.length > 0">
-                      <ion-label>Linha</ion-label>
+                  <ion-col size="12" padding-vertical>
+                    <ion-item color="light" lines="full" *ngIf="user.onibus.length" text-center>
+                      <ion-label color="secondary">Linha</ion-label>
                     </ion-item>
+                    <!--</ion-item-divider>-->
                   </ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col justify-content-center size="12">
-                    <ion-item color="Light" *ngFor="let linhas of user.onibus">
-                      <ion-label color="success"text-wrap>{{ linhas.numero }} | {{ linhas.descricao }}</ion-label>
-                    </ion-item>
+                    <ion-item-divider *ngFor="let linhas of user.onibus" color="light">
+                      <ion-item lines="none" color="light">
+                        <ion-label text-wrap color="success">{{ linhas.numero }}</ion-label>
+                      </ion-item>
+                      <ion-item lines="none" color="light">
+                        <ion-label color="dark" text-wrap>{{ linhas.descricao }}</ion-label>
+                      </ion-item>
+                    </ion-item-divider>
                   </ion-col>
                 </ion-row>
               </ion-grid>
