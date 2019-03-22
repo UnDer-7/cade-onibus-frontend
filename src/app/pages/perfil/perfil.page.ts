@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import {TokenService} from '../../Token.service';
 import {User} from '../auth/user.model';
 import { environment } from '../../../environments/environment';
+import { AuthService } from '../auth/auth.service';
+import { SessionService } from '../../auth/session.service';
 
 @Component({
   selector: 'app-perfil',
@@ -16,7 +18,8 @@ export class PerfilPage implements OnInit {
   constructor(
     private perfilService: PerfilService,
     private tokenService: TokenService,
-    private router: Router
+    private router: Router,
+    private sessionService: SessionService
   ) {
     this.user = {} as User;
   }
@@ -34,10 +37,15 @@ export class PerfilPage implements OnInit {
     this.router.navigate(['auth/login']);
   }
 
+  public editUser(): void {
+    this.sessionService.login();
+  }
+
   private getUser(): void {
     const id = this.tokenService.decodeToken()._id;
     this.perfilService.findUser(id).subscribe(res => {
       this.user = res;
     });
   }
+
 }
