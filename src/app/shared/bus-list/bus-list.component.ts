@@ -4,7 +4,6 @@ import { Onibus } from '../../pages/onibus.modal';
 @Component({
   selector: 'app-bus-list',
   templateUrl: './bus-list.component.html',
-  styleUrls: ['./bus-list.component.scss'],
 })
 export class BusListComponent implements OnInit {
   @Input() public onibus: Array<Onibus>;

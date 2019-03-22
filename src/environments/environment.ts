@@ -6,7 +6,8 @@
 export const environment = {
   production: false,
   apiUrl: '/api',
-  dftrans: 'https://www.sistemas.dftrans.df.gov.br/'
+  dftrans: 'https://www.sistemas.dftrans.df.gov.br/',
+  appName: 'Cadê Ônibus'
 };
 
 /*

@@ -3,6 +3,7 @@ import { PerfilService } from './perfil.service';
 import { Router } from '@angular/router';
 import {TokenService} from '../../Token.service';
 import {User} from '../auth/user.model';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-perfil',
@@ -10,6 +11,7 @@ import {User} from '../auth/user.model';
 })
 export class PerfilPage implements OnInit {
   public user: User;
+  public appName: string = environment.appName;
 
   constructor(
     private perfilService: PerfilService,

@@ -4,6 +4,7 @@ import { AuthService } from '../auth.service';
 import { User } from '../user.model';
 import { UtilService } from '../../../util/util.service';
 import { TokenService } from '../../../Token.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +15,7 @@ export class LoginPage implements OnInit {
   public user: User;
   public passwordIcon: string = 'eye-off';
   public passwordType: string = 'password';
+  public appName: string = environment.appName;
 
   constructor(
     private router: Router,
