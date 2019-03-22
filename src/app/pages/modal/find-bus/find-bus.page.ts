@@ -23,8 +23,8 @@ export class FindBusPage implements OnInit {
     private utilService: UtilService
   ) {
     this.isLoading = false;
-    this.onibus = new Array<Onibus>();
-    this.onibusAdded = new Array<Onibus>();
+    this.onibus = [] as Onibus[];
+    this.onibusAdded = [] as Onibus[];
   }
 
   public ngOnInit(): void {

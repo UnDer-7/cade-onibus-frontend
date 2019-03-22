@@ -25,8 +25,8 @@ export class NewAccountPage implements OnInit {
     private util: UtilService,
     private route: Router
   ) {
-    this.user = new User();
-    this.user.onibus = new Array<Onibus>();
+    this.user = {} as User;
+    this.user.onibus = [] as Onibus[];
   }
 
   public ngOnInit(): void {

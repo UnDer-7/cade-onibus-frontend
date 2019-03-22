@@ -18,7 +18,7 @@ export class PerfilPage implements OnInit {
     private tokenService: TokenService,
     private router: Router
   ) {
-    this.user = new User();
+    this.user = {} as User;
   }
 
   public ngOnInit(): void {

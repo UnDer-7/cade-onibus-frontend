@@ -23,7 +23,7 @@ export class LoginPage implements OnInit {
     private util: UtilService,
     private tokenService: TokenService
   ) {
-    this.user = new User();
+    this.user = {} as User;
   }
 
   public ngOnInit(): void { }

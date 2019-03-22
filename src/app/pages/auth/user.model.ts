@@ -1,11 +1,9 @@
 import { Onibus } from '../onibus.modal';
 
-export class User {
-  constructor(
-    public id?: number,
-    public name?: string,
-    public email?: string,
-    public password?: string,
-    public onibus?: Onibus[]
-  ) { }
+export interface User {
+  id?: number;
+  name?: string;
+  email?: string;
+  password?: string;
+  onibus?: Onibus[];
 }
