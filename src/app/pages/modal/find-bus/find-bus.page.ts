@@ -3,6 +3,7 @@ import {ModalController, ToastController} from '@ionic/angular';
 import {Onibus} from '../../onibus.modal';
 import {FindBusService} from './find-bus.service';
 import {UtilService} from '../../../util/util.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-find-bus',
@@ -12,6 +13,7 @@ export class FindBusPage implements OnInit {
   public onibus: Array<Onibus>;
   public linha: string;
   public isLoading: boolean;
+  public appName: string = environment.appName;
   private onibusAdded: Array<Onibus>;
 
   constructor(
@@ -37,7 +39,7 @@ export class FindBusPage implements OnInit {
         this.utilService.showToast('Nenhum onibus encontrado');
       }
       this.isLoading = false;
-    }, err => this.isLoading = false);
+    }, () => this.isLoading = false);
   }
 
   public async closeModal(): Promise<any> {

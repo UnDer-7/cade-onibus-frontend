@@ -11,8 +11,6 @@ export class BusListComponent implements OnInit {
 
   @Output() public checkBoxValue: EventEmitter<any>;
 
-  private color: string = 'dark';
-
   constructor() {
     this.checkBoxValue = new EventEmitter();
   }
@@ -23,15 +21,11 @@ export class BusListComponent implements OnInit {
     this.checkBoxValue.emit({ checkbox: checkbox, index: index });
   }
 
-  public colors(): string {
-    if (this.color === 'dark') {
-      this.color = 'light';
-      return 'light';
-    }
-
-    if (this.color === 'light') {
-      this.color = 'dark';
+  public colors(index: number): string {
+    if (index % 2 === 0) {
       return 'dark';
+    } else {
+      return 'dark-2';
     }
   }
 }
