@@ -11,7 +11,8 @@
     <ion-input
       placeholder="Linha ou Cidades"
       name="linha"
-      [(ngModel)]="linha">
+      [(ngModel)]="linha"
+      (keydown.enter)="searchBus()">
     </ion-input>
   </ion-item>
   <br>
