@@ -36,7 +36,7 @@ export class FindBusPage implements OnInit {
       this.onibus = this.removeDuplicates(res, 'numero');
 
       if (this.onibus.length < 1) {
-        this.utilService.showToast('Nenhum onibus encontrado');
+        this.utilService.showToast('Nenhum onibus encontrado', 'danger');
       }
       this.isLoading = false;
     }, () => this.isLoading = false);
