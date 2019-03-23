@@ -11,7 +11,7 @@
         <div style="padding-top: 20%">
           <ion-card text-center color="light">
             <ion-card-header>
-              <ion-card-title text-center>Nova Conta</ion-card-title>
+              <ion-card-title text-center>{{user._id ? 'Editando Conta' : 'Nova Conta'}}</ion-card-title>
             </ion-card-header>
 
             <ion-card-content>
@@ -32,7 +32,7 @@
                   [(ngModel)]="user.name">
                 </ion-input>
               </ion-item>
-              <ion-item color="light">
+              <ion-item color="light" *ngIf="user?.password !== null">
                 <ion-icon slot="end" (click)="showPassword()" [name]="passwordIcon"></ion-icon>
                 <ion-input
                   placeholder="Senha"
@@ -86,7 +86,7 @@
     <ion-grid>
       <ion-row>
         <ion-col size="6">
-          <ion-button expand="full" fill="clear" (click)="save()">Criar Conta</ion-button>
+          <ion-button expand="full" fill="clear" (click)="save()">Salvar</ion-button>
         </ion-col>
         <ion-col size="6">
           <ion-button expand="full" fill="clear" color="danger" (click)="closeModal()">Cancelar</ion-button>

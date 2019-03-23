@@ -17,7 +17,10 @@ export class UserFormComponent implements OnInit {
   @Input() public user: User;
   public passwordIcon: string = 'eye-off';
   public passwordType: string = 'password';
+
   public appName: string = environment.appName;
+
+  // public
 
   constructor(
     private toastCtrl: ToastController,
@@ -27,7 +30,6 @@ export class UserFormComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
-    console.log('userToEdit', this.user);
     if (!this.user) {
       this.initializeUser();
     }
@@ -85,24 +87,36 @@ export class UserFormComponent implements OnInit {
   }
 
   private validations(): boolean {
-    if (!(this.user.email && this.user.password && this.user.name)) {
-      this.util.showToast('Preencha todos os campos', 'danger');
-      return false;
+    if (this.user._id) {
+      if (!(this.user.email && this.user.name)) {
+        this.util.showToast('Preencha todos os campos', 'danger');
+        return false;
+      }
 
-    }
+      if (!Validate.email(this.user.email)) {
+        this.util.showToast('E-mail invalido', 'danger');
+        return false;
+      }
+    } else {
+      if (!(this.user.email && this.user.password && this.user.name)) {
+        this.util.showToast('Preencha todos os campos', 'danger');
+        return false;
 
-    if (!Validate.email(this.user.email)) {
-      this.util.showToast('E-mail invalido', 'danger');
-      return false;
-    }
+      }
 
-    if (this.user.password.length < 5) {
-      this.util.showToast('Senha tem que ter no minimo 5 caracteres', 'danger');
-      return false;
-    }
-    if (this.user.onibus.length < 1) {
-      this.util.showToast('Selecione ao menos um ônibus', 'danger');
-      return false;
+      if (!Validate.email(this.user.email)) {
+        this.util.showToast('E-mail invalido', 'danger');
+        return false;
+      }
+
+      if (this.user.password.length < 5) {
+        this.util.showToast('Senha tem que ter no minimo 5 caracteres', 'danger');
+        return false;
+      }
+      if (this.user.onibus.length < 1) {
+        this.util.showToast('Selecione ao menos um ônibus', 'danger');
+        return false;
+      }
     }
     return true;
   }

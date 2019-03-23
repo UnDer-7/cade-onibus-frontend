@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../modals/user-form/user.service';
 import { Router } from '@angular/router';
-import {TokenService} from '../../auth/Token.service';
-import {User} from '../../models/user.model';
+import { TokenService } from '../../auth/Token.service';
+import { User } from '../../models/user.model';
 import { environment } from '../../../environments/environment';
 import { SessionService } from '../../auth/session.service';
 import { ModalController } from '@ionic/angular';
@@ -40,16 +39,19 @@ export class PerfilPage implements OnInit {
   }
 
   public async editUser(): Promise<any> {
-    console.log('USER: ', this.user)
+    const user = Object.assign({}, this.user);
     const modal = await this.modalCtrl.create({
       component: UserFormComponent,
       componentProps: {
-        user: this.user
+        user: user
       }
     });
     await modal.present();
-    const { data } = await modal.onWillDismiss();
-    console.log('data: ', data);
+    this.getUser();
+  }
+
+  get isEmpty(): boolean {
+    return Object.entries(this.user).length === 0;
   }
 
   private getUser(): void {

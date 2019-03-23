@@ -15,10 +15,8 @@
       (keydown.enter)="searchBus()">
     </ion-input>
   </ion-item>
-  <br>
-  <br>
-  <ion-spinner color="primary" name="bubbles" *ngIf="isLoading"></ion-spinner>
-  <app-bus-list
+  <ion-progress-bar margin-vertical type="indeterminate" color="dark" *ngIf="isLoading"></ion-progress-bar>
+  <app-bus-list margin-vertical
     *ngIf="onibus.length > 0"
     [onibus]="onibus"
     (checkBoxValue)="onBusSelection($event)">
@@ -32,10 +30,10 @@
         <ion-col size="6" text-center>
           <ion-button expand="full" fill="clear" (click)="closeModal()">Salvar</ion-button>
           <!--<ion-label color="primary" (click)="closeModal()">-->
-            <!--<div class="ion-activatable" style="position: relative">-->
-              <!--<ion-ripple-effect></ion-ripple-effect>-->
-              <!--Salvar-->
-            <!--</div>-->
+          <!--<div class="ion-activatable" style="position: relative">-->
+          <!--<ion-ripple-effect></ion-ripple-effect>-->
+          <!--Salvar-->
+          <!--</div>-->
           <!--</ion-label>-->
         </ion-col>
         <ion-col size="6" text-center>
