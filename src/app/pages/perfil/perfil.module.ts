@@ -8,7 +8,6 @@ import { IonicModule } from '@ionic/angular';
 import { PerfilPage } from './perfil.page';
 import { PerfilService } from './perfil.service';
 import { SharedModule } from '../../shared/shared.module';
-import { AuthModule } from '../../auth/auth.module';
 
 const routes: Routes = [
   {
@@ -24,7 +23,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes),
     SharedModule.forRoot(),
-    AuthModule.forRoot()
   ],
   declarations: [PerfilPage],
   providers: [

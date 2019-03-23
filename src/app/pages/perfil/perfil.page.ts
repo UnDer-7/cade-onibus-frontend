@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import {TokenService} from '../../Token.service';
 import {User} from '../auth/user.model';
 import { environment } from '../../../environments/environment';
-import { AuthService } from '../auth/auth.service';
 import { SessionService } from '../../auth/session.service';
 
 @Component({
