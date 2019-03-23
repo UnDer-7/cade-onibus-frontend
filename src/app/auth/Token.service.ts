@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import * as jwtDecode from 'jwt-decode';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class TokenService {
   get token(): string {
     return localStorage.getItem('token');

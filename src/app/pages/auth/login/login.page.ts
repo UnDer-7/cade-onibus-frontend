@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
-import { AuthService } from '../auth.service';
 import { User } from '../user.model';
 import { UtilService } from '../../../util/util.service';
-import { TokenService } from '../../../Token.service';
+import { TokenService } from '../../../auth/Token.service';
 import { environment } from '../../../../environments/environment';
+import { SessionService } from '../../../auth/session.service';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +19,7 @@ export class LoginPage implements OnInit {
 
   constructor(
     private router: Router,
-    private authService: AuthService,
+    private sessionService: SessionService,
     private util: UtilService,
     private tokenService: TokenService
   ) {
@@ -29,7 +29,7 @@ export class LoginPage implements OnInit {
   public ngOnInit(): void { }
 
   public login(): void {
-    this.authService.login(this.user).subscribe(res => {
+    this.sessionService.login(this.user).subscribe(res => {
       this.tokenService.token = res.token;
       this.router.navigate(['/home']);
     }, err => {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PerfilService } from './perfil.service';
 import { Router } from '@angular/router';
-import {TokenService} from '../../Token.service';
+import {TokenService} from '../../auth/Token.service';
 import {User} from '../auth/user.model';
 import { environment } from '../../../environments/environment';
 import { SessionService } from '../../auth/session.service';
@@ -32,12 +32,11 @@ export class PerfilPage implements OnInit {
   }
 
   public logout(): void {
-    this.tokenService.removeItem();
-    this.router.navigate(['auth/login']);
+    this.sessionService.logout();
   }
 
   public editUser(): void {
-    this.sessionService.login();
+    // this.sessionService.login();
   }
 
   private getUser(): void {
