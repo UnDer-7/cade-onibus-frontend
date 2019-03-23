@@ -6,8 +6,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { PerfilPage } from './perfil.page';
-import { PerfilService } from './perfil.service';
+import { UserService } from '../modals/user-form/user.service';
 import { SharedModule } from '../../shared/shared.module';
+import { PerfilService } from './perfil.service';
 
 const routes: Routes = [
   {

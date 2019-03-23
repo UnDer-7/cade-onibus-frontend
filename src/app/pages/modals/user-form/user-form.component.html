@@ -1,8 +1,6 @@
 <ion-header>
   <ion-toolbar color="dark">
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/auth/login"></ion-back-button>
-    </ion-buttons>
+    <ion-title text-center>{{ appName }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -87,9 +85,11 @@
   <ion-toolbar color="dark">
     <ion-grid>
       <ion-row>
-        <ion-col size="6" offset="3">
-          <ion-button type="button" expand="block" fill="clear" color="primary" (click)="save()">Criar conta
-          </ion-button>
+        <ion-col size="6">
+          <ion-button expand="full" fill="clear" (click)="save()">Criar Conta</ion-button>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button expand="full" fill="clear" color="danger" (click)="closeModal()">Cancelar</ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>

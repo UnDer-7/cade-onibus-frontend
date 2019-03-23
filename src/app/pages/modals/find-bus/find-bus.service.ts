@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Onibus } from '../../onibus.modal';
+import { Onibus } from '../../../models/onibus.modal';
 import {environment} from '../../../../environments/environment';
 
 @Injectable()

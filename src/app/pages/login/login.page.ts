@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
-import { User } from '../user.model';
-import { UtilService } from '../../../util/util.service';
-import { TokenService } from '../../../auth/Token.service';
-import { environment } from '../../../../environments/environment';
-import { SessionService } from '../../../auth/session.service';
+import { User } from '../../models/user.model';
+import { UtilService } from '../../util/util.service';
+import { TokenService } from '../../auth/Token.service';
+import { environment } from '../../../environments/environment';
+import { SessionService } from '../../auth/session.service';
+import { ModalController } from '@ionic/angular';
+import { UserFormComponent } from '../modals/user-form/user-form.component';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
   public user: User;
@@ -21,7 +22,8 @@ export class LoginPage implements OnInit {
     private router: Router,
     private sessionService: SessionService,
     private util: UtilService,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private modalCtrl: ModalController
   ) {
     this.user = {} as User;
   }
@@ -39,8 +41,11 @@ export class LoginPage implements OnInit {
     });
   }
 
-  public newAccount(): void {
-    this.router.navigate(['/auth/new-account']);
+  public async newAccount(): Promise<any> {
+    const modal = await this.modalCtrl.create({
+      component: UserFormComponent
+    });
+    await modal.present();
   }
 
   public showPassword(): void {

@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {ModalController, ToastController} from '@ionic/angular';
-import {Onibus} from '../../onibus.modal';
-import {FindBusService} from './find-bus.service';
-import {UtilService} from '../../../util/util.service';
+import { Component, OnInit } from '@angular/core';
+import { ModalController, ToastController } from '@ionic/angular';
+import { Onibus } from '../../../models/onibus.modal';
+import { FindBusService } from './find-bus.service';
+import { UtilService } from '../../../util/util.service';
 import { environment } from '../../../../environments/environment';
 
 @Component({
@@ -31,7 +31,7 @@ export class FindBusPage implements OnInit {
   }
 
   public searchBus(): void {
-      this.isLoading = true;
+    this.isLoading = true;
     this.findBusService.findBus(this.linha).subscribe((res: Onibus[]) => {
       this.onibus = this.removeDuplicates(res, 'numero');
 
@@ -64,7 +64,7 @@ export class FindBusPage implements OnInit {
    */
   public onBusSelection(event: Object): void {
     // @ts-ignore
-    const {checkbox, index} = event;
+    const { checkbox, index } = event;
     if (checkbox) {
       this.onibusAdded = this.onibusAdded.filter(item => {
         return item.numero !== this.onibus[index].numero;

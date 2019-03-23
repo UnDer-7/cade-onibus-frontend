@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import { Onibus } from '../../pages/onibus.modal';
+import { Onibus } from '../../models/onibus.modal';
 
 @Component({
   selector: 'app-bus-list',

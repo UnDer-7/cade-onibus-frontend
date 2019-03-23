@@ -8,13 +8,14 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { FindBusPageModule } from './pages/modal/find-bus/find-bus.module';
+import { FindBusPageModule } from './pages/modals/find-bus/find-bus.module';
 import { UtilService } from './util/util.service';
 import { TokenService } from './auth/Token.service';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { TokenApiService } from './Interceptors/Token-api.service';
 import {registerLocaleData} from '@angular/common';
 import localePt from '@angular/common/locales/pt';
+import { UserFormModule } from './pages/modals/user-form/user-form.module';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -26,7 +27,8 @@ registerLocaleData(localePt, 'pt-BR');
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
-    FindBusPageModule
+    FindBusPageModule,
+    UserFormModule
   ],
   providers: [
     StatusBar,
