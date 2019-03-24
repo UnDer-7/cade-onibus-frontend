@@ -5,6 +5,7 @@ import { UserFormComponent } from './user-form.component';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { UserService } from './user.service';
+import { BlockUIModule } from 'ng-block-ui';
 
 const routes: Routes = [
   {
@@ -19,6 +20,7 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
+    BlockUIModule.forRoot()
   ],
   declarations: [
     UserFormComponent

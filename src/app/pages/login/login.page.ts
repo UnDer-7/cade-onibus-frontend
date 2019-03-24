@@ -41,9 +41,9 @@ export class LoginPage implements OnInit {
 
     this.blockUi.start();
     this.sessionService.login(this.user).subscribe(res => {
-      this.blockUi.stop();
       this.tokenService.token = res.token;
       this.router.navigate(['/home']);
+      this.blockUi.stop();
     }, err => {
       this.blockUi.stop();
       if (err.status === 400) {
@@ -54,7 +54,10 @@ export class LoginPage implements OnInit {
 
   public async newAccount(): Promise<any> {
     const modal = await this.modalCtrl.create({
-      component: UserFormComponent
+      component: UserFormComponent,
+      componentProps: {
+        action: 'new'
+      }
     });
     await modal.present();
   }

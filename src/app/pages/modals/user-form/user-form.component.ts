@@ -8,6 +8,7 @@ import { Validate } from '../../../util/validate';
 import { environment } from '../../../../environments/environment';
 import { UserService } from './user.service';
 import { Observable } from 'rxjs';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
 
 @Component({
   selector: 'app-user-form',
@@ -15,12 +16,13 @@ import { Observable } from 'rxjs';
 })
 export class UserFormComponent implements OnInit {
   @Input() public user: User;
+  @Input() public action: string;
+
   public passwordIcon: string = 'eye-off';
   public passwordType: string = 'password';
-
   public appName: string = environment.appName;
 
-  // public
+  @BlockUI() private blockUi: NgBlockUI;
 
   constructor(
     private toastCtrl: ToastController,
@@ -70,23 +72,25 @@ export class UserFormComponent implements OnInit {
     }
   }
 
-  get isEmpty(): boolean {
-    return Object.entries(this.user).length > 1;
-  }
-
   private async subscribeToSaveResponse(result: Observable<User>): Promise<any> {
+    this.blockUi.start();
     result.subscribe(res => {
       if (this.user._id) {
         this.util.showToast('Conta alterada com sucesso', 'success');
         this.closeModal(res);
+        this.blockUi.stop();
       } else {
         this.util.showToast('Conta criado com sucesso', 'success');
         this.closeModal();
+        this.blockUi.stop();
       }
     }, err => {
       if (err.error === 'User already exists') {
+        this.blockUi.stop();
         this.util.showToast('Já existe um usuário com esse e-mail', 'danger');
+        return;
       }
+      this.blockUi.stop();
     });
   }
 
@@ -99,6 +103,11 @@ export class UserFormComponent implements OnInit {
 
       if (!Validate.email(this.user.email)) {
         this.util.showToast('E-mail invalido', 'danger');
+        return false;
+      }
+
+      if (Validate.onibus(this.user.onibus)) {
+        this.util.showToast('Selecione ao menos um ônibus', 'danger');
         return false;
       }
     } else {

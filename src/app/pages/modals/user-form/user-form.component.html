@@ -1,3 +1,4 @@
+<block-ui></block-ui>
 <ion-header>
   <ion-toolbar color="dark">
     <ion-title text-center>{{ appName }}</ion-title>
@@ -32,7 +33,7 @@
                   [(ngModel)]="user.name">
                 </ion-input>
               </ion-item>
-              <ion-item color="light" *ngIf="!isEmpty">
+              <ion-item color="light" *ngIf="action === 'new'">
                 <ion-icon slot="end" (click)="showPassword()" [name]="passwordIcon"></ion-icon>
                 <ion-input
                   placeholder="Senha"

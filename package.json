@@ -5,14 +5,14 @@
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --baseHref=/ --open=true --poll 200 --proxyConfig proxy.conf.json",
-    "build": "ng build",
+    "start": "ng serve --baseHref=/ --open=true --poll 200",
+    "build": "ng build --configuration=development",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build-android": "ionic capacitor add android",
-    "update-android": "ionic capacitor copy android",
-    "build-android-open-AS": "ionic capacitor run android"
+    "build-android": "ionic capacitor add android --configuration=development",
+    "update-android": "ionic capacitor copy android --configuration=development",
+    "build-android-open-AS": "ionic capacitor run android --configuration=development"
   },
   "private": true,
   "dependencies": {

@@ -2,6 +2,7 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/c
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TokenService } from '../auth/Token.service';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class TokenApiService implements HttpInterceptor {
@@ -10,8 +11,8 @@ export class TokenApiService implements HttpInterceptor {
   ) { }
 
   public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const api = '/api/';
-    if (this.tokenService.token && req.url.search(api) === 0) {
+    const url = req.url.substring(0, req.url.search('api') + 3);
+    if (this.tokenService.token && url === environment.apiUrl) {
       return next.handle(this.addToken(req, this.tokenService.token));
     }
     return next.handle(req);

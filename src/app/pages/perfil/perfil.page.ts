@@ -43,7 +43,8 @@ export class PerfilPage implements OnInit {
     const modal = await this.modalCtrl.create({
       component: UserFormComponent,
       componentProps: {
-        user: user
+        user: user,
+        action: 'edit'
       }
     });
     await modal.present();
