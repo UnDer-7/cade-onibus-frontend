@@ -70,6 +70,10 @@ export class UserFormComponent implements OnInit {
     }
   }
 
+  get isEmpty(): boolean {
+    return Object.entries(this.user).length > 1;
+  }
+
   private async subscribeToSaveResponse(result: Observable<User>): Promise<any> {
     result.subscribe(res => {
       if (this.user._id) {
@@ -109,11 +113,11 @@ export class UserFormComponent implements OnInit {
         return false;
       }
 
-      if (this.user.password.length < 5) {
+      if (Validate.password(this.user.password)) {
         this.util.showToast('Senha tem que ter no minimo 5 caracteres', 'danger');
         return false;
       }
-      if (this.user.onibus.length < 1) {
+      if (Validate.onibus(this.user.onibus)) {
         this.util.showToast('Selecione ao menos um ônibus', 'danger');
         return false;
       }

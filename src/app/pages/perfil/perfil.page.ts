@@ -47,7 +47,9 @@ export class PerfilPage implements OnInit {
       }
     });
     await modal.present();
-    this.getUser();
+    modal.onDidDismiss().then(() => {
+      this.getUser();
+    });
   }
 
   get isEmpty(): boolean {

@@ -24,6 +24,6 @@ export class SessionService {
 
   public logout(): void {
     this.tokenService.removeItem();
-    this.router.navigate(['auth/login']);
+    this.router.navigate(['login']);
   }
 }

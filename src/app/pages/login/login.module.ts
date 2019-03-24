@@ -4,6 +4,7 @@ import { IonicModule } from '@ionic/angular';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginPage } from './login.page';
 import { FormsModule } from '@angular/forms';
+import { BlockUIModule } from 'ng-block-ui';
 
 const route: Routes = [
   {
@@ -17,7 +18,8 @@ const route: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(route)
+    RouterModule.forChild(route),
+    BlockUIModule.forRoot(),
   ],
   declarations: [
     LoginPage
