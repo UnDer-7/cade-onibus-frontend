@@ -24,7 +24,6 @@
     "function-constructor": true,
     "import-blacklist": [
       true,
-      "rxjs",
       "lodash"
     ],
     "no-arg": true,

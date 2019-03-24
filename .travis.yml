@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+  - stable
+dist: trusty
+sudo: required
+
+branches:
+  only:
+    - development
+
+before_script:
+  - npm install -g @angular/cli
+script:
+  - ng lint
+  - ng build --configuration=development
