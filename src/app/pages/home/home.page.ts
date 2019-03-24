@@ -13,8 +13,8 @@ import { HomeService } from './home.service';
 })
 export class HomePage {
 
+  public user: User;
   private token: any;
-  private user: User;
 
   constructor(
     private menuCtrl: MenuController,
