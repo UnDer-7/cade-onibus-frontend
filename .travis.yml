@@ -15,8 +15,6 @@ deploy:
   provider: pages
   skip_cleanup: true
   local_dir: dist/
+  github-token: $GITHUB_TOKEN
   on:
     branch: development
-env:
-  global:
-    secure: HhhDa7HLH030uFdpMwlRiLS3PldD11JHLYhVPgomdrtN4ZEKo0EmwU8Fy8LVdVSkWR0kMsUU2s0ZRHGly72Q0LICiWNUHK2SfpzVA+7wlYlaSP679r4MTvuXHr/EKErpIjNKMCwda33momUJ9uUYrJVfat+tUOxNpJ9QDsbd8tvHMRAV2iKzslb4/tPPRmYPXuSDOmJn6JN1Bdfh5hpxIkG664zyWwK3dpbr8/CEJWXbV4Ya8E38wsKQWteE5ITlVPFq/bwkJ5UoJqLr947rDe28WWkU1MxV2DmyCGSnd/l0c3GaIjiJpQ+wXX4FK3KtwDdhxOeIOLZzRyYORntMMrYyfNP88m81Y0c2R/nsUd9PO/OoqCcENX1rMWtHSf+n8P1EylvZ1uuxVXsPzRqIpPpUVi5Sn5ZwCzXeWU9ayidZ7qPg783DLIqsj1YzXkbZJRtPrxzY4GM9QrhA6JAV+RjWaP1aLrMC7rkJ1LncYNOmcMFGdLOJU/zYkcDtfF/Y48Bs/hS4HvUyhh71eIgo/HEtRLKIGC8gJnFpX4B/wW9LkgNogs7avE/F4qyuZN2I/KsNA7Hi9X2bM/zNhvCRDBgwzXZ5hkmRtiOE0xhOay8pVIs14IDheVXkwtP6PHx/rYf4X9uqRD+j960ckUEDDSt9/AH8SXrijBV9ooVnqGE=

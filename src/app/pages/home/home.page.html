@@ -18,13 +18,12 @@
 <ion-content padding>
   <!-- real content -->
   <ion-list *ngIf="user">
-    <ion-item>
-
-    </ion-item>
-    <ion-item *ngFor="let onibus of user.onibus">
-      <ion-badge slot="start" color="dark">{{ onibus.numero }}</ion-badge>
-      <ion-label text-wrap>{{ onibus.descricao }}</ion-label>
-    </ion-item>
+    <ion-item-divider *ngFor="let onibus of user.onibus">
+      <ion-item lines="none">
+        <ion-badge slot="start" color="dark">{{ onibus.numero }}</ion-badge>
+        <ion-label text-wrap>{{ onibus.descricao }}</ion-label>
+      </ion-item>
+    </ion-item-divider>
   </ion-list>
 
   <!-- skeleton loading -->
