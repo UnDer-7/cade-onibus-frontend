@@ -1,15 +1,22 @@
 language: node_js
 node_js:
-  - stable
+- stable
 dist: trusty
 sudo: required
-
 branches:
   only:
-    - development
-
+  - development
 before_script:
-  - npm install -g @angular/cli
+- npm install -g @angular/cli
 script:
-  - ng lint
-  - ng build --configuration=development
+- ng lint
+- ng build --prod --configuration=development --base-href=https://UnDer-7.github.io/cade-onibus-frontend/
+env:
+  global:
+    secure: Kjlch1kJh0xkQHrcTDn7QmZrSlMSOc63XrhrYMjLw7IcghpOLF/qiMtt3WeUkXdjUrT0TOdMtr+TwBqq/zvPU9SDlTVVrSVs+EHyUKAvF4nmEiDIzhoNozaUQmtC2a6w+Z6BTSymOsqrdBGtwtdBVZTEDlV4kKVp0JZfa3EtTlOFITV2XnOtbYTtKYQ62WHyXQDg41yCUCsIMxuaA4f/MGTKMn/okZUB0g5dyhhFgFaL3xYyNmi3g8r01+LbOcuzqTsXeg3Mc1dtY1wg3XF57I9WvCZZIUeHDTipnHY1EwGrQDQSJLaznOQ+fS4aWx1heWyOc4o+wR9pfwVgOew1WMJ+zx8Jp0NoyGuAj3q6X3zRnrVVsArB1arrLlm++Pir387v2h3ZXK4KZWcU56i15AqlcOYju8KykXgWluOLmrKa22w6XjG7RjHrxQ6dmd9sXzms2f64b1iqPs2tOyOFj88eRQFzVJ2o9yteADgWOMg7UNuAuplOESf2V7Nc5Lm1vbG2YGJZjkej1AQyefTMy+ZWKecm8TWXDM0KhVYJkqqDz4Fs7E8oVLLyp7tyKXJHKxxWmSC72ldDV8xXvze8y6AxsP37sNAtg5EfWCdkaM6PntGer5keniEy1MLR9nFZ2G5FodDIRU8CPiIceLStcEemv7uS05cAFjDoNRadJy8=
+deploy:
+  provider: pages
+  skip_cleanup: true
+  local_dir: dist/
+  on:
+    branch: development
