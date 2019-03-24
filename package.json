@@ -6,7 +6,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --baseHref=/ --open=true --poll 200",
-    "build": "ng build --configuration=development",
+    "build": "ng build --prod --configuration=development --base-href=https://UnDer-7.github.io/cade-onibus-frontend/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
