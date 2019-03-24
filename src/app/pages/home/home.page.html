@@ -15,5 +15,39 @@
   <ion-router-outlet id="main"></ion-router-outlet>
 </ion-menu>
 
-<ion-content padding color="medium">
+<ion-content padding>
+  <!-- real content -->
+  <ion-list *ngIf="user">
+    <ion-item>
+
+    </ion-item>
+    <ion-item *ngFor="let onibus of user.onibus">
+      <ion-badge slot="start" color="dark">{{ onibus.numero }}</ion-badge>
+      <ion-label text-wrap>{{ onibus.descricao }}</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <!-- skeleton loading -->
+  <div *ngIf="!user">
+    <div class="ion-padding custom-skeleton">
+      <ion-skeleton-text animated></ion-skeleton-text>
+    </div>
+
+    <ion-list>
+      <ion-item>
+        <ion-skeleton-text animated style="width: 50px; height: 20px" slot="start"></ion-skeleton-text>
+        <ion-label>
+          <h3>
+            <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+          </h3>
+          <p>
+            <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+          </p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>
