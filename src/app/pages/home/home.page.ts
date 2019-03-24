@@ -24,7 +24,7 @@ export class HomePage {
     private router: Router,
   ) { }
 
-  ionViewDidEnter() {
+  public ionViewDidEnter(): void {
     this.token = this.tokenService.decodeToken();
     this.homeService.findUser(this.token._id).subscribe(
         res => this.user = res,
