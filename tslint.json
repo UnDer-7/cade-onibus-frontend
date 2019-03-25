@@ -12,7 +12,6 @@
     "typedef": [
       true,
       "call-signature",
-      "arrow-call-signature",
       "parameter",
       "member-variable-declaration",
       "array-destructuring",

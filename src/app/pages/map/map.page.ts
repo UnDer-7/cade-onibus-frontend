@@ -14,8 +14,8 @@ export class MapPage implements OnInit {
   constructor() {
   }
 
-  public async ngOnInit(): Promise<void> {
-    await Geolocation.watchPosition({
+  public ngOnInit(): void {
+    Geolocation.watchPosition({
       enableHighAccuracy: true,
       maximumAge: 0
     }, res => {
