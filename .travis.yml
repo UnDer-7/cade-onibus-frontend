@@ -10,7 +10,7 @@ before_script:
 - npm install -g @angular/cli
 script:
 - ng lint
-- ng build --prod --configuration=development --base-href=https://UnDer-7.github.io/cade-onibus-frontend/
+- ng build-prod --prod --configuration=development --base-href=https://UnDer-7.github.io/cade-onibus-frontend/
 deploy:
   provider: pages
   skip_cleanup: true
