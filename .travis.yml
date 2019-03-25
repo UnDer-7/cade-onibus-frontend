@@ -1,16 +1,16 @@
 language: node_js
 node_js:
-- stable
+  - stable
 dist: trusty
 sudo: required
 branches:
   only:
-  - development
+    - development
 before_script:
-- npm install -g @angular/cli
+  - npm install -g @angular/cli
 script:
-- ng lint
-- ng build-prod --prod --configuration=development --base-href=https://UnDer-7.github.io/cade-onibus-frontend/
+  - npm rum lint
+  - npm rum build-prod
 deploy:
   provider: pages
   skip_cleanup: true
