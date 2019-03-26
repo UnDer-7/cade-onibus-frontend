@@ -14,7 +14,7 @@ export class MapsPage implements OnInit {
   @Input() public onibus: Onibus;
   public userLocation: number[] = new Array<number>();
 
-  private busLocation: BusLocation[] = [] as BusLocation[];
+  public busLocation: BusLocation[] = [] as BusLocation[];
 
   constructor(
     private mapsService: MapsService
