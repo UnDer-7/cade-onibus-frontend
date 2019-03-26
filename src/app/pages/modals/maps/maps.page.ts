@@ -3,6 +3,8 @@ import { Onibus } from '../../../models/onibus.modal';
 import { MapsService } from './maps.service';
 import { BusLocation } from '../../../models/bus-location.model';
 import { Plugins } from '@capacitor/core';
+import { pipe, timer } from 'rxjs';
+import { flatMap } from 'rxjs/operators';
 
 const { Geolocation } = Plugins;
 
@@ -24,7 +26,10 @@ export class MapsPage implements OnInit {
   public ngOnInit(): void {
     this.getUserCurrentPosstion();
 
-    this.mapsService.trackBus(this.onibus.numero).subscribe(res => {
+    timer(0, 5000)
+      .pipe(
+        flatMap(() => this.mapsService.trackBus(this.onibus.numero))
+      ).subscribe(res => {
       this.busLocation = res.features;
 
       console.log('BUS: ', this.busLocation);

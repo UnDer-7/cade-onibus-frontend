@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content padding>
-  <agm-map [latitude]="userLocation[1]" [longitude]="userLocation[0]">
+  <agm-map [latitude]="busLocation[0]?.geometry?.coordinates[1]" [longitude]="busLocation[0]?.geometry?.coordinates[0]" [zoom]=18>
     <agm-marker
       *ngFor="let position of busLocation; let i = index"
       [latitude]="position.geometry.coordinates[1]"
