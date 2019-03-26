@@ -14,6 +14,6 @@ export class MapsService {
   }
 
   private resourceUrl(linha: string): string {
-    return environment.dftrans + `gps/linha/${linha}/geo/recent`;
+    return environment.dftrans + `/gps/linha/${linha}/geo/recent`;
   }
 }
