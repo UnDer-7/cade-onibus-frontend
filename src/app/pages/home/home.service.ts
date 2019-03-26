@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { User } from '../../models/user.model';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { BusPosition } from '../../models/bus-position.model';
+import { UserLocation } from '../../models/user.location.model';
 
 @Injectable()
 export class HomeService {
@@ -18,7 +18,8 @@ export class HomeService {
     return this.http.get<User>(`${this.resourceUrl}/${id}`);
   }
 
-  public createBus(bus: BusPosition): Observable<BusPosition> {
-    return this.http.post<BusPosition>(this.buspositionsUrl, bus);
+  public createBus(userLocation: UserLocation): void {
+    console.log('BUS: ', userLocation);
+    // return this.http.post<BusPosition>(this.buspositionsUrl, bus);
   }
 }

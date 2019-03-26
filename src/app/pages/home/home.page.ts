@@ -5,11 +5,10 @@ import { TokenService } from 'src/app/auth/Token.service';
 import { User } from 'src/app/models/user.model';
 import { UtilService } from 'src/app/util/util.service';
 import { HomeService } from './home.service';
-import { GeolocationPosition, Plugins } from '@capacitor/core';
-import { BusPosition } from '../../models/bus-position.model';
+import { Plugins } from '@capacitor/core';
 import { Onibus } from '../../models/onibus.modal';
-import { MapsPageModule } from '../modals/maps/maps.module';
 import { MapsPage } from '../modals/maps/maps.page';
+import { UserLocation } from '../../models/user.location.model';
 
 const { Geolocation } = Plugins;
 
@@ -20,8 +19,8 @@ const { Geolocation } = Plugins;
 export class HomePage {
 
   public user: User;
+  public userLocation: UserLocation = {} as UserLocation;
   private token: any;
-  private busPosition: BusPosition = {} as BusPosition;
 
   constructor(
     private menuCtrl: MenuController,
@@ -31,8 +30,7 @@ export class HomePage {
     private router: Router,
     private pickerCtrl: PickerController,
     private modalCtrl: ModalController
-  ) {
-  }
+  ) { }
 
   public ionViewDidEnter(): void {
     this.token = this.tokenService.decodeToken();
@@ -95,13 +93,10 @@ export class HomePage {
       enableHighAccuracy: true,
       maximumAge: 0
     }, res => {
-      this.busPosition = <BusPosition>res.coords;
-      this.busPosition.linha = linha;
-      console.log('onibusPosition', this.busPosition);
-      this.homeService.createBus(this.busPosition).subscribe(item => {
-        console.log('item: ', item);
-      });
+      this.userLocation.geolocationPosition = res;
+      this.userLocation.linha = linha;
+
+      this.homeService.createBus(this.userLocation);
     });
-    console.log('ID: ', id);
   }
 }

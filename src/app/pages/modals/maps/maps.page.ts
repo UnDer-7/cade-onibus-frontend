@@ -31,10 +31,6 @@ export class MapsPage implements OnInit {
         flatMap(() => this.mapsService.trackBus(this.onibus.numero))
       ).subscribe(res => {
       this.busLocation = res.features;
-
-      console.log('BUS: ', this.busLocation);
-      console.log('Lat: ', this.busLocation[0].geometry.coordinates[1]);
-      console.log('Long: ', this.busLocation[0].geometry.coordinates[1]);
     });
   }
 

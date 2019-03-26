@@ -1,4 +1,8 @@
 export interface Geometry {
+/**
+ * coordinates[1] -> latitude
+ * coordinates[0] -> longitude
+ */
   coordinates: number[];
 }
 
