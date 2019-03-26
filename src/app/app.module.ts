@@ -16,6 +16,7 @@ import { TokenApiService } from './Interceptors/Token-api.service';
 import {registerLocaleData} from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 import { UserFormModule } from './pages/modals/user-form/user-form.module';
+import { MapsPageModule } from './pages/modals/maps/maps.module';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -28,7 +29,8 @@ registerLocaleData(localePt, 'pt-BR');
     AppRoutingModule,
     HttpClientModule,
     FindBusPageModule,
-    UserFormModule
+    MapsPageModule,
+    UserFormModule,
   ],
   providers: [
     StatusBar,

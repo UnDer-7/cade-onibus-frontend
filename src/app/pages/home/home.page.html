@@ -12,14 +12,13 @@
 
 <ion-menu contentId="main">
     <ion-button color="dark" (click)="sendToPerfil()">Perfil</ion-button>
-    <ion-button color="dark" (click)="sendToMaps()">MAPS</ion-button>
   <ion-router-outlet id="main"></ion-router-outlet>
 </ion-menu>
 
 <ion-content padding>
   <!-- real content -->
   <ion-list *ngIf="user">
-    <ion-item-divider *ngFor="let onibus of user.onibus">
+    <ion-item-divider *ngFor="let onibus of user.onibus" (click)="followBus(onibus)">
       <ion-item lines="none">
         <ion-badge slot="start" color="dark">{{ onibus.numero }}</ion-badge>
         <ion-label text-wrap>{{ onibus.descricao }}</ion-label>

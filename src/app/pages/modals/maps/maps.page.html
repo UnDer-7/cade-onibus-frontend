@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>maps</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <agm-map [latitude]="userLocation[1]" [longitude]="userLocation[0]">
+    <agm-marker
+      *ngFor="let position of busLocation; let i = index"
+      [latitude]="position.geometry.coordinates[1]"
+      [longitude]="position.geometry.coordinates[0]">
+    </agm-marker>
+  </agm-map>
+</ion-content>

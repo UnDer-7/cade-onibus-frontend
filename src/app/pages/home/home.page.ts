@@ -1,12 +1,15 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { MenuController, PickerController } from '@ionic/angular';
+import { MenuController, ModalController, PickerController } from '@ionic/angular';
 import { TokenService } from 'src/app/auth/Token.service';
 import { User } from 'src/app/models/user.model';
 import { UtilService } from 'src/app/util/util.service';
 import { HomeService } from './home.service';
 import { GeolocationPosition, Plugins } from '@capacitor/core';
 import { BusPosition } from '../../models/bus-position.model';
+import { Onibus } from '../../models/onibus.modal';
+import { MapsPageModule } from '../modals/maps/maps.module';
+import { MapsPage } from '../modals/maps/maps.page';
 
 const { Geolocation } = Plugins;
 
@@ -26,7 +29,8 @@ export class HomePage {
     private homeService: HomeService,
     private util: UtilService,
     private router: Router,
-    private pickerCtrl: PickerController
+    private pickerCtrl: PickerController,
+    private modalCtrl: ModalController
   ) {
   }
 
@@ -76,8 +80,14 @@ export class HomePage {
     this.router.navigate(['perfil']);
   }
 
-  public sendToMaps(): void {
-    this.router.navigate(['map']);
+  public async followBus(onibus: Onibus): Promise<void> {
+    const modal = await this.modalCtrl.create({
+      component: MapsPage,
+      componentProps: {
+        onibus: onibus
+      }
+    });
+    await modal.present();
   }
 
   private sharingLocation(linha: string): void {

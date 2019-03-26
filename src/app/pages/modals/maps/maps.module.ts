@@ -1,30 +1,32 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { MapPage } from './map.page';
+import { MapsPage } from './maps.page';
 import { AgmCoreModule } from '@agm/core';
+import { MapsService } from './maps.service';
 
 const routes: Routes = [
   {
     path: '',
-    component: MapPage
+    component: MapsPage
   }
 ];
 
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCuj1bd6vb0mHGIfvEoyj1_SgKk8HfWdVs'
     })
   ],
-  declarations: [MapPage]
+  declarations: [MapsPage],
+  providers: [
+    MapsService
+  ]
 })
-export class MapPageModule {}
+export class MapsPageModule {}
