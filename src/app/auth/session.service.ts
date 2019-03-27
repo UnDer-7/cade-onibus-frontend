@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
-import { TokenService } from './Token.service';
+import { TokenService } from './token.service';
 
 @Injectable({
   providedIn: 'root'

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { TokenService } from '../../auth/Token.service';
+import { TokenService } from '../../auth/token.service';
 import { User } from '../../models/user.model';
 import { environment } from '../../../environments/environment';
 import { SessionService } from '../../auth/session.service';

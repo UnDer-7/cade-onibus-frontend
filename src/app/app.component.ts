@@ -4,7 +4,8 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { environment } from '../environments/environment';
-import { Router, RouterEvent } from '@angular/router';
+import { Router } from '@angular/router';
+import { SessionService } from './auth/session.service';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +13,7 @@ import { Router, RouterEvent } from '@angular/router';
 })
 export class AppComponent {
   public appName: string = environment.appName;
+
   public appPages: Array<Object> = [
     {
       title: 'Home',
@@ -25,24 +27,28 @@ export class AppComponent {
     }
   ];
 
-  public selectedPath: string;
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private router: Router
+    private router: Router,
+    private sessionService: SessionService
   ) {
     this.initializeApp();
-    this.router.events.subscribe((event: RouterEvent) => {
-      console.log('EVENT: ', event.url);
-      this.selectedPath = event.url;
-    });
   }
 
   public initializeApp(): void {
     this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
+      this.statusBar.styleBlackTranslucent();
       this.splashScreen.hide();
     });
+  }
+
+  public logout(): void {
+    this.sessionService.logout();
+  }
+
+  get canShowMenu(): boolean {
+    return this.router.url === ('/login' || '/');
   }
 }

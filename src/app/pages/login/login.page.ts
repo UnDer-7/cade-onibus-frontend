@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../../models/user.model';
 import { UtilService } from '../../util/util.service';
-import { TokenService } from '../../auth/Token.service';
+import { TokenService } from '../../auth/token.service';
 import { environment } from '../../../environments/environment';
 import { SessionService } from '../../auth/session.service';
 import { ModalController } from '@ionic/angular';

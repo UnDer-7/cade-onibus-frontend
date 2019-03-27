@@ -1,6 +1,6 @@
 <ion-app>
-  <ion-split-pane>
-    <ion-menu>
+  <ion-split-pane [disabled]="canShowMenu">
+    <ion-menu [disabled]="canShowMenu">
       <ion-header>
         <ion-toolbar color="dark">
           <ion-title text-center>{{ appName }}</ion-title>
@@ -19,6 +19,18 @@
           </ion-menu-toggle>
         </ion-list>
       </ion-content>
+
+      <ion-footer>
+        <ion-toolbar color="dark">
+          <ion-button
+            expand="full"
+            fill="clear"
+            color="danger"
+            (click)="logout()">
+            Sair
+          </ion-button>
+        </ion-toolbar>
+      </ion-footer>
     </ion-menu>
     <ion-router-outlet main></ion-router-outlet>
   </ion-split-pane>

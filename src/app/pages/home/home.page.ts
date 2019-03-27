@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController, ModalController, PickerController } from '@ionic/angular';
-import { TokenService } from 'src/app/auth/Token.service';
+import { TokenService } from 'src/app/auth/token.service';
 import { User } from 'src/app/models/user.model';
 import { UtilService } from 'src/app/util/util.service';
 import { HomeService } from './home.service';
