@@ -9,6 +9,7 @@ import { UtilService } from '../../../util/util.service';
 import { environment } from '../../../../environments/environment';
 import { SessionService } from '../../../auth/session.service';
 import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 
 const { Geolocation } = Plugins;
 
@@ -27,7 +28,8 @@ export class MapsPage implements OnInit {
     public util: UtilService,
     private mapsService: MapsService,
     private sessionService: SessionService,
-    private router: Router
+    private router: Router,
+    private modalCtrl: ModalController
   ) {
   }
 
@@ -42,16 +44,8 @@ export class MapsPage implements OnInit {
     });
   }
 
-  public sendToPerfil(): void {
-    this.router.navigate(['perfil']);
-  }
-
-  public sendToHome(): void {
-    this.router.navigate(['home']);
-  }
-
-  public logout(): void {
-    this.sessionService.logout();
+  public closeModal(): void {
+    this.modalCtrl.dismiss();
   }
 
   private async getUserCurrentPosstion(): Promise<any> {

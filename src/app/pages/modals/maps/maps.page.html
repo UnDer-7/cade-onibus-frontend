@@ -1,11 +1,9 @@
 <ion-header>
   <ion-toolbar color="dark">
     <ion-buttons slot="start">
-      <ion-menu-toggle>
-        <ion-button>
-          <ion-icon slot="icon-only" name="menu"></ion-icon>
-        </ion-button>
-      </ion-menu-toggle>
+      <ion-button (click)="closeModal()">
+        <ion-icon name="arrow-back" size="large"></ion-icon>
+      </ion-button>
     </ion-buttons>
     <ion-icon
       padding-end
@@ -17,25 +15,6 @@
     </ion-icon>
   </ion-toolbar>
 </ion-header>
-
-<ion-menu contentId="maps">
-  <ion-header>
-    <ion-toolbar color="dark">
-      <ion-title text-center>{{ appName }}</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <ion-content color="medium" margin-top padding>
-    <ion-button color="dark" expand="block" (click)="sendToPerfil()">Perfil</ion-button>
-    <ion-button color="dark" expand="block" (click)="sendToHome()">Home</ion-button>
-  </ion-content>
-  <ion-footer>
-    <ion-toolbar color="dark">
-      <ion-button  expand="full" fill="clear" color="danger" (click)="logout()">Sair</ion-button>
-    </ion-toolbar>
-  </ion-footer>
-  <ion-router-outlet id="maps"></ion-router-outlet>
-</ion-menu>
 
 <ion-content padding color="medium">
   <agm-map [latitude]="userLocation[1]" [longitude]="userLocation[0]" [zoom]=10>

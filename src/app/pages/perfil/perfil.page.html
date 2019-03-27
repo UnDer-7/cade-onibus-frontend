@@ -1,11 +1,7 @@
 <ion-header>
   <ion-toolbar color="dark">
     <ion-buttons slot="start">
-      <ion-menu-toggle>
-        <ion-button>
-          <ion-icon slot="icon-only" name="menu"></ion-icon>
-        </ion-button>
-      </ion-menu-toggle>
+      <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-icon
       padding-end
@@ -17,24 +13,6 @@
     </ion-icon>
   </ion-toolbar>
 </ion-header>
-
-<ion-menu contentId="perfil">
-  <ion-header>
-    <ion-toolbar color="dark">
-      <ion-title text-center>{{ appName }}</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <ion-content color="medium" margin-top padding>
-      <ion-button color="dark" expand="block" (click)="sendToHome()">Home</ion-button>
-  </ion-content>
-  <ion-footer>
-    <ion-toolbar color="dark">
-      <ion-button  expand="full" fill="clear" color="danger" (click)="logout()">Sair</ion-button>
-    </ion-toolbar>
-  </ion-footer>
-  <ion-router-outlet id="perfil"></ion-router-outlet>
-</ion-menu>
 
 <ion-content color="medium">
   <ion-card color="light" *ngIf="!isEmpty">
