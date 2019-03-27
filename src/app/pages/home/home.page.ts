@@ -9,6 +9,8 @@ import { Plugins } from '@capacitor/core';
 import { Onibus } from '../../models/onibus.modal';
 import { MapsPage } from '../modals/maps/maps.page';
 import { UserLocation } from '../../models/user.location.model';
+import { SessionService } from '../../auth/session.service';
+import { environment } from '../../../environments/environment';
 
 const { Geolocation } = Plugins;
 
@@ -17,7 +19,7 @@ const { Geolocation } = Plugins;
   templateUrl: 'home.page.html',
 })
 export class HomePage {
-
+  public appName: string = environment.appName;
   public user: User;
   public userLocation: UserLocation = {} as UserLocation;
 
@@ -25,13 +27,14 @@ export class HomePage {
   private watchPositionId: string;
 
   constructor(
+    public util: UtilService,
     private menuCtrl: MenuController,
     private tokenService: TokenService,
     private homeService: HomeService,
-    private util: UtilService,
     private router: Router,
     private pickerCtrl: PickerController,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private sessionService: SessionService
   ) { }
 
   public ionViewDidEnter(): void {
@@ -83,6 +86,10 @@ export class HomePage {
       }
     });
     await modal.present();
+  }
+
+  public logout(): void {
+    this.sessionService.logout();
   }
 
   public stopSharing(): void {

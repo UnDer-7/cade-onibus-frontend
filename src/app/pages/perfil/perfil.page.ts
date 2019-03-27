@@ -18,12 +18,12 @@ export class PerfilPage implements OnInit {
   public appName: string = environment.appName;
 
   constructor(
+    public util: UtilService,
     private perfilService: PerfilService,
     private tokenService: TokenService,
     private router: Router,
     private sessionService: SessionService,
     private modalCtrl: ModalController,
-    private util: UtilService
   ) {
     this.user = {} as User;
   }

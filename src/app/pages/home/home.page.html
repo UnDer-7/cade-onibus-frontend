@@ -18,9 +18,22 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-menu contentId="main">
-  <ion-button color="dark" (click)="sendToPerfil()">Perfil</ion-button>
-  <ion-router-outlet id="main"></ion-router-outlet>
+<ion-menu contentId="home">
+  <ion-header>
+    <ion-toolbar color="dark">
+      <ion-title text-center>{{ appName }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content color="medium" margin-top padding>
+    <ion-button color="dark" expand="block" (click)="sendToPerfil()">Perfil</ion-button>
+  </ion-content>
+  <ion-footer>
+    <ion-toolbar color="dark">
+      <ion-button  expand="full" fill="clear" color="danger" (click)="logout()">Sair</ion-button>
+    </ion-toolbar>
+  </ion-footer>
+  <ion-router-outlet id="home"></ion-router-outlet>
 </ion-menu>
 
 <ion-content padding>

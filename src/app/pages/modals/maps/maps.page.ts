@@ -6,6 +6,8 @@ import { Plugins } from '@capacitor/core';
 import { timer } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 import { UtilService } from '../../../util/util.service';
+import { environment } from '../../../../environments/environment';
+import { SessionService } from '../../../auth/session.service';
 
 const { Geolocation } = Plugins;
 
@@ -16,12 +18,14 @@ const { Geolocation } = Plugins;
 export class MapsPage implements OnInit {
   @Input() public onibus: Onibus;
 
+  public appName: string = environment.appName;
   public userLocation: number[] = new Array<number>();
   public busLocation: BusLocation[] = [] as BusLocation[];
 
   constructor(
+    public util: UtilService,
     private mapsService: MapsService,
-    private util: UtilService
+    private sessionService: SessionService
   ) {
   }
 
@@ -34,6 +38,18 @@ export class MapsPage implements OnInit {
       ).subscribe(res => {
       this.busLocation = res.features;
     });
+  }
+
+  public sendToPerfil(): void {
+    this.router.navigate(['perfil']);
+  }
+
+  public sendToHome(): void {
+    this.router.navigate(['home']);
+  }
+
+  public logout(): void {
+    this.sessionService.logout();
   }
 
   private async getUserCurrentPosstion(): Promise<any> {

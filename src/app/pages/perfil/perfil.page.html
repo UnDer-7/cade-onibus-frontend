@@ -7,7 +7,6 @@
         </ion-button>
       </ion-menu-toggle>
     </ion-buttons>
-    <ion-title text-center>{{ appName }}</ion-title>
     <ion-icon
       padding-end
       size="large"
@@ -19,14 +18,22 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-menu contentId="main">
-  <ion-content>
-    <ion-list>
+<ion-menu contentId="perfil">
+  <ion-header>
+    <ion-toolbar color="dark">
+      <ion-title text-center>{{ appName }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content color="medium" margin-top padding>
       <ion-button color="dark" expand="block" (click)="sendToHome()">Home</ion-button>
-      <ion-button color="dark" expand="block" (click)="logout()">Sair</ion-button>
-    </ion-list>
   </ion-content>
-  <ion-router-outlet id="main"></ion-router-outlet>
+  <ion-footer>
+    <ion-toolbar color="dark">
+      <ion-button  expand="full" fill="clear" color="danger" (click)="logout()">Sair</ion-button>
+    </ion-toolbar>
+  </ion-footer>
+  <ion-router-outlet id="perfil"></ion-router-outlet>
 </ion-menu>
 
 <ion-content color="medium">

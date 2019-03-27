@@ -25,9 +25,9 @@ export class UserFormComponent implements OnInit {
   @BlockUI() private blockUi: NgBlockUI;
 
   constructor(
+    public util: UtilService,
     private toastCtrl: ToastController,
     private modalCtrl: ModalController,
-    private util: UtilService,
     private userService: UserService
   ) { }
 
