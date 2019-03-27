@@ -8,6 +8,7 @@ import { flatMap } from 'rxjs/operators';
 import { UtilService } from '../../../util/util.service';
 import { environment } from '../../../../environments/environment';
 import { SessionService } from '../../../auth/session.service';
+import { Router } from '@angular/router';
 
 const { Geolocation } = Plugins;
 
@@ -25,7 +26,8 @@ export class MapsPage implements OnInit {
   constructor(
     public util: UtilService,
     private mapsService: MapsService,
-    private sessionService: SessionService
+    private sessionService: SessionService,
+    private router: Router
   ) {
   }
 
