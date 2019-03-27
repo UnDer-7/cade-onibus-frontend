@@ -11,13 +11,13 @@ export interface Onibus {
   tiposOnibus?: any;
 }
 
-export interface FaixaTarifaria {
+interface FaixaTarifaria {
   sequencial?: number;
   descricao?: string;
   tarifa?: number;
 }
 
-export interface Bacia {
+interface Bacia {
   sequencial?: string;
   descricao?: string;
 }

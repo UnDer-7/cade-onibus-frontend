@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 @Injectable()
 export class UtilService {
+  private isUserSharingLocation: boolean = false;
   constructor(
     private toastCtrl: ToastController
   ) { }
@@ -22,5 +23,17 @@ export class UtilService {
       translucent: true,
     });
     toast.present();
+  }
+
+  public startSharing(): void {
+    this.isUserSharingLocation = true;
+  }
+
+  public stopSharing(): void {
+    this.isUserSharingLocation = false;
+  }
+
+  public isSharing(): boolean {
+    return this.isUserSharingLocation;
   }
 }

@@ -1,6 +1,14 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>maps</ion-title>
+    <ion-icon
+      padding-end
+      size="large"
+      name="locate"
+      slot="end"
+      color="danger"
+      *ngIf="util.isSharing()">
+    </ion-icon>
   </ion-toolbar>
 </ion-header>
 

@@ -3,8 +3,9 @@ import { Onibus } from '../../../models/onibus.modal';
 import { MapsService } from './maps.service';
 import { BusLocation } from '../../../models/bus-location.model';
 import { Plugins } from '@capacitor/core';
-import { pipe, timer } from 'rxjs';
+import { timer } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
+import { UtilService } from '../../../util/util.service';
 
 const { Geolocation } = Plugins;
 
@@ -14,12 +15,13 @@ const { Geolocation } = Plugins;
 })
 export class MapsPage implements OnInit {
   @Input() public onibus: Onibus;
-  public userLocation: number[] = new Array<number>();
 
+  public userLocation: number[] = new Array<number>();
   public busLocation: BusLocation[] = [] as BusLocation[];
 
   constructor(
-    private mapsService: MapsService
+    private mapsService: MapsService,
+    private util: UtilService
   ) {
   }
 

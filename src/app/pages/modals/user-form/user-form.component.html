@@ -2,6 +2,14 @@
 <ion-header>
   <ion-toolbar color="dark">
     <ion-title text-center>{{ appName }}</ion-title>
+    <ion-icon
+      padding-end
+      size="large"
+      name="locate"
+      slot="end"
+      color="danger"
+      *ngIf="util.isSharing() && action === 'edit'">
+    </ion-icon>
   </ion-toolbar>
 </ion-header>
 

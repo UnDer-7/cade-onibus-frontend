@@ -8,7 +8,7 @@ import { UserLocation } from '../../models/user.location.model';
 @Injectable()
 export class HomeService {
   private resourceUrl: string = environment.apiUrl + '/users';
-  private buspositionsUrl: string = environment.apiUrl + '/buspositions';
+  private buspositionsUrl: string = environment.apiUrl + '/userlocations';
 
   constructor(
     private http: HttpClient
@@ -18,8 +18,7 @@ export class HomeService {
     return this.http.get<User>(`${this.resourceUrl}/${id}`);
   }
 
-  public createBus(userLocation: UserLocation): void {
-    console.log('BUS: ', userLocation);
-    // return this.http.post<BusPosition>(this.buspositionsUrl, bus);
+  public createBus(userLocation: UserLocation): Observable<UserLocation> {
+    return this.http.post<UserLocation>(this.buspositionsUrl, userLocation);
   }
 }

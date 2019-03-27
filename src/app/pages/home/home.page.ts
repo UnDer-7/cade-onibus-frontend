@@ -20,7 +20,9 @@ export class HomePage {
 
   public user: User;
   public userLocation: UserLocation = {} as UserLocation;
+
   private token: any;
+  private watchPositionId: string;
 
   constructor(
     private menuCtrl: MenuController,
@@ -47,7 +49,7 @@ export class HomePage {
     const onibusPicker = this.user.onibus.map(item => {
       return Object.assign({}, {
         text: item.numero,
-        value: item.numero
+        value: item
       });
     });
     const picker = await this.pickerCtrl.create({
@@ -55,7 +57,7 @@ export class HomePage {
         {
           text: 'Compartilhar',
           handler: value => {
-            this.sharingLocation(value.onibus.value);
+            this.startSharing(value.onibus.value);
           }
         },
       ],
@@ -67,11 +69,6 @@ export class HomePage {
       ],
     });
     await picker.present();
-  }
-
-  public openFrist(): void {
-    this.menuCtrl.enable(true, 'main');
-    this.menuCtrl.open('main');
   }
 
   public sendToPerfil(): void {
@@ -88,15 +85,48 @@ export class HomePage {
     await modal.present();
   }
 
-  private sharingLocation(linha: string): void {
-    const id = Geolocation.watchPosition({
+  public stopSharing(): void {
+    this.util.stopSharing();
+    Geolocation.clearWatch({ id: this.watchPositionId });
+  }
+
+  private startSharing(onibus: Onibus): void {
+    this.util.startSharing();
+    this.watchPositionId = Geolocation.watchPosition({
       enableHighAccuracy: true,
       maximumAge: 0
     }, res => {
-      this.userLocation.geolocationPosition = res;
-      this.userLocation.linha = linha;
+      this.userLocation = this.prepareUserLocation(res, onibus);
+      this.homeService.createBus(this.userLocation).subscribe(item => {
+        console.log('RES: ', item);
+      });
+    });
+  }
 
-      this.homeService.createBus(this.userLocation);
+  /**
+   * - Pq isso existe?
+   * -- pq se fizer só this.userLocation.cords = res.cords
+   * ele nao vai conseguir transformar o obj Cords
+   * em JSON, vai ficar vazio
+   * - Motivo
+   * -- Não tenho certeza, mas ele fica tipo com um tipo
+   * Coords todo em em caps e nao consegue tranformar em JSON,
+   * o OBJ fica vazio.
+   * @param res - Resposta q vem do watchPosition
+   * @param onibus - Onibus Selecionado no PickList
+   */
+  private prepareUserLocation(res: any, onibus: Onibus): UserLocation {
+    return Object.assign({}, res, {
+      cords: Object.assign({}, res, {
+        accuracy: res.coords.accuracy,
+        altitude: res.coords.altitude,
+        heading: res.coords.heading,
+        latitude: res.coords.latitude,
+        longitude: res.coords.longitude,
+        speed: res.coords.speed
+      }),
+      numero: onibus.numero,
+      sequencial: onibus.sequencial
     });
   }
 }

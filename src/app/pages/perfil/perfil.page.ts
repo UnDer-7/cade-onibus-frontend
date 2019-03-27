@@ -7,6 +7,7 @@ import { SessionService } from '../../auth/session.service';
 import { ModalController } from '@ionic/angular';
 import { UserFormComponent } from '../modals/user-form/user-form.component';
 import { PerfilService } from './perfil.service';
+import { UtilService } from '../../util/util.service';
 
 @Component({
   selector: 'app-perfil',
@@ -21,7 +22,8 @@ export class PerfilPage implements OnInit {
     private tokenService: TokenService,
     private router: Router,
     private sessionService: SessionService,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private util: UtilService
   ) {
     this.user = {} as User;
   }
