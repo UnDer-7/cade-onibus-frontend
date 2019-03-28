@@ -65,9 +65,9 @@ export class AppComponent {
     const currentDate = new Date();
 
     if (currentDate < expiration) {
-      this.router.navigate(['/home']);
+      this.router.navigateByUrl('/home');
     } else {
-      this.router.navigate(['/']);
+      this.router.navigateByUrl('/');
     }
   }
 }
