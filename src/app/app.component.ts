@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { environment } from '../environments/environment';
 import { Router } from '@angular/router';
 import { SessionService } from './auth/session.service';
+import { TokenService } from './auth/token.service';
 
 @Component({
   selector: 'app-root',
@@ -32,7 +33,8 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private router: Router,
-    private sessionService: SessionService
+    private sessionService: SessionService,
+    private tokenService: TokenService,
   ) {
     this.initializeApp();
   }
@@ -41,6 +43,7 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleBlackTranslucent();
       this.splashScreen.hide();
+      this.isLoggedIn();
     });
   }
 
@@ -50,5 +53,21 @@ export class AppComponent {
 
   get canShowMenu(): boolean {
     return this.router.url === ('/login' || '/');
+  }
+
+  private isLoggedIn(): void {
+    if (!this.tokenService.token) {
+      this.router.navigate(['/']);
+      return;
+    }
+
+    const expiration = new Date(this.tokenService.decodeToken().exp * 1000);
+    const currentDate = new Date();
+
+    if (currentDate < expiration) {
+      this.router.navigate(['/home']);
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 }
