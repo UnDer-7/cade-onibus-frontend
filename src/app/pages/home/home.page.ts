@@ -5,14 +5,12 @@ import { TokenService } from 'src/app/auth/token.service';
 import { User } from 'src/app/models/user.model';
 import { UtilService } from 'src/app/util/util.service';
 import { HomeService } from './home.service';
-import { Plugins } from '@capacitor/core';
 import { Onibus } from '../../models/onibus.modal';
 import { MapsPage } from '../modals/maps/maps.page';
 import { UserLocation } from '../../models/user.location.model';
 import { SessionService } from '../../auth/session.service';
 import { environment } from '../../../environments/environment';
-
-const { Geolocation } = Plugins;
+import { SharingLocationService } from '../../util/sharing-location.service';
 
 @Component({
   selector: 'app-home',
@@ -24,7 +22,6 @@ export class HomePage {
   public userLocation: UserLocation = {} as UserLocation;
 
   private token: any;
-  private watchPositionId: string;
 
   constructor(
     public util: UtilService,
@@ -34,7 +31,8 @@ export class HomePage {
     private router: Router,
     private pickerCtrl: PickerController,
     private modalCtrl: ModalController,
-    private sessionService: SessionService
+    private sessionService: SessionService,
+    private sharingLocationService: SharingLocationService
   ) { }
 
   public ionViewDidEnter(): void {
@@ -93,47 +91,10 @@ export class HomePage {
   }
 
   public stopSharing(): void {
-    this.util.stopSharing();
-    Geolocation.clearWatch({ id: this.watchPositionId });
+    this.sharingLocationService.stopSharing();
   }
 
   private startSharing(onibus: Onibus): void {
-    this.util.startSharing();
-    this.watchPositionId = Geolocation.watchPosition({
-      enableHighAccuracy: true,
-      maximumAge: 0
-    }, res => {
-      this.userLocation = this.prepareUserLocation(res, onibus);
-      this.homeService.createBus(this.userLocation).subscribe(item => {
-        console.log('RES: ', item);
-      });
-    });
-  }
-
-  /**
-   * - Pq isso existe?
-   * -- pq se fizer só this.userLocation.cords = res.cords
-   * ele nao vai conseguir transformar o obj Cords
-   * em JSON, vai ficar vazio
-   * - Motivo
-   * -- Não tenho certeza, mas ele fica tipo com um tipo
-   * Coords todo em em caps e nao consegue tranformar em JSON,
-   * o OBJ fica vazio.
-   * @param res - Resposta q vem do watchPosition
-   * @param onibus - Onibus Selecionado no PickList
-   */
-  private prepareUserLocation(res: any, onibus: Onibus): UserLocation {
-    return Object.assign({}, res, {
-      cords: Object.assign({}, res, {
-        accuracy: res.coords.accuracy,
-        altitude: res.coords.altitude,
-        heading: res.coords.heading,
-        latitude: res.coords.latitude,
-        longitude: res.coords.longitude,
-        speed: res.coords.speed
-      }),
-      numero: onibus.numero,
-      sequencial: onibus.sequencial
-    });
+    this.sharingLocationService.startSharing(onibus);
   }
 }

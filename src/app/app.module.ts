@@ -17,6 +17,7 @@ import {registerLocaleData} from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 import { UserFormModule } from './pages/modals/user-form/user-form.module';
 import { MapsPageModule } from './pages/modals/maps/maps.module';
+import { SharingLocationService } from './util/sharing-location.service';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -36,6 +37,7 @@ registerLocaleData(localePt, 'pt-BR');
     StatusBar,
     SplashScreen,
     UtilService,
+    SharingLocationService,
     TokenService,
     {
       provide: HTTP_INTERCEPTORS,

@@ -9,7 +9,7 @@
       name="locate"
       slot="end"
       color="danger"
-      *ngIf="util.isSharing()">
+      *ngIf="sharingLocationService.isSharing()">
     </ion-icon>
   </ion-toolbar>
 </ion-header>
@@ -57,7 +57,7 @@
           <ion-button
             expand="full"
             fill="clear"
-            *ngIf="!util.isSharing()"
+            *ngIf="!sharingLocationService.isSharing()"
             (click)="openPicker()">
             Compartilhar Localização
           </ion-button>
@@ -65,7 +65,7 @@
             expand="full"
             fill="clear"
             color="danger"
-            *ngIf="util.isSharing()"
+            *ngIf="sharingLocationService.isSharing()"
             (click)="stopSharing()">
             Cancelar Compartilhamento
           </ion-button>
