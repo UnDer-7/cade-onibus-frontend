@@ -3,14 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-icon
-      padding-end
-      size="large"
-      name="locate"
-      slot="end"
-      color="danger"
-      *ngIf="sharingLocationService.isSharing()">
-    </ion-icon>
+    <app-sharing-location slot="end"></app-sharing-location>
   </ion-toolbar>
 </ion-header>
 

@@ -32,7 +32,7 @@ export class HomePage {
     private pickerCtrl: PickerController,
     private modalCtrl: ModalController,
     private sessionService: SessionService,
-    private sharingLocationService: SharingLocationService
+    public sharingLocationService: SharingLocationService
   ) { }
 
   public ionViewDidEnter(): void {

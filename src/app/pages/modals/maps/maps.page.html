@@ -5,18 +5,11 @@
         <ion-icon name="arrow-back" size="large"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-icon
-      padding-end
-      size="large"
-      name="locate"
-      slot="end"
-      color="danger"
-      *ngIf="util.isSharing()">
-    </ion-icon>
+    <app-sharing-location slot="end"></app-sharing-location>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding color="medium">
+<ion-content color="medium">
   <agm-map [latitude]="userLocation[1]" [longitude]="userLocation[0]" [zoom]=10>
     <agm-marker
       *ngFor="let position of busLocation; let i = index"

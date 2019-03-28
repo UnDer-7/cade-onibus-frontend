@@ -22,7 +22,6 @@ export class SharingLocationService {
 
   public startSharing(onibus: Onibus): void {
     this.isUserSharing = true;
-
     this.watchPositionID = Geolocation.watchPosition({
       enableHighAccuracy: true,
       maximumAge: 0

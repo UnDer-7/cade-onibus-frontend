@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
 import { HomeService } from './home.service';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { HomeService } from './home.service';
         path: '',
         component: HomePage
       }
-    ])
+    ]),
+    SharedModule.forRoot()
   ],
   declarations: [HomePage],
   providers: [HomeService]
