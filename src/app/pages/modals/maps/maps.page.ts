@@ -3,7 +3,7 @@ import { Onibus } from '../../../models/onibus.modal';
 import { MapsService } from './maps.service';
 import { BusLocation } from '../../../models/bus-location.model';
 import { Plugins } from '@capacitor/core';
-import { timer } from 'rxjs';
+import { Subscription, timer } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 import { UtilService } from '../../../util/util.service';
 import { environment } from '../../../../environments/environment';
@@ -24,6 +24,8 @@ export class MapsPage implements OnInit {
   public userLocation: number[] = new Array<number>();
   public busLocation: BusLocation[] = [] as BusLocation[];
 
+  private subscription: Subscription;
+
   constructor(
     public util: UtilService,
     private mapsService: MapsService,
@@ -36,7 +38,7 @@ export class MapsPage implements OnInit {
   public ngOnInit(): void {
     this.getUserCurrentPosstion();
 
-    timer(0, 5000)
+    this.subscription = timer(0, 5000)
       .pipe(
         flatMap(() => this.mapsService.trackBus(this.onibus.numero))
       ).subscribe(res => {
@@ -46,6 +48,7 @@ export class MapsPage implements OnInit {
 
   public closeModal(): void {
     this.modalCtrl.dismiss();
+    this.subscription.unsubscribe();
   }
 
   private async getUserCurrentPosstion(): Promise<any> {
