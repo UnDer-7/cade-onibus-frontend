@@ -12,13 +12,33 @@
 <ion-content color="medium">
   <agm-map [latitude]="userLocation[1]" [longitude]="userLocation[0]" [zoom]=12>
     <agm-marker
-      [iconUrl]="icon"
-      *ngFor="let position of busLocation; let i = index"
-      [latitude]="position.geometry.coordinates[1]"
-      [longitude]="position.geometry.coordinates[0]">
+      [iconUrl]="icon.user"
+      [latitude]="userLocation[1]"
+      [longitude]="userLocation[0]">
       <agm-info-window>
         GGWP
       </agm-info-window>
     </agm-marker>
+
+    <agm-marker
+      [iconUrl]="icon.dfTrans"
+      [latitude]="position.geometry.coordinates[1]"
+      [longitude]="position.geometry.coordinates[0]"
+      *ngFor="let position of busLocation">
+      <agm-info-window>
+        GGWP
+      </agm-info-window>
+    </agm-marker>
+
+    <!--<agm-marker-->
+      <!--[iconUrl]="icon.busUser"-->
+      <!--[latitude]="bus.cords.latitude"-->
+      <!--[longitude]="bus.cords.longitude"-->
+      <!--*ngFor="let bus of pagination.docs">-->
+      <!--<agm-info-window>-->
+        <!--GGWP-->
+      <!--</agm-info-window>-->
+    <!--</agm-marker>-->
   </agm-map>
 </ion-content>
+

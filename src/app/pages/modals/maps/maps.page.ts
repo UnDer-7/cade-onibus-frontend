@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Onibus } from '../../../models/onibus.modal';
 import { MapsService } from './maps.service';
 import { BusLocation } from '../../../models/bus-location.model';
@@ -18,7 +18,7 @@ const { Geolocation } = Plugins;
   selector: 'app-maps',
   templateUrl: './maps.page.html',
 })
-export class MapsPage implements OnInit {
+export class MapsPage implements OnInit, OnDestroy {
   @Input() public onibus: Onibus;
 
   public appName: string = environment.appName;
@@ -27,10 +27,26 @@ export class MapsPage implements OnInit {
   public busLocation: BusLocation[] = [] as BusLocation[];
 
   public icon: Object = {
-    url: '../../../../assets/bus-icon.png',
-    scaledSize: {
-      width: 43,
-      height: 40
+    dfTrans: {
+      url: '../../../../assets/bus-icon-dfTrans.png',
+      scaledSize: {
+        width: 43,
+        height: 40
+      }
+    },
+    busUser: {
+      url: '../../../../assets/bus-icon-user.png',
+      scaledSize: {
+        width: 43,
+        height: 40
+      }
+    },
+    user: {
+      url: '../../../../assets/user-icon.png',
+      scaledSize: {
+        width: 43,
+        height: 40
+      }
     }
   };
 
@@ -63,9 +79,11 @@ export class MapsPage implements OnInit {
           flatMap(() => this.mapsService.getUserLocation())
         ).subscribe(res => {
         this.pagination = res;
-        console.log('PAGI: ', this.pagination);
       })
     );
+  }
+
+  public ngOnDestroy(): void {
   }
 
   public closeModal(): void {
@@ -73,6 +91,7 @@ export class MapsPage implements OnInit {
     this.subscription.forEach(item => {
       item.unsubscribe();
     });
+    this.ngOnDestroy();
   }
 
   private async getUserCurrentPosstion(): Promise<any> {
