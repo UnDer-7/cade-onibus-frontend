@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
 import { Onibus } from '../../../models/onibus.modal';
 import { FindBusService } from './find-bus.service';
@@ -42,6 +42,17 @@ export class FindBusPage implements OnInit {
     }, () => this.isLoading = false);
   }
 
+  public removeOnibusSelected(onibus: Onibus): void {
+    setTimeout(() => {
+      this.onibusAdded = this.onibusAdded.filter(item => {
+        if (item.numero !== onibus.numero) {
+          return item;
+        }
+        // this.unchckCheckbox(onibus);
+      });
+    }, 300);
+  }
+
   public async closeModal(): Promise<any> {
     this.modalCtrl.dismiss(this.onibusAdded);
   }
@@ -59,11 +70,8 @@ export class FindBusPage implements OnInit {
    * o value vai vir true.
    * -- Logo se o ela vir false quer dizer é uma ativação, entao o onibus
    * com o index informado é pra adicionado no array dos onibus selecionados.
-   * @param checkbox - Se a checkbox esta selecionada ou não.
-   * @param index - Index do array de Onibus que veio do df-trans.
    */
   public onBusSelection(event: Object): void {
-    // @ts-ignore
     const { checkbox, index } = event;
     if (checkbox) {
       this.onibusAdded = this.onibusAdded.filter(item => {
@@ -82,5 +90,18 @@ export class FindBusPage implements OnInit {
     return myArr.filter((obj, pos, arr) => {
       return arr.map(mapObj => mapObj[prop]).indexOf(obj[prop]) === pos;
     });
+  }
+
+  private unchckCheckbox(onibus: Onibus): void {
+    const checkboxToUncheck = this.onibus.findIndex(onibusToRemove => {
+      return onibusToRemove.numero === onibus.numero;
+    });
+
+    const obj = Object.assign({}, {
+      checkbox: true,
+      index: checkboxToUncheck
+    });
+
+    this.onBusSelection(obj);
   }
 }

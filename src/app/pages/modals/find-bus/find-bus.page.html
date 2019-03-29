@@ -5,6 +5,15 @@
 </ion-header>
 
 <ion-content color="medium" padding>
+  <ion-button
+    color="dark"
+    size="small"
+    (click)="removeOnibusSelected(added)"
+    *ngFor="let added of onibusAdded">
+    {{ added.numero }}
+    <ion-icon name="close" color="danger" slot="end"></ion-icon>
+  </ion-button>
+
   <ion-item color="light">
     <ion-icon name="search" slot="start" (click)="searchBus()"></ion-icon>
     <ion-icon *ngIf="linha" name="close" slot="end" (click)="cleanSearch()"></ion-icon>
@@ -17,9 +26,9 @@
   </ion-item>
   <ion-progress-bar margin-vertical type="indeterminate" color="dark" *ngIf="isLoading"></ion-progress-bar>
   <app-bus-list margin-vertical
-    *ngIf="onibus.length > 0"
-    [onibus]="onibus"
-    (checkBoxValue)="onBusSelection($event)">
+                *ngIf="onibus.length > 0"
+                [onibus]="onibus"
+                (checkBoxValue)="onBusSelection($event)">
   </app-bus-list>
 </ion-content>
 
