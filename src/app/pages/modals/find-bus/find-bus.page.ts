@@ -1,9 +1,10 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
 import { Onibus } from '../../../models/onibus.modal';
 import { FindBusService } from './find-bus.service';
 import { UtilService } from '../../../util/util.service';
 import { environment } from '../../../../environments/environment';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-find-bus',
@@ -39,7 +40,16 @@ export class FindBusPage implements OnInit {
         this.utilService.showToast('Nenhum onibus encontrado', 'danger');
       }
       this.isLoading = false;
-    }, () => this.isLoading = false);
+    }, (err: HttpErrorResponse) => {
+      this.isLoading = false;
+
+      if (err.status !== 400) {
+        this.utilService.showToast('Erro com servidor do DFTrans, tente mais tarde', 'danger', 2000);
+        return;
+      }
+
+      this.utilService.showToast('Nenhum onibus encontrado', 'danger');
+    });
   }
 
   public removeOnibusSelected(onibus: Onibus): void {
