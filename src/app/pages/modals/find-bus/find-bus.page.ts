@@ -15,7 +15,7 @@ export class FindBusPage implements OnInit {
   public linha: string;
   public isLoading: boolean;
   public appName: string = environment.appName;
-  private onibusAdded: Array<Onibus>;
+  public onibusAdded: Array<Onibus>;
 
   constructor(
     private modalCtrl: ModalController,
@@ -82,6 +82,7 @@ export class FindBusPage implements OnInit {
    * com o index informado é pra adicionado no array dos onibus selecionados.
    */
   public onBusSelection(event: Object): void {
+    // @ts-ignore
     const { checkbox, index } = event;
     if (checkbox) {
       this.onibusAdded = this.onibusAdded.filter(item => {

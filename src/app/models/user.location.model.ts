@@ -1,7 +1,7 @@
 export interface UserLocation {
   numero: string;
   sequencial: number;
-  hora: Date;
+  hora: string;
   cords: Coords;
 }
 

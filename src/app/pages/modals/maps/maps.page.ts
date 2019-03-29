@@ -26,7 +26,7 @@ export class MapsPage implements OnInit, OnDestroy {
   public pagination: Pagination = {} as Pagination;
   public busLocation: BusLocation[] = [] as BusLocation[];
 
-  public icon: Object = {
+  public icon: any = {
     dfTrans: {
       url: '../../../../assets/bus-icon-dfTrans.png',
       scaledSize: {
