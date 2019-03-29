@@ -10,11 +10,15 @@
 </ion-header>
 
 <ion-content color="medium">
-  <agm-map [latitude]="userLocation[1]" [longitude]="userLocation[0]" [zoom]=10>
+  <agm-map [latitude]="userLocation[1]" [longitude]="userLocation[0]" [zoom]=12>
     <agm-marker
+      [iconUrl]="icon"
       *ngFor="let position of busLocation; let i = index"
       [latitude]="position.geometry.coordinates[1]"
       [longitude]="position.geometry.coordinates[0]">
+      <agm-info-window>
+        GGWP
+      </agm-info-window>
     </agm-marker>
   </agm-map>
 </ion-content>

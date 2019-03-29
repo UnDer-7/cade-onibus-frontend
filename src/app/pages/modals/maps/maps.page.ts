@@ -10,6 +10,7 @@ import { environment } from '../../../../environments/environment';
 import { SessionService } from '../../../auth/session.service';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
+import { Pagination } from '../../../models/pagination.model';
 
 const { Geolocation } = Plugins;
 
@@ -22,9 +23,18 @@ export class MapsPage implements OnInit {
 
   public appName: string = environment.appName;
   public userLocation: number[] = new Array<number>();
+  public pagination: Pagination = {} as Pagination;
   public busLocation: BusLocation[] = [] as BusLocation[];
 
-  private subscription: Subscription;
+  public icon: Object = {
+    url: '../../../../assets/bus-icon.png',
+    scaledSize: {
+      width: 43,
+      height: 40
+    }
+  };
+
+  private subscription: Array<Subscription> = new Array<Subscription>();
 
   constructor(
     public util: UtilService,
@@ -38,17 +48,31 @@ export class MapsPage implements OnInit {
   public ngOnInit(): void {
     this.getUserCurrentPosstion();
 
-    this.subscription = timer(0, 5000)
-      .pipe(
-        flatMap(() => this.mapsService.trackBus(this.onibus.numero))
-      ).subscribe(res => {
-      this.busLocation = res.features;
-    });
+    this.subscription.push(
+      timer(0, 5000)
+        .pipe(
+          flatMap(() => this.mapsService.trackBus(this.onibus.numero))
+        ).subscribe(res => {
+        this.busLocation = res.features;
+      })
+    );
+
+    this.subscription.push(
+      timer(0, 5000)
+        .pipe(
+          flatMap(() => this.mapsService.getUserLocation())
+        ).subscribe(res => {
+        this.pagination = res;
+        console.log('PAGI: ', this.pagination);
+      })
+    );
   }
 
   public closeModal(): void {
     this.modalCtrl.dismiss();
-    this.subscription.unsubscribe();
+    this.subscription.forEach(item => {
+      item.unsubscribe();
+    });
   }
 
   private async getUserCurrentPosstion(): Promise<any> {

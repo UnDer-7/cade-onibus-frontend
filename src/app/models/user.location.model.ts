@@ -5,7 +5,7 @@ export interface UserLocation {
   cords: Coords;
 }
 
-export interface Coords {
+interface Coords {
   latitude: number;
   longitude: number;
   accuracy: number;
