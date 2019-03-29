@@ -70,7 +70,8 @@ export class SharingLocationService {
         speed: cb.coords.speed
       }),
       numero: onibus.numero,
-      sequencial: onibus.sequencial
+      sequencial: onibus.sequencial,
+      hora: Date()
     });
   }
 }

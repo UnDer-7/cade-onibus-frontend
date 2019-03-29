@@ -5,15 +5,16 @@ import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class MapsService {
+  private resourceUrl: string;
   constructor(
     private http: HttpClient
   ) { }
 
   public trackBus(linha: string): Observable<any> {
-    return this.http.get(this.resourceUrl(linha));
+    return this.http.get(this.dfTransUrl(linha));
   }
 
-  private resourceUrl(linha: string): string {
+  private dfTransUrl(linha: string): string {
     return environment.dftrans + `/gps/linha/${linha}/geo/recent`;
   }
 }
