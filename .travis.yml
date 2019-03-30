@@ -13,8 +13,7 @@ after_script:
 deploy:
   skip_cleanup: true
   provider: firebase
-  token:
-    secure: tNbuZzctCn4scv5LwGRBJaHydHFAlLD5i4+L2WQQlPsaUa4epuKnH7mIu0s5rjSoIZmBjesmTdWQXYFr6tOUH5SfiPxz4PO/fCzkrOLZF6YtdqXrKbOq57tMvRdNuC3SjsaDrjnCrjRjbRwCohepR6Pqa/cIQACklTjBUAgq7woubxDgzkauVAgoZ9VEdt8F+HT6f7VPP621M2Lt5oPgMcGoXxvkmKSLp3OV6owhp6w0rVDqnks3wH4kaX/yYr+1ZJStLM0XMlnMmE6iN4Q1Vm9vYZEMs1Dt140lVT+sEoFCZwdd9u6aqcnOijJmBYhBRPcXiw9Vsz8XdnbwX5lE6TQnjf0nEbmO/Buaur3cyFCwz6XFJ8gsjOHAK+6NyIht5zX1DDbNhzxypsgiAalrAZA0JH76dP9tdT+R+/ADQO0M1V0dh2tZnyLfsetIBmXIwSZ6d+aEoU4enkS1w8fR6NRseU2RJP218PN9+pPbuP82yHCV+LB0/ORH0AyjMRbAGnG3TCeAfbZOuvWzJExJqCHRlnTX50tE5CjfhWx0ZesfBknAQwal50XXA9zF4HeQI/+zEMZkqFzgZk9qj48PRDak7LxyOrCHltAZJzoQ8RPAUt+Yii4q0nOm/1UYHPBgxusvrPGRv1+7ba+abKBFnvkwM/DZRPs691Pt+LTtWf8=
+  token: $FIREBASE_TOKEN
   on:
     repo: UnDer-7/cade-onibus-frontend
     branch: development
