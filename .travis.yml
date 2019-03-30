@@ -12,9 +12,6 @@ script:
   - npm run lint
   - npm run build-prod
 deploy:
-  provider: pages
-  skip_cleanup: true
-  local_dir: dist/
-  github-token: $GITHUB_TOKEN
-  on:
-    branch: development
+  provider: firebase
+  token:
+    secure: "ZrnsPHA/KZH1JcBSYo5zBUSMg/TAz+XLHAyZbiypS8I5mKpGLxzNdl16J15lLwWRbbGTUKz1EhAm1v22P3sv5LTuGkXOD2IMNDSB/mzPw0wzk/hSHW6eSeWJW65Pqrr3M6k/CReHAw0KDMyRKLxKmznFXF9+sHQcOYKMdxtj2dbd8fH709JouEMTVIrJiaOeptGbLWqqXgsdtJOYFD/vQud0QeF5mAEiuPKojvIgJf+zWzcl/C/BJP/GgQ/xBZH1km/qQVQhllFOVQTgeU/u6Mb1+SV9LuNEdFZD0bP/h6TxPwtn0enlcrwluEGSlcdj1lggXrtXk74ctJIJQnd08UNAdbqm8MKbCsB2ygUYNXyXJaY7X01gtp4003WDhqu/qdfiiIo4sKYSoXXUK9PMzxFWWoxi6O/wgvWcT/TXFQvFm5QqvYTKXdPPo1ccZrDrrZkieX6PhHvfy7DzS5E30pNKvcTZJDPrsX2vrcjxIVnnLrXJNDF6DlLPg1B00D08KbS9+jxRwBdMUgJjYoFB8i/zh57dQza1Z8UuuwJotlCr05M4KnfTI89hGdkQO8GaCQE0LZciDFqlP7UZheYoT1oerWEHrUJv+YfEVFPSW9lSKYLst9IVYYTqRpq6u6UohyhLsVTNwoEpXHKJUft5jh8afUyqKMfwAfofpBruq30="

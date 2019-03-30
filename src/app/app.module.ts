@@ -18,6 +18,8 @@ import localePt from '@angular/common/locales/pt';
 import { UserFormModule } from './pages/modals/user-form/user-form.module';
 import { MapsPageModule } from './pages/modals/maps/maps.module';
 import { SharingLocationService } from './util/sharing-location.service';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -32,6 +34,7 @@ registerLocaleData(localePt, 'pt-BR');
     FindBusPageModule,
     MapsPageModule,
     UserFormModule,
+    AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [
     StatusBar,
