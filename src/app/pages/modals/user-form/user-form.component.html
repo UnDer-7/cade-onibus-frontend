@@ -53,10 +53,9 @@
               <ion-grid>
                 <ion-row>
                   <ion-col size="12" padding-vertical>
-                    <ion-item color="light" lines="full" *ngIf="user.onibus.length" text-center>
+                    <ion-item color="light" lines="full" *ngIf="user?.onibus?.length" text-center>
                       <ion-label color="secondary">Linha</ion-label>
                     </ion-item>
-                    <!--</ion-item-divider>-->
                   </ion-col>
                 </ion-row>
                 <ion-row>
@@ -71,17 +70,30 @@
                     </ion-item-divider>
                   </ion-col>
                 </ion-row>
+                <ion-row>
+                  <ion-col size="6">
+                    <ion-button
+                      type="button"
+                      expand="block"
+                      fill="outline"
+                      color="secondary"
+                      (click)="showLines()"
+                      text-wrap>
+                      Selecione sua linha
+                    </ion-button>
+                  </ion-col>
+                  <ion-col size="6">
+                  <ion-button
+                    type="button"
+                    expand="block"
+                    fill="outline"
+                    color="danger"
+                    (click)="deleteAllBus()">
+                    Limpar ônibus
+                  </ion-button>
+                  </ion-col>
+                </ion-row>
               </ion-grid>
-              <div padding-vertical>
-                <ion-button
-                  type="button"
-                  expand="block"
-                  fill="outline"
-                  color="secondary"
-                  (click)="showLines()">
-                  Selecione sua linha
-                </ion-button>
-              </div>
             </ion-card-content>
           </ion-card>
         </div>

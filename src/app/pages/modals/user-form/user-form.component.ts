@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { User } from '../../../models/user.model';
-import { ModalController, ToastController } from '@ionic/angular';
+import { AlertController, ModalController, ToastController } from '@ionic/angular';
 import { UtilService } from '../../../util/util.service';
 import { Onibus } from '../../../models/onibus.modal';
 import { FindBusPage } from '../find-bus/find-bus.page';
@@ -28,8 +28,10 @@ export class UserFormComponent implements OnInit {
     public util: UtilService,
     private toastCtrl: ToastController,
     private modalCtrl: ModalController,
-    private userService: UserService
-  ) { }
+    private userService: UserService,
+    private alertCtrl: AlertController
+  ) {
+  }
 
   public ngOnInit(): void {
     if (!this.user) {
@@ -59,7 +61,11 @@ export class UserFormComponent implements OnInit {
     });
     await modal.present();
     const { data } = await modal.onWillDismiss();
-    this.user.onibus = data;
+    if (data) {
+      data.forEach(item => {
+        this.user.onibus = [...this.user.onibus, item];
+      });
+    }
   }
 
   public showPassword(): void {
@@ -70,6 +76,27 @@ export class UserFormComponent implements OnInit {
       this.passwordIcon = 'eye-off';
       this.passwordType = 'password';
     }
+  }
+
+  public async deleteAllBus(): Promise<void> {
+    const alert = await this.alertCtrl.create({
+      header: 'Remover seus ônibus',
+      message: 'Tem certeza que quer remover todos seus ônibus?',
+      buttons: [
+        {
+          text: 'Sim',
+          handler: () => {
+            this.user.onibus = [];
+          }
+        },
+        {
+          text: 'Não',
+          handler: () => {
+          }
+        }
+      ]
+    });
+    await alert.present();
   }
 
   private async subscribeToSaveResponse(result: Observable<User>): Promise<any> {

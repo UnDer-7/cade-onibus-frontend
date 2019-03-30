@@ -63,8 +63,12 @@ export class FindBusPage implements OnInit {
     }, 300);
   }
 
-  public async closeModal(): Promise<any> {
-    this.modalCtrl.dismiss(this.onibusAdded);
+  public async closeModal(): Promise<void> {
+    if (this.onibusAdded.length > 0) {
+      this.modalCtrl.dismiss(this.onibusAdded);
+    } else {
+      this.modalCtrl.dismiss(null);
+    }
   }
 
   public cleanSearch(): void {
