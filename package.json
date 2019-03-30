@@ -10,7 +10,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build-prod": "ng build --prod --configuration=development --base-href=https://UnDer-7.github.io/cade-onibus-frontend/",
+    "build-prod": "ng build --prod --configuration=development --base-href=/",
     "build-android": "ionic capacitor add android --configuration=development",
     "update-android": "ionic capacitor copy android --configuration=development",
     "build-android-open-AS": "ionic capacitor run android --configuration=development"
