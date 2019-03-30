@@ -31,15 +31,15 @@
       </agm-info-window>
     </agm-marker>
 
-    <!--<agm-marker-->
-    <!--[iconUrl]="icon.busUser"-->
-    <!--[latitude]="bus.cords.latitude"-->
-    <!--[longitude]="bus.cords.longitude"-->
-    <!--*ngFor="let bus of pagination.docs">-->
-    <!--<agm-info-window>-->
-    <!--GGWP-->
-    <!--</agm-info-window>-->
-    <!--</agm-marker>-->
+    <agm-marker
+      [iconUrl]="icon.busUser"
+      [latitude]="bus.cords.latitude"
+      [longitude]="bus.cords.longitude"
+      *ngFor="let bus of pagination.docs">
+      <agm-info-window>
+        GGWP
+      </agm-info-window>
+    </agm-marker>
   </agm-map>
 </ion-content>
 
