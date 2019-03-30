@@ -1,17 +1,17 @@
 language: node_js
 node_js:
-  - stable
+- stable
 dist: trusty
 sudo: required
 before_script:
-  - npm install -g @angular/cli
+- npm install -g @angular/cli
 script:
-  - npm run lint
-  - npm run build-prod
+- npm run lint
+- npm run build-prod
 deploy:
   provider: firebase
+  token:
+    secure: tNbuZzctCn4scv5LwGRBJaHydHFAlLD5i4+L2WQQlPsaUa4epuKnH7mIu0s5rjSoIZmBjesmTdWQXYFr6tOUH5SfiPxz4PO/fCzkrOLZF6YtdqXrKbOq57tMvRdNuC3SjsaDrjnCrjRjbRwCohepR6Pqa/cIQACklTjBUAgq7woubxDgzkauVAgoZ9VEdt8F+HT6f7VPP621M2Lt5oPgMcGoXxvkmKSLp3OV6owhp6w0rVDqnks3wH4kaX/yYr+1ZJStLM0XMlnMmE6iN4Q1Vm9vYZEMs1Dt140lVT+sEoFCZwdd9u6aqcnOijJmBYhBRPcXiw9Vsz8XdnbwX5lE6TQnjf0nEbmO/Buaur3cyFCwz6XFJ8gsjOHAK+6NyIht5zX1DDbNhzxypsgiAalrAZA0JH76dP9tdT+R+/ADQO0M1V0dh2tZnyLfsetIBmXIwSZ6d+aEoU4enkS1w8fR6NRseU2RJP218PN9+pPbuP82yHCV+LB0/ORH0AyjMRbAGnG3TCeAfbZOuvWzJExJqCHRlnTX50tE5CjfhWx0ZesfBknAQwal50XXA9zF4HeQI/+zEMZkqFzgZk9qj48PRDak7LxyOrCHltAZJzoQ8RPAUt+Yii4q0nOm/1UYHPBgxusvrPGRv1+7ba+abKBFnvkwM/DZRPs691Pt+LTtWf8=
   on:
     repo: UnDer-7/cade-onibus-frontend
     branch: development
-  token:
-    secure: "ZrnsPHA/KZH1JcBSYo5zBUSMg/TAz+XLHAyZbiypS8I5mKpGLxzNdl16J15lLwWRbbGTUKz1EhAm1v22P3sv5LTuGkXOD2IMNDSB/mzPw0wzk/hSHW6eSeWJW65Pqrr3M6k/CReHAw0KDMyRKLxKmznFXF9+sHQcOYKMdxtj2dbd8fH709JouEMTVIrJiaOeptGbLWqqXgsdtJOYFD/vQud0QeF5mAEiuPKojvIgJf+zWzcl/C/BJP/GgQ/xBZH1km/qQVQhllFOVQTgeU/u6Mb1+SV9LuNEdFZD0bP/h6TxPwtn0enlcrwluEGSlcdj1lggXrtXk74ctJIJQnd08UNAdbqm8MKbCsB2ygUYNXyXJaY7X01gtp4003WDhqu/qdfiiIo4sKYSoXXUK9PMzxFWWoxi6O/wgvWcT/TXFQvFm5QqvYTKXdPPo1ccZrDrrZkieX6PhHvfy7DzS5E30pNKvcTZJDPrsX2vrcjxIVnnLrXJNDF6DlLPg1B00D08KbS9+jxRwBdMUgJjYoFB8i/zh57dQza1Z8UuuwJotlCr05M4KnfTI89hGdkQO8GaCQE0LZciDFqlP7UZheYoT1oerWEHrUJv+YfEVFPSW9lSKYLst9IVYYTqRpq6u6UohyhLsVTNwoEpXHKJUft5jh8afUyqKMfwAfofpBruq30="
