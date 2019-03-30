@@ -84,13 +84,13 @@ export class MapsPage implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
+    this.subscription.forEach(item => {
+      item.unsubscribe();
+    });
   }
 
   public closeModal(): void {
     this.modalCtrl.dismiss();
-    this.subscription.forEach(item => {
-      item.unsubscribe();
-    });
     this.ngOnDestroy();
   }
 
