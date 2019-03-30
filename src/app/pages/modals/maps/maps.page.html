@@ -6,6 +6,7 @@
       </ion-button>
     </ion-buttons>
     <app-sharing-location slot="end"></app-sharing-location>
+    <ion-label text-center slot="end" padding-end color="primary">{{ onibus.numero }}</ion-label>
   </ion-toolbar>
 </ion-header>
 
@@ -31,13 +32,13 @@
     </agm-marker>
 
     <!--<agm-marker-->
-      <!--[iconUrl]="icon.busUser"-->
-      <!--[latitude]="bus.cords.latitude"-->
-      <!--[longitude]="bus.cords.longitude"-->
-      <!--*ngFor="let bus of pagination.docs">-->
-      <!--<agm-info-window>-->
-        <!--GGWP-->
-      <!--</agm-info-window>-->
+    <!--[iconUrl]="icon.busUser"-->
+    <!--[latitude]="bus.cords.latitude"-->
+    <!--[longitude]="bus.cords.longitude"-->
+    <!--*ngFor="let bus of pagination.docs">-->
+    <!--<agm-info-window>-->
+    <!--GGWP-->
+    <!--</agm-info-window>-->
     <!--</agm-marker>-->
   </agm-map>
 </ion-content>
