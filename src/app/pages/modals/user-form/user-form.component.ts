@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { User } from '../../../models/user.model';
-import { AlertController, ModalController, ToastController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { UtilService } from '../../../util/util.service';
 import { Onibus } from '../../../models/onibus.modal';
 import { FindBusPage } from '../find-bus/find-bus.page';
@@ -9,6 +9,7 @@ import { environment } from '../../../../environments/environment';
 import { UserService } from './user.service';
 import { Observable } from 'rxjs';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
+import { difference } from 'lodash-es';
 
 @Component({
   selector: 'app-user-form',
@@ -21,6 +22,9 @@ export class UserFormComponent implements OnInit {
   public passwordIcon: string = 'eye-off';
   public passwordType: string = 'password';
   public appName: string = environment.appName;
+  public isOption: boolean = false;
+  public checkBoxSelected: number;
+  public onibusToDelete: Array<Onibus> = new Array<Onibus>();
 
   @BlockUI() private blockUi: NgBlockUI;
 
@@ -28,8 +32,7 @@ export class UserFormComponent implements OnInit {
     public util: UtilService,
     private toastCtrl: ToastController,
     private modalCtrl: ModalController,
-    private userService: UserService,
-    private alertCtrl: AlertController
+    private userService: UserService
   ) {
   }
 
@@ -78,25 +81,32 @@ export class UserFormComponent implements OnInit {
     }
   }
 
-  public async deleteAllBus(): Promise<void> {
-    const alert = await this.alertCtrl.create({
-      header: 'Remover seus ônibus',
-      message: 'Tem certeza que quer remover todos seus ônibus?',
-      buttons: [
-        {
-          text: 'Sim',
-          handler: () => {
-            this.user.onibus = [];
-          }
-        },
-        {
-          text: 'Não',
-          handler: () => {
-          }
-        }
-      ]
-    });
-    await alert.present();
+  public showCheckbox(itemPressed: number, firstBusSelected: Onibus): void {
+    if (!this.isOption) {
+      this.checkBoxSelected = itemPressed;
+      this.isOption = true;
+      this.onibusToDelete = [firstBusSelected];
+    } else {
+      this.isOption = false;
+      this.onibusToDelete = [];
+    }
+
+  }
+
+  public onCheckboxClick(item: CustomEvent): void {
+    const { checked, value } = item.detail;
+
+    if (checked) {
+      this.onibusToDelete = [...this.onibusToDelete, value];
+    } else {
+      this.onibusToDelete = this.onibusToDelete.filter(element => {
+        return element.numero !== value.numero;
+      });
+    }
+  }
+
+  public async deleteBus(): Promise<void> {
+    this.user.onibus = difference(this.user.onibus, this.onibusToDelete);
   }
 
   private async subscribeToSaveResponse(result: Observable<User>): Promise<any> {

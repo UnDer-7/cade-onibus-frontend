@@ -60,18 +60,26 @@
                 </ion-row>
                 <ion-row>
                   <ion-col justify-content-center size="12">
-                    <ion-item-divider *ngFor="let linhas of user.onibus" color="light">
+                    <ion-item-divider *ngFor="let linhas of user.onibus; let i = index" color="light" (press)="showCheckbox(i, linhas)">
                       <ion-item lines="none" color="light">
                         <ion-label text-wrap color="success">{{ linhas.numero }}</ion-label>
                       </ion-item>
                       <ion-item lines="none" color="light">
                         <ion-label color="dark" text-wrap>{{ linhas.descricao }}</ion-label>
                       </ion-item>
+                      <ion-item lines="none" color="light" *ngIf="isOption">
+                        <ion-checkbox
+                          color="secondary"
+                          [value]="linhas"
+                          (ionChange)="onCheckboxClick($event)"
+                          [checked]="checkBoxSelected === i && user.onibus.length > 1">
+                        </ion-checkbox>
+                      </ion-item>
                     </ion-item-divider>
                   </ion-col>
                 </ion-row>
                 <ion-row>
-                  <ion-col size="6">
+                  <ion-col [size]="isOption ? 6 : 12">
                     <ion-button
                       type="button"
                       expand="block"
@@ -84,12 +92,14 @@
                   </ion-col>
                   <ion-col size="6">
                   <ion-button
+                    text-wrap
                     type="button"
                     expand="block"
                     fill="outline"
                     color="danger"
-                    (click)="deleteAllBus()">
-                    Limpar ônibus
+                    *ngIf="isOption"
+                    (click)="deleteBus()">
+                    Remover Ônibus
                   </ion-button>
                   </ion-col>
                 </ion-row>

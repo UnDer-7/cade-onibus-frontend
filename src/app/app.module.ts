@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -20,6 +20,7 @@ import { MapsPageModule } from './pages/modals/maps/maps.module';
 import { SharingLocationService } from './util/sharing-location.service';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
+import { IonicGestureConfig } from './util/ionic-gesture-config';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -50,6 +51,10 @@ registerLocaleData(localePt, 'pt-BR');
     {
       provide: RouteReuseStrategy,
       useClass: IonicRouteStrategy
+    },
+    {
+      provide: HAMMER_GESTURE_CONFIG,
+      useClass: IonicGestureConfig
     }
   ],
   bootstrap: [AppComponent]
