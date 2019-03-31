@@ -10,6 +10,7 @@ import { UserService } from './user.service';
 import { Observable } from 'rxjs';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { difference } from 'lodash-es';
+import { SharingLocationService } from '../../../util/sharing-location.service';
 
 @Component({
   selector: 'app-user-form',
@@ -32,7 +33,8 @@ export class UserFormComponent implements OnInit {
     public util: UtilService,
     private toastCtrl: ToastController,
     private modalCtrl: ModalController,
-    private userService: UserService
+    private userService: UserService,
+    public sharingLocationService: SharingLocationService
   ) {
   }
 

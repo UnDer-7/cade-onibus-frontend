@@ -12,39 +12,64 @@
 
 <ion-content color="medium">
   <agm-map [latitude]="userLocation[1]" [longitude]="userLocation[0]" [zoom]=12>
-    <!--<agm-marker-->
-      <!--[iconUrl]="icon.user"-->
-      <!--[latitude]="userLocation[1]"-->
-      <!--[longitude]="userLocation[0]">-->
-      <!--<agm-info-window>-->
-        <!--GGWP-->
-      <!--</agm-info-window>-->
-    <!--</agm-marker>-->
+    <agm-marker
+      [iconUrl]="icon.user"
+      [latitude]="userLocation[1]"
+      [longitude]="userLocation[0]">
+      <agm-snazzy-info-window
+        backgroundColor="#222428"
+        padding="13px"
+        fontSize="50px"
+        [border]="false"
+        [maxWidth]="200"
+        [isOpen]="true"
+        [closeWhenOthersOpen]="true">
+        <ng-template>
+          <ion-text color="primary">Sua posição</ion-text>
+        </ng-template>
+      </agm-snazzy-info-window>
+    </agm-marker>
 
-    <!--<agm-marker-->
-      <!--[iconUrl]="icon.dfTrans"-->
-      <!--[latitude]="position.geometry.coordinates[1]"-->
-      <!--[longitude]="position.geometry.coordinates[0]"-->
-      <!--*ngFor="let position of busLocation">-->
-      <!--<agm-info-window>-->
-        <!--<ng-template>-->
-          <!--AGORA VAI!-->
-        <!--</ng-template>-->
-      <!--</agm-info-window>-->
-    <!--</agm-marker>-->
+    <agm-marker
+      [iconUrl]="icon.dfTrans"
+      [latitude]="position.geometry.coordinates[1]"
+      [longitude]="position.geometry.coordinates[0]"
+      *ngFor="let position of busLocation; let i = index">
+      <agm-snazzy-info-window
+        backgroundColor="#222428"
+        padding="13px"
+        fontSize="50px"
+        [border]="false"
+        [maxWidth]="200"
+        [closeWhenOthersOpen]="true">
+        <ng-template>
+          <ion-text color="primary">Onibus Compartilhado pelo DFTrans</ion-text>
+          <hr>
+          <ion-text color="danger">Linha: </ion-text>
+          <ion-text color="medium">{{ position.properties.linha }}</ion-text>
+        </ng-template>
+      </agm-snazzy-info-window>
+    </agm-marker>
 
     <agm-marker
       [iconUrl]="icon.busUser"
       [latitude]="bus.cords.latitude"
       [longitude]="bus.cords.longitude"
-      *ngFor="let bus of pagination.docs">
-      <agm-info-window>
-        <agm-snazzy-info-window backgroundColor="#2c2e32" [border]="false" [maxWidth]="200" [closeWhenOthersOpen]="true" [isOpen]="true">
-          <ng-template>
-            <ion-text color="danger">Onibus Compartilhado pelo usuario</ion-text>
-          </ng-template>
-        </agm-snazzy-info-window>
-      </agm-info-window>
+      *ngFor="let bus of userBusLocation">
+      <agm-snazzy-info-window
+        backgroundColor="#222428"
+        padding="13px"
+        fontSize="50px"
+        [border]="false"
+        [maxWidth]="200"
+        [closeWhenOthersOpen]="true">
+        <ng-template>
+          <ion-text color="primary">Onibus Compartilhado pelo usuario</ion-text>
+          <hr>
+          <ion-text color="danger">Ultima hora registrada:</ion-text>
+          <ion-text color="medium">{{ bus.hora | date:'HH:mm • dd/MM/yyyy' }}</ion-text>
+        </ng-template>
+      </agm-snazzy-info-window>
     </agm-marker>
   </agm-map>
 </ion-content>

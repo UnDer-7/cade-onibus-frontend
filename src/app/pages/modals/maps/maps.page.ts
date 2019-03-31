@@ -10,7 +10,8 @@ import { environment } from '../../../../environments/environment';
 import { SessionService } from '../../../auth/session.service';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
-import { Pagination } from '../../../models/pagination.model';
+import { UserLocation } from '../../../models/user.location.model';
+import { HttpErrorResponse } from '@angular/common/http';
 
 const { Geolocation } = Plugins;
 
@@ -23,8 +24,8 @@ export class MapsPage implements OnInit, OnDestroy {
 
   public appName: string = environment.appName;
   public userLocation: number[] = new Array<number>();
-  public pagination: Pagination = {} as Pagination;
   public busLocation: BusLocation[] = [] as BusLocation[];
+  public userBusLocation: Array<UserLocation> = new Array<UserLocation>();
 
   public icon: any = {
     dfTrans: {
@@ -70,15 +71,20 @@ export class MapsPage implements OnInit, OnDestroy {
           flatMap(() => this.mapsService.trackBus(this.onibus.numero))
         ).subscribe(res => {
         this.busLocation = res.features;
+        console.log('BUS: ', this.busLocation);
       })
     );
 
     this.subscription.push(
       timer(0, 5000)
         .pipe(
-          flatMap(() => this.mapsService.getUserLocation())
+          flatMap(() => this.mapsService.getUserByLinha(this.onibus.numero))
         ).subscribe(res => {
-        this.pagination = res;
+        this.userBusLocation = res;
+      }, (err: HttpErrorResponse) => {
+          if (err.error === 'bus not found') {
+            this.util.showToast('Nem um usuário esta compartilhando esse ônibus.\nVocê pode ser o primeiro.', 'tertiary', 7500, '', true);
+          }
       })
     );
   }

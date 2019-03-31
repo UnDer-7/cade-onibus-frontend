@@ -17,5 +17,5 @@ export interface Properties {
 
 export interface BusLocation {
   geometry: Geometry;
-  properties: Properties[];
+  properties: Properties;
 }

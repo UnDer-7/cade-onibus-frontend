@@ -8,7 +8,7 @@
       name="locate"
       slot="end"
       color="danger"
-      *ngIf="util.isSharing() && action === 'edit'">
+      *ngIf="sharingLocationService.isSharing() && action === 'edit'">
     </ion-icon>
   </ion-toolbar>
 </ion-header>
