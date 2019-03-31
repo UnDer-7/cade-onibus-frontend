@@ -111,6 +111,10 @@ export class UserFormComponent implements OnInit {
     this.user.onibus = difference(this.user.onibus, this.onibusToDelete);
   }
 
+  get showOptions(): boolean {
+    return this.isOption && this.user.onibus.length > 0;
+  }
+
   private async subscribeToSaveResponse(result: Observable<User>): Promise<any> {
     this.blockUi.start();
     result.subscribe(res => {

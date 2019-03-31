@@ -78,7 +78,7 @@
                   </ion-col>
                 </ion-row>
                 <ion-row>
-                  <ion-col [size]="isOption ? 6 : 12">
+                  <ion-col [size]="showOptions ? 6 : 12">
                     <ion-button
                       type="button"
                       expand="block"
@@ -96,7 +96,7 @@
                     expand="block"
                     fill="outline"
                     color="danger"
-                    *ngIf="isOption"
+                    *ngIf="showOptions"
                     (click)="deleteBus()">
                     Remover Ônibus
                   </ion-button>
