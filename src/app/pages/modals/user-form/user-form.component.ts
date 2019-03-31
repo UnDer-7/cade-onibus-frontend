@@ -47,6 +47,7 @@ export class UserFormComponent implements OnInit {
       return;
     }
 
+    this.isOption = false;
     if (this.user._id) {
       this.subscribeToSaveResponse(this.userService.updateUser(this.user));
     } else {
@@ -56,13 +57,14 @@ export class UserFormComponent implements OnInit {
 
   public async closeModal(user?: User): Promise<any> {
     this.modalCtrl.dismiss(user);
+    this.isOption = false;
   }
 
   public async showLines(): Promise<any> {
     const modal = await this.modalCtrl.create({
       component: FindBusPage
     });
-    await modal.present();
+    await modal.present().then(() => this.isOption = false);
     const { data } = await modal.onWillDismiss();
     if (data) {
       data.forEach(item => {
