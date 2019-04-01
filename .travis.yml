@@ -17,3 +17,5 @@ deploy:
   on:
     repo: UnDer-7/cade-onibus-frontend
     branch: development
+notifications:
+  email: false
