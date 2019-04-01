@@ -27,9 +27,7 @@ export class SharingLocationService {
       maximumAge: 0
     }, cb => {
       this.userLocation = this.prepareUserLocation(cb, onibus);
-      this.subscription = this.saveUserLocation(this.userLocation).subscribe(res => {
-        console.log('RES: ', res);
-      });
+      this.subscription = this.saveUserLocation(this.userLocation).subscribe();
     });
   }
 

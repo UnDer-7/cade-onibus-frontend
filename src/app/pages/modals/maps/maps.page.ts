@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { UserLocation } from '../../../models/user.location.model';
 import { HttpErrorResponse } from '@angular/common/http';
+import { SharingLocationService } from '../../../util/sharing-location.service';
 
 const { Geolocation } = Plugins;
 
@@ -58,7 +59,8 @@ export class MapsPage implements OnInit, OnDestroy {
     private mapsService: MapsService,
     private sessionService: SessionService,
     private router: Router,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    public sharingLocationService: SharingLocationService
   ) {
   }
 
@@ -71,7 +73,6 @@ export class MapsPage implements OnInit, OnDestroy {
           flatMap(() => this.mapsService.trackBus(this.onibus.numero))
         ).subscribe(res => {
         this.busLocation = res.features;
-        console.log('BUS: ', this.busLocation);
       })
     );
 
@@ -98,6 +99,14 @@ export class MapsPage implements OnInit, OnDestroy {
   public closeModal(): void {
     this.modalCtrl.dismiss();
     this.ngOnDestroy();
+  }
+
+  public startSharing(): void {
+    this.sharingLocationService.startSharing(this.onibus);
+  }
+
+  public stopSharing(): void {
+    this.sharingLocationService.stopSharing();
   }
 
   private async getUserCurrentPosstion(): Promise<any> {
