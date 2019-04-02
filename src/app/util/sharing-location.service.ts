@@ -15,12 +15,15 @@ export class SharingLocationService {
   private subscription: Subscription;
   private userLocation: UserLocation = {} as UserLocation;
   private resourceUrl: string = environment.apiUrl + '/userlocations';
+  private startDate: Date;
+  private endDate: Date;
 
   constructor(
     private http: HttpClient
   ) { }
 
   public startSharing(onibus: Onibus): void {
+    this.startDate = new Date();
     this.isUserSharing = true;
     this.watchPositionID = Geolocation.watchPosition({
       enableHighAccuracy: true,
@@ -32,6 +35,8 @@ export class SharingLocationService {
   }
 
   public stopSharing(): void {
+    this.endDate = new Date();
+    console.log('dates: ', this.startDate, this.endDate);
     Geolocation.clearWatch({ id: this.watchPositionID });
     this.subscription.unsubscribe();
     this.isUserSharing = false;
