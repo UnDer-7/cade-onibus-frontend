@@ -74,7 +74,7 @@ export class SharingLocationService {
       }),
       numero: onibus.numero,
       sequencial: onibus.sequencial,
-      hora: Date()
+      hora: new Date()
     });
   }
 }
