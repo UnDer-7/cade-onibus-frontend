@@ -57,7 +57,7 @@ export class AppComponent {
 
   private isLoggedIn(): void {
     if (!this.tokenService.token) {
-      this.router.navigate(['/']);
+      this.router.navigateByUrl('/');
       return;
     }
 

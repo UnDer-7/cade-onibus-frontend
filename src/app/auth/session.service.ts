@@ -23,7 +23,11 @@ export class SessionService {
   }
 
   public logout(): void {
-    this.tokenService.removeItem();
-    this.router.navigate(['login']);
+    this.router.navigateByUrl('/').then(res => {
+      if (res) {
+        this.tokenService.removeItem();
+        location.reload(true);
+      }
+    });
   }
 }
