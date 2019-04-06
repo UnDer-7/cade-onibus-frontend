@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as jwtDecode from 'jwt-decode';
 import { Token } from '../models/token.model';
+import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,10 @@ export class TokenService {
   }
 
   public decodeToken(): Token {
-    return jwtDecode(this.token);
+    try {
+      return jwtDecode(this.token);
+    } catch (e) {
+      throwError(`Erro while trying to decode token\n${e}`);
+    }
   }
 }

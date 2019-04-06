@@ -37,13 +37,7 @@ export class HomePage {
 
   public ionViewDidEnter(): void {
     this.token = this.tokenService.decodeToken();
-    this.homeService.findUser(this.token._id).subscribe(
-      res => this.user = res,
-      err => {
-        this.util.showToast('Houve um erro na requisição. Tente recarregar a página.');
-        console.error(err);
-      }
-    );
+    this.homeService.findUser(this.token._id).subscribe(res => this.user = res);
   }
 
   public async openPicker(): Promise<any> {

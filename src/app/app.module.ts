@@ -12,7 +12,7 @@ import { FindBusPageModule } from './pages/modals/find-bus/find-bus.module';
 import { UtilService } from './util/util.service';
 import { TokenService } from './auth/token.service';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import { TokenApiService } from './Interceptors/Token-api.service';
+import { TokenInterceptor } from './Interceptors/token.interceptor';
 import {registerLocaleData} from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 import { UserFormModule } from './pages/modals/user-form/user-form.module';
@@ -21,6 +21,7 @@ import { SharingLocationService } from './util/sharing-location.service';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { IonicGestureConfig } from './util/ionic-gesture-config';
+import { ErrorInterceptor } from './Interceptors/error.interceptor';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -45,7 +46,12 @@ registerLocaleData(localePt, 'pt-BR');
     TokenService,
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: TokenApiService,
+      useClass: TokenInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
       multi: true
     },
     {
