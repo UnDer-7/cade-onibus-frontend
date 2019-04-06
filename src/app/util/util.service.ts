@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 @Injectable()
 export class UtilService {
+  private urlAccessed: string;
+
   constructor(
     private toastCtrl: ToastController
   ) { }
@@ -22,5 +24,13 @@ export class UtilService {
       translucent: true,
     });
     toast.present();
+  }
+
+  get blockedUrl(): string {
+    return this.urlAccessed;
+  }
+
+  set blockedUrl(urlAccessed: string) {
+    this.urlAccessed = urlAccessed;
   }
 }

@@ -1,8 +1,6 @@
 {
   "name": "cade-onibus",
-  "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "version": "2.0.7",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --baseHref=/ --open=true --poll 200",
@@ -54,9 +52,10 @@
     "@angular/compiler-cli": "~7.2.2",
     "@angular/language-service": "~7.2.2",
     "@ionic/angular-toolkit": "~1.4.0",
-    "@types/node": "~10.12.0",
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
+    "@types/jwt-decode": "^2.2.1",
+    "@types/node": "~10.12.0",
     "codelyzer": "~4.5.0",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
@@ -70,5 +69,22 @@
     "tslint": "~5.12.0",
     "typescript": "~3.1.6"
   },
-  "description": "An Ionic project"
+  "description": "Projeto desenvolvido para a disciplina Projeto Integrado III do curso de Sistemas de Informação do UniPROJEÇÃO",
+  "homepage": "https://cade-onibus-2.firebaseapp.com",
+  "contributors": [
+    {
+      "name": "Mateus Gomes",
+      "email": "mateus7532@gmail.com",
+      "url": "https://github.com/UnDer-7"
+    },
+    {
+      "name": "Lucas Veiga",
+      "email": "lucasveiga09@gmail.com",
+      "url": "https://github.com/lucas-veiga"
+    }
+  ],
+  "repository": {
+    "url": "https://github.com/UnDer-7/cade-onibus-frontend",
+    "type": "Git"
+  }
 }

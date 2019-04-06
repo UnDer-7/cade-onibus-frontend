@@ -34,7 +34,6 @@ export class AppComponent {
     private statusBar: StatusBar,
     private router: Router,
     private sessionService: SessionService,
-    private tokenService: TokenService,
   ) {
     this.initializeApp();
   }
@@ -43,7 +42,6 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleBlackTranslucent();
       this.splashScreen.hide();
-      this.isLoggedIn();
     });
   }
 
@@ -53,21 +51,5 @@ export class AppComponent {
 
   get canShowMenu(): boolean {
     return this.router.url === ('/login' || '/');
-  }
-
-  private isLoggedIn(): void {
-    if (!this.tokenService.token) {
-      this.router.navigateByUrl('/');
-      return;
-    }
-
-    const expiration = new Date(this.tokenService.decodeToken().exp * 1000);
-    const currentDate = new Date();
-
-    if (currentDate < expiration) {
-      this.router.navigateByUrl('/home');
-    } else {
-      this.router.navigateByUrl('/');
-    }
   }
 }

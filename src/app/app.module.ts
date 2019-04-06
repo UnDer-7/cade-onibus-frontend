@@ -22,6 +22,7 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { IonicGestureConfig } from './util/ionic-gesture-config';
 import { ErrorInterceptor } from './Interceptors/error.interceptor';
+import { AuthGuard } from './guards/auth-guard.guard';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -44,6 +45,7 @@ registerLocaleData(localePt, 'pt-BR');
     UtilService,
     SharingLocationService,
     TokenService,
+    AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
