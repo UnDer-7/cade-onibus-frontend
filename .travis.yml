@@ -15,7 +15,7 @@ deploy:
   provider: firebase
   token: $FIREBASE_TOKEN
   on:
-    repo: cade-onibus/cade-onibus-backend
+    repo: cade-onibus/cade-onibus-frontend
     branch: development
 notifications:
   email: false
