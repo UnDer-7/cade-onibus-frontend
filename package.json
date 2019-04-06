@@ -86,5 +86,32 @@
   "repository": {
     "url": "https://github.com/UnDer-7/cade-onibus-frontend",
     "type": "Git"
-  }
+  },
+  "license": "SEE LICENSE IN LICENSE.md",
+  "keywords": [
+    "UniPROJEÇÃO",
+    "UniPROJECAO",
+    "PROJEÇÃO",
+    "PROJECAO",
+    "UnDer-7",
+    "Mateus Gomes",
+    "Lucas Veiga",
+    "Brasilia",
+    "DF",
+    "Distrito Federal",
+    "Sobradinho",
+    "Sobradinho II",
+    "Sobradinho 2",
+    "Onibus",
+    "Bus",
+    "DFTrans",
+    "DF-Trans",
+    "DF Trans",
+    "Google Maps",
+    "Maps",
+    "Mapa",
+    "Ionic",
+    "Ionic 4",
+    "Angular"
+  ]
 }
