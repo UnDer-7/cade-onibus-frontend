@@ -17,16 +17,17 @@ export class SessionService {
     private http: HttpClient,
     private router: Router,
     private tokenService: TokenService
-  ) { }
+  ) {
+  }
 
   public login(user: User): Observable<any> {
     return this.http.post(this.authUrl, user);
   }
 
   public logout(): void {
+    this.tokenService.removeItem();
     this.router.navigateByUrl('/').then(res => {
       if (res) {
-        this.tokenService.removeItem();
         location.reload(true);
       }
     });

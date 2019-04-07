@@ -18,10 +18,10 @@ export class AuthGuard implements CanActivate {
       return true;
     }
 
+    this.tokenService.removeItem();
     this.router.navigateByUrl('/').then(res => {
       if (res) {
         this.util.showToast('Você não esta mais logado!', 'danger');
-        this.tokenService.removeItem();
         this.util.blockedUrl = route.url[0].path;
       }
     });
