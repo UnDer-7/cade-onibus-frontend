@@ -23,6 +23,7 @@ import { environment } from '../environments/environment';
 import { IonicGestureConfig } from './util/ionic-gesture-config';
 import { ErrorInterceptor } from './Interceptors/error.interceptor';
 import { AuthGuard } from './guards/auth-guard.guard';
+import { LoginGuard } from './guards/login-guard.guard';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -46,6 +47,7 @@ registerLocaleData(localePt, 'pt-BR');
     SharingLocationService,
     TokenService,
     AuthGuard,
+    LoginGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
