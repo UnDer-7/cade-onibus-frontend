@@ -11,6 +11,9 @@ import { Observable } from 'rxjs';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { difference } from 'lodash-es';
 import { SharingLocationService } from '../../../util/sharing-location.service';
+import { SessionService } from '../../../auth/session.service';
+import { Router } from '@angular/router';
+import { TokenService } from '../../../auth/token.service';
 
 @Component({
   selector: 'app-user-form',
@@ -34,6 +37,9 @@ export class UserFormComponent implements OnInit {
     private toastCtrl: ToastController,
     private modalCtrl: ModalController,
     private userService: UserService,
+    private sessionService: SessionService,
+    private router: Router,
+    private tokenService: TokenService,
     public sharingLocationService: SharingLocationService
   ) {
   }
@@ -126,7 +132,7 @@ export class UserFormComponent implements OnInit {
         this.blockUi.stop();
       } else {
         this.util.showToast('Conta criado com sucesso', 'success');
-        this.closeModal();
+        this.closeModal().then(() => this.login());
         this.blockUi.stop();
       }
     }, err => {
@@ -136,6 +142,18 @@ export class UserFormComponent implements OnInit {
         return;
       }
       this.blockUi.stop();
+    });
+  }
+
+  private login(): void {
+    this.sessionService.login(this.user).subscribe(res => {
+      this.tokenService.token = res.token;
+      this.router.navigateByUrl('/home');
+    }, err => {
+      this.blockUi.stop();
+      if (err.status === 400) {
+        this.util.showToast('Credenciais incorretas', 'danger');
+      }
     });
   }
 
