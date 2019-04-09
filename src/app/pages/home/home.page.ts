@@ -11,6 +11,7 @@ import { UserLocation } from '../../models/user.location.model';
 import { SessionService } from '../../auth/session.service';
 import { environment } from '../../../environments/environment';
 import { SharingLocationService } from '../../util/sharing-location.service';
+import { FindBusPage } from '../modals/find-bus/find-bus.page';
 
 @Component({
   selector: 'app-home',
@@ -77,6 +78,14 @@ export class HomePage {
         onibus: onibus
       }
     });
+    await modal.present();
+  }
+
+  public async addMoreBus(): Promise<void> {
+    const modal = await this.modalCtrl.create({
+      component: FindBusPage
+    });
+
     await modal.present();
   }
 
