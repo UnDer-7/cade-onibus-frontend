@@ -53,6 +53,7 @@ export class MapsPage implements OnInit, OnDestroy {
   };
 
   private subscription: Array<Subscription> = new Array<Subscription>();
+  private watchPositionID: string;
 
   constructor(
     public util: UtilService,
@@ -98,6 +99,7 @@ export class MapsPage implements OnInit, OnDestroy {
 
   public closeModal(): void {
     this.modalCtrl.dismiss();
+    Geolocation.clearWatch({ id: this.watchPositionID });
     this.ngOnDestroy();
   }
 
@@ -110,8 +112,12 @@ export class MapsPage implements OnInit, OnDestroy {
   }
 
   private async getUserCurrentPosstion(): Promise<any> {
-    const currentPosition = await Geolocation.getCurrentPosition({ enableHighAccuracy: true });
-    this.userLocation[1] = currentPosition.coords.latitude;
-    this.userLocation[0] = currentPosition.coords.longitude;
+    this.watchPositionID = await Geolocation.watchPosition({
+      enableHighAccuracy: true,
+      maximumAge: 0
+    }, cb => {
+      this.userLocation[1] = cb.coords.latitude;
+      this.userLocation[0] = cb.coords.longitude;
+    });
   }
 }
