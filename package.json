@@ -1,23 +1,25 @@
 {
-  "name": "cade-onibus-frontend",
-  "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "name": "cade-onibus",
+  "version": "2.0.7",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --baseHref=/ --open=true --poll 200",
-    "build": "ng build --configuration=development",
+    "build": "ng build --prod --configuration=development",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "build-prod": "ng build --prod --configuration=development --base-href=/",
     "build-android": "ionic capacitor add android --configuration=development",
     "update-android": "ionic capacitor copy android --configuration=development",
     "build-android-open-AS": "ionic capacitor run android --configuration=development"
   },
   "private": true,
   "dependencies": {
+    "@agm/core": "^1.0.0-beta.5",
+    "@agm/snazzy-info-window": "^1.0.0-beta.5",
     "@angular/common": "^7.2.2",
     "@angular/core": "^7.2.2",
+    "@angular/fire": "^5.1.2",
     "@angular/forms": "^7.2.2",
     "@angular/http": "^7.2.2",
     "@angular/platform-browser": "^7.2.2",
@@ -31,10 +33,13 @@
     "@ionic-native/status-bar": "^5.0.0",
     "@ionic/angular": "^4.1.0",
     "core-js": "^2.5.4",
+    "firebase": "^5.9.2",
+    "hammerjs": "^2.0.8",
     "jwt-decode": "^2.2.0",
-    "lodash": "^4.17.11",
+    "lodash-es": "^4.17.11",
     "ng-block-ui": "^2.1.1",
     "rxjs": "~6.3.3",
+    "snazzy-info-window": "^1.1.1",
     "zone.js": "~0.8.29"
   },
   "devDependencies": {
@@ -47,9 +52,10 @@
     "@angular/compiler-cli": "~7.2.2",
     "@angular/language-service": "~7.2.2",
     "@ionic/angular-toolkit": "~1.4.0",
-    "@types/node": "~10.12.0",
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
+    "@types/jwt-decode": "^2.2.1",
+    "@types/node": "~10.12.0",
     "codelyzer": "~4.5.0",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
@@ -63,5 +69,49 @@
     "tslint": "~5.12.0",
     "typescript": "~3.1.6"
   },
-  "description": "An Ionic project"
+  "description": "Projeto desenvolvido para a disciplina Projeto Integrado III do curso de Sistemas de Informação do UniPROJEÇÃO",
+  "homepage": "https://cade-onibus-2.firebaseapp.com",
+  "contributors": [
+    {
+      "name": "Mateus Gomes",
+      "email": "mateus7532@gmail.com",
+      "url": "https://github.com/UnDer-7"
+    },
+    {
+      "name": "Lucas Veiga",
+      "email": "lucasveiga09@gmail.com",
+      "url": "https://github.com/lucas-veiga"
+    }
+  ],
+  "repository": {
+    "url": "https://github.com/cade-onibus",
+    "type": "Git"
+  },
+  "license": "SEE LICENSE IN LICENSE.md",
+  "keywords": [
+    "UniPROJEÇÃO",
+    "UniPROJECAO",
+    "PROJEÇÃO",
+    "PROJECAO",
+    "UnDer-7",
+    "Mateus Gomes",
+    "Lucas Veiga",
+    "Brasilia",
+    "DF",
+    "Distrito Federal",
+    "Sobradinho",
+    "Sobradinho II",
+    "Sobradinho 2",
+    "Onibus",
+    "Bus",
+    "DFTrans",
+    "DF-Trans",
+    "DF Trans",
+    "Google Maps",
+    "Maps",
+    "Mapa",
+    "Ionic",
+    "Ionic 4",
+    "Angular"
+  ]
 }

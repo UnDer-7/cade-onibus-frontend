@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../../models/user.model';
 import { UtilService } from '../../util/util.service';
-import { TokenService } from '../../auth/Token.service';
+import { TokenService } from '../../auth/token.service';
 import { environment } from '../../../environments/environment';
 import { SessionService } from '../../auth/session.service';
 import { ModalController } from '@ionic/angular';
@@ -35,6 +35,7 @@ export class LoginPage implements OnInit {
   }
 
   public login(): void {
+    const goTo = this.util.blockedUrl || '/home';
     if (!this.validations()) {
       return;
     }
@@ -42,7 +43,7 @@ export class LoginPage implements OnInit {
     this.blockUi.start();
     this.sessionService.login(this.user).subscribe(res => {
       this.tokenService.token = res.token;
-      this.router.navigate(['/home']);
+      this.router.navigateByUrl(goTo);
       this.blockUi.stop();
     }, err => {
       this.blockUi.stop();

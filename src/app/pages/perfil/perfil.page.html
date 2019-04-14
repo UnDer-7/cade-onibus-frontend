@@ -1,32 +1,19 @@
 <ion-header>
   <ion-toolbar color="dark">
     <ion-buttons slot="start">
-      <ion-menu-toggle>
-        <ion-button>
-          <ion-icon slot="icon-only" name="menu"></ion-icon>
-        </ion-button>
-      </ion-menu-toggle>
+      <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title text-center>{{ appName }}</ion-title>
+    <app-sharing-location slot="end"></app-sharing-location>
   </ion-toolbar>
 </ion-header>
-
-<ion-menu contentId="main">
-  <ion-content>
-    <ion-list>
-      <ion-button color="dark" expand="block" (click)="sendToHome()">Home</ion-button>
-      <ion-button color="dark" expand="block" (click)="logout()">Sair</ion-button>
-    </ion-list>
-  </ion-content>
-  <ion-router-outlet id="main"></ion-router-outlet>
-</ion-menu>
 
 <ion-content color="medium">
   <ion-card color="light" *ngIf="!isEmpty">
     <ion-card-header>
-      <ion-card color="dark" padding-vertical>
+      <ion-card color="dark" padding-vertical text-center>
         <ion-card-title text-uppercase text-center>{{ user.name }}</ion-card-title>
-        <ion-card-subtitle text-center> {{ user.email }}</ion-card-subtitle>
+        <ion-card-subtitle padding-bottom text-center> {{ user.email }}</ion-card-subtitle>
+        <ion-text>Moedas: </ion-text> <ion-text color="warning">{{ user.moedas }}</ion-text>
       </ion-card>
     </ion-card-header>
     <ion-card-content>

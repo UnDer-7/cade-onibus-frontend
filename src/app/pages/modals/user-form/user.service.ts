@@ -17,6 +17,7 @@ export class UserService {
   }
 
   public createUser(user: User): Observable<User> {
+    user.moedas = 0;
     return this.http.post(this.resourceUrl, user);
   }
 

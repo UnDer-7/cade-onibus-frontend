@@ -1,11 +1,11 @@
-import { browser, by, element } from 'protractor';
+import { browser, by, element, promise as wdpromise } from 'protractor';
 
 export class AppPage {
-  navigateTo() {
+  public navigateTo(): wdpromise.Promise<any> {
     return browser.get('/');
   }
 
-  getParagraphText() {
+  public getParagraphText(): any {
     return element(by.deepCss('app-root ion-content')).getText();
   }
 }

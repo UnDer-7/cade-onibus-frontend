@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { TokenService } from '../../auth/Token.service';
+import { TokenService } from '../../auth/token.service';
 import { User } from '../../models/user.model';
 import { environment } from '../../../environments/environment';
 import { SessionService } from '../../auth/session.service';
 import { ModalController } from '@ionic/angular';
 import { UserFormComponent } from '../modals/user-form/user-form.component';
 import { PerfilService } from './perfil.service';
+import { UtilService } from '../../util/util.service';
 
 @Component({
   selector: 'app-perfil',
@@ -17,21 +18,18 @@ export class PerfilPage implements OnInit {
   public appName: string = environment.appName;
 
   constructor(
+    public util: UtilService,
     private perfilService: PerfilService,
     private tokenService: TokenService,
     private router: Router,
     private sessionService: SessionService,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
   ) {
     this.user = {} as User;
   }
 
   public ngOnInit(): void {
     this.getUser();
-  }
-
-  public sendToHome(): void {
-    this.router.navigate(['home']);
   }
 
   public logout(): void {
