@@ -10,9 +10,10 @@
 <ion-content color="medium">
   <ion-card color="light" *ngIf="!isEmpty">
     <ion-card-header>
-      <ion-card color="dark" padding-vertical>
+      <ion-card color="dark" padding-vertical text-center>
         <ion-card-title text-uppercase text-center>{{ user.name }}</ion-card-title>
-        <ion-card-subtitle text-center> {{ user.email }}</ion-card-subtitle>
+        <ion-card-subtitle padding-bottom text-center> {{ user.email }}</ion-card-subtitle>
+        <ion-text>Moedas: </ion-text> <ion-text color="warning">{{ user.moedas }}</ion-text>
       </ion-card>
     </ion-card-header>
     <ion-card-content>

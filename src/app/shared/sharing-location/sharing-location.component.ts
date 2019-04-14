@@ -10,7 +10,7 @@ export class SharingLocationComponent implements OnInit {
   public isStopping: boolean = false;
 
   constructor(
-    private sharingLocationService: SharingLocationService,
+    public sharingLocationService: SharingLocationService,
     private alertCtrl: AlertController
   ) {
   }

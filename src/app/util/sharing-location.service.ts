@@ -15,25 +15,28 @@ export class SharingLocationService {
   private subscription: Subscription;
   private userLocation: UserLocation = {} as UserLocation;
   private resourceUrl: string = environment.apiUrl + '/userlocations';
+  private startDate: Date;
+  private endDate: Date;
 
   constructor(
     private http: HttpClient
   ) { }
 
   public startSharing(onibus: Onibus): void {
+    this.startDate = new Date();
     this.isUserSharing = true;
     this.watchPositionID = Geolocation.watchPosition({
       enableHighAccuracy: true,
       maximumAge: 0
     }, cb => {
       this.userLocation = this.prepareUserLocation(cb, onibus);
-      this.subscription = this.saveUserLocation(this.userLocation).subscribe(res => {
-        console.log('RES: ', res);
-      });
+      this.subscription = this.saveUserLocation(this.userLocation).subscribe();
     });
   }
 
   public stopSharing(): void {
+    this.endDate = new Date();
+    console.log('dates: ', this.startDate, this.endDate);
     Geolocation.clearWatch({ id: this.watchPositionID });
     this.subscription.unsubscribe();
     this.isUserSharing = false;
@@ -70,7 +73,8 @@ export class SharingLocationService {
         speed: cb.coords.speed
       }),
       numero: onibus.numero,
-      sequencial: onibus.sequencial
+      sequencial: onibus.sequencial,
+      hora: new Date()
     });
   }
 }

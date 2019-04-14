@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Onibus } from '../../../models/onibus.modal';
 import { MapsService } from './maps.service';
 import { BusLocation } from '../../../models/bus-location.model';
@@ -10,6 +10,9 @@ import { environment } from '../../../../environments/environment';
 import { SessionService } from '../../../auth/session.service';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
+import { UserLocation } from '../../../models/user.location.model';
+import { HttpErrorResponse } from '@angular/common/http';
+import { SharingLocationService } from '../../../util/sharing-location.service';
 
 const { Geolocation } = Plugins;
 
@@ -17,43 +20,104 @@ const { Geolocation } = Plugins;
   selector: 'app-maps',
   templateUrl: './maps.page.html',
 })
-export class MapsPage implements OnInit {
+export class MapsPage implements OnInit, OnDestroy {
   @Input() public onibus: Onibus;
 
   public appName: string = environment.appName;
   public userLocation: number[] = new Array<number>();
   public busLocation: BusLocation[] = [] as BusLocation[];
+  public userBusLocation: Array<UserLocation> = new Array<UserLocation>();
 
-  private subscription: Subscription;
+  public icon: any = {
+    dfTrans: {
+      url: '../../../../assets/bus-icon-dfTrans.png',
+      scaledSize: {
+        width: 43,
+        height: 40
+      }
+    },
+    busUser: {
+      url: '../../../../assets/bus-icon-user.png',
+      scaledSize: {
+        width: 43,
+        height: 40
+      }
+    },
+    user: {
+      url: '../../../../assets/user-icon.png',
+      scaledSize: {
+        width: 43,
+        height: 40
+      }
+    }
+  };
+
+  private subscription: Array<Subscription> = new Array<Subscription>();
+  private watchPositionID: string;
 
   constructor(
     public util: UtilService,
     private mapsService: MapsService,
     private sessionService: SessionService,
     private router: Router,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    public sharingLocationService: SharingLocationService
   ) {
   }
 
   public ngOnInit(): void {
     this.getUserCurrentPosstion();
 
-    this.subscription = timer(0, 5000)
-      .pipe(
-        flatMap(() => this.mapsService.trackBus(this.onibus.numero))
-      ).subscribe(res => {
-      this.busLocation = res.features;
+    this.subscription.push(
+      timer(0, 5000)
+        .pipe(
+          flatMap(() => this.mapsService.trackBus(this.onibus.numero))
+        ).subscribe(res => {
+        this.busLocation = res.features;
+      })
+    );
+
+    this.subscription.push(
+      timer(0, 5000)
+        .pipe(
+          flatMap(() => this.mapsService.getUserByLinha(this.onibus.numero))
+        ).subscribe(res => {
+        this.userBusLocation = res;
+      }, (err: HttpErrorResponse) => {
+          if (err.error === 'bus not found') {
+            this.util.showToast('Nem um usuário esta compartilhando esse ônibus.\nVocê pode ser o primeiro.', 'tertiary', 7500, '', true);
+          }
+      })
+    );
+  }
+
+  public ngOnDestroy(): void {
+    this.subscription.forEach(item => {
+      item.unsubscribe();
     });
   }
 
   public closeModal(): void {
     this.modalCtrl.dismiss();
-    this.subscription.unsubscribe();
+    Geolocation.clearWatch({ id: this.watchPositionID });
+    this.ngOnDestroy();
+  }
+
+  public startSharing(): void {
+    this.sharingLocationService.startSharing(this.onibus);
+  }
+
+  public stopSharing(): void {
+    this.sharingLocationService.stopSharing();
   }
 
   private async getUserCurrentPosstion(): Promise<any> {
-    const currentPosition = await Geolocation.getCurrentPosition({ enableHighAccuracy: true });
-    this.userLocation[1] = currentPosition.coords.latitude;
-    this.userLocation[0] = currentPosition.coords.longitude;
+    this.watchPositionID = await Geolocation.watchPosition({
+      enableHighAccuracy: true,
+      maximumAge: 0
+    }, cb => {
+      this.userLocation[1] = cb.coords.latitude;
+      this.userLocation[0] = cb.coords.longitude;
+    });
   }
 }

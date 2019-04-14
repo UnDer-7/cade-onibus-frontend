@@ -4,6 +4,10 @@ import { Onibus } from '../../../models/onibus.modal';
 import { FindBusService } from './find-bus.service';
 import { UtilService } from '../../../util/util.service';
 import { environment } from '../../../../environments/environment';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Plugins } from '@capacitor/core';
+
+const { Keyboard } = Plugins;
 
 @Component({
   selector: 'app-find-bus',
@@ -14,7 +18,7 @@ export class FindBusPage implements OnInit {
   public linha: string;
   public isLoading: boolean;
   public appName: string = environment.appName;
-  private onibusAdded: Array<Onibus>;
+  public onibusAdded: Array<Onibus>;
 
   constructor(
     private modalCtrl: ModalController,
@@ -32,6 +36,8 @@ export class FindBusPage implements OnInit {
 
   public searchBus(): void {
     this.isLoading = true;
+    Keyboard.hide().catch(() => console.warn('Impossible to hide Keyboard, probably running on Desktop Mode'));
+
     this.findBusService.findBus(this.linha).subscribe((res: Onibus[]) => {
       this.onibus = this.removeDuplicates(res, 'numero');
 
@@ -39,11 +45,35 @@ export class FindBusPage implements OnInit {
         this.utilService.showToast('Nenhum onibus encontrado', 'danger');
       }
       this.isLoading = false;
-    }, () => this.isLoading = false);
+    }, (err: HttpErrorResponse) => {
+      this.isLoading = false;
+
+      if (err.status !== 400) {
+        this.utilService.showToast('Erro com servidor do DFTrans, tente mais tarde', 'danger', 2000);
+        return;
+      }
+
+      this.utilService.showToast('Nenhum onibus encontrado', 'danger');
+    });
   }
 
-  public async closeModal(): Promise<any> {
-    this.modalCtrl.dismiss(this.onibusAdded);
+  public removeOnibusSelected(onibus: Onibus): void {
+    setTimeout(() => {
+      this.onibusAdded = this.onibusAdded.filter(item => {
+        if (item.numero !== onibus.numero) {
+          return item;
+        }
+        // this.unchckCheckbox(onibus);
+      });
+    }, 300);
+  }
+
+  public async closeModal(): Promise<void> {
+    if (this.onibusAdded.length > 0) {
+      this.modalCtrl.dismiss(this.onibusAdded);
+    } else {
+      this.modalCtrl.dismiss(null);
+    }
   }
 
   public cleanSearch(): void {
@@ -59,8 +89,6 @@ export class FindBusPage implements OnInit {
    * o value vai vir true.
    * -- Logo se o ela vir false quer dizer é uma ativação, entao o onibus
    * com o index informado é pra adicionado no array dos onibus selecionados.
-   * @param checkbox - Se a checkbox esta selecionada ou não.
-   * @param index - Index do array de Onibus que veio do df-trans.
    */
   public onBusSelection(event: Object): void {
     // @ts-ignore
@@ -82,5 +110,18 @@ export class FindBusPage implements OnInit {
     return myArr.filter((obj, pos, arr) => {
       return arr.map(mapObj => mapObj[prop]).indexOf(obj[prop]) === pos;
     });
+  }
+
+  private unchckCheckbox(onibus: Onibus): void {
+    const checkboxToUncheck = this.onibus.findIndex(onibusToRemove => {
+      return onibusToRemove.numero === onibus.numero;
+    });
+
+    const obj = Object.assign({}, {
+      checkbox: true,
+      index: checkboxToUncheck
+    });
+
+    this.onBusSelection(obj);
   }
 }

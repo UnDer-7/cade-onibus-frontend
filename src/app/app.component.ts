@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { environment } from '../environments/environment';
 import { Router } from '@angular/router';
 import { SessionService } from './auth/session.service';
+import { TokenService } from './auth/token.service';
 
 @Component({
   selector: 'app-root',
@@ -32,7 +33,7 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private router: Router,
-    private sessionService: SessionService
+    private sessionService: SessionService,
   ) {
     this.initializeApp();
   }

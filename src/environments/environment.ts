@@ -7,7 +7,15 @@ export const environment = {
   production: false,
   apiUrl: 'http://localhost:3000/api',
   dftrans: 'https://www.sistemas.dftrans.df.gov.br/',
-  appName: 'Cadê Ônibus'
+  appName: 'Cadê Ônibus',
+  firebase: {
+    apiKey: 'AIzaSyCaHG3_EARlUhDRD00eAS8YDawvuanH2fQ',
+    authDomain: 'cade-onibus-2.firebaseapp.com',
+    databaseURL: 'https://cade-onibus-2.firebaseio.com',
+    projectId: 'cade-onibus-2',
+    storageBucket: 'cade-onibus-2.appspot.com',
+    messagingSenderId: '993140754910'
+  }
 };
 
 /*

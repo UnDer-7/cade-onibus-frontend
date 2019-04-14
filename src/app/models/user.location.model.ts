@@ -1,10 +1,11 @@
 export interface UserLocation {
   numero: string;
   sequencial: number;
+  hora: Date;
   cords: Coords;
 }
 
-export interface Coords {
+interface Coords {
   latitude: number;
   longitude: number;
   accuracy: number;

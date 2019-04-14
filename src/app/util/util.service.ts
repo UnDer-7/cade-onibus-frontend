@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 @Injectable()
 export class UtilService {
-  private isUserSharingLocation: boolean = false;
+  private urlAccessed: string;
+
   constructor(
     private toastCtrl: ToastController
   ) { }
@@ -25,15 +26,11 @@ export class UtilService {
     toast.present();
   }
 
-  public startSharing(): void {
-    this.isUserSharingLocation = true;
+  get blockedUrl(): string {
+    return this.urlAccessed;
   }
 
-  public stopSharing(): void {
-    this.isUserSharingLocation = false;
-  }
-
-  public isSharing(): boolean {
-    return this.isUserSharingLocation;
+  set blockedUrl(urlAccessed: string) {
+    this.urlAccessed = urlAccessed;
   }
 }

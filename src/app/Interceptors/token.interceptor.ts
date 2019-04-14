@@ -5,7 +5,7 @@ import { TokenService } from '../auth/token.service';
 import { environment } from '../../environments/environment';
 
 @Injectable()
-export class TokenApiService implements HttpInterceptor {
+export class TokenInterceptor implements HttpInterceptor {
   constructor (
     private tokenService: TokenService
   ) { }

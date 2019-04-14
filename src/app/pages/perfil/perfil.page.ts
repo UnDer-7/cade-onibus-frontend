@@ -32,10 +32,6 @@ export class PerfilPage implements OnInit {
     this.getUser();
   }
 
-  public sendToHome(): void {
-    this.router.navigate(['home']);
-  }
-
   public logout(): void {
     this.sessionService.logout();
   }
