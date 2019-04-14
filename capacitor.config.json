@@ -1,7 +1,0 @@
-{
-  "appId": "com.example.app",
-  "appName": "cade-onibus",
-  "bundledWebRuntime": false,
-  "webDir": "dist",
-  "linuxAndroidStudioPath": "/home/mateus/.local/share/JetBrains/Toolbox/apps/AndroidStudio/ch-0/182.5314842/bin/studio.sh"
-}

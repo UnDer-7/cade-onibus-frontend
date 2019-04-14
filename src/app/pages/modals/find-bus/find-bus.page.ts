@@ -5,9 +5,9 @@ import { FindBusService } from './find-bus.service';
 import { UtilService } from '../../../util/util.service';
 import { environment } from '../../../../environments/environment';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Plugins } from '@capacitor/core';
+// import { Plugins } from '@capacitor/core';
 
-const { Keyboard } = Plugins;
+// const { Keyboard } = Plugins;
 
 @Component({
   selector: 'app-find-bus',
@@ -36,7 +36,7 @@ export class FindBusPage implements OnInit {
 
   public searchBus(): void {
     this.isLoading = true;
-    Keyboard.hide().catch(() => console.warn('Impossible to hide Keyboard, probably running on Desktop Mode'));
+    // Keyboard.hide().catch(() => console.warn('Impossible to hide Keyboard, probably running on Desktop Mode'));
 
     this.findBusService.findBus(this.linha).subscribe((res: Onibus[]) => {
       this.onibus = this.removeDuplicates(res, 'numero');

@@ -4,14 +4,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --baseHref=/ --open=true --poll 200",
-    "build": "ng build --prod --configuration=development",
-    "test": "ng test",
+    "build": "ng build --configuration=development",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "build-prod": "ng build --prod --configuration=development --base-href=/",
-    "build-android": "ionic capacitor add android --configuration=development",
-    "update-android": "ionic capacitor copy android --configuration=development",
-    "build-android-open-AS": "ionic capacitor run android --configuration=development"
+    "test": "ng test",
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
@@ -25,13 +21,19 @@
     "@angular/platform-browser": "^7.2.2",
     "@angular/platform-browser-dynamic": "^7.2.2",
     "@angular/router": "^7.2.2",
-    "@capacitor/android": "^1.0.0-beta.19",
-    "@capacitor/cli": "1.0.0-beta.19",
-    "@capacitor/core": "1.0.0-beta.19",
     "@ionic-native/core": "^5.0.0",
+    "@ionic-native/geolocation": "^5.4.0",
     "@ionic-native/splash-screen": "^5.0.0",
     "@ionic-native/status-bar": "^5.0.0",
     "@ionic/angular": "^4.1.0",
+    "cordova-android": "8.0.0",
+    "cordova-plugin-device": "^2.0.2",
+    "cordova-plugin-geolocation": "4.0.1",
+    "cordova-plugin-ionic-keyboard": "^2.1.3",
+    "cordova-plugin-ionic-webview": "^3.1.2",
+    "cordova-plugin-splashscreen": "^5.0.2",
+    "cordova-plugin-statusbar": "^2.4.2",
+    "cordova-plugin-whitelist": "^1.3.3",
     "core-js": "^2.5.4",
     "firebase": "^5.9.2",
     "hammerjs": "^2.0.8",
@@ -113,5 +115,21 @@
     "Ionic",
     "Ionic 4",
     "Angular"
-  ]
+  ],
+  "cordova": {
+    "plugins": {
+      "cordova-plugin-whitelist": {},
+      "cordova-plugin-statusbar": {},
+      "cordova-plugin-device": {},
+      "cordova-plugin-splashscreen": {},
+      "cordova-plugin-ionic-webview": {
+        "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
+      },
+      "cordova-plugin-ionic-keyboard": {},
+      "cordova-plugin-geolocation": {}
+    },
+    "platforms": [
+      "android"
+    ]
+  }
 }

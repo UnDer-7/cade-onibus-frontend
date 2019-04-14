@@ -1,7 +1,7 @@
 {
   "name": "cade-onibus",
+  "type": "angular",
   "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular"
+    "cordova": {}
+  }
 }
