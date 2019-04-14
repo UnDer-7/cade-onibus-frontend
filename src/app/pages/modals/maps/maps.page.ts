@@ -2,7 +2,6 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Onibus } from '../../../models/onibus.modal';
 import { MapsService } from './maps.service';
 import { BusLocation } from '../../../models/bus-location.model';
-import { Plugins } from '@capacitor/core';
 import { Subscription, timer } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 import { UtilService } from '../../../util/util.service';
@@ -13,8 +12,7 @@ import { ModalController } from '@ionic/angular';
 import { UserLocation } from '../../../models/user.location.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { SharingLocationService } from '../../../util/sharing-location.service';
-
-const { Geolocation } = Plugins;
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 @Component({
   selector: 'app-maps',
@@ -53,15 +51,15 @@ export class MapsPage implements OnInit, OnDestroy {
   };
 
   private subscription: Array<Subscription> = new Array<Subscription>();
-  private watchPositionID: string;
 
   constructor(
     public util: UtilService,
+    public sharingLocationService: SharingLocationService,
     private mapsService: MapsService,
     private sessionService: SessionService,
     private router: Router,
     private modalCtrl: ModalController,
-    public sharingLocationService: SharingLocationService
+    private geolocation: Geolocation
   ) {
   }
 
@@ -84,22 +82,19 @@ export class MapsPage implements OnInit, OnDestroy {
         ).subscribe(res => {
         this.userBusLocation = res;
       }, (err: HttpErrorResponse) => {
-          if (err.error === 'bus not found') {
-            this.util.showToast('Nem um usuário esta compartilhando esse ônibus.\nVocê pode ser o primeiro.', 'tertiary', 7500, '', true);
-          }
+        if (err.error === 'bus not found') {
+          this.util.showToast('Nem um usuário esta compartilhando esse ônibus.\nVocê pode ser o primeiro.', 'tertiary', 7500, '', true);
+        }
       })
     );
   }
 
   public ngOnDestroy(): void {
-    this.subscription.forEach(item => {
-      item.unsubscribe();
-    });
+    this.subscription.forEach(item => item.unsubscribe());
   }
 
   public closeModal(): void {
     this.modalCtrl.dismiss();
-    Geolocation.clearWatch({ id: this.watchPositionID });
     this.ngOnDestroy();
   }
 
@@ -112,12 +107,18 @@ export class MapsPage implements OnInit, OnDestroy {
   }
 
   private async getUserCurrentPosstion(): Promise<any> {
-    this.watchPositionID = await Geolocation.watchPosition({
-      enableHighAccuracy: true,
-      maximumAge: 0
-    }, cb => {
-      this.userLocation[1] = cb.coords.latitude;
-      this.userLocation[0] = cb.coords.longitude;
-    });
+    this.subscription.push(
+      this.geolocation.watchPosition(
+        {
+          maximumAge: 0,
+          enableHighAccuracy: true
+        })
+        .subscribe(res => {
+          this.userLocation[1] = res.coords.latitude;
+          this.userLocation[0] = res.coords.longitude;
+        }, err => {
+          console.log(`Error while trying to ger user's location\n${ err }`);
+        })
+    );
   }
 }

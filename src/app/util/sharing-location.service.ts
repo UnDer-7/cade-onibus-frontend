@@ -1,44 +1,46 @@
 import { Injectable } from '@angular/core';
-import { GeolocationPosition, Plugins } from '@capacitor/core';
 import { Onibus } from '../models/onibus.modal';
 import { UserLocation } from '../models/user.location.model';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subscription } from 'rxjs';
-
-const { Geolocation } = Plugins;
+import { Geolocation, Geoposition } from '@ionic-native/geolocation/ngx';
 
 @Injectable()
 export class SharingLocationService {
   private isUserSharing: boolean = false;
-  private watchPositionID: string;
-  private subscription: Subscription;
+  private subscription: Array<Subscription> = new Array<Subscription>();
   private userLocation: UserLocation = {} as UserLocation;
   private resourceUrl: string = environment.apiUrl + '/userlocations';
   private startDate: Date;
   private endDate: Date;
 
   constructor(
-    private http: HttpClient
-  ) { }
+    private http: HttpClient,
+    private geolocation: Geolocation
+  ) {
+  }
 
   public startSharing(onibus: Onibus): void {
     this.startDate = new Date();
     this.isUserSharing = true;
-    this.watchPositionID = Geolocation.watchPosition({
-      enableHighAccuracy: true,
-      maximumAge: 0
-    }, cb => {
-      this.userLocation = this.prepareUserLocation(cb, onibus);
-      this.subscription = this.saveUserLocation(this.userLocation).subscribe();
-    });
+    this.subscription.push(
+      this.geolocation.watchPosition(
+        {
+          maximumAge: 0,
+          enableHighAccuracy: true
+        })
+        .subscribe(res => {
+          this.userLocation = this.prepareUserLocation(res, onibus);
+          this.subscription.push(this.saveUserLocation(this.userLocation).subscribe());
+        })
+    );
   }
 
   public stopSharing(): void {
     this.endDate = new Date();
     console.log('dates: ', this.startDate, this.endDate);
-    Geolocation.clearWatch({ id: this.watchPositionID });
-    this.subscription.unsubscribe();
+    this.subscription.forEach(item => item.unsubscribe());
     this.isUserSharing = false;
   }
 
@@ -59,10 +61,10 @@ export class SharingLocationService {
    * -- Não tenho certeza, mas ele fica tipo com um tipo
    * Coords todo em em caps e nao consegue tranformar em JSON,
    * o OBJ fica vazio.
-   * @param res - Resposta q vem do watchPosition
+   * @param cb - Resposta q vem do watchPosition
    * @param onibus - Onibus Selecionado no PickList
    */
-  private prepareUserLocation(cb: GeolocationPosition, onibus: Onibus): UserLocation {
+  private prepareUserLocation(cb: Geoposition, onibus: Onibus): UserLocation {
     return Object.assign({}, cb, {
       cords: Object.assign({}, cb, {
         accuracy: cb.coords.accuracy,

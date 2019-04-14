@@ -9,6 +9,7 @@ import { AgmCoreModule } from '@agm/core';
 import { MapsService } from './maps.service';
 import { SharedModule } from '../../../shared/shared.module';
 import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 const routes: Routes = [
   {
@@ -30,7 +31,8 @@ const routes: Routes = [
   ],
   declarations: [MapsPage],
   providers: [
-    MapsService
+    MapsService,
+    Geolocation
   ]
 })
 export class MapsPageModule {}
