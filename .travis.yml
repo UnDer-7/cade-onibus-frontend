@@ -8,8 +8,6 @@ before_script:
 script:
 - npm run lint
 - npm run build
-after_script:
-  -
 deploy:
   skip_cleanup: true
   provider: firebase
@@ -17,5 +15,7 @@ deploy:
   on:
     repo: cade-onibus/cade-onibus-frontend
     branch: development
+after_deploy:
+  - echo "URL -> https://cade-onibus-2.firebaseapp.com"
 notifications:
   email: false
