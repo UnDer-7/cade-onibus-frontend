@@ -1,6 +1,6 @@
 {
   "name": "cade-onibus",
-  "version": "2.0.7",
+  "version": "2.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --baseHref=/ --open=true --poll 200",
