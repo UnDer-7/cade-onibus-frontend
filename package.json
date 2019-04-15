@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --baseHref=/ --open=true --poll 200",
-    "build": "ng build --configuration=development",
+    "build": "ng build --prod --configuration=development --base-href=/",
     "lint": "ng lint",
     "test": "ng test",
     "e2e": "ng e2e"

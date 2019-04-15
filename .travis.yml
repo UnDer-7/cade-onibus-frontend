@@ -7,7 +7,7 @@ before_script:
 - npm install -g @angular/cli
 script:
 - npm run lint
-- npm run build-prod
+- npm run build
 after_script:
   -
 deploy:
