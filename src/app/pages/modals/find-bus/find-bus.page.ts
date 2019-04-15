@@ -5,9 +5,7 @@ import { FindBusService } from './find-bus.service';
 import { UtilService } from '../../../util/util.service';
 import { environment } from '../../../../environments/environment';
 import { HttpErrorResponse } from '@angular/common/http';
-// import { Plugins } from '@capacitor/core';
-
-// const { Keyboard } = Plugins;
+import { Keyboard } from '@ionic-native/keyboard/ngx';
 
 @Component({
   selector: 'app-find-bus',
@@ -24,7 +22,8 @@ export class FindBusPage implements OnInit {
     private modalCtrl: ModalController,
     private findBusService: FindBusService,
     private toastCtrl: ToastController,
-    private utilService: UtilService
+    private utilService: UtilService,
+    private keyboard: Keyboard
   ) {
     this.isLoading = false;
     this.onibus = [] as Onibus[];
@@ -36,7 +35,7 @@ export class FindBusPage implements OnInit {
 
   public searchBus(): void {
     this.isLoading = true;
-    // Keyboard.hide().catch(() => console.warn('Impossible to hide Keyboard, probably running on Desktop Mode'));
+    this.keyboard.hide();
 
     this.findBusService.findBus(this.linha).subscribe((res: Onibus[]) => {
       this.onibus = this.removeDuplicates(res, 'numero');

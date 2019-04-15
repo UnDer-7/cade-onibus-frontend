@@ -8,6 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { FindBusPage } from './find-bus.page';
 import { FindBusService } from './find-bus.service';
 import { SharedModule } from '../../../shared/shared.module';
+import { Keyboard } from '@ionic-native/keyboard/ngx';
 
 const routes: Routes = [
   {
@@ -27,6 +28,7 @@ const routes: Routes = [
   declarations: [FindBusPage],
   providers: [
     FindBusService,
+    Keyboard
   ],
 })
 export class FindBusPageModule {}
