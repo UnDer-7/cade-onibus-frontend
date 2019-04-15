@@ -9,6 +9,8 @@ import { ModalController } from '@ionic/angular';
 import { UserFormComponent } from '../modals/user-form/user-form.component';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { Validate } from '../../util/validate';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
+import { GoogleUser } from '../../models/google-user.model';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +21,7 @@ export class LoginPage implements OnInit {
   public passwordIcon: string = 'eye-off';
   public passwordType: string = 'password';
   public appName: string = environment.appName;
+  private googleUser: GoogleUser = {} as GoogleUser;
   @BlockUI() private blockUi: NgBlockUI;
 
   constructor(
@@ -26,7 +29,8 @@ export class LoginPage implements OnInit {
     private sessionService: SessionService,
     private util: UtilService,
     private tokenService: TokenService,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private googlePlus: GooglePlus
   ) {
     this.user = {} as User;
   }
@@ -45,12 +49,36 @@ export class LoginPage implements OnInit {
       this.tokenService.token = res.token;
       this.router.navigateByUrl(goTo);
       this.blockUi.stop();
-    }, err => {
+    }, (err) => {
       this.blockUi.stop();
-      if (err.status === 400) {
+      if (err.includes('400')) {
         this.util.showToast('Credenciais incorretas', 'danger');
       }
     });
+  }
+
+  public async loginWithGoogle(): Promise<void> {
+    try {
+      this.googleUser = await this.googlePlus.login({
+        'webClientId': '993140754910-tc9co59hefrb7fd0ck3t5aciu8vkn1gt.apps.googleusercontent.com',
+        'offline': true
+      });
+
+      this.user = Object.assign({}, {
+        email: this.googleUser.email,
+        userId: this.googleUser.userId
+      });
+      this.sessionService.loginWithGoogle(this.user).subscribe(
+        () => {
+        },
+        err => {
+          if (err.includes('400')) {
+            this.util.showToast('Credenciais incorretas', 'danger');
+          }
+        });
+    } catch (e) {
+      console.log('ERR: ', e);
+    }
   }
 
   public async newAccount(): Promise<any> {

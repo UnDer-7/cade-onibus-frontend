@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginPage } from './login.page';
 import { FormsModule } from '@angular/forms';
 import { BlockUIModule } from 'ng-block-ui';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
 
 const route: Routes = [
   {
@@ -23,6 +24,9 @@ const route: Routes = [
   ],
   declarations: [
     LoginPage
+  ],
+  providers: [
+    GooglePlus
   ]
 })
 export class LoginModule { }

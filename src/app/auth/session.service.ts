@@ -24,6 +24,10 @@ export class SessionService {
     return this.http.post(this.authUrl, user);
   }
 
+  public loginWithGoogle(user: User): Observable<any> {
+    return this.http.post(`${this.authUrl}/google`, user);
+  }
+
   public logout(): void {
     this.tokenService.removeItem();
     this.router.navigateByUrl('/').then(res => {
