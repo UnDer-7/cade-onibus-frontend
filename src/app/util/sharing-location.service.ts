@@ -5,6 +5,8 @@ import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subscription } from 'rxjs';
 import { Geolocation, Geoposition } from '@ionic-native/geolocation/ngx';
+import { TokenService } from '../auth/token.service';
+import { UtilService } from './util.service';
 
 @Injectable()
 export class SharingLocationService {
@@ -12,12 +14,15 @@ export class SharingLocationService {
   private subscription: Array<Subscription> = new Array<Subscription>();
   private userLocation: UserLocation = {} as UserLocation;
   private resourceUrl: string = environment.apiUrl + '/userlocations';
+  private updateUsereUrl: string = environment.apiUrl + '/users';
   private startDate: Date;
   private endDate: Date;
 
   constructor(
     private http: HttpClient,
-    private geolocation: Geolocation
+    private geolocation: Geolocation,
+    private tokenService: TokenService,
+    private util: UtilService
   ) {
   }
 
@@ -39,8 +44,7 @@ export class SharingLocationService {
 
   public stopSharing(): void {
     this.endDate = new Date();
-    console.log('dates: ', this.startDate, this.endDate);
-    this.subscription.forEach(item => item.unsubscribe());
+    this.unsubscribe();
     this.isUserSharing = false;
   }
 
@@ -52,6 +56,28 @@ export class SharingLocationService {
     return this.http.post<UserLocation>(this.resourceUrl, userLocation);
   }
 
+  private timeShared(): Observable<void> {
+    const time = {
+      _id: this.tokenService.decodeToken()._id,
+      start: this.startDate,
+      end: this.endDate
+    };
+
+    return this.http.post<void>(`${ this.updateUsereUrl }/time-shared`, time);
+  }
+
+  private unsubscribe(): void {
+    this.subscription.forEach(item => item.unsubscribe());
+    this.timeShared().subscribe((res: any) => {
+      const { made, have } = res;
+      if (made === 0) {
+        this.util.showToast(`Você não ganhou nem uma moeda\nVamos tentar compartilhar por mais de 1 minuto?`, 'danger', 3000);
+        return;
+      }
+      this.util.showToast(`Você ganhou ${ made } moedas\nAgora você tem ${ have } moedas`, 'success', 3000);
+    });
+  }
+
   /**
    * - Pq isso existe?
    * -- pq se fizer só this.userLocation.cords = res.cords
@@ -59,7 +85,7 @@ export class SharingLocationService {
    * em JSON, vai ficar vazio
    * - Motivo
    * -- Não tenho certeza, mas ele fica tipo com um tipo
-   * Coords todo em em caps e nao consegue tranformar em JSON,
+   * Coords todo em em caps e nao consegue transformar em JSON,
    * o OBJ fica vazio.
    * @param cb - Resposta q vem do watchPosition
    * @param onibus - Onibus Selecionado no PickList

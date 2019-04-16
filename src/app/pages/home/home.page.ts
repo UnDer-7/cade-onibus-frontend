@@ -26,6 +26,7 @@ export class HomePage {
 
   constructor(
     public util: UtilService,
+    public sharingLocationService: SharingLocationService,
     private menuCtrl: MenuController,
     private tokenService: TokenService,
     private homeService: HomeService,
@@ -33,7 +34,6 @@ export class HomePage {
     private pickerCtrl: PickerController,
     private modalCtrl: ModalController,
     private sessionService: SessionService,
-    public sharingLocationService: SharingLocationService
   ) { }
 
   public ionViewDidEnter(): void {
