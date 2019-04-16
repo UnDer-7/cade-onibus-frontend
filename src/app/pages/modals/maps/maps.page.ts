@@ -21,8 +21,10 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 export class MapsPage implements OnInit, OnDestroy {
   @Input() public onibus: Onibus;
 
+  public userCurrentLocation: number[] = new Array<number>();
+  public userFirstLocation: number[] = new Array<number>();
+
   public appName: string = environment.appName;
-  public userLocation: number[] = new Array<number>();
   public busLocation: BusLocation[] = [] as BusLocation[];
   public userBusLocation: Array<UserLocation> = new Array<UserLocation>();
 
@@ -64,7 +66,8 @@ export class MapsPage implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    this.getUserCurrentPosstion();
+    this.watchUserCurrentPosition();
+    this.getUserCurrentPosition();
 
     this.subscription.push(
       timer(0, 5000)
@@ -106,7 +109,16 @@ export class MapsPage implements OnInit, OnDestroy {
     this.sharingLocationService.stopSharing();
   }
 
-  private async getUserCurrentPosstion(): Promise<any> {
+  private async getUserCurrentPosition(): Promise<any> {
+    const current = await this.geolocation.getCurrentPosition({
+      enableHighAccuracy: true,
+      maximumAge: 0
+    });
+    this.userFirstLocation[1] = current.coords.latitude;
+    this.userFirstLocation[0] = current.coords.longitude;
+  }
+
+  private async watchUserCurrentPosition(): Promise<any> {
     this.subscription.push(
       this.geolocation.watchPosition(
         {
@@ -114,8 +126,8 @@ export class MapsPage implements OnInit, OnDestroy {
           enableHighAccuracy: true
         })
         .subscribe(res => {
-          this.userLocation[1] = res.coords.latitude;
-          this.userLocation[0] = res.coords.longitude;
+          this.userCurrentLocation[1] = res.coords.latitude;
+          this.userCurrentLocation[0] = res.coords.longitude;
         }, err => {
           console.log(`Error while trying to ger user's location\n${ err }`);
         })

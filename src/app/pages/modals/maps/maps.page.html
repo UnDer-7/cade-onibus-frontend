@@ -11,11 +11,11 @@
 </ion-header>
 
 <ion-content color="medium">
-  <agm-map [latitude]="userLocation[1]" [longitude]="userLocation[0]" [zoom]=12>
+  <agm-map [latitude]="userFirstLocation[1]" [longitude]="userFirstLocation[0]" [zoom]=12>
     <agm-marker
       [iconUrl]="icon.user"
-      [latitude]="userLocation[1]"
-      [longitude]="userLocation[0]">
+      [latitude]="userCurrentLocation[1]"
+      [longitude]="userCurrentLocation[0]">
       <agm-snazzy-info-window
         backgroundColor="#222428"
         padding="13px"
