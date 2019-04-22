@@ -20,6 +20,11 @@ const routes: Routes = [
     loadChildren: './pages/perfil/perfil.module#PerfilPageModule',
     canActivate: [ AuthGuard ]
   },
+  {
+    path: 'loja',
+    loadChildren: './pages/loja/loja.module#LojaModule',
+    canActivate: [ AuthGuard ]
+  },
 ];
 
 @NgModule({

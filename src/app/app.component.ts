@@ -25,6 +25,11 @@ export class AppComponent {
       title: 'Perfil',
       url: '/perfil',
       icon: 'person'
+    },
+    {
+      title: 'Loja',
+      url: '/loja',
+      icon: 'logo-bitcoin'
     }
   ];
 
