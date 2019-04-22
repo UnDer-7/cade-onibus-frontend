@@ -24,6 +24,7 @@ import { IonicGestureConfig } from './util/ionic-gesture-config';
 import { ErrorInterceptor } from './Interceptors/error.interceptor';
 import { AuthGuard } from './guards/auth-guard.guard';
 import { LoginGuard } from './guards/login-guard.guard';
+import { MoedasModule } from './pages/modals/moedas/moedas.module';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -38,6 +39,7 @@ registerLocaleData(localePt, 'pt-BR');
     FindBusPageModule,
     MapsPageModule,
     UserFormModule,
+    MoedasModule,
     AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [

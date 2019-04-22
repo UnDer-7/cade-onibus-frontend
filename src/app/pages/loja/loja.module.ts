@@ -6,6 +6,7 @@ import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { LojaComponent } from './loja.component';
+import { UsersService } from '../../services/resources/users.service';
 
 const routes: Routes = [
   {
@@ -24,7 +25,8 @@ const routes: Routes = [
   ],
   declarations: [LojaComponent],
   providers: [
-    Keyboard
+    Keyboard,
+    UsersService
   ],
 })
 export class LojaModule {}

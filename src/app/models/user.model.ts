@@ -1,7 +1,7 @@
 import { Onibus } from './onibus.modal';
 
 export interface User {
-  _id?: number;
+  _id?: string;
   name?: string;
   email?: string;
   userId?: string;

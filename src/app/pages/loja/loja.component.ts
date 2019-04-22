@@ -1,31 +1,31 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../modals/user-form/user.service';
-import { User } from 'src/app/models/user.model';
-import { TokenService } from 'src/app/auth/token.service';
-import { ToastController } from '@ionic/angular';
-import { UtilService } from 'src/app/util/util.service';
+import { TokenService } from '../../auth/token.service';
+import { UsersService } from '../../services/resources/users.service';
+import { User } from '../../models/user.model';
+import { ModalController } from '@ionic/angular';
+import { MoedasComponent } from '../modals/moedas/moedas.component';
 
 @Component({
   selector: 'app-loja',
   templateUrl: './loja.component.html',
-  styleUrls: ['./loja.component.scss'],
 })
 export class LojaComponent implements OnInit {
-
-  user: User;
+  public user: User = {} as User;
 
   constructor(
-    private userService: UserService,
-    private tokenService: TokenService,
-    private util: UtilService
+    private jwt: TokenService,
+    private usersService: UsersService,
+    private modalCtrl: ModalController
   ) { }
 
-  ngOnInit() {
-    const id = this.tokenService.decodeToken()._id;
-    this.userService.findUser(id).subscribe(
-      user => this.user = user,
-      () => this.util.showToast('Houve um erro ao carregar os dados!', 'danger')
-    )
+  public ngOnInit(): void {
+    this.usersService.getUser(this.jwt.decodeToken()._id).subscribe(res => this.user = res);
   }
 
+  public async buyMoedas(): Promise<void> {
+    const modal = await this.modalCtrl.create({
+      component: MoedasComponent
+    });
+    await modal.present();
+  }
 }

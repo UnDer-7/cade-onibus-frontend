@@ -6,52 +6,45 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-card>
-    <ion-card-content>Seu saldo: {{ user.moedas }} moedas</ion-card-content>
+<ion-content padding>
+  <ion-card text-center padding>
+    <ion-card-title>
+      <ion-text color="dark">SEU SALDO: </ion-text>
+      <ion-text color="success">{{ user.moedas }}</ion-text>
+      <ion-text color="medium"> MOEDAS</ion-text>
+    </ion-card-title>
   </ion-card>
     <ion-card>
       <ion-item>
-        <!-- <ion-icon name="logo-usd" slot="start"></ion-icon> -->
-        <ion-badge color="success">R$2,00</ion-badge>
-        <ion-label>Pacote de 50 moedas</ion-label>
+        <ion-badge color="success" margin-end>10 MOEDAS</ion-badge>
+        <ion-label text-center>3 Dias</ion-label>
         <ion-button fill="outline" slot="end">Comprar</ion-button>
       </ion-item>
       <ion-card-content>
-        Pacote com 50 moedas para remover as propagandas do aplicativo por um tempo determinado.
+        3 Dias sem anuncios
       </ion-card-content>
     </ion-card>
     <ion-card>
       <ion-item>
         <!-- <ion-icon name="logo-usd" slot="start"></ion-icon> -->
-        <ion-badge color="success">R$4,00</ion-badge>
-        <ion-label>Pacote de 100 moedas</ion-label>
+        <ion-badge color="success" margin-end>15 MOEDAS</ion-badge>
+        <ion-label text-center>5 Dias</ion-label>
         <ion-button fill="outline" slot="end">Comprar</ion-button>
       </ion-item>
       <ion-card-content>
-        Pacote com 100 moedas para remover as propagandas do aplicativo por um tempo determinado.
+        5 Dias sem anuncios
       </ion-card-content>
     </ion-card>
     <ion-card>
       <ion-item>
         <!-- <ion-icon name="logo-usd" slot="start"></ion-icon> -->
-        <ion-badge color="success">R$5,00</ion-badge>
-        <ion-label>Pacote de 150 moedas</ion-label>
+        <ion-badge color="success" margin-end>18 MOEDAS</ion-badge>
+        <ion-label text-center>7 DIAS</ion-label>
         <ion-button fill="outline" slot="end">Comprar</ion-button>
       </ion-item>
       <ion-card-content>
-        Pacote com 150 moedas para remover as propagandas do aplicativo por um tempo determinado.
+        7 Dis sem anuncios
       </ion-card-content>
     </ion-card>
-    <ion-card>
-      <ion-item>
-        <!-- <ion-icon name="logo-usd" slot="start"></ion-icon> -->
-        <ion-badge color="success">R$7,00</ion-badge>
-        <ion-label>Pacote de 250 moedas</ion-label>
-        <ion-button fill="outline" slot="end">Comprar</ion-button>
-      </ion-item>
-      <ion-card-content>
-        Pacote com 250 moedas para remover as propagandas do aplicativo por um tempo determinado.
-      </ion-card-content>
-    </ion-card>
+  <ion-button margin-top expand="block" fill="outline" color="warning" (click)="buyMoedas()">COMPRAR MOEDAS</ion-button>
 </ion-content>
