@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { LojaComponent } from './loja.component';
 import { UsersService } from '../../services/resources/users.service';
+import { BlockUIModule } from 'ng-block-ui';
 
 const routes: Routes = [
   {
@@ -21,7 +22,8 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
-    SharedModule.forRoot()
+    SharedModule.forRoot(),
+    BlockUIModule.forRoot()
   ],
   declarations: [LojaComponent],
   providers: [

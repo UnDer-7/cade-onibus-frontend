@@ -1,4 +1,5 @@
 import { Onibus } from './onibus.modal';
+import { Pacote } from './pacote.model';
 
 export interface User {
   _id?: string;
@@ -8,4 +9,5 @@ export interface User {
   moedas?: number;
   password?: string;
   onibus?: Onibus[];
+  pacote?: Pacote;
 }

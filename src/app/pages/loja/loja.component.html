@@ -1,3 +1,4 @@
+<block-ui></block-ui>
 <ion-header>
   <ion-toolbar color="dark">
     <ion-buttons slot="start">
@@ -15,32 +16,40 @@
     </ion-card-title>
   </ion-card>
     <ion-card>
+      <div margin-top margin-start *ngIf="user?.pacote?.quantosDias === 3">
+        <ion-badge color="tertiary">COMPRADO</ion-badge>
+      </div>
       <ion-item>
         <ion-badge color="success" margin-end>10 MOEDAS</ion-badge>
         <ion-label text-center>3 Dias</ion-label>
-        <ion-button fill="outline" slot="end">Comprar</ion-button>
+        <ion-button fill="outline" slot="end" (click)="buyItem(3)">Comprar</ion-button>
       </ion-item>
       <ion-card-content>
         3 Dias sem anuncios
       </ion-card-content>
     </ion-card>
     <ion-card>
+      <div margin-top margin-start *ngIf="user?.pacote?.quantosDias === 5">
+        <ion-badge color="tertiary">COMPRADO</ion-badge>
+      </div>
       <ion-item>
-        <!-- <ion-icon name="logo-usd" slot="start"></ion-icon> -->
         <ion-badge color="success" margin-end>15 MOEDAS</ion-badge>
         <ion-label text-center>5 Dias</ion-label>
-        <ion-button fill="outline" slot="end">Comprar</ion-button>
+        <ion-button fill="outline" slot="end" (click)="buyItem(5)">Comprar</ion-button>
       </ion-item>
       <ion-card-content>
         5 Dias sem anuncios
       </ion-card-content>
     </ion-card>
     <ion-card>
+      <div margin-top margin-start *ngIf="user?.pacote?.quantosDias === 7">
+        <ion-badge color="tertiary">COMPRADO</ion-badge>
+      </div>
       <ion-item>
         <!-- <ion-icon name="logo-usd" slot="start"></ion-icon> -->
         <ion-badge color="success" margin-end>18 MOEDAS</ion-badge>
         <ion-label text-center>7 DIAS</ion-label>
-        <ion-button fill="outline" slot="end">Comprar</ion-button>
+        <ion-button fill="outline" slot="end" (click)="buyItem(7)">Comprar</ion-button>
       </ion-item>
       <ion-card-content>
         7 Dis sem anuncios
