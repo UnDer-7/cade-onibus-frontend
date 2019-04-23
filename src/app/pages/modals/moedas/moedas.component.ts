@@ -11,7 +11,7 @@ import { ModalController } from '@ionic/angular';
 })
 export class MoedasComponent implements OnInit {
 
-  user: User;
+  public user: User;
 
   constructor(
     private userService: UsersService,
@@ -26,7 +26,7 @@ export class MoedasComponent implements OnInit {
     this.userService.getUser(id).subscribe(
       res => this.user = res,
       err => this.utilService.showToast('Houve um erro ao buscar seus dados!')
-    )
+    );
   }
 
   public buyCoins(coins: number): void {
@@ -37,7 +37,7 @@ export class MoedasComponent implements OnInit {
         this.user = res;
       },
       err => this.utilService.showToast('Houve um erro ao comprar as moedas!')
-    )
+    );
   }
 
   public closeModal(): void {
