@@ -34,10 +34,11 @@ export class LojaComponent {
   ) { }
 
   public ionViewDidEnter(): void {
-    this.usersService.getUser(this.jwt.decodeToken()._id).subscribe(res => {
-      this.user = res;
-      this.successLoading = true;
-    });
+    this.getUser();
+  }
+
+  public refresh(event: any): void {
+    this.getUser(event);
   }
 
   public buyItem(dias: number): void {
@@ -72,6 +73,17 @@ export class LojaComponent {
       this.user = res;
       this.blockUi.stop();
       this.utilService.showToast('Compra concluida', 'success');
+    });
+  }
+
+  private getUser(event?: any): void {
+    this.usersService.getUser(this.jwt.decodeToken()._id).pipe(
+      finalize(() => {
+        if (event) event.target.complete(); // o refresh foi finalizado
+      })
+    ).subscribe(res => {
+      this.user = res;
+      this.successLoading = true;
     });
   }
 

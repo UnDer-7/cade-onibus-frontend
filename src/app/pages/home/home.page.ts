@@ -39,9 +39,11 @@ export class HomePage {
   public ionViewDidEnter(): void {
     this.isLoading = true;
     this.token = this.tokenService.decodeToken();
-    this.homeService.findUser(this.token._id).pipe(
-      finalize(() => this.isLoading = false)
-    ).subscribe(res => this.user = res);
+    this.getUser();
+  }
+
+  public refresh(event: any): void {
+    this.getUser(event);
   }
 
   public async openPicker(): Promise<any> {
@@ -68,10 +70,6 @@ export class HomePage {
       ],
     });
     await picker.present();
-  }
-
-  public sendToPerfil(): void {
-    this.router.navigate(['perfil']);
   }
 
   public async followBus(onibus: Onibus): Promise<void> {
@@ -102,5 +100,14 @@ export class HomePage {
 
   private startSharing(onibus: Onibus): void {
     this.sharingLocationService.startSharing(onibus);
+  }
+
+  private getUser(event?: any): void {
+    this.homeService.findUser(this.token._id).pipe(
+      finalize(() => {
+        if (event) event.target.complete(); // o refresh foi finalizado
+        this.isLoading = false;
+      })
+    ).subscribe(res => this.user = res);
   }
 }

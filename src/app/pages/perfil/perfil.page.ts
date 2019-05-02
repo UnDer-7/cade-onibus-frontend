@@ -41,6 +41,10 @@ export class PerfilPage {
     this.sessionService.logout();
   }
 
+  public refresh(event: any): void {
+    this.getUser(event);
+  }
+
   public async editUser(): Promise<any> {
     const user = Object.assign({}, this.user);
     const modal = await this.modalCtrl.create({
@@ -56,14 +60,11 @@ export class PerfilPage {
     });
   }
 
-  get isEmpty(): boolean {
-    return Object.entries(this.user).length === 0;
-  }
-
-  private getUser(): void {
+  private getUser(event?: any): void {
     const id = this.tokenService.decodeToken()._id;
     this.perfilService.findUser(id).pipe(
       finalize(() => {
+        if (event) event.target.complete(); // o refresh foi finalizado
         this.isLoading = false;
       })
     ).subscribe(
@@ -72,10 +73,5 @@ export class PerfilPage {
         this.successLoading = true;
       },
       () => this.successLoading = false);
-
-    // this.perfilService.findUser(id).subscribe(res => {
-    //   this.user = res;
-    // });
   }
-
 }
