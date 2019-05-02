@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content color="medium">
-  <ion-card color="light" *ngIf="!isEmpty">
+  <ion-card color="light" *ngIf="!isLoading">
     <ion-card-header>
       <ion-card color="dark" padding-vertical text-center>
         <ion-card-title text-uppercase text-center>{{ user.name }}</ion-card-title>
@@ -25,10 +25,10 @@
         [disableCheckBox]=false>
       </app-bus-list>
     </ion-card-content>
-    <ion-button expand="full" fill="clear" (click)="editUser()">Editar Dados</ion-button>
+    <ion-button expand="full" fill="clear" (click)="editUser()" [disabled]="!successLoading">Editar Dados</ion-button>
   </ion-card>
 
-  <ion-card color="light" *ngIf="isEmpty">
+  <ion-card color="light" *ngIf="isLoading">
     <ion-card-header>
       <ion-card padding-vertical padding-horizontal color="dark">
         <ion-card-title margin-bottom>
@@ -47,6 +47,7 @@
         <ion-progress-bar margin-vertical type="indeterminate" color="light"></ion-progress-bar>
       </ion-card>
     </ion-card-content>
-    <ion-button expand="full" fill="clear" (click)="editUser()" [disabled]="isEmpty">Editar Dados</ion-button>
+    {{successLoading}}
+    <ion-button expand="full" fill="clear" (click)="editUser()" disabled="true">Editar Dados</ion-button>
   </ion-card>
 </ion-content>

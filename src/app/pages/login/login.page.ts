@@ -11,6 +11,7 @@ import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { Validate } from '../../util/validate';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { GoogleUser } from '../../models/google-user.model';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -49,9 +50,9 @@ export class LoginPage implements OnInit {
       this.tokenService.token = res.token;
       this.router.navigateByUrl(goTo);
       this.blockUi.stop();
-    }, (err) => {
+    }, (err: HttpErrorResponse) => {
       this.blockUi.stop();
-      if (err.includes('400')) {
+      if (err.status === 400) {
         this.util.showToast('Credenciais incorretas', 'danger');
       }
     });

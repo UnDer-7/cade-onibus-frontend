@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { TokenService } from '../../auth/token.service';
 import { User } from '../../models/user.model';
@@ -8,14 +8,17 @@ import { ModalController } from '@ionic/angular';
 import { UserFormComponent } from '../modals/user-form/user-form.component';
 import { PerfilService } from './perfil.service';
 import { UtilService } from '../../util/util.service';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.page.html',
 })
-export class PerfilPage implements OnInit {
+export class PerfilPage {
   public user: User;
   public appName: string = environment.appName;
+  public isLoading: boolean = true;
+  public successLoading: boolean = false;
 
   constructor(
     public util: UtilService,
@@ -28,7 +31,9 @@ export class PerfilPage implements OnInit {
     this.user = {} as User;
   }
 
-  public ngOnInit(): void {
+  public ionViewDidEnter(): void {
+    this.isLoading = true;
+    this.successLoading = false;
     this.getUser();
   }
 
@@ -57,9 +62,20 @@ export class PerfilPage implements OnInit {
 
   private getUser(): void {
     const id = this.tokenService.decodeToken()._id;
-    this.perfilService.findUser(id).subscribe(res => {
-      this.user = res;
-    });
+    this.perfilService.findUser(id).pipe(
+      finalize(() => {
+        this.isLoading = false;
+      })
+    ).subscribe(
+      res => {
+        this.user = res;
+        this.successLoading = true;
+      },
+      () => this.successLoading = false);
+
+    // this.perfilService.findUser(id).subscribe(res => {
+    //   this.user = res;
+    // });
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { TokenService } from '../../auth/token.service';
 import { UsersService } from '../../services/resources/users.service';
 import { User } from '../../models/user.model';
@@ -8,12 +8,13 @@ import { Pacote } from '../../models/pacote.model';
 import { UtilService } from '../../util/util.service';
 import { Observable } from 'rxjs';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-loja',
   templateUrl: './loja.component.html',
 })
-export class LojaComponent implements OnInit {
+export class LojaComponent {
   public readonly precos: object = {
     tresDias: 10,
     cincoDias: 15,
@@ -21,6 +22,7 @@ export class LojaComponent implements OnInit {
   };
 
   public user: User = {} as User;
+  public successLoading: boolean = false;
 
   @BlockUI() private blockUi: NgBlockUI;
 
@@ -31,10 +33,10 @@ export class LojaComponent implements OnInit {
     private utilService: UtilService
   ) { }
 
-  public ngOnInit(): void {
+  public ionViewDidEnter(): void {
     this.usersService.getUser(this.jwt.decodeToken()._id).subscribe(res => {
-      console.log('USER START: ', res);
       this.user = res;
+      this.successLoading = true;
     });
   }
 

@@ -7,11 +7,11 @@ import { UtilService } from 'src/app/util/util.service';
 import { HomeService } from './home.service';
 import { Onibus } from '../../models/onibus.modal';
 import { MapsPage } from '../modals/maps/maps.page';
-import { UserLocation } from '../../models/user.location.model';
 import { SessionService } from '../../auth/session.service';
 import { environment } from '../../../environments/environment';
 import { SharingLocationService } from '../../util/sharing-location.service';
 import { FindBusPage } from '../modals/find-bus/find-bus.page';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -19,8 +19,8 @@ import { FindBusPage } from '../modals/find-bus/find-bus.page';
 })
 export class HomePage {
   public appName: string = environment.appName;
-  public user: User;
-  public userLocation: UserLocation = {} as UserLocation;
+  public user: User = {} as User;
+  public isLoading: boolean = true;
 
   private token: any;
 
@@ -37,8 +37,11 @@ export class HomePage {
   ) { }
 
   public ionViewDidEnter(): void {
+    this.isLoading = true;
     this.token = this.tokenService.decodeToken();
-    this.homeService.findUser(this.token._id).subscribe(res => this.user = res);
+    this.homeService.findUser(this.token._id).pipe(
+      finalize(() => this.isLoading = false)
+    ).subscribe(res => this.user = res);
   }
 
   public async openPicker(): Promise<any> {

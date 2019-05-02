@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-list *ngIf="user">
+  <ion-list *ngIf="!isLoading">
     <ion-item-divider *ngFor="let onibus of user.onibus" (click)="followBus(onibus)">
       <ion-item lines="none">
         <ion-badge slot="start" color="dark">{{ onibus.numero }}</ion-badge>
@@ -18,7 +18,7 @@
   </ion-list>
 
   <!-- skeleton loading -->
-  <div *ngIf="!user">
+  <div *ngIf="isLoading">
     <div class="ion-padding custom-skeleton">
       <ion-skeleton-text animated></ion-skeleton-text>
     </div>
