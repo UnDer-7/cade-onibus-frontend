@@ -45,6 +45,8 @@
     "ban-ts-ignore": false,
     "ordered-imports": false,
     "arrow-parens": false,
+    "interface-name": false,
+    "object-literal-shorthand": false,
 
 
     "arrow-return-shorthand": true,
