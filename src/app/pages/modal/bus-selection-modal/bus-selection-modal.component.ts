@@ -86,6 +86,9 @@ export class BusSelectionModalComponent implements OnInit {
     if (busFound) return true;
   }
 
+  public canShowLine(last: any): string | undefined {
+    if (last) return 'none';
+  }
   private removeDuplicates(myArr: Bus[], prop: string): Bus[] {
     return myArr.filter((obj, pos, arr) => {
       // @ts-ignore

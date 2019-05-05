@@ -38,8 +38,8 @@
 
   <ion-card color="white" *ngIf="bus.length >= 1">
     <ion-card-content>
-      <div *ngFor="let b of bus; let i = index">
-        <ion-item class="ion-activatable" slot="start">
+      <div *ngFor="let b of bus; let i = index; let last = last">
+        <ion-item class="ion-activatable" slot="start" [lines]="canShowLine(last)">
           <ion-checkbox
             style="margin-right: 12px"
             [value]="b"

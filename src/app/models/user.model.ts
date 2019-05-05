@@ -7,7 +7,7 @@ export interface User extends Base {
   name?: string;
   email?: string;
   password?: string;
-  onibus?: Bus[];
+  bus?: Bus[];
 }
 
 export function ObjectToUser(user: any): User {
@@ -17,7 +17,7 @@ export function ObjectToUser(user: any): User {
     name: user.name,
     email: user.email,
     password: user.password,
-    onibus: user.onibus,
+    bus: user.bus,
     createdAt: user.createdAt,
   });
 }
@@ -27,6 +27,6 @@ export function SocialUserToUser(socialUser: SocialUser): User {
     google_id: socialUser.id,
     name: socialUser.name,
     email: socialUser.email,
-    onibus: [],
+    bus: [],
   });
 }

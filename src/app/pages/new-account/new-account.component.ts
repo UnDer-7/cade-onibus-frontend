@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { AuthService, GoogleLoginProvider } from 'angularx-social-login';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
@@ -16,14 +16,9 @@ import { BusSelectionModalComponent } from '../modal/bus-selection-modal/bus-sel
   selector: 'app-new-account',
   templateUrl: './new-account.component.html',
 })
-export class NewAccountComponent implements OnInit {
+export class NewAccountComponent {
   public readonly contentColor: string = environment.contentColor;
   public readonly appName: string = environment.appName;
-
-  public passwordIcon: string = 'eye-off';
-  public passwordType: string = 'password';
-
-  public user: User = {} as User;
 
   @BlockUI() private blockUi!: NgBlockUI;
 
@@ -33,53 +28,26 @@ export class NewAccountComponent implements OnInit {
     private utilService: UtilService,
     private sessionHandler: SessionHandler,
     private modalCtrl: ModalController,
-  ) {
-  }
+  ) { }
 
-  public ngOnInit(): void {
-    console.log('INIT');
-  }
-
-  public saveEmailPassword(): void {
-    this.isFormValid();
-    console.log('USER TO SAvVE: ', this.user);
+  public async saveEmailPassword(): Promise<void> {
   }
 
   public async saveGoogle(): Promise<void> {
     const bus = await this.busSelection();
 
-    if (bus.length > 0) {
+    if (bus && bus.length > 0) {
       this.blockUi.start();
       await this.socialService.signIn(GoogleLoginProvider.PROVIDER_ID).catch(this.blockUi.stop);
       this.createGoogleUser(bus);
     }
   }
 
-  public showPassword(): void {
-    if (this.passwordIcon === 'eye-off') {
-      this.passwordIcon = 'eye';
-      this.passwordType = 'text';
-    } else {
-      this.passwordIcon = 'eye-off';
-      this.passwordType = 'password';
-    }
-  }
-
-  public isFormValid(): string | undefined {
-    /* tslint:disable:max-line-length */
-    const email = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (!(this.user.email && this.user.password)) return 'empty';
-
-    if (!email.test(this.user.email)) return 'email';
-
-    if (this.user.password.length < 5) return 'password';
-  }
-
   private async createGoogleUser(bus: Bus[]): Promise<void> {
     this.socialService.authState.pipe(
       mergeMap(socialUser => {
         const user = SocialUserToUser(socialUser);
-        user.onibus = bus;
+        user.bus = bus;
         return this.userService.createUser(user)
           .pipe(
             finalize(() => this.blockUi.stop()),
@@ -95,6 +63,26 @@ export class NewAccountComponent implements OnInit {
           this.utilService.showToast('Usuário já cadastrado', 'danger');
         }
       });
+  }
+
+  private createEmailPasswordUser(user: User, bus: Bus[]): void {
+    const password = user.password;
+    user.bus = bus;
+    this.blockUi.start();
+
+    this.userService.createUser(user).pipe(
+      finalize(() => this.blockUi.stop()),
+    ).subscribe(
+      res => {
+        res.password = password;
+        this.sessionHandler.loginWithEmail(res);
+      },
+      (err: HttpErrorResponse) => {
+        if (err.status === 400) {
+          this.utilService.showToast('Usuário já cadastrado', 'danger');
+        }
+      },
+    );
   }
 
   private async busSelection(): Promise<Bus[]> {

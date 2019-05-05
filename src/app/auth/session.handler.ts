@@ -2,9 +2,11 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
+import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { User } from '../models/user.model';
 import { SessionService } from '../resource/session.service';
+import { ServerErrorMessages } from '../utils/server-error.messages';
 import { UtilService } from '../utils/util.service';
 import { saveJWT } from './jwt.handler';
 
@@ -19,8 +21,13 @@ export class SessionHandler {
   ) {
   }
 
-  // public loginWithEmail(user: User): void {
-  // }
+  public loginWithEmail(user: User): void {
+    this.subscriptionHandler(
+      this.sessionService.loginWithEmail(user).pipe(
+        finalize(() => this.blockUi.stop()),
+      ),
+    );
+  }
 
   public loginWithGoogle(user: User): void {
     this.sessionService.loginWithGoogle(user).pipe(
@@ -41,4 +48,22 @@ export class SessionHandler {
   // public logout(): void {
   // }
 
+  private subscriptionHandler(observable: Observable<string>): void {
+    observable.subscribe(
+      res => {
+        saveJWT(res);
+        this.router.navigateByUrl('/home');
+      },
+      (err: HttpErrorResponse) => {
+        if (err.status === 404 && err.error === ServerErrorMessages.NOT_FOUND) {
+          this.utilService.showToast('Usuário não encontrado', 'danger');
+          return;
+        }
+        if (err.status === 400 && err.error === ServerErrorMessages.INVALID_CREDENTIALS) {
+          this.utilService.showToast('Credencias incorretas', 'danger');
+          return;
+        }
+      },
+    );
+  }
 }
