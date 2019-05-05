@@ -1,0 +1,51 @@
+<block-ui>
+</block-ui>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      NO-NAME
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding [color]="contentColor">
+  <ion-card padding text-center style="margin-top: 200px" color="white">
+    <ion-card-title>ENTRAR</ion-card-title>
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="floating">E-MAIL</ion-label>
+        <ion-input
+          autocomplete="true"
+          maxlength="50"
+          minlength="4"
+          inputmode="email"
+          type="email"
+          name="email"
+          [(ngModel)]="user.email">
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">SENHA</ion-label>
+        <ion-input
+          inputmode="password"
+          maxlength="30"
+          minlength="5"
+          type="password"
+          name="password"
+          [(ngModel)]="user.password">
+        </ion-input>
+      </ion-item>
+        <ion-button margin-top expand="block" fill="outline" color="success" (click)="saveEmailPassword()">
+          CRIAR CONTA
+        </ion-button>
+
+      <div margin-vertical>
+        <ion-label>OU</ion-label>
+      </div>
+
+      <ion-button expand="block" fill="outline" color="primary" (click)="saveGoogle()">
+        <ion-icon name="logo-google"></ion-icon>
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

@@ -4,8 +4,8 @@ import { AuthService, GoogleLoginProvider, SocialUser } from 'angularx-social-lo
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { finalize, mergeMap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
-import { SessionService } from '../../auth/session.service';
-import { User } from '../../models/user.model';
+import { SessionService } from '../../resource/session.service';
+import { SocialUserToUser, User } from '../../models/user.model';
 import { UtilService } from '../../utils/util.service';
 
 @Component({
@@ -30,28 +30,24 @@ export class LoginComponent implements OnInit {
   public async google(): Promise<void> {
     this.blockUi.start();
     await this.socialService.signIn(GoogleLoginProvider.PROVIDER_ID).catch(this.blockUi.stop);
+    this.loginWithGoogle();
+  }
 
-    // this.socialService.authState.subscribe(
-    //   res => {
-    //     this.sessionService.loginWithGoogle(this.socialUserToUser(res)).pipe(
-    //       finalize(() => this.blockUi.stop()),
-    //     ).subscribe();
-    //   },
-    //   err => {
-    //     this.blockUi.stop();
-    //   },
-    // );
+  public emailPassword(): void {
+    this.loginWithEmailPassword();
+  }
 
+  private loginWithGoogle(): void {
     this.socialService.authState.pipe(
       mergeMap(socialUser => {
-        return this.sessionService.loginWithGoogle(this.socialUserToUser(socialUser))
+        return this.sessionService.loginWithGoogle(SocialUserToUser(socialUser))
           .pipe(
             finalize(() => this.blockUi.stop()),
           );
       }),
     ).subscribe(
       res => {
-      console.log('RES: ', res);
+        console.log('RES: ', res);
       },
       (err: HttpErrorResponse) => {
         if (err.status === 404 || err.status === 400) {
@@ -61,22 +57,6 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  public emailPassword(): void {
-    this.loginWithEmailPassword();
-  }
-
-  private loginWithGoogle(user: User): void {
-
-  }
-
   private loginWithEmailPassword(): void {
-  }
-
-  private socialUserToUser(socialUser: SocialUser): User {
-    return Object.assign({}, {
-      google_id: socialUser.id,
-      name: socialUser.name,
-      email: socialUser.email,
-    });
   }
 }

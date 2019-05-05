@@ -10,7 +10,7 @@ export class UtilService {
   public async showToast(
     message: string,
     color: string = 'dark',
-    duration: number = 1500,
+    duration: number = 1850,
     position: string = 'bottom',
     showCloseButton: boolean = false): Promise<any> {
     // @ts-ignore
