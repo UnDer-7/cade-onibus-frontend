@@ -2,50 +2,67 @@
 </block-ui>
 <ion-header>
   <ion-toolbar>
-    <ion-title>
-      NO-NAME
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title [color]="contentColor">
+      {{ appName }}
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding [color]="contentColor">
-  <ion-card padding text-center style="margin-top: 200px" color="white">
-    <ion-card-title>ENTRAR</ion-card-title>
-    <ion-card-content>
-      <ion-item>
-        <ion-label position="floating">E-MAIL</ion-label>
-        <ion-input
-          autocomplete="true"
-          maxlength="50"
-          minlength="4"
-          inputmode="email"
-          type="email"
-          name="email"
-          [(ngModel)]="user.email">
-        </ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">SENHA</ion-label>
-        <ion-input
-          inputmode="password"
-          maxlength="30"
-          minlength="5"
-          type="password"
-          name="password"
-          [(ngModel)]="user.password">
-        </ion-input>
-      </ion-item>
-        <ion-button margin-top expand="block" fill="outline" color="success" (click)="saveEmailPassword()">
-          CRIAR CONTA
-        </ion-button>
+  <ion-grid>
+    <ion-row>
+      <ion-col
+        sizeSm="12"
+        sizeMd="6" offsetMd="3"
+        sizeLg="4.3" offsetLg="3.8"
+        sizeXl="3" offsetXl="4.5">
+        <ion-card padding text-center style="margin-top: 27%" color="white">
+          <ion-title>NOVA CONTA</ion-title>
+          <ion-card-content>
+            <ion-item>
+              <ion-label position="floating" [color]="contentColor">E-MAIL</ion-label>
+              <ion-input
+                autocomplete="true"
+                maxlength="50"
+                minlength="4"
+                inputmode="email"
+                type="email"
+                name="email"
+                [(ngModel)]="user.email">
+              </ion-input>
+            </ion-item>
+            <div text-start *ngIf="isFormValid() === 'email'">
+            <ion-text color="danger">E-mail invalido</ion-text>
+            </div>
+            <ion-item>
+              <ion-label position="floating" [color]="contentColor">SENHA</ion-label>
+              <ion-icon slot="end" (click)="showPassword()" [name]="passwordIcon"></ion-icon>
+              <ion-input
+                inputmode="password"
+                maxlength="30"
+                minlength="5"
+                [type]="passwordType"
+                name="password"
+                [(ngModel)]="user.password">
+              </ion-input>
+            </ion-item>
+            <ion-button margin-top expand="block" fill="outline" color="success" (click)="saveEmailPassword()">
+              CRIAR COM E-MAIL/SENHA
+            </ion-button>
 
-      <div margin-vertical>
-        <ion-label>OU</ion-label>
-      </div>
+            <div margin-vertical>
+              <ion-label>OU</ion-label>
+            </div>
 
-      <ion-button expand="block" fill="outline" color="primary" (click)="saveGoogle()">
-        <ion-icon name="logo-google"></ion-icon>
-      </ion-button>
-    </ion-card-content>
-  </ion-card>
+            <ion-button expand="block" fill="outline" color="primary" (click)="saveGoogle()">
+              <ion-icon name="logo-google"></ion-icon>
+            </ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

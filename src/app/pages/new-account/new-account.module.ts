@@ -5,7 +5,6 @@ import { BlockUIModule } from 'ng-block-ui';
 import { SessionHandler } from '../../auth/session.handler';
 import { socialLoginConfig } from '../../config/social-login.config';
 import { UserService } from '../../resource/user.service';
-import { AutoFocusDirective } from '../../shared/directive/auto-focus.directive';
 import { COMMON_IMPORTS } from '../../utils/common-imports';
 import { UtilService } from '../../utils/util.service';
 import { NewAccountComponent } from './new-account.component';
@@ -19,7 +18,6 @@ import { NewAccountComponent } from './new-account.component';
   ],
   declarations: [
     NewAccountComponent,
-    AutoFocusDirective,
   ],
   providers: [
     UserService,

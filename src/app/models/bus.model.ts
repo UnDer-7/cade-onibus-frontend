@@ -1,4 +1,4 @@
-export interface Onibus {
+export interface Bus {
   sequencial?: number;
   numero?: string;
   descricao?: string;

@@ -9,6 +9,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ModalModule } from './pages/modal/modal.module';
 import { SessionService } from './resource/session.service';
 
 @NgModule({
@@ -18,6 +19,7 @@ import { SessionService } from './resource/session.service';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    ModalModule,
     IonicModule.forRoot(),
   ],
   providers: [

@@ -1,3 +1,90 @@
-<p>
-  bus-selection-modal works!
-</p>
+<ion-header>
+  <ion-toolbar>
+    <ion-title text-center [color]="contentColor">
+      {{ appName }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [color]="contentColor">
+  <div margin-start style="margin-top: 5px" *ngIf="busSelected.length > 0">
+    <ion-button
+      color="dark"
+      size="small"
+      (click)="removeBus(b)"
+      *ngFor="let b of busSelected">
+      {{ b.numero }}
+      <ion-icon name="close" color="danger" slot="end"></ion-icon>
+    </ion-button>
+  </div>
+
+  <div padding>
+    <ion-item>
+      <ion-button fill="clear" style="margin-right: 10px; margin-left: 1px" expand="block" color="success">
+        <ion-icon name="search" slot="icon-only" [color]="contentColor"></ion-icon>
+      </ion-button>
+      <ion-input
+        name="linha-cidade"
+        debounce="500"
+        autocomplete="true"
+        placeholder="LINHA OU CIDADE"
+        clearInput="true"
+        [(ngModel)]="search"
+        (keydown.enter)="findBus()"
+        (ionChange)="findBus()">
+      </ion-input>
+    </ion-item>
+  </div>
+
+  <ion-card color="white" *ngIf="bus.length >= 1">
+    <ion-card-content>
+      <div *ngFor="let b of bus; let i = index">
+        <ion-item class="ion-activatable" slot="start">
+          <ion-checkbox
+            style="margin-right: 12px"
+            [value]="b"
+            [checked]="isSelect(b)"
+            [color]="contentColor"
+            (ionChange)="onBusSelection($event)">
+          </ion-checkbox>
+          <ion-badge style="margin-right: 10px" color="dark">{{ b.numero }}</ion-badge>
+          <ion-label text-wrap>{{ b.descricao }}</ion-label>
+          <ion-text
+            style="margin-left: 10px"
+            color="danger">
+            {{ b.faixaTarifaria.tarifa |  currency: 'R$ '}}
+          </ion-text>
+          <ion-ripple-effect></ion-ripple-effect>
+        </ion-item>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6" text-center>
+          <ion-button
+            expand="block"
+            fill="clear"
+            color="success"
+            (click)="save()"
+            [disabled]="busSelected.length <= 0">
+            SALVAR
+          </ion-button>
+        </ion-col>
+        <ion-col size="6" text-center>
+          <ion-button
+            expand="block"
+            fill="clear"
+            color="danger"
+            (click)="cancel()">
+            CANCELAR
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

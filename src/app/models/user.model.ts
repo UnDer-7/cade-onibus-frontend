@@ -1,13 +1,13 @@
 import { SocialUser } from 'angularx-social-login';
 import { Base } from './base.model';
-import { Onibus } from './onibus.model';
+import { Bus } from './bus.model';
 
 export interface User extends Base {
   google_id?: string;
   name?: string;
   email?: string;
   password?: string;
-  onibus?: Onibus[];
+  onibus?: Bus[];
 }
 
 export function ObjectToUser(user: any): User {
@@ -27,5 +27,6 @@ export function SocialUserToUser(socialUser: SocialUser): User {
     google_id: socialUser.id,
     name: socialUser.name,
     email: socialUser.email,
+    onibus: [],
   });
 }
