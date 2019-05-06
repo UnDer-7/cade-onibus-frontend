@@ -7,7 +7,6 @@ import { socialLoginConfig } from '../../config/social-login.config';
 import { UserService } from '../../resource/user.service';
 import { SharedComponentModule } from '../../shared/component/shared-component.module';
 import { COMMON_IMPORTS } from '../../utils/common-imports';
-import { UtilService } from '../../utils/util.service';
 import { NewAccountComponent } from './new-account.component';
 
 @NgModule({
@@ -23,7 +22,6 @@ import { NewAccountComponent } from './new-account.component';
   ],
   providers: [
     UserService,
-    UtilService,
     SessionHandler,
     {
       provide: AuthServiceConfig,

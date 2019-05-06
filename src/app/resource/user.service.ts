@@ -16,7 +16,7 @@ export class UserService {
     return this.http.post<User>(this.resourceUrl, user);
   }
 
-  public getUser(id: string): Observable<User> {
-    return this.http.get(`${this.resourceUrl}/${id}`);
+  public getUser(email: string): Observable<User> {
+    return this.http.get(`${this.resourceUrl}/${email}`);
   }
 }

@@ -1,5 +1,5 @@
 export class ServerErrorMessages {
-  public static readonly NO_ID: string = 'no-id-informed';
+  public static readonly NO_EMAIL: string = 'no-email-informed';
   public static readonly NOT_FOUND: string = 'resource-not-found';
   public static readonly RESOURCE_EXISTS: string = 'resource-already-exists';
   public static readonly INVALID_CREDENTIALS: string = 'invalid-credentials';

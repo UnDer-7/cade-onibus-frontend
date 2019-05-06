@@ -1,0 +1,2234 @@
+[
+  {
+    "name": "AppRoutingModule",
+    "file": "src/app/app-routing.module.ts",
+    "providers": [],
+    "declarations": [],
+    "imports": [
+      {
+        "ns": "RouterModule",
+        "name": "RouterModule.forRoot(args)"
+      }
+    ],
+    "exports": [
+      {
+        "name": "RouterModule"
+      }
+    ],
+    "bootstrap": [],
+    "__raw": [
+      {
+        "pos": 156,
+        "end": 250,
+        "flags": 0,
+        "kind": 269,
+        "name": {
+          "pos": 156,
+          "end": 166,
+          "flags": 0,
+          "escapedText": "imports"
+        },
+        "initializer": {
+          "pos": 167,
+          "end": 250,
+          "flags": 0,
+          "kind": 182,
+          "multiLine": true,
+          "elements": [
+            {
+              "pos": 169,
+              "end": 245,
+              "flags": 0,
+              "kind": 186,
+              "expression": {
+                "pos": 169,
+                "end": 194,
+                "flags": 0,
+                "kind": 184,
+                "expression": {
+                  "pos": 169,
+                  "end": 186,
+                  "flags": 0,
+                  "escapedText": "RouterModule"
+                },
+                "name": {
+                  "pos": 187,
+                  "end": 194,
+                  "flags": 0,
+                  "escapedText": "forRoot"
+                }
+              },
+              "arguments": [
+                {
+                  "pos": 195,
+                  "end": 201,
+                  "flags": 0,
+                  "escapedText": "routes"
+                },
+                {
+                  "pos": 202,
+                  "end": 244,
+                  "flags": 0,
+                  "kind": 183,
+                  "properties": [
+                    {
+                      "pos": 204,
+                      "end": 242,
+                      "flags": 0,
+                      "kind": 269,
+                      "name": {
+                        "pos": 204,
+                        "end": 223,
+                        "flags": 0,
+                        "escapedText": "preloadingStrategy"
+                      },
+                      "initializer": {
+                        "pos": 224,
+                        "end": 242,
+                        "flags": 0,
+                        "escapedText": "PreloadAllModules"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "pos": 251,
+        "end": 277,
+        "flags": 0,
+        "kind": 269,
+        "name": {
+          "pos": 251,
+          "end": 261,
+          "flags": 0,
+          "escapedText": "exports"
+        },
+        "initializer": {
+          "pos": 262,
+          "end": 277,
+          "flags": 0,
+          "kind": 182,
+          "elements": [
+            {
+              "pos": 264,
+              "end": 276,
+              "flags": 0,
+              "escapedText": "RouterModule"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "name": "AppModule",
+    "file": "src/app/app.module.ts",
+    "providers": [
+      {
+        "name": "StatusBar"
+      },
+      {
+        "name": "SplashScreen"
+      },
+      {
+        "name": "SessionService"
+      },
+      {
+        "name": "IsLoggedInGuard"
+      },
+      {
+        "name": "{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }"
+      }
+    ],
+    "declarations": [
+      {
+        "name": "AppComponent",
+        "file": "src/app/app.component.ts",
+        "selector": "app-root",
+        "providers": [],
+        "templateUrl": [
+          "app.component.html"
+        ],
+        "styleUrls": [],
+        "__raw": [
+          {
+            "pos": 222,
+            "end": 245,
+            "flags": 0,
+            "kind": 269,
+            "name": {
+              "pos": 222,
+              "end": 233,
+              "flags": 0,
+              "escapedText": "selector"
+            },
+            "initializer": {
+              "pos": 234,
+              "end": 245,
+              "flags": 0,
+              "kind": 9,
+              "text": "app-root"
+            }
+          },
+          {
+            "pos": 246,
+            "end": 282,
+            "flags": 0,
+            "kind": 269,
+            "name": {
+              "pos": 246,
+              "end": 260,
+              "flags": 0,
+              "escapedText": "templateUrl"
+            },
+            "initializer": {
+              "pos": 261,
+              "end": 282,
+              "flags": 0,
+              "kind": 9,
+              "text": "app.component.html"
+            }
+          }
+        ]
+      }
+    ],
+    "imports": [
+      {
+        "name": "BrowserModule"
+      },
+      {
+        "name": "AppRoutingModule"
+      },
+      {
+        "name": "HttpClientModule"
+      },
+      {
+        "name": "ModalModule"
+      },
+      {
+        "ns": "IonicModule",
+        "name": "IonicModule.forRoot()"
+      }
+    ],
+    "exports": [],
+    "bootstrap": [
+      {
+        "name": "AppComponent"
+      }
+    ],
+    "__raw": [
+      {
+        "pos": 700,
+        "end": 731,
+        "flags": 0,
+        "kind": 269,
+        "name": {
+          "pos": 700,
+          "end": 715,
+          "flags": 0,
+          "escapedText": "declarations"
+        },
+        "initializer": {
+          "pos": 716,
+          "end": 731,
+          "flags": 0,
+          "kind": 182,
+          "elements": [
+            {
+              "pos": 718,
+              "end": 730,
+              "flags": 0,
+              "escapedText": "AppComponent"
+            }
+          ]
+        }
+      },
+      {
+        "pos": 732,
+        "end": 754,
+        "flags": 0,
+        "kind": 269,
+        "name": {
+          "pos": 732,
+          "end": 750,
+          "flags": 0,
+          "escapedText": "entryComponents"
+        },
+        "initializer": {
+          "pos": 751,
+          "end": 754,
+          "flags": 0,
+          "kind": 182,
+          "elements": []
+        }
+      },
+      {
+        "pos": 755,
+        "end": 879,
+        "flags": 0,
+        "kind": 269,
+        "name": {
+          "pos": 755,
+          "end": 765,
+          "flags": 0,
+          "escapedText": "imports"
+        },
+        "initializer": {
+          "pos": 766,
+          "end": 879,
+          "flags": 0,
+          "kind": 182,
+          "multiLine": true,
+          "elements": [
+            {
+              "pos": 768,
+              "end": 786,
+              "flags": 0,
+              "escapedText": "BrowserModule"
+            },
+            {
+              "pos": 787,
+              "end": 808,
+              "flags": 0,
+              "escapedText": "AppRoutingModule"
+            },
+            {
+              "pos": 809,
+              "end": 830,
+              "flags": 0,
+              "escapedText": "HttpClientModule"
+            },
+            {
+              "pos": 831,
+              "end": 847,
+              "flags": 0,
+              "escapedText": "ModalModule"
+            },
+            {
+              "pos": 848,
+              "end": 874,
+              "flags": 0,
+              "kind": 186,
+              "expression": {
+                "pos": 848,
+                "end": 872,
+                "flags": 0,
+                "kind": 184,
+                "expression": {
+                  "pos": 848,
+                  "end": 864,
+                  "flags": 0,
+                  "escapedText": "IonicModule"
+                },
+                "name": {
+                  "pos": 865,
+                  "end": 872,
+                  "flags": 0,
+                  "escapedText": "forRoot"
+                }
+              },
+              "arguments": []
+            }
+          ]
+        }
+      },
+      {
+        "pos": 880,
+        "end": 1040,
+        "flags": 0,
+        "kind": 269,
+        "name": {
+          "pos": 880,
+          "end": 892,
+          "flags": 0,
+          "escapedText": "providers"
+        },
+        "initializer": {
+          "pos": 893,
+          "end": 1040,
+          "flags": 0,
+          "kind": 182,
+          "multiLine": true,
+          "elements": [
+            {
+              "pos": 895,
+              "end": 909,
+              "flags": 0,
+              "escapedText": "StatusBar"
+            },
+            {
+              "pos": 910,
+              "end": 927,
+              "flags": 0,
+              "escapedText": "SplashScreen"
+            },
+            {
+              "pos": 928,
+              "end": 947,
+              "flags": 0,
+              "escapedText": "SessionService"
+            },
+            {
+              "pos": 948,
+              "end": 968,
+              "flags": 0,
+              "escapedText": "IsLoggedInGuard"
+            },
+            {
+              "pos": 969,
+              "end": 1035,
+              "flags": 0,
+              "kind": 183,
+              "properties": [
+                {
+                  "pos": 975,
+                  "end": 1003,
+                  "flags": 0,
+                  "kind": 269,
+                  "name": {
+                    "pos": 975,
+                    "end": 983,
+                    "flags": 0,
+                    "escapedText": "provide"
+                  },
+                  "initializer": {
+                    "pos": 984,
+                    "end": 1003,
+                    "flags": 0,
+                    "escapedText": "RouteReuseStrategy"
+                  }
+                },
+                {
+                  "pos": 1004,
+                  "end": 1033,
+                  "flags": 0,
+                  "kind": 269,
+                  "name": {
+                    "pos": 1004,
+                    "end": 1013,
+                    "flags": 0,
+                    "escapedText": "useClass"
+                  },
+                  "initializer": {
+                    "pos": 1014,
+                    "end": 1033,
+                    "flags": 0,
+                    "escapedText": "IonicRouteStrategy"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "pos": 1041,
+        "end": 1069,
+        "flags": 0,
+        "kind": 269,
+        "name": {
+          "pos": 1041,
+          "end": 1053,
+          "flags": 0,
+          "escapedText": "bootstrap"
+        },
+        "initializer": {
+          "pos": 1054,
+          "end": 1069,
+          "flags": 0,
+          "kind": 182,
+          "elements": [
+            {
+              "pos": 1056,
+              "end": 1068,
+              "flags": 0,
+              "escapedText": "AppComponent"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "name": "LoginModule",
+    "file": "pages/login/login.module.ts",
+    "providers": [
+      {
+        "name": "UtilService"
+      },
+      {
+        "name": "SessionHandler"
+      },
+      {
+        "name": "{ provide: AuthServiceConfig, useFactory: socialLoginConfig }"
+      }
+    ],
+    "declarations": [
+      {
+        "name": "LoginComponent",
+        "file": "pages/login/login.component.ts",
+        "selector": "app-login",
+        "providers": [],
+        "templateUrl": [
+          "login.component.html"
+        ],
+        "styleUrls": [],
+        "__raw": [
+          {
+            "pos": 471,
+            "end": 495,
+            "flags": 0,
+            "kind": 269,
+            "name": {
+              "pos": 471,
+              "end": 482,
+              "flags": 0,
+              "escapedText": "selector"
+            },
+            "initializer": {
+              "pos": 483,
+              "end": 495,
+              "flags": 0,
+              "kind": 9,
+              "text": "app-login"
+            }
+          },
+          {
+            "pos": 496,
+            "end": 536,
+            "flags": 0,
+            "kind": 269,
+            "name": {
+              "pos": 496,
+              "end": 510,
+              "flags": 0,
+              "escapedText": "templateUrl"
+            },
+            "initializer": {
+              "pos": 511,
+              "end": 536,
+              "flags": 0,
+              "kind": 9,
+              "text": "./login.component.html"
+            }
+          }
+        ]
+      }
+    ],
+    "imports": [
+      {
+        "name": "COMMON_IMPORTS"
+      },
+      {
+        "name": "SocialLoginModule"
+      },
+      {
+        "ns": "BlockUIModule",
+        "name": "BlockUIModule.forRoot()"
+      },
+      {
+        "ns": "SharedComponentModule",
+        "name": "SharedComponentModule.forRoot()"
+      },
+      {
+        "ns": "RouterModule",
+        "name": "RouterModule.forChild(args)"
+      }
+    ],
+    "exports": [],
+    "bootstrap": [],
+    "__raw": [
+      {
+        "pos": 613,
+        "end": 809,
+        "flags": 0,
+        "kind": 269,
+        "name": {
+          "pos": 613,
+          "end": 623,
+          "flags": 0,
+          "escapedText": "imports"
+        },
+        "initializer": {
+          "pos": 624,
+          "end": 809,
+          "flags": 0,
+          "kind": 182,
+          "multiLine": true,
+          "elements": [
+            {
+              "pos": 626,
+              "end": 645,
+              "flags": 0,
+              "escapedText": "COMMON_IMPORTS"
+            },
+            {
+              "pos": 646,
+              "end": 668,
+              "flags": 0,
+              "escapedText": "SocialLoginModule"
+            },
+            {
+              "pos": 669,
+              "end": 697,
+              "flags": 0,
+              "kind": 186,
+              "expression": {
+                "pos": 669,
+                "end": 695,
+                "flags": 0,
+                "kind": 184,
+                "expression": {
+                  "pos": 669,
+                  "end": 687,
+                  "flags": 0,
+                  "escapedText": "BlockUIModule"
+                },
+                "name": {
+                  "pos": 688,
+                  "end": 695,
+                  "flags": 0,
+                  "escapedText": "forRoot"
+                }
+              },
+              "arguments": []
+            },
+            {
+              "pos": 698,
+              "end": 734,
+              "flags": 0,
+              "kind": 186,
+              "expression": {
+                "pos": 698,
+                "end": 732,
+                "flags": 0,
+                "kind": 184,
+                "expression": {
+                  "pos": 698,
+                  "end": 724,
+                  "flags": 0,
+                  "escapedText": "SharedComponentModule"
+                },
+                "name": {
+                  "pos": 725,
+                  "end": 732,
+                  "flags": 0,
+                  "escapedText": "forRoot"
+                }
+              },
+              "arguments": []
+            },
+            {
+              "pos": 735,
+              "end": 804,
+              "flags": 0,
+              "kind": 186,
+              "expression": {
+                "pos": 735,
+                "end": 761,
+                "flags": 0,
+                "kind": 184,
+                "expression": {
+                  "pos": 735,
+                  "end": 752,
+                  "flags": 0,
+                  "escapedText": "RouterModule"
+                },
+                "name": {
+                  "pos": 753,
+                  "end": 761,
+                  "flags": 0,
+                  "escapedText": "forChild"
+                }
+              },
+              "arguments": [
+                {
+                  "pos": 762,
+                  "end": 803,
+                  "flags": 0,
+                  "kind": 182,
+                  "elements": [
+                    {
+                      "pos": 763,
+                      "end": 802,
+                      "flags": 0,
+                      "kind": 183,
+                      "properties": [
+                        {
+                          "pos": 764,
+                          "end": 773,
+                          "flags": 0,
+                          "kind": 269,
+                          "name": {
+                            "pos": 764,
+                            "end": 769,
+                            "flags": 0,
+                            "escapedText": "path"
+                          },
+                          "initializer": {
+                            "pos": 770,
+                            "end": 773,
+                            "flags": 0,
+                            "kind": 9,
+                            "text": ""
+                          }
+                        },
+                        {
+                          "pos": 774,
+                          "end": 800,
+                          "flags": 0,
+                          "kind": 269,
+                          "name": {
+                            "pos": 774,
+                            "end": 784,
+                            "flags": 0,
+                            "escapedText": "component"
+                          },
+                          "initializer": {
+                            "pos": 785,
+                            "end": 800,
+                            "flags": 0,
+                            "escapedText": "LoginComponent"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "pos": 810,
+        "end": 950,
+        "flags": 0,
+        "kind": 269,
+        "name": {
+          "pos": 810,
+          "end": 822,
+          "flags": 0,
+          "escapedText": "providers"
+        },
+        "initializer": {
+          "pos": 823,
+          "end": 950,
+          "flags": 0,
+          "kind": 182,
+          "multiLine": true,
+          "elements": [
+            {
+              "pos": 825,
+              "end": 841,
+              "flags": 0,
+              "escapedText": "UtilService"
+            },
+            {
+              "pos": 842,
+              "end": 861,
+              "flags": 0,
+              "escapedText": "SessionHandler"
+            },
+            {
+              "pos": 862,
+              "end": 945,
+              "flags": 0,
+              "kind": 183,
+              "multiLine": true,
+              "properties": [
+                {
+                  "pos": 868,
+                  "end": 901,
+                  "flags": 0,
+                  "kind": 269,
+                  "name": {
+                    "pos": 868,
+                    "end": 882,
+                    "flags": 0,
+                    "escapedText": "provide"
+                  },
+                  "initializer": {
+                    "pos": 883,
+                    "end": 901,
+                    "flags": 0,
+                    "escapedText": "AuthServiceConfig"
+                  }
+                },
+                {
+                  "pos": 902,
+                  "end": 938,
+                  "flags": 0,
+                  "kind": 269,
+                  "name": {
+                    "pos": 902,
+                    "end": 919,
+                    "flags": 0,
+                    "escapedText": "useFactory"
+                  },
+                  "initializer": {
+                    "pos": 920,
+                    "end": 938,
+                    "flags": 0,
+                    "escapedText": "socialLoginConfig"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "pos": 951,
+        "end": 984,
+        "flags": 0,
+        "kind": 269,
+        "name": {
+          "pos": 951,
+          "end": 966,
+          "flags": 0,
+          "escapedText": "declarations"
+        },
+        "initializer": {
+          "pos": 967,
+          "end": 984,
+          "flags": 0,
+          "kind": 182,
+          "elements": [
+            {
+              "pos": 969,
+              "end": 983,
+              "flags": 0,
+              "escapedText": "LoginComponent"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "name": "ModalModule",
+    "file": "pages/modal/modal.module.ts",
+    "providers": [
+      {
+        "name": "DfTransService"
+      },
+      {
+        "name": "UtilService"
+      }
+    ],
+    "declarations": [
+      {
+        "name": "BusSelectionModalComponent",
+        "file": "modal/bus-selection-modal/bus-selection-modal.component.ts",
+        "selector": "app-bus-selection-modal",
+        "providers": [],
+        "templateUrl": [
+          "bus-selection-modal.component.html"
+        ],
+        "styleUrls": [],
+        "__raw": [
+          {
+            "pos": 434,
+            "end": 472,
+            "flags": 0,
+            "kind": 269,
+            "name": {
+              "pos": 434,
+              "end": 445,
+              "flags": 0,
+              "escapedText": "selector"
+            },
+            "initializer": {
+              "pos": 446,
+              "end": 472,
+              "flags": 0,
+              "kind": 9,
+              "text": "app-bus-selection-modal"
+            }
+          },
+          {
+            "pos": 473,
+            "end": 527,
+            "flags": 0,
+            "kind": 269,
+            "name": {
+              "pos": 473,
+              "end": 487,
+              "flags": 0,
+              "escapedText": "templateUrl"
+            },
+            "initializer": {
+              "pos": 488,
+              "end": 527,
+              "flags": 0,
+              "kind": 9,
+              "text": "./bus-selection-modal.component.html"
+            }
+          }
+        ]
+      }
+    ],
+    "imports": [
+      {
+        "name": "COMMON_IMPORTS"
+      },
+      {
+        "ns": "RouterModule",
+        "name": "RouterModule.forChild(args)"
+      }
+    ],
+    "exports": [],
+    "bootstrap": [],
+    "__raw": [
+      {
+        "pos": 383,
+        "end": 502,
+        "flags": 0,
+        "kind": 269,
+        "name": {
+          "pos": 383,
+          "end": 393,
+          "flags": 0,
+          "escapedText": "imports"
+        },
+        "initializer": {
+          "pos": 394,
+          "end": 502,
+          "flags": 0,
+          "kind": 182,
+          "multiLine": true,
+          "elements": [
+            {
+              "pos": 396,
+              "end": 415,
+              "flags": 0,
+              "escapedText": "COMMON_IMPORTS"
+            },
+            {
+              "pos": 416,
+              "end": 497,
+              "flags": 0,
+              "kind": 186,
+              "expression": {
+                "pos": 416,
+                "end": 442,
+                "flags": 0,
+                "kind": 184,
+                "expression": {
+                  "pos": 416,
+                  "end": 433,
+                  "flags": 0,
+                  "escapedText": "RouterModule"
+                },
+                "name": {
+                  "pos": 434,
+                  "end": 442,
+                  "flags": 0,
+                  "escapedText": "forChild"
+                }
+              },
+              "arguments": [
+                {
+                  "pos": 443,
+                  "end": 496,
+                  "flags": 0,
+                  "kind": 182,
+                  "elements": [
+                    {
+                      "pos": 444,
+                      "end": 495,
+                      "flags": 0,
+                      "kind": 183,
+                      "properties": [
+                        {
+                          "pos": 445,
+                          "end": 454,
+                          "flags": 0,
+                          "kind": 269,
+                          "name": {
+                            "pos": 445,
+                            "end": 450,
+                            "flags": 0,
+                            "escapedText": "path"
+                          },
+                          "initializer": {
+                            "pos": 451,
+                            "end": 454,
+                            "flags": 0,
+                            "kind": 9,
+                            "text": ""
+                          }
+                        },
+                        {
+                          "pos": 455,
+                          "end": 493,
+                          "flags": 0,
+                          "kind": 269,
+                          "name": {
+                            "pos": 455,
+                            "end": 465,
+                            "flags": 0,
+                            "escapedText": "component"
+                          },
+                          "initializer": {
+                            "pos": 466,
+                            "end": 493,
+                            "flags": 0,
+                            "escapedText": "BusSelectionModalComponent"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "pos": 503,
+        "end": 559,
+        "flags": 0,
+        "kind": 269,
+        "name": {
+          "pos": 503,
+          "end": 515,
+          "flags": 0,
+          "escapedText": "providers"
+        },
+        "initializer": {
+          "pos": 516,
+          "end": 559,
+          "flags": 0,
+          "kind": 182,
+          "multiLine": true,
+          "elements": [
+            {
+              "pos": 518,
+              "end": 537,
+              "flags": 0,
+              "escapedText": "DfTransService"
+            },
+            {
+              "pos": 538,
+              "end": 554,
+              "flags": 0,
+              "escapedText": "UtilService"
+            }
+          ]
+        }
+      },
+      {
+        "pos": 560,
+        "end": 605,
+        "flags": 0,
+        "kind": 269,
+        "name": {
+          "pos": 560,
+          "end": 575,
+          "flags": 0,
+          "escapedText": "declarations"
+        },
+        "initializer": {
+          "pos": 576,
+          "end": 605,
+          "flags": 0,
+          "kind": 182,
+          "elements": [
+            {
+              "pos": 578,
+              "end": 604,
+              "flags": 0,
+              "escapedText": "BusSelectionModalComponent"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "name": "NewAccountModule",
+    "file": "pages/new-account/new-account.module.ts",
+    "providers": [
+      {
+        "name": "UserService"
+      },
+      {
+        "name": "UtilService"
+      },
+      {
+        "name": "SessionHandler"
+      },
+      {
+        "name": "{ provide: AuthServiceConfig, useFactory: socialLoginConfig }"
+      }
+    ],
+    "declarations": [
+      {
+        "name": "NewAccountComponent",
+        "file": "pages/new-account/new-account.component.ts",
+        "selector": "app-new-account",
+        "providers": [],
+        "templateUrl": [
+          "new-account.component.html"
+        ],
+        "styleUrls": [],
+        "__raw": [
+          {
+            "pos": 799,
+            "end": 829,
+            "flags": 0,
+            "kind": 269,
+            "name": {
+              "pos": 799,
+              "end": 810,
+              "flags": 0,
+              "escapedText": "selector"
+            },
+            "initializer": {
+              "pos": 811,
+              "end": 829,
+              "flags": 0,
+              "kind": 9,
+              "text": "app-new-account"
+            }
+          },
+          {
+            "pos": 830,
+            "end": 876,
+            "flags": 0,
+            "kind": 269,
+            "name": {
+              "pos": 830,
+              "end": 844,
+              "flags": 0,
+              "escapedText": "templateUrl"
+            },
+            "initializer": {
+              "pos": 845,
+              "end": 876,
+              "flags": 0,
+              "kind": 9,
+              "text": "./new-account.component.html"
+            }
+          }
+        ]
+      }
+    ],
+    "imports": [
+      {
+        "name": "COMMON_IMPORTS"
+      },
+      {
+        "name": "SocialLoginModule"
+      },
+      {
+        "ns": "BlockUIModule",
+        "name": "BlockUIModule.forRoot()"
+      },
+      {
+        "ns": "SharedComponentModule",
+        "name": "SharedComponentModule.forRoot()"
+      },
+      {
+        "ns": "RouterModule",
+        "name": "RouterModule.forChild(args)"
+      }
+    ],
+    "exports": [],
+    "bootstrap": [],
+    "__raw": [
+      {
+        "pos": 683,
+        "end": 884,
+        "flags": 0,
+        "kind": 269,
+        "name": {
+          "pos": 683,
+          "end": 693,
+          "flags": 0,
+          "escapedText": "imports"
+        },
+        "initializer": {
+          "pos": 694,
+          "end": 884,
+          "flags": 0,
+          "kind": 182,
+          "multiLine": true,
+          "elements": [
+            {
+              "pos": 696,
+              "end": 715,
+              "flags": 0,
+              "escapedText": "COMMON_IMPORTS"
+            },
+            {
+              "pos": 716,
+              "end": 738,
+              "flags": 0,
+              "escapedText": "SocialLoginModule"
+            },
+            {
+              "pos": 739,
+              "end": 767,
+              "flags": 0,
+              "kind": 186,
+              "expression": {
+                "pos": 739,
+                "end": 765,
+                "flags": 0,
+                "kind": 184,
+                "expression": {
+                  "pos": 739,
+                  "end": 757,
+                  "flags": 0,
+                  "escapedText": "BlockUIModule"
+                },
+                "name": {
+                  "pos": 758,
+                  "end": 765,
+                  "flags": 0,
+                  "escapedText": "forRoot"
+                }
+              },
+              "arguments": []
+            },
+            {
+              "pos": 768,
+              "end": 804,
+              "flags": 0,
+              "kind": 186,
+              "expression": {
+                "pos": 768,
+                "end": 802,
+                "flags": 0,
+                "kind": 184,
+                "expression": {
+                  "pos": 768,
+                  "end": 794,
+                  "flags": 0,
+                  "escapedText": "SharedComponentModule"
+                },
+                "name": {
+                  "pos": 795,
+                  "end": 802,
+                  "flags": 0,
+                  "escapedText": "forRoot"
+                }
+              },
+              "arguments": []
+            },
+            {
+              "pos": 805,
+              "end": 879,
+              "flags": 0,
+              "kind": 186,
+              "expression": {
+                "pos": 805,
+                "end": 831,
+                "flags": 0,
+                "kind": 184,
+                "expression": {
+                  "pos": 805,
+                  "end": 822,
+                  "flags": 0,
+                  "escapedText": "RouterModule"
+                },
+                "name": {
+                  "pos": 823,
+                  "end": 831,
+                  "flags": 0,
+                  "escapedText": "forChild"
+                }
+              },
+              "arguments": [
+                {
+                  "pos": 832,
+                  "end": 878,
+                  "flags": 0,
+                  "kind": 182,
+                  "elements": [
+                    {
+                      "pos": 833,
+                      "end": 877,
+                      "flags": 0,
+                      "kind": 183,
+                      "properties": [
+                        {
+                          "pos": 834,
+                          "end": 843,
+                          "flags": 0,
+                          "kind": 269,
+                          "name": {
+                            "pos": 834,
+                            "end": 839,
+                            "flags": 0,
+                            "escapedText": "path"
+                          },
+                          "initializer": {
+                            "pos": 840,
+                            "end": 843,
+                            "flags": 0,
+                            "kind": 9,
+                            "text": ""
+                          }
+                        },
+                        {
+                          "pos": 844,
+                          "end": 875,
+                          "flags": 0,
+                          "kind": 269,
+                          "name": {
+                            "pos": 844,
+                            "end": 854,
+                            "flags": 0,
+                            "escapedText": "component"
+                          },
+                          "initializer": {
+                            "pos": 855,
+                            "end": 875,
+                            "flags": 0,
+                            "escapedText": "NewAccountComponent"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "pos": 885,
+        "end": 932,
+        "flags": 0,
+        "kind": 269,
+        "name": {
+          "pos": 885,
+          "end": 900,
+          "flags": 0,
+          "escapedText": "declarations"
+        },
+        "initializer": {
+          "pos": 901,
+          "end": 932,
+          "flags": 0,
+          "kind": 182,
+          "multiLine": true,
+          "elements": [
+            {
+              "pos": 903,
+              "end": 927,
+              "flags": 0,
+              "escapedText": "NewAccountComponent"
+            }
+          ]
+        }
+      },
+      {
+        "pos": 933,
+        "end": 1090,
+        "flags": 0,
+        "kind": 269,
+        "name": {
+          "pos": 933,
+          "end": 945,
+          "flags": 0,
+          "escapedText": "providers"
+        },
+        "initializer": {
+          "pos": 946,
+          "end": 1090,
+          "flags": 0,
+          "kind": 182,
+          "multiLine": true,
+          "elements": [
+            {
+              "pos": 948,
+              "end": 964,
+              "flags": 0,
+              "escapedText": "UserService"
+            },
+            {
+              "pos": 965,
+              "end": 981,
+              "flags": 0,
+              "escapedText": "UtilService"
+            },
+            {
+              "pos": 982,
+              "end": 1001,
+              "flags": 0,
+              "escapedText": "SessionHandler"
+            },
+            {
+              "pos": 1002,
+              "end": 1085,
+              "flags": 0,
+              "kind": 183,
+              "multiLine": true,
+              "properties": [
+                {
+                  "pos": 1008,
+                  "end": 1041,
+                  "flags": 0,
+                  "kind": 269,
+                  "name": {
+                    "pos": 1008,
+                    "end": 1022,
+                    "flags": 0,
+                    "escapedText": "provide"
+                  },
+                  "initializer": {
+                    "pos": 1023,
+                    "end": 1041,
+                    "flags": 0,
+                    "escapedText": "AuthServiceConfig"
+                  }
+                },
+                {
+                  "pos": 1042,
+                  "end": 1078,
+                  "flags": 0,
+                  "kind": 269,
+                  "name": {
+                    "pos": 1042,
+                    "end": 1059,
+                    "flags": 0,
+                    "escapedText": "useFactory"
+                  },
+                  "initializer": {
+                    "pos": 1060,
+                    "end": 1078,
+                    "flags": 0,
+                    "escapedText": "socialLoginConfig"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "name": "Tab1PageModule",
+    "file": "pages/tab1/tab1.module.ts",
+    "providers": [],
+    "declarations": [
+      {
+        "name": "Tab1Page"
+      }
+    ],
+    "imports": [
+      {
+        "name": "IonicModule"
+      },
+      {
+        "name": "CommonModule"
+      },
+      {
+        "name": "FormsModule"
+      },
+      {
+        "ns": "RouterModule",
+        "name": "RouterModule.forChild(args)"
+      }
+    ],
+    "exports": [],
+    "bootstrap": [],
+    "__raw": [
+      {
+        "pos": 282,
+        "end": 415,
+        "flags": 0,
+        "kind": 269,
+        "name": {
+          "pos": 282,
+          "end": 292,
+          "flags": 0,
+          "escapedText": "imports"
+        },
+        "initializer": {
+          "pos": 293,
+          "end": 415,
+          "flags": 0,
+          "kind": 182,
+          "multiLine": true,
+          "elements": [
+            {
+              "pos": 295,
+              "end": 311,
+              "flags": 0,
+              "escapedText": "IonicModule"
+            },
+            {
+              "pos": 312,
+              "end": 329,
+              "flags": 0,
+              "escapedText": "CommonModule"
+            },
+            {
+              "pos": 330,
+              "end": 346,
+              "flags": 0,
+              "escapedText": "FormsModule"
+            },
+            {
+              "pos": 347,
+              "end": 410,
+              "flags": 0,
+              "kind": 186,
+              "expression": {
+                "pos": 347,
+                "end": 373,
+                "flags": 0,
+                "kind": 184,
+                "expression": {
+                  "pos": 347,
+                  "end": 364,
+                  "flags": 0,
+                  "escapedText": "RouterModule"
+                },
+                "name": {
+                  "pos": 365,
+                  "end": 373,
+                  "flags": 0,
+                  "escapedText": "forChild"
+                }
+              },
+              "arguments": [
+                {
+                  "pos": 374,
+                  "end": 409,
+                  "flags": 0,
+                  "kind": 182,
+                  "elements": [
+                    {
+                      "pos": 375,
+                      "end": 408,
+                      "flags": 0,
+                      "kind": 183,
+                      "properties": [
+                        {
+                          "pos": 376,
+                          "end": 385,
+                          "flags": 0,
+                          "kind": 269,
+                          "name": {
+                            "pos": 376,
+                            "end": 381,
+                            "flags": 0,
+                            "escapedText": "path"
+                          },
+                          "initializer": {
+                            "pos": 382,
+                            "end": 385,
+                            "flags": 0,
+                            "kind": 9,
+                            "text": ""
+                          }
+                        },
+                        {
+                          "pos": 386,
+                          "end": 406,
+                          "flags": 0,
+                          "kind": 269,
+                          "name": {
+                            "pos": 386,
+                            "end": 396,
+                            "flags": 0,
+                            "escapedText": "component"
+                          },
+                          "initializer": {
+                            "pos": 397,
+                            "end": 406,
+                            "flags": 0,
+                            "escapedText": "Tab1Page"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "pos": 416,
+        "end": 443,
+        "flags": 0,
+        "kind": 269,
+        "name": {
+          "pos": 416,
+          "end": 431,
+          "flags": 0,
+          "escapedText": "declarations"
+        },
+        "initializer": {
+          "pos": 432,
+          "end": 443,
+          "flags": 0,
+          "kind": 182,
+          "elements": [
+            {
+              "pos": 434,
+              "end": 442,
+              "flags": 0,
+              "escapedText": "Tab1Page"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "name": "Tab2PageModule",
+    "file": "pages/tab2/tab2.module.ts",
+    "providers": [],
+    "declarations": [
+      {
+        "name": "Tab2Page"
+      }
+    ],
+    "imports": [
+      {
+        "name": "IonicModule"
+      },
+      {
+        "name": "CommonModule"
+      },
+      {
+        "name": "FormsModule"
+      },
+      {
+        "ns": "RouterModule",
+        "name": "RouterModule.forChild(args)"
+      }
+    ],
+    "exports": [],
+    "bootstrap": [],
+    "__raw": [
+      {
+        "pos": 282,
+        "end": 415,
+        "flags": 0,
+        "kind": 269,
+        "name": {
+          "pos": 282,
+          "end": 292,
+          "flags": 0,
+          "escapedText": "imports"
+        },
+        "initializer": {
+          "pos": 293,
+          "end": 415,
+          "flags": 0,
+          "kind": 182,
+          "multiLine": true,
+          "elements": [
+            {
+              "pos": 295,
+              "end": 311,
+              "flags": 0,
+              "escapedText": "IonicModule"
+            },
+            {
+              "pos": 312,
+              "end": 329,
+              "flags": 0,
+              "escapedText": "CommonModule"
+            },
+            {
+              "pos": 330,
+              "end": 346,
+              "flags": 0,
+              "escapedText": "FormsModule"
+            },
+            {
+              "pos": 347,
+              "end": 410,
+              "flags": 0,
+              "kind": 186,
+              "expression": {
+                "pos": 347,
+                "end": 373,
+                "flags": 0,
+                "kind": 184,
+                "expression": {
+                  "pos": 347,
+                  "end": 364,
+                  "flags": 0,
+                  "escapedText": "RouterModule"
+                },
+                "name": {
+                  "pos": 365,
+                  "end": 373,
+                  "flags": 0,
+                  "escapedText": "forChild"
+                }
+              },
+              "arguments": [
+                {
+                  "pos": 374,
+                  "end": 409,
+                  "flags": 0,
+                  "kind": 182,
+                  "elements": [
+                    {
+                      "pos": 375,
+                      "end": 408,
+                      "flags": 0,
+                      "kind": 183,
+                      "properties": [
+                        {
+                          "pos": 376,
+                          "end": 385,
+                          "flags": 0,
+                          "kind": 269,
+                          "name": {
+                            "pos": 376,
+                            "end": 381,
+                            "flags": 0,
+                            "escapedText": "path"
+                          },
+                          "initializer": {
+                            "pos": 382,
+                            "end": 385,
+                            "flags": 0,
+                            "kind": 9,
+                            "text": ""
+                          }
+                        },
+                        {
+                          "pos": 386,
+                          "end": 406,
+                          "flags": 0,
+                          "kind": 269,
+                          "name": {
+                            "pos": 386,
+                            "end": 396,
+                            "flags": 0,
+                            "escapedText": "component"
+                          },
+                          "initializer": {
+                            "pos": 397,
+                            "end": 406,
+                            "flags": 0,
+                            "escapedText": "Tab2Page"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "pos": 416,
+        "end": 443,
+        "flags": 0,
+        "kind": 269,
+        "name": {
+          "pos": 416,
+          "end": 431,
+          "flags": 0,
+          "escapedText": "declarations"
+        },
+        "initializer": {
+          "pos": 432,
+          "end": 443,
+          "flags": 0,
+          "kind": 182,
+          "elements": [
+            {
+              "pos": 434,
+              "end": 442,
+              "flags": 0,
+              "escapedText": "Tab2Page"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "name": "Tab3PageModule",
+    "file": "pages/tab3/tab3.module.ts",
+    "providers": [],
+    "declarations": [
+      {
+        "name": "Tab3Page"
+      }
+    ],
+    "imports": [
+      {
+        "name": "IonicModule"
+      },
+      {
+        "name": "CommonModule"
+      },
+      {
+        "name": "FormsModule"
+      },
+      {
+        "ns": "RouterModule",
+        "name": "RouterModule.forChild(args)"
+      }
+    ],
+    "exports": [],
+    "bootstrap": [],
+    "__raw": [
+      {
+        "pos": 282,
+        "end": 415,
+        "flags": 0,
+        "kind": 269,
+        "name": {
+          "pos": 282,
+          "end": 292,
+          "flags": 0,
+          "escapedText": "imports"
+        },
+        "initializer": {
+          "pos": 293,
+          "end": 415,
+          "flags": 0,
+          "kind": 182,
+          "multiLine": true,
+          "elements": [
+            {
+              "pos": 295,
+              "end": 311,
+              "flags": 0,
+              "escapedText": "IonicModule"
+            },
+            {
+              "pos": 312,
+              "end": 329,
+              "flags": 0,
+              "escapedText": "CommonModule"
+            },
+            {
+              "pos": 330,
+              "end": 346,
+              "flags": 0,
+              "escapedText": "FormsModule"
+            },
+            {
+              "pos": 347,
+              "end": 410,
+              "flags": 0,
+              "kind": 186,
+              "expression": {
+                "pos": 347,
+                "end": 373,
+                "flags": 0,
+                "kind": 184,
+                "expression": {
+                  "pos": 347,
+                  "end": 364,
+                  "flags": 0,
+                  "escapedText": "RouterModule"
+                },
+                "name": {
+                  "pos": 365,
+                  "end": 373,
+                  "flags": 0,
+                  "escapedText": "forChild"
+                }
+              },
+              "arguments": [
+                {
+                  "pos": 374,
+                  "end": 409,
+                  "flags": 0,
+                  "kind": 182,
+                  "elements": [
+                    {
+                      "pos": 375,
+                      "end": 408,
+                      "flags": 0,
+                      "kind": 183,
+                      "properties": [
+                        {
+                          "pos": 376,
+                          "end": 385,
+                          "flags": 0,
+                          "kind": 269,
+                          "name": {
+                            "pos": 376,
+                            "end": 381,
+                            "flags": 0,
+                            "escapedText": "path"
+                          },
+                          "initializer": {
+                            "pos": 382,
+                            "end": 385,
+                            "flags": 0,
+                            "kind": 9,
+                            "text": ""
+                          }
+                        },
+                        {
+                          "pos": 386,
+                          "end": 406,
+                          "flags": 0,
+                          "kind": 269,
+                          "name": {
+                            "pos": 386,
+                            "end": 396,
+                            "flags": 0,
+                            "escapedText": "component"
+                          },
+                          "initializer": {
+                            "pos": 397,
+                            "end": 406,
+                            "flags": 0,
+                            "escapedText": "Tab3Page"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "pos": 416,
+        "end": 443,
+        "flags": 0,
+        "kind": 269,
+        "name": {
+          "pos": 416,
+          "end": 431,
+          "flags": 0,
+          "escapedText": "declarations"
+        },
+        "initializer": {
+          "pos": 432,
+          "end": 443,
+          "flags": 0,
+          "kind": 182,
+          "elements": [
+            {
+              "pos": 434,
+              "end": 442,
+              "flags": 0,
+              "escapedText": "Tab3Page"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "name": "TabsPageModule",
+    "file": "pages/tabs/tabs.module.ts",
+    "providers": [],
+    "declarations": [
+      {
+        "name": "TabsPage"
+      }
+    ],
+    "imports": [
+      {
+        "name": "IonicModule"
+      },
+      {
+        "name": "CommonModule"
+      },
+      {
+        "name": "FormsModule"
+      },
+      {
+        "name": "TabsPageRoutingModule"
+      }
+    ],
+    "exports": [],
+    "bootstrap": [],
+    "__raw": [
+      {
+        "pos": 298,
+        "end": 394,
+        "flags": 0,
+        "kind": 269,
+        "name": {
+          "pos": 298,
+          "end": 308,
+          "flags": 0,
+          "escapedText": "imports"
+        },
+        "initializer": {
+          "pos": 309,
+          "end": 394,
+          "flags": 0,
+          "kind": 182,
+          "multiLine": true,
+          "elements": [
+            {
+              "pos": 311,
+              "end": 327,
+              "flags": 0,
+              "escapedText": "IonicModule"
+            },
+            {
+              "pos": 328,
+              "end": 345,
+              "flags": 0,
+              "escapedText": "CommonModule"
+            },
+            {
+              "pos": 346,
+              "end": 362,
+              "flags": 0,
+              "escapedText": "FormsModule"
+            },
+            {
+              "pos": 363,
+              "end": 389,
+              "flags": 0,
+              "escapedText": "TabsPageRoutingModule"
+            }
+          ]
+        }
+      },
+      {
+        "pos": 395,
+        "end": 422,
+        "flags": 0,
+        "kind": 269,
+        "name": {
+          "pos": 395,
+          "end": 410,
+          "flags": 0,
+          "escapedText": "declarations"
+        },
+        "initializer": {
+          "pos": 411,
+          "end": 422,
+          "flags": 0,
+          "kind": 182,
+          "elements": [
+            {
+              "pos": 413,
+              "end": 421,
+              "flags": 0,
+              "escapedText": "TabsPage"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "name": "TabsPageRoutingModule",
+    "file": "pages/tabs/tabs.router.module.ts",
+    "providers": [],
+    "declarations": [],
+    "imports": [
+      {
+        "ns": "RouterModule",
+        "name": "RouterModule.forChild(args)"
+      }
+    ],
+    "exports": [
+      {
+        "name": "RouterModule"
+      }
+    ],
+    "bootstrap": [],
+    "__raw": [
+      {
+        "pos": 979,
+        "end": 1031,
+        "flags": 0,
+        "kind": 269,
+        "name": {
+          "pos": 979,
+          "end": 989,
+          "flags": 0,
+          "escapedText": "imports"
+        },
+        "initializer": {
+          "pos": 990,
+          "end": 1031,
+          "flags": 0,
+          "kind": 182,
+          "multiLine": true,
+          "elements": [
+            {
+              "pos": 992,
+              "end": 1026,
+              "flags": 0,
+              "kind": 186,
+              "expression": {
+                "pos": 992,
+                "end": 1018,
+                "flags": 0,
+                "kind": 184,
+                "expression": {
+                  "pos": 992,
+                  "end": 1009,
+                  "flags": 0,
+                  "escapedText": "RouterModule"
+                },
+                "name": {
+                  "pos": 1010,
+                  "end": 1018,
+                  "flags": 0,
+                  "escapedText": "forChild"
+                }
+              },
+              "arguments": [
+                {
+                  "pos": 1019,
+                  "end": 1025,
+                  "flags": 0,
+                  "escapedText": "routes"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "pos": 1032,
+        "end": 1058,
+        "flags": 0,
+        "kind": 269,
+        "name": {
+          "pos": 1032,
+          "end": 1042,
+          "flags": 0,
+          "escapedText": "exports"
+        },
+        "initializer": {
+          "pos": 1043,
+          "end": 1058,
+          "flags": 0,
+          "kind": 182,
+          "elements": [
+            {
+              "pos": 1045,
+              "end": 1057,
+              "flags": 0,
+              "escapedText": "RouterModule"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "name": "SharedComponentModule",
+    "file": "shared/component/shared-component.module.ts",
+    "providers": [],
+    "declarations": [
+      {
+        "name": "components"
+      }
+    ],
+    "imports": [
+      {
+        "name": "COMMON_IMPORTS"
+      },
+      {
+        "name": "ReactiveFormsModule"
+      }
+    ],
+    "exports": [
+      {
+        "name": "components"
+      }
+    ],
+    "bootstrap": [],
+    "__raw": [
+      {
+        "pos": 343,
+        "end": 405,
+        "flags": 0,
+        "kind": 269,
+        "name": {
+          "pos": 343,
+          "end": 353,
+          "flags": 0,
+          "escapedText": "imports"
+        },
+        "initializer": {
+          "pos": 354,
+          "end": 405,
+          "flags": 0,
+          "kind": 182,
+          "multiLine": true,
+          "elements": [
+            {
+              "pos": 356,
+              "end": 375,
+              "flags": 0,
+              "escapedText": "COMMON_IMPORTS"
+            },
+            {
+              "pos": 376,
+              "end": 400,
+              "flags": 0,
+              "escapedText": "ReactiveFormsModule"
+            }
+          ]
+        }
+      },
+      {
+        "pos": 406,
+        "end": 433,
+        "flags": 0,
+        "kind": 269,
+        "name": {
+          "pos": 406,
+          "end": 421,
+          "flags": 0,
+          "escapedText": "declarations"
+        },
+        "initializer": {
+          "pos": 422,
+          "end": 433,
+          "flags": 0,
+          "escapedText": "components"
+        }
+      },
+      {
+        "pos": 434,
+        "end": 456,
+        "flags": 0,
+        "kind": 269,
+        "name": {
+          "pos": 434,
+          "end": 444,
+          "flags": 0,
+          "escapedText": "exports"
+        },
+        "initializer": {
+          "pos": 445,
+          "end": 456,
+          "flags": 0,
+          "escapedText": "components"
+        }
+      }
+    ]
+  }
+]

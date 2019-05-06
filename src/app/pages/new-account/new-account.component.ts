@@ -25,9 +25,9 @@ export class NewAccountComponent {
   constructor(
     private socialService: AuthService,
     private userService: UserService,
-    private utilService: UtilService,
     private sessionHandler: SessionHandler,
     private modalCtrl: ModalController,
+    private utilService: UtilService,
   ) { }
 
   public async saveEmailPassword(user: User): Promise<void> {

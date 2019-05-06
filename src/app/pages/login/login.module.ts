@@ -6,7 +6,6 @@ import { SessionHandler } from '../../auth/session.handler';
 import { socialLoginConfig } from '../../config/social-login.config';
 import { SharedComponentModule } from '../../shared/component/shared-component.module';
 import { COMMON_IMPORTS } from '../../utils/common-imports';
-import { UtilService } from '../../utils/util.service';
 import { LoginComponent } from './login.component';
 
 @NgModule({
@@ -18,7 +17,6 @@ import { LoginComponent } from './login.component';
     RouterModule.forChild([{ path: '', component: LoginComponent }]),
   ],
   providers: [
-    UtilService,
     SessionHandler,
     {
       provide: AuthServiceConfig,

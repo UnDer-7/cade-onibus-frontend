@@ -8,7 +8,7 @@ import { User } from '../models/user.model';
 import { SessionService } from '../resource/session.service';
 import { ServerErrorMessages } from '../utils/server-error.messages';
 import { UtilService } from '../utils/util.service';
-import { saveJWT } from './jwt.handler';
+import { removeJWT, saveJWT } from './jwt.handler';
 
 @Injectable()
 export class SessionHandler {
@@ -45,13 +45,20 @@ export class SessionHandler {
     );
   }
 
-  // public logout(): void {
-  // }
+  public logout(): void {
+    removeJWT();
+    this.router.navigateByUrl('/').then(res => {
+      if (res) {
+        this.utilService.showToast('Você não esta mais logado', 'danger');
+      }
+    });
+  }
 
   private subscriptionHandler(observable: Observable<string>): void {
     observable.subscribe(
       res => {
         saveJWT(res);
+        console.log('ROUTE SAVE: ', this.utilService.blockedUrl);
         this.router.navigateByUrl('/home');
       },
       (err: HttpErrorResponse) => {
