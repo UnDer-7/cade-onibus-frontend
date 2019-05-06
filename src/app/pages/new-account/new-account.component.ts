@@ -30,7 +30,13 @@ export class NewAccountComponent {
     private modalCtrl: ModalController,
   ) { }
 
-  public async saveEmailPassword(): Promise<void> {
+  public async saveEmailPassword(user: User): Promise<void> {
+    const bus = await this.busSelection();
+
+    if (bus && bus.length > 0) {
+      user.bus = bus;
+      this.createEmailPasswordUser(user);
+    }
   }
 
   public async saveGoogle(): Promise<void> {
@@ -65,9 +71,8 @@ export class NewAccountComponent {
       });
   }
 
-  private createEmailPasswordUser(user: User, bus: Bus[]): void {
+  private createEmailPasswordUser(user: User): void {
     const password = user.password;
-    user.bus = bus;
     this.blockUi.start();
 
     this.userService.createUser(user).pipe(
@@ -76,6 +81,7 @@ export class NewAccountComponent {
       res => {
         res.password = password;
         this.sessionHandler.loginWithEmail(res);
+        this.utilService.showToast(`${ res.name } cadastrado com sucesso`, 'success');
       },
       (err: HttpErrorResponse) => {
         if (err.status === 400) {

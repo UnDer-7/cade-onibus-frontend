@@ -4,10 +4,10 @@ import { environment } from '../../../../environments/environment';
 import { User } from '../../../models/user.model';
 
 @Component({
-  selector: 'app-email-password',
-  templateUrl: './email-password.component.html',
+  selector: 'app-email-password-form',
+  templateUrl: './email-password-form.component.html',
 })
-export class EmailPasswordComponent {
+export class EmailPasswordFormComponent {
   public readonly contentColor: string = environment.contentColor;
 
   @Output() public userSubmitted: EventEmitter<User> = new EventEmitter();
@@ -28,7 +28,7 @@ export class EmailPasswordComponent {
     this.isSubmitted = true;
     if (this.loginWithEmailForm.invalid) return;
 
-    console.log('TO SAVE: ', this.loginWithEmailForm.value);
+    this.userSubmitted.emit(this.loginWithEmailForm.value);
   }
 
   public showPassword(): void {

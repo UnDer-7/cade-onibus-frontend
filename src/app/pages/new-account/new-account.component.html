@@ -22,7 +22,7 @@
         <ion-card padding text-center style="margin-top: 27%" color="white">
           <ion-title>NOVA CONTA</ion-title>
           <ion-card-content>
-            <app-email-password></app-email-password>
+            <app-email-password-form (userSubmitted)="saveEmailPassword($event)"></app-email-password-form>
 
             <div margin-vertical>
               <ion-label>OU</ion-label>
