@@ -22,10 +22,13 @@
             <ion-button expand="block" fill="outline" color="primary" (click)="google()">
               <ion-icon name="logo-google"></ion-icon>
             </ion-button>
+            <div margin-top>
+              <app-email-password-form [isCreation]="false" *ngIf="isEmailPassword" (userSubmitted)="email($event)"></app-email-password-form>
+            </div>
 
-            <ion-label>OU</ion-label>
+            <ion-label *ngIf="!isEmailPassword">OU</ion-label>
 
-            <ion-button expand="block" fill="clear" color="primary">
+            <ion-button expand="block" fill="clear" color="primary" (click)="onEmailSelection()" *ngIf="!isEmailPassword">
               EMAIL E SENHA
             </ion-button>
           </ion-card-content>

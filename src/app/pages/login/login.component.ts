@@ -4,7 +4,7 @@ import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { finalize } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { SessionHandler } from '../../auth/session.handler';
-import { SocialUserToUser } from '../../models/user.model';
+import { SocialUserToUser, User } from '../../models/user.model';
 import { UtilService } from '../../utils/util.service';
 
 @Component({
@@ -14,6 +14,8 @@ import { UtilService } from '../../utils/util.service';
 export class LoginComponent {
   public readonly contentColor: string = environment.contentColor;
   public readonly appName: string = environment.appName;
+
+  public isEmailPassword: boolean = false;
 
   @BlockUI() private blockUi!: NgBlockUI;
 
@@ -28,6 +30,15 @@ export class LoginComponent {
     this.blockUi.start();
     await this.socialService.signIn(GoogleLoginProvider.PROVIDER_ID).catch(this.blockUi.stop);
     this.loginWithGoogle();
+  }
+
+  public email(user: User): void {
+    this.blockUi.start();
+    this.sessionHandler.loginWithEmail(user);
+  }
+
+  public onEmailSelection(): void {
+    this.isEmailPassword = true;
   }
 
   private loginWithGoogle(): void {

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { environment } from '../../../../environments/environment';
 import { User } from '../../../models/user.model';
@@ -7,21 +7,28 @@ import { User } from '../../../models/user.model';
   selector: 'app-email-password-form',
   templateUrl: './email-password-form.component.html',
 })
-export class EmailPasswordFormComponent {
+export class EmailPasswordFormComponent implements OnInit {
   public readonly contentColor: string = environment.contentColor;
 
+  @Input() public isCreation: boolean = true;
   @Output() public userSubmitted: EventEmitter<User> = new EventEmitter();
+
+  public loginWithEmailForm!: FormGroup;
 
   public passwordIcon: string = 'eye-off';
   public passwordType: string = 'password';
   public isSubmitted: boolean = false;
 
-  private loginWithEmailForm!: FormGroup;
-
   constructor(
     private fb: FormBuilder,
-  ) {
-    this.emailFormBuilder();
+  ) { }
+
+  public ngOnInit(): void {
+    if (this.isCreation) {
+      this.newAccountFormBuilder();
+    } else {
+      this.loginFormBuilder();
+    }
   }
 
   public saveEmailPassword(): void {
@@ -39,6 +46,13 @@ export class EmailPasswordFormComponent {
       this.passwordIcon = 'eye-off';
       this.passwordType = 'password';
     }
+  }
+
+  get buttonText(): string {
+    if (this.isCreation) {
+      return 'CRIAR COM E-MAIL/SENHA';
+    }
+    return 'ENTRAR';
   }
 
   get formControls(): { [p: string]: AbstractControl } {
@@ -99,7 +113,22 @@ export class EmailPasswordFormComponent {
     }
   }
 
-  private emailFormBuilder(): void {
+  private loginFormBuilder(): void {
+    this.loginWithEmailForm = this.fb.group({
+      email: ['', [
+        Validators.required,
+        Validators.email,
+        Validators.maxLength(50),
+      ]],
+      password: ['', [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(50),
+      ]],
+    });
+  }
+
+  private newAccountFormBuilder(): void {
     this.loginWithEmailForm = this.fb.group({
       name: ['', [
         Validators.required,
