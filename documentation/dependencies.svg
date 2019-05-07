@@ -724,15 +724,15 @@
 <path fill="none" stroke="#000000" d="M549.4672,-122.0411C549.4672,-159.4476 549.4672,-242 549.4672,-242 549.4672,-242 971.003,-242 971.003,-242"/>
 <polygon fill="#000000" stroke="#000000" points="971.003,-245.5001 981.003,-242 971.0029,-238.5001 971.003,-245.5001"/>
 </g>
-<!-- Tab2Page -->
+<!-- TabMapComponent -->
 <g id="node36" class="node">
-<title>Tab2Page</title>
+<title>TabMapComponent</title>
 <polygon fill="#ffffb3" stroke="#000000" points="327.979,-122 256.021,-122 256.021,-86 327.979,-86 327.979,-122"/>
-<text text-anchor="middle" x="292" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">Tab2Page</text>
+<text text-anchor="middle" x="292" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">TabMapComponent</text>
 </g>
-<!-- Tab2Page&#45;&gt;Tab2PageModule -->
+<!-- TabMapComponent&#45;&gt;Tab2PageModule -->
 <g id="edge44" class="edge">
-<title>Tab2Page&#45;&gt;Tab2PageModule</title>
+<title>TabMapComponent&#45;&gt;Tab2PageModule</title>
 <path fill="none" stroke="#000000" d="M292,-122.0109C292,-122.0109 292,-151.855 292,-151.855"/>
 <polygon fill="#000000" stroke="#000000" points="288.5001,-151.8549 292,-161.855 295.5001,-151.855 288.5001,-151.8549"/>
 </g>

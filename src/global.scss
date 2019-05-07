@@ -11,6 +11,11 @@
 @import '~@ionic/angular/css/flex-utils.css';
 
 
+//ion-refresher-content {
+//  background-color: #7044ff;
+//}
+$refresher-icon-color: red;
+
 .ion-color-white {
   --ion-color-base: #ffffff;
   --ion-color-base-rgb: 255,255,255;

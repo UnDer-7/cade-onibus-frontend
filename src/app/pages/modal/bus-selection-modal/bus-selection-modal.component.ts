@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AlertController, ModalController } from '@ionic/angular';
 import { environment } from '../../../../environments/environment';
+import { SessionHandler } from '../../../auth/session.handler';
 import { Bus } from '../../../models/bus.model';
 import { DfTransService } from '../../../resource/df-trans.service';
 import { UtilService } from '../../../utils/util.service';
@@ -23,10 +24,14 @@ export class BusSelectionModalComponent implements OnInit {
     private utilService: UtilService,
     private alertCtrl: AlertController,
     private modalCtrl: ModalController,
+    private sessionHandler: SessionHandler,
   ) {
   }
 
   public ngOnInit(): void {
+    if (this.sessionHandler.isLoggedIn()) {
+      return;
+    }
     this.alertCtrl.create({
       header: 'Procure seus Ônibus',
       message: 'Procure e selecione os principais ônibus que você utiliza',

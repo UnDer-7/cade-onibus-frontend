@@ -16,6 +16,10 @@ export class UserService {
     return this.http.post<User>(this.resourceUrl, user);
   }
 
+  public updateUser(user: User): Observable<any> {
+    return this.http.put<any>(this.resourceUrl, user);
+  }
+
   public getUser(email: string): Observable<User> {
     return this.http.get(`${this.resourceUrl}/${email}`);
   }

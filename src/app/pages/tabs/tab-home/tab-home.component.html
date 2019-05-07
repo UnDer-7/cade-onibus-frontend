@@ -3,9 +3,45 @@
     <ion-title text-center [color]="appColor">
       {{ appName }}
     </ion-title>
+    <ion-progress-bar type="indeterminate" [color]="appColor" *ngIf="isLoading"></ion-progress-bar>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [color]="appColor">
+<ion-content [color]="appColor" padding>
+  <ion-refresher slot="fixed" (ionRefresh)="getUser($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Arraste para atualizar"
+      refreshingSpinner="circles">
+    </ion-refresher-content>
+  </ion-refresher>
 
+  <ion-card color="white" *ngIf="!isLoading">
+    <ion-card-content>
+      <ion-button expand="block" fill="outline" [color]="appColor" (click)="onAddingBus()" *ngIf="user.bus.length <= 0">
+        ADICIONAR ÔNIBUS
+      </ion-button>
+      <div *ngFor="let b of user.bus; let i = index; let last = last">
+        <ion-list>
+          <ion-item-sliding>
+            <ion-item-options side="start">
+              <ion-item-option color="danger" (click)="deleteBus(b)">
+                <ion-icon name="trash" slot="icon-only" color="white"></ion-icon>
+              </ion-item-option>
+            </ion-item-options>
+            <ion-item class="ion-activatable" slot="start" [lines]="canShowLine(last)">
+              <ion-badge style="margin-right: 10px" color="dark">{{ b.numero }}</ion-badge>
+              <ion-label text-wrap>{{ b.descricao }}</ion-label>
+              <ion-text
+                style="margin-left: 10px"
+                color="danger">
+                {{ b.faixaTarifaria.tarifa |  currency: 'R$ '}}
+              </ion-text>
+              <ion-ripple-effect></ion-ripple-effect>
+            </ion-item>
+          </ion-item-sliding>
+        </ion-list>
+      </div>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
