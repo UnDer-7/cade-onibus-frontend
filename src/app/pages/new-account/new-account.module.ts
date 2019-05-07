@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AuthServiceConfig, SocialLoginModule } from 'angularx-social-login';
 import { BlockUIModule } from 'ng-block-ui';
-import { SessionHandler } from '../../auth/session.handler';
 import { socialLoginConfig } from '../../config/social-login.config';
 import { UserService } from '../../resource/user.service';
 import { SharedComponentModule } from '../../shared/component/shared-component.module';
@@ -22,7 +21,6 @@ import { NewAccountComponent } from './new-account.component';
   ],
   providers: [
     UserService,
-    SessionHandler,
     {
       provide: AuthServiceConfig,
       useFactory: socialLoginConfig,

@@ -8,7 +8,8 @@ import { User } from '../models/user.model';
 import { SessionService } from '../resource/session.service';
 import { ServerErrorMessages } from '../utils/server-error.messages';
 import { UtilService } from '../utils/util.service';
-import { removeJWT, saveJWT } from './jwt.handler';
+import { decodeJWT, getJWT, removeJWT, saveJWT } from './jwt.handler';
+import * as jwtDecode from 'jwt-decode';
 
 @Injectable()
 export class SessionHandler {
@@ -54,6 +55,19 @@ export class SessionHandler {
     });
   }
 
+  public isLoggedIn(): boolean {
+    switch (false) {
+      case !!getJWT():
+        return false;
+      case this.isTokenValid():
+        return false;
+      case this.isTokenExpired():
+        return false;
+      default:
+        return true;
+    }
+  }
+
   private subscriptionHandler(observable: Observable<string>): void {
     observable.subscribe(
       res => {
@@ -72,5 +86,21 @@ export class SessionHandler {
         }
       },
     );
+  }
+
+  private isTokenValid(): boolean {
+    try {
+      jwtDecode(getJWT() as string);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  private isTokenExpired(): boolean {
+    const expiration = new Date(decodeJWT().exp * 1000);
+    const currentDate = new Date();
+
+    return expiration >= currentDate;
   }
 }

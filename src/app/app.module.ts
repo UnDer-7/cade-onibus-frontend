@@ -9,6 +9,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { SessionHandler } from './auth/session.handler';
 import { CanLogInGuard } from './guard/can-log-in.guard';
 import { IsLoggedInGuard } from './guard/is-logged-in.guard';
 import { ErrorInterceptor } from './interceptor/error.interceptor';
@@ -31,6 +32,7 @@ import { UtilService } from './utils/util.service';
     StatusBar,
     SplashScreen,
     SessionService,
+    SessionHandler,
     IsLoggedInGuard,
     CanLogInGuard,
     UtilService,
