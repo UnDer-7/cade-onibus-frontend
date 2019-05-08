@@ -26,6 +26,15 @@ const routes: Routes = [
         ],
       },
       {
+        path: 'map/:linha',
+        children: [
+          {
+            path: '',
+            loadChildren: './tab-map/tab-map.module#TabMapModule',
+          },
+        ],
+      },
+      {
         path: 'tab3',
         children: [
           {

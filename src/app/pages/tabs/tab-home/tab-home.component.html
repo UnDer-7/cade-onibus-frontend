@@ -29,7 +29,8 @@
                 <ion-icon name="trash" slot="icon-only" color="white"></ion-icon>
               </ion-item-option>
             </ion-item-options>
-            <ion-item class="ion-activatable" slot="start" [lines]="canShowLine(last)">
+
+            <ion-item class="ion-activatable" slot="start" [lines]="canShowLine(last)" [routerLink]="['/app/tabs/map/', b.numero]">
               <ion-badge style="margin-right: 10px" color="dark">{{ b.numero }}</ion-badge>
               <ion-label text-wrap>{{ b.descricao }}</ion-label>
               <ion-text

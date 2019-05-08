@@ -7,9 +7,43 @@
 </ion-header>
 
 <ion-content [color]="appColor">
-  <ion-item lines="none">
-    <ion-button>Procure seu ônibus</ion-button>
-  </ion-item>
-  <agm-map>
+  <agm-map
+    (mapReady)="mapsReady($event)"
+    [latitude]="userPosition.latitude"
+    [longitude]="userPosition.longitude"
+    [zoom]="12">
+
+    name="linha-cidade"
+    debounce="500"
+    autocomplete="true"
+    placeholder="LINHA OU CIDADE"
+    clearInput="true"
+    [(ngModel)]="searchParams"
+    (keydown.enter)="findBus()"
+    (ionChange)="findBus()">
+
+    <ion-searchbar
+      debounce="500"
+      autocomplete="false"
+      placeholder="LINHA OU CIDADE"
+      #search
+      (click)="findBus()"
+      (keydown.enter)="findBus()"
+      (ionChange)="findBus()"
+      [(ngModel)]="searchParams"></ion-searchbar>
+
+    <agm-marker
+    id="users-marker"
+    [latitude]="userCurrentPosition.latitude"
+    [longitude]="userCurrentPosition.longitude">
+    </agm-marker>
+
+    <agm-marker
+      id="bus-marker"
+      [iconUrl]="icons.dfTrans"
+      *ngFor="let bus of busCurrentPosition"
+      [latitude]="bus.geometry.latitude"
+      [longitude]="bus.geometry.longitude">
+    </agm-marker>
   </agm-map>
 </ion-content>

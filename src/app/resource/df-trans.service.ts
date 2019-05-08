@@ -16,7 +16,7 @@ export class DfTransService {
     return this.http.get<Bus[]>(`${this.resourceUrl}/linha/find/${search}`);
   }
 
-  public busLocation(linha: string): Observable<any> {
+  public watchBusLocation(linha: string): Observable<any> {
     return this.http.get<any>(`${this.resourceUrl}/gps/linha/${linha}/geo/recent`);
   }
 }
