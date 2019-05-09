@@ -56,7 +56,11 @@
     "tslint": "~5.16.0",
     "typescript": "~3.1.6"
   },
-  "author": "Mateus Gomes da Silva Cardoso",
+  "author": {
+    "name": "Mateus Gomes da Silva Cardos",
+    "url": "https://www.linkedin.com/in/mateus-gomes-da-silva-cardoso/",
+    "email": "mateus7532@gmail.com"
+  },
   "homepage": "https://ionicframework.com/",
   "repository": {
     "type": "git",
