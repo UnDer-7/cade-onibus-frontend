@@ -35,11 +35,11 @@ const routes: Routes = [
         ],
       },
       {
-        path: 'tab3',
+        path: 'perfil',
         children: [
           {
             path: '',
-            loadChildren: './tab3/tab3.module#Tab3PageModule',
+            loadChildren: './tab-perfil/tab-perfil.module#TabPerfilModule',
           },
         ],
       },
