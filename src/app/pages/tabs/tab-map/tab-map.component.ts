@@ -1,11 +1,15 @@
 import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 import { Subscription, timer } from 'rxjs';
-import { flatMap } from 'rxjs/operators';
+import { finalize, flatMap } from 'rxjs/operators';
 import { environment } from '../../../../environments/environment';
 import { BusCoordinates, ObjectsToBusCoordinates } from '../../../models/bus-coordinates.model';
+import { Bus } from '../../../models/bus.model';
 import { Coordinates } from '../../../models/coordinates.model';
 import { DfTransService } from '../../../resource/df-trans.service';
+import { UtilService } from '../../../utils/util.service';
+import { BusSelectionModalComponent } from '../../modal/bus-selection-modal/bus-selection-modal.component';
 
 declare const google: any;
 
@@ -17,6 +21,11 @@ export class TabMapComponent {
   public readonly appName: string = environment.appName;
   public readonly appColor: string = environment.contentColor;
 
+  public userCurrentPosition: Coordinates = {} as Coordinates;
+  public userPosition: Coordinates = {} as Coordinates;
+  public busCurrentPosition: BusCoordinates[] = [] as BusCoordinates[];
+  public isLoading: boolean = false;
+
   public icons: any = {
     dfTrans: {
       url: '../../../../assets/bus-icon-dfTrans.png',
@@ -27,18 +36,16 @@ export class TabMapComponent {
     },
   };
 
-  public userCurrentPosition: Coordinates = {} as Coordinates;
-  public userPosition: Coordinates = {} as Coordinates;
-  public busCurrentPosition: BusCoordinates[] = [] as BusCoordinates[];
-  public searchParams: string = '';
-
   @ViewChild('search') public search!: any;
+  @ViewChild('currentBuss') public currentBuss!: any;
   private subscription: Subscription[] = [] as Subscription[];
   private watchLocationID!: number;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private dfTransService: DfTransService,
+    private modalCtr: ModalController,
+    private utilService: UtilService,
   ) {
   }
 
@@ -58,22 +65,39 @@ export class TabMapComponent {
   }
 
   public mapsReady(event?: any): any {
-    event.controls[google.maps.ControlPosition.TOP_LEFT].push(this.search.el);
+    event.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(this.search.el);
+    event.controls[google.maps.ControlPosition.TOP_LEFT].push(this.currentBuss.el);
   }
 
-  public findBus(): void {
-    if (!this.searchParams) return;
-    console.log('1: ', this.searchParams);
+  public async findBus(): Promise<void> {
+    const modal = await this.modalCtr.create({
+      component: BusSelectionModalComponent,
+      componentProps: {
+        multiSelect: false,
+      },
+    });
+
+    await modal.present();
+    const payload = await modal.onDidDismiss();
+    const bus = payload.data as Bus;
+    this.subscription.forEach(item => item.unsubscribe());
+    this.watchBusLocation(bus.numero);
   }
 
-  private watchBusLocation(linha: string | null): void {
+  private watchBusLocation(linha: string | null | undefined): void {
     if (!linha) return;
     this.subscription.push(
-      timer(0, 5000).pipe(
-        flatMap(() => this.dfTransService.watchBusLocation(linha)),
+      timer(0, 8000).pipe(
+        flatMap(() => {
+          this.isLoading = true;
+          return this.dfTransService.watchBusLocation(linha).pipe(
+            finalize(() => this.isLoading = false),
+          );
+        }),
       ).subscribe(res => {
-        this.busCurrentPosition = ObjectsToBusCoordinates(res);
-      }),
+          this.busCurrentPosition = ObjectsToBusCoordinates(res);
+          this.noBusFoundHandle();
+        }),
     );
   }
 
@@ -114,5 +138,11 @@ export class TabMapComponent {
     this.userPosition = {} as Coordinates;
     this.busCurrentPosition = [] as BusCoordinates[];
     this.subscription = [] as Subscription[];
+  }
+
+  private noBusFoundHandle(): void {
+    if (!this.busCurrentPosition || this.busCurrentPosition.length <= 0) {
+      this.utilService.showToast('Nenhum ônibus encontrado', 'danger');
+    }
   }
 }

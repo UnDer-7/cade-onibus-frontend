@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AlertController, ModalController } from '@ionic/angular';
 import { environment } from '../../../../environments/environment';
 import { SessionHandler } from '../../../auth/session.handler';
@@ -15,6 +15,7 @@ export class BusSelectionModalComponent implements OnInit {
   public readonly contentColor: string = environment.contentColor;
   public readonly appName: string = environment.appName;
 
+  @Input() public multiSelect: boolean = true;
   public search: string = '';
   public bus: Bus[] = [] as Bus[];
   public busSelected: Bus[] = [] as Bus[];
@@ -41,7 +42,11 @@ export class BusSelectionModalComponent implements OnInit {
       .catch(err => console.log('Erro ao mostrar alert!\n', err));
   }
 
-  public async save(): Promise<void> {
+  public async save(bus?: Bus): Promise<void> {
+    if (bus) {
+      await this.modalCtrl.dismiss(bus);
+      return;
+    }
     await this.modalCtrl.dismiss(this.busSelected);
   }
 

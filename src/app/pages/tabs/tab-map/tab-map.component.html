@@ -1,8 +1,7 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title text-center [color]="appColor">
-      {{ appName }}
-    </ion-title>
+    <ion-title [color]="appColor" text-center>{{ appName }}</ion-title>
+    <ion-progress-bar type="indeterminate" [color]="appColor" *ngIf="isLoading"></ion-progress-bar>
   </ion-toolbar>
 </ion-header>
 
@@ -13,24 +12,16 @@
     [longitude]="userPosition.longitude"
     [zoom]="12">
 
-    name="linha-cidade"
-    debounce="500"
-    autocomplete="true"
-    placeholder="LINHA OU CIDADE"
-    clearInput="true"
-    [(ngModel)]="searchParams"
-    (keydown.enter)="findBus()"
-    (ionChange)="findBus()">
-
-    <ion-searchbar
-      debounce="500"
-      autocomplete="false"
-      placeholder="LINHA OU CIDADE"
+    <ion-button
       #search
-      (click)="findBus()"
-      (keydown.enter)="findBus()"
-      (ionChange)="findBus()"
-      [(ngModel)]="searchParams"></ion-searchbar>
+      expand="block"
+      margin-bottom
+      [color]="appColor"
+      (click)="findBus()">
+      PROCURAR ÔNIBUS
+    </ion-button>
+
+    <ion-badge margin style="padding-top: 7px" #currentBuss [color]="appColor">ÔNIBUS ATUAL: {{ busCurrentPosition[0]?.properties?.linha }}</ion-badge>
 
     <agm-marker
     id="users-marker"
