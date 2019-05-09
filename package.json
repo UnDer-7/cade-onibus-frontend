@@ -1,8 +1,6 @@
 {
   "name": "cade-onibus-frontend",
-  "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --baseHref=/ --open=true --poll 200",
@@ -58,5 +56,36 @@
     "tslint": "~5.16.0",
     "typescript": "~3.1.6"
   },
-  "description": "An Ionic project"
+  "author": "Mateus Gomes da Silva Cardoso",
+  "homepage": "https://ionicframework.com/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/UnDer-7/cade-onibus-frontend-playstore"
+  },
+  "bugs": {
+    "url": "https://github.com/UnDer-7/cade-onibus-frontend-playstore/issues",
+    "email": "mateus7532@gmail.com"
+  },
+  "description": "Um rastreador de ônibus brasilienses",
+  "keywords": [
+    "UnDer-7",
+    "Mateus Gomes",
+    "Brasilia",
+    "DF",
+    "Distrito Federal",
+    "Sobradinho",
+    "Sobradinho II",
+    "Sobradinho 2",
+    "Onibus",
+    "Bus",
+    "DFTrans",
+    "DF-Trans",
+    "DF Trans",
+    "Google Maps",
+    "Maps",
+    "Mapa",
+    "Ionic",
+    "Ionic 4",
+    "Angular"
+  ]
 }
