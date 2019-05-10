@@ -6,6 +6,7 @@ export const environment = {
   production: false,
   apiUrl: 'http://localhost:8080/api',
   dfTrans: 'https://www.sistemas.dftrans.df.gov.br',
+  clientID: '83439041810-4vtmsdpe25bst614h7gasgjdugt6gugi.apps.googleusercontent.com',
   contentColor: 'tertiary',
   appName: 'Cadê Ônibus',
 };
