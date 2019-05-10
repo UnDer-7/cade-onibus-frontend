@@ -6,16 +6,18 @@ import { SessionHandler } from '../../../auth/session.handler';
 import { Bus } from '../../../models/bus.model';
 import { DfTransService } from '../../../resource/df-trans.service';
 import { UtilService } from '../../../utils/util.service';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-bus-selection-modal',
   templateUrl: './bus-selection-modal.component.html',
 })
 export class BusSelectionModalComponent implements OnInit {
-  public readonly contentColor: string = environment.contentColor;
+  public readonly appColor: string = environment.contentColor;
   public readonly appName: string = environment.appName;
 
   @Input() public multiSelect: boolean = true;
+  public isLoading: boolean = false;
   public search: string = '';
   public bus: Bus[] = [] as Bus[];
   public busSelected: Bus[] = [] as Bus[];
@@ -56,7 +58,10 @@ export class BusSelectionModalComponent implements OnInit {
 
   public findBus(): void {
     if (!this.search.length) return;
-    this.dfTranService.findBus(this.search).subscribe(
+    this.isLoading = true;
+    this.dfTranService.findBus(this.search).pipe(
+      finalize(() => this.isLoading = false),
+    ).subscribe(
       res => {
         this.bus = this.removeDuplicates(res, 'numero');
         if (this.bus.length <= 0) {

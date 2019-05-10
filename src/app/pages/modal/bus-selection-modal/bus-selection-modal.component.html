@@ -5,13 +5,14 @@
         <ion-icon name="arrow-back"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title text-center [color]="contentColor">
+    <ion-title text-center [color]="appColor">
       {{ appName }}
     </ion-title>
+    <ion-progress-bar type="indeterminate" [color]="appColor" *ngIf="isLoading"></ion-progress-bar>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [color]="contentColor">
+<ion-content [color]="appColor">
   <div margin-start style="margin-top: 5px" *ngIf="busSelected.length > 0">
     <ion-button
       color="dark"
@@ -26,7 +27,7 @@
   <div padding>
     <ion-item>
       <ion-button fill="clear" style="margin-right: 10px; margin-left: 1px" expand="block" color="success">
-        <ion-icon name="search" slot="icon-only" [color]="contentColor"></ion-icon>
+        <ion-icon name="search" slot="icon-only" [color]="appColor"></ion-icon>
       </ion-button>
       <ion-input
         name="linha-cidade"
@@ -51,7 +52,7 @@
               style="margin-right: 12px"
               [value]="b"
               [checked]="isSelect(b)"
-              [color]="contentColor"
+              [color]="appColor"
               (ionChange)="onBusSelection($event)">
             </ion-checkbox>
             <ion-badge style="margin-right: 10px" color="dark">{{ b.numero }}</ion-badge>
