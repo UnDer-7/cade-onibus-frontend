@@ -2,8 +2,8 @@ export const environment = {
   production: true,
   apiUrl: 'https://cade-onibus-playstore-prod.herokuapp.com/api',
   dfTrans: 'https://www.sistemas.dftrans.df.gov.br/',
-  clientID: '323203038037-dvi8p9ep47iafhs10nviiikca82ohcnh.apps.googleusercontent.com',
-  googleApiKey: 'AIzaSyCvXJpb-cRLNv-E2p0_7bu22Xx1c1fwgGY',
+  clientID: '83439041810-bnmf6jsjl2ep6f5l0uqqlv5ikdfq9usr.apps.googleusercontent.com',
+  googleApiKey: 'AIzaSyD3cRYuq1jOs_veHDMinQ5sPB3vkgP2YOQ',
   contentColor: 'tertiary',
   appName: 'Cadê Ônibus',
 };
