@@ -1,0 +1,29 @@
+language: node_js
+node_js:
+  - '10.15.1'
+dist: trusty
+sudo: required
+cache:
+  directories:
+    - node_modules
+branches:
+  only:
+    - master
+before_script:
+    - npm install -g @angular/cli
+script:
+  - npm run test-modules
+  - npm run lint
+  - npm run build-prod
+deploy:
+  skip_cleanup: true
+  provider: firebase
+  token: $FIREBASE_TOKEN
+  local_dir: dist/
+  on:
+    repo: UnDer-7/cade-onibus-frontend-playstore
+    branch: master
+after_deploy:
+  - echo "URL -> https://cadeonibus.web.app"
+notifications:
+  email: false
