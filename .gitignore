@@ -35,6 +35,7 @@ plugins/android.json
 plugins/ios.json
 
 # misc
+.firebase
 /.sass-cache
 /connect.lock
 /coverage
