@@ -80,6 +80,8 @@ export class TabMapComponent {
     await modal.present();
     const payload = await modal.onDidDismiss();
     const bus = payload.data as Bus;
+    if (!bus) return;
+
     this.subscription.forEach(item => item.unsubscribe());
     this.watchBusLocation(bus.numero);
   }
