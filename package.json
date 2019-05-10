@@ -4,8 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --baseHref=/ --open=true --poll 200",
-    "build": "ng build --prod --base-href=/",
-    "lint": "ng lint"
+    "build-prod": "ng build --prod --configuration=production --base-href=/",
+    "lint": "ng lint",
+    "test-modules": "snyk test --severity-threshold=medium"
   },
   "private": true,
   "dependencies": {
@@ -54,7 +55,8 @@
     "protractor": "~5.4.0",
     "ts-node": "~8.1.0",
     "tslint": "~5.16.0",
-    "typescript": "~3.1.6"
+    "typescript": "~3.1.6",
+    "snyk": "^1.163.1"
   },
   "author": {
     "name": "Mateus Gomes da Silva Cardos",
