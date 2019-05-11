@@ -17,6 +17,8 @@ import { TokenInterceptor } from './interceptor/token.interceptor';
 import { ModalModule } from './pages/modal/modal.module';
 import { SessionService } from './resource/session.service';
 import { UtilService } from './utils/util.service';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,6 +29,7 @@ import { UtilService } from './utils/util.service';
     HttpClientModule,
     ModalModule,
     IonicModule.forRoot(),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
     StatusBar,
