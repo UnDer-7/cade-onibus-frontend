@@ -2,7 +2,7 @@
   "index": "/index.html",
   "assetGroups": [
     {
-      "name": "app",
+      "name": "Cadê Ônibus",
       "installMode": "prefetch",
       "resources": {
         "files": [

@@ -1,11 +1,16 @@
 {
-  "name": "app",
-  "short_name": "app",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "name": "Cadê Ônibus",
+  "short_name": "cade",
+  "theme_color": "#7044FF",
+  "background_color": "#FFFFFF",
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
+
+  "description": "Buscador e rastreador de ônibus para quem sempre pega o mesmo ônibus",
+  "lang": "pt-br",
+  "orientation": "portrait-primary",
+
   "icons": [
     {
       "src": "assets/icons/icon-72x72.png",
