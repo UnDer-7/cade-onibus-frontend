@@ -4,7 +4,7 @@ import { finalize } from 'rxjs/operators';
 import { environment } from '../../../../environments/environment';
 import { decodeJWT } from '../../../auth/jwt.handler';
 import { Bus } from '../../../models/bus.model';
-import { User } from '../../../models/user.model';
+import { ObjectToUser, User } from '../../../models/user.model';
 import { UserService } from '../../../resource/user.service';
 import { UtilService } from '../../../utils/util.service';
 import { BusSelectionModalComponent } from '../../modal/bus-selection-modal/bus-selection-modal.component';
@@ -66,6 +66,7 @@ export class TabHomeComponent implements OnInit {
     });
     await modal.present();
     const payload = await modal.onDidDismiss();
+    if (!payload.data) return;
     this.addBus(payload.data as Bus[]);
   }
 
@@ -80,11 +81,11 @@ export class TabHomeComponent implements OnInit {
       message: `Tem certeza que quer remover o ${ bus.numero }?`,
       buttons: [
         {
-          text: 'SIM',
-          handler: () => answer = true,
+          text: 'NÃO',
         },
         {
-          text: 'NÃO',
+          text: 'SIM',
+          handler: () => answer = true,
         },
       ],
     });
@@ -94,8 +95,10 @@ export class TabHomeComponent implements OnInit {
   }
 
   private addBus(bus: Bus[]): void {
-    const user = Object.assign({}, this.user);
-    user.bus = bus;
+    const user = ObjectToUser(this.user);
+    bus.forEach(item => {
+      user.bus!.push(item);
+    });
     this.updateUser(user);
   }
 

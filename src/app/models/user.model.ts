@@ -11,13 +11,12 @@ export interface User extends Base {
 }
 
 export function ObjectToUser(user: any): User {
-  return Object.assign({}, {
-    _id: user.id,
+  return Object.assign({} as User, {
+    _id: user._id,
     google_id: user.google_id,
     name: user.name,
     email: user.email,
-    password: user.password,
-    bus: user.bus,
+    bus: Object.assign([] as Bus, user.bus),
     createdAt: user.createdAt,
   });
 }
