@@ -22,6 +22,8 @@ export class BusSelectionModalComponent implements OnInit {
   public bus: Bus[] = [] as Bus[];
   public busSelected: Bus[] = [] as Bus[];
 
+  @Input() private savedBus: Bus[] = [] as Bus[];
+
   constructor(
     private dfTranService: DfTransService,
     private utilService: UtilService,
@@ -104,6 +106,16 @@ export class BusSelectionModalComponent implements OnInit {
   public canShowLine(last: any): string | undefined {
     if (last) return 'none';
   }
+
+  public getColor(busSelected: Bus, defaultColor: string): string {
+    if (this.canSelect(busSelected)) return 'medium';
+    return defaultColor;
+  }
+
+  public canSelect(busSelected: Bus): boolean {
+    return !!this.savedBus.find(item => item.numero === busSelected.numero);
+  }
+
   private removeDuplicates(myArr: Bus[], prop: string): Bus[] {
     return myArr.filter((obj, pos, arr) => {
       // @ts-ignore

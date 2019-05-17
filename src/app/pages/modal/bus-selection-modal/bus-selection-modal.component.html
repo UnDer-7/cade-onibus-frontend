@@ -51,15 +51,16 @@
             <ion-checkbox
               style="margin-right: 12px"
               [value]="b"
+              [disabled]="canSelect(b)"
               [checked]="isSelect(b)"
               [color]="appColor"
               (ionChange)="onBusSelection($event)">
             </ion-checkbox>
-            <ion-badge style="margin-right: 10px" color="dark">{{ b.numero }}</ion-badge>
+            <ion-badge style="margin-right: 10px" [color]="getColor(b, 'dark')">{{ b.numero }}</ion-badge>
             <ion-label text-wrap>{{ b.descricao }}</ion-label>
             <ion-text
               style="margin-left: 10px"
-              color="danger">
+              [color]="getColor(b, 'danger')">
               {{ b.faixaTarifaria.tarifa |  currency: 'R$ '}}
             </ion-text>
             <ion-ripple-effect></ion-ripple-effect>

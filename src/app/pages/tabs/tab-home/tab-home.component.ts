@@ -63,6 +63,9 @@ export class TabHomeComponent implements OnInit {
   public async onAddingBus(): Promise<void> {
     const modal = await this.modalCtrl.create({
       component: BusSelectionModalComponent,
+      componentProps: {
+        savedBus: this.user.bus,
+      },
     });
     await modal.present();
     const payload = await modal.onDidDismiss();
