@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { AlertController, ModalController } from '@ionic/angular';
 import { environment } from '../../../../environments/environment';
 import { SessionHandler } from '../../../auth/session.handler';
@@ -23,6 +23,7 @@ export class BusSelectionModalComponent implements OnInit {
   public busSelected: Bus[] = [] as Bus[];
 
   @Input() private savedBus: Bus[] = [] as Bus[];
+  @ViewChild('searchInput') private searchInput!: any;
 
   constructor(
     private dfTranService: DfTransService,
@@ -44,6 +45,10 @@ export class BusSelectionModalComponent implements OnInit {
     })
       .then(item => item.present())
       .catch(err => console.log('Erro ao mostrar alert!\n', err));
+  }
+
+  public ionViewDidEnter(): void {
+    this.searchInput.el.setFocus();
   }
 
   public async save(bus?: Bus): Promise<void> {
