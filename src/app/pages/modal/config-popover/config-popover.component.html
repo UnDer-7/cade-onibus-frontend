@@ -1,0 +1,25 @@
+<ion-button expand="block" fill="clear" [color]="appColor" (click)="showSobre()">{{sobre? 'FECHAR' : 'SOBRE'}}</ion-button>
+
+<!--SOBRE-->
+<ion-card text-center *ngIf="sobre" [color]="appColor">
+  <ion-card color="white">
+    <ion-card-title>DESENVOLVEDORES</ion-card-title>
+    <ion-card-subtitle>Mateus Gomes</ion-card-subtitle>
+    <ion-card-subtitle>Lucas Veiga</ion-card-subtitle>
+  </ion-card>
+
+  <ion-card color="white">
+    <ion-card-title>TECNOLOGIA</ion-card-title>
+    <ion-card-subtitle>Ionic 4</ion-card-subtitle>
+    <ion-card-subtitle>NodeJS</ion-card-subtitle>
+  </ion-card>
+
+  <ion-card color="white">
+    <ion-card-title>REPOSITÓRIO</ion-card-title>
+    <a href="https://github.com/UnDer-7/cade-onibus-backend-playstore" target="_blank">BACKEND</a>
+    <br>
+    <a href="https://github.com/UnDer-7/cade-onibus-frontend-playstore" target="_blank">FRONTEND</a>
+  </ion-card>
+</ion-card>
+
+<ion-button expand="block" fill="clear" color="danger" (click)="logout()">SAIR</ion-button>
