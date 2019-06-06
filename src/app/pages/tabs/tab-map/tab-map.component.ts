@@ -38,8 +38,10 @@ export class TabMapComponent {
 
   @ViewChild('search') public search!: any;
   @ViewChild('currentBuss') public currentBuss!: any;
+  @ViewChild('refresh') public refreshBuss!: any;
   private subscription: Subscription[] = [] as Subscription[];
   private watchLocationID!: number;
+  private linha!: string | null | undefined;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -51,12 +53,12 @@ export class TabMapComponent {
 
   public ionViewWillEnter(): void {
     this.initializeVariables();
-    const linha = this.activatedRoute.snapshot.paramMap.get('linha');
+    this.linha = this.activatedRoute.snapshot.paramMap.get('linha');
 
     this.getUserLocation();
     this.watchUserLocation();
 
-    this.watchBusLocation(linha);
+    this.watchBusLocation();
   }
 
   public ionViewDidLeave(): void {
@@ -66,6 +68,7 @@ export class TabMapComponent {
 
   public mapsReady(event?: any): any {
     event.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(this.search.el);
+    event.controls[google.maps.ControlPosition.BOTTOM_RIGHT].push(this.refreshBuss.el);
     event.controls[google.maps.ControlPosition.TOP_LEFT].push(this.currentBuss.el);
   }
 
@@ -83,16 +86,31 @@ export class TabMapComponent {
     if (!bus) return;
 
     this.subscription.forEach(item => item.unsubscribe());
-    this.watchBusLocation(bus.numero);
+    this.linha = bus.numero;
+    this.watchBusLocation();
   }
 
-  private watchBusLocation(linha: string | null | undefined): void {
-    if (!linha) return;
+  public refreshBusPosition(): void {
+    if (!this.linha) return;
+
+    this.isLoading = true;
+    this.dfTransService.watchBusLocation(this.linha).pipe(
+      finalize(() => this.isLoading = false),
+    ).subscribe((res: any) => {
+      this.busCurrentPosition = ObjectsToBusCoordinates(res);
+      this.noBusFoundHandle();
+    });
+  }
+
+  private watchBusLocation(): void {
+    if (!this.linha) return;
+
     this.subscription.push(
       timer(0, 8000).pipe(
         flatMap(() => {
           this.isLoading = true;
-          return this.dfTransService.watchBusLocation(linha).pipe(
+          // @ts-ignore
+          return this.dfTransService.watchBusLocation(this.linha).pipe(
             finalize(() => this.isLoading = false),
           );
         }),
@@ -140,6 +158,7 @@ export class TabMapComponent {
     this.userPosition = {} as Coordinates;
     this.busCurrentPosition = [] as BusCoordinates[];
     this.subscription = [] as Subscription[];
+    this.linha = null;
   }
 
   private noBusFoundHandle(): void {

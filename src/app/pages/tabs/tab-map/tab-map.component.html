@@ -13,6 +13,16 @@
     [zoom]="12">
 
     <ion-button
+      #refresh
+      margin-bottom
+      expand="block"
+      slot="icon-only"
+      [color]="appColor"
+      (click)="refreshBusPosition()">
+      <ion-icon name="refresh"></ion-icon>
+    </ion-button>
+
+    <ion-button
       #search
       expand="block"
       margin-bottom
@@ -21,7 +31,13 @@
       PROCURAR ÔNIBUS
     </ion-button>
 
-    <ion-badge margin style="padding-top: 7px" #currentBuss [color]="appColor">ÔNIBUS ATUAL: {{ busCurrentPosition[0]?.properties?.linha }}</ion-badge>
+    <ion-badge
+      #currentBuss
+      style="padding-top: 7px"
+      margin
+      [color]="appColor">
+      ÔNIBUS ATUAL: {{ busCurrentPosition[0]?.properties?.linha }}
+    </ion-badge>
 
     <agm-marker
     id="users-marker"
