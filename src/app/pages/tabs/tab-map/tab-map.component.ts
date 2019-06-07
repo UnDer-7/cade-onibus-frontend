@@ -42,11 +42,11 @@ export class TabMapComponent {
   @ViewChild('info') public info!: any;
   @ViewChild('infoList') public infoList!: any;
 
+  public isShowingInfo: boolean = false;
+
   private subscription: Subscription[] = [] as Subscription[];
   private watchLocationID!: number;
   private linha!: string | null | undefined;
-
-  private isShowingInfo: boolean = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -176,7 +176,7 @@ export class TabMapComponent {
 
   private noBusFoundHandle(): void {
     if (!this.busCurrentPosition || this.busCurrentPosition.length <= 0) {
-      this.utilService.showToast('Nenhum ônibus encontrado', 'danger');
+      this.utilService.showToast('Nenhum ônibus encontrado', 'danger', 99999);
     }
   }
 }

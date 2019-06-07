@@ -7,9 +7,9 @@ import { environment } from '../../../../../environments/environment';
 })
 export class InfoContentComponent {
   public readonly appColor: string = environment.contentColor;
-  private isShowingAtualizacaoOnibus: boolean = false;
-  private isShowingPrecisao: boolean = false;
-  private isShowingOndeVemDados: boolean = false;
+  public isShowingAtualizacaoOnibus: boolean = false;
+  public isShowingPrecisao: boolean = false;
+  public isShowingOndeVemDados: boolean = false;
 
   public showAtualizacaoOnibus(): void {
     this.isShowingAtualizacaoOnibus = !this.isShowingAtualizacaoOnibus;
