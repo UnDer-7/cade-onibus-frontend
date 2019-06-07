@@ -25,6 +25,7 @@ export class TabMapComponent {
   public userPosition: Coordinates = {} as Coordinates;
   public busCurrentPosition: BusCoordinates[] = [] as BusCoordinates[];
   public isLoading: boolean = false;
+  public linha!: string | null | undefined;
 
   public icons: any = {
     dfTrans: {
@@ -46,7 +47,6 @@ export class TabMapComponent {
 
   private subscription: Subscription[] = [] as Subscription[];
   private watchLocationID!: number;
-  private linha!: string | null | undefined;
 
   constructor(
     private activatedRoute: ActivatedRoute,

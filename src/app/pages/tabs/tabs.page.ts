@@ -12,7 +12,7 @@ export class TabsPage {
     private router: Router,
   ) { }
 
-  private navigateTo(whereTo: string): void {
+  public navigateTo(whereTo: string): void {
     this.router.navigateByUrl('/app/tabs/' + whereTo);
   }
 }
