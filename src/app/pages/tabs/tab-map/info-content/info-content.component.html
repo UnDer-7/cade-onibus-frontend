@@ -1,0 +1,40 @@
+<ion-card-subtitle text-center text-wrap>
+  <ion-button
+    expand="block"
+    fill="clear"
+    [color]="isShowingAtualizacaoOnibus ? 'danger' : appColor"
+    (click)="showAtualizacaoOnibus()">
+    ATUALIZAÇÃO DOS ÔNIBUS
+  </ion-button>
+</ion-card-subtitle>
+<ion-card-content text-center text-wrap [hidden]="!isShowingAtualizacaoOnibus">
+  <p>O Cadê Ônibus verifica de 8 em 8 segundos se a posição do ônibus foi atualizada.</p>
+  <p>Você pode atualizar quando quiser clicando no butão de atualizar.</p>
+</ion-card-content>
+
+<ion-card-subtitle text-center text-wrap>
+  <ion-button
+    expand="block"
+    fill="clear"
+    [color]="isShowingPrecisao ? 'danger' : appColor"
+    (click)="showPrecisao()">
+    PRECISÃO
+  </ion-button>
+</ion-card-subtitle>
+<ion-card-content text-center text-wrap [hidden]="!isShowingPrecisao">
+  A posição fornecida pelo DFTrans não é em tempo real, pode haver até 1 minuto de atraso.
+</ion-card-content>
+
+<ion-card-subtitle text-center text-wrap>
+  <ion-button
+    expand="block"
+    fill="clear"
+    [color]="isShowingOndeVemDados ? 'danger' : appColor"
+    (click)="showOndeVemDados()">
+    DE ONDE VEM OS DADOS
+  </ion-button>
+</ion-card-subtitle>
+<ion-card-content text-center text-wrap [hidden]="!isShowingOndeVemDados">
+  <p>A posição e os dados do ônibus são fornecidos pelo DFTrans.</p>
+  <p>Logo se algum ônibus aparecer em rotas incomuns não é de responsabilidade do Cadê Ônibus.</p>
+</ion-card-content>

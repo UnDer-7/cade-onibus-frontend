@@ -12,6 +12,39 @@
     [longitude]="userPosition.longitude"
     [zoom]="12">
 
+    <!--    TOP ITENS-->
+    <ion-badge
+      class="map-top-item"
+      #currentBuss
+      margin
+      [color]="appColor">
+      ÔNIBUS ATUAL: {{ busCurrentPosition[0]?.properties?.linha }}
+    </ion-badge>
+
+    <ion-button
+      #info
+      class="map-top-item"
+      expand="block"
+      fill="clear"
+      slot="icon-only"
+      (click)="showInfo()">
+      <ion-icon name="information-circle-outline" [color]="appColor" size="large"></ion-icon>
+    </ion-button>
+
+    <ion-card #infoList class="map-top-item" color="white" padding [hidden]="!isShowingInfo">
+      <app-info-content></app-info-content>
+    </ion-card>
+
+    <!--    BUTTON ITENS-->
+    <ion-button
+      #search
+      expand="block"
+      margin-bottom
+      [color]="appColor"
+      (click)="findBus()">
+      PROCURAR ÔNIBUS
+    </ion-button>
+
     <ion-button
       #refresh
       margin-bottom
@@ -22,27 +55,10 @@
       <ion-icon name="refresh"></ion-icon>
     </ion-button>
 
-    <ion-button
-      #search
-      expand="block"
-      margin-bottom
-      [color]="appColor"
-      (click)="findBus()">
-      PROCURAR ÔNIBUS
-    </ion-button>
-
-    <ion-badge
-      #currentBuss
-      style="padding-top: 7px"
-      margin
-      [color]="appColor">
-      ÔNIBUS ATUAL: {{ busCurrentPosition[0]?.properties?.linha }}
-    </ion-badge>
-
     <agm-marker
-    id="users-marker"
-    [latitude]="userCurrentPosition.latitude"
-    [longitude]="userCurrentPosition.longitude">
+      id="users-marker"
+      [latitude]="userCurrentPosition.latitude"
+      [longitude]="userCurrentPosition.longitude">
     </agm-marker>
 
     <agm-marker

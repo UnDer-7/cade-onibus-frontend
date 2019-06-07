@@ -39,9 +39,14 @@ export class TabMapComponent {
   @ViewChild('search') public search!: any;
   @ViewChild('currentBuss') public currentBuss!: any;
   @ViewChild('refresh') public refreshBuss!: any;
+  @ViewChild('info') public info!: any;
+  @ViewChild('infoList') public infoList!: any;
+
   private subscription: Subscription[] = [] as Subscription[];
   private watchLocationID!: number;
   private linha!: string | null | undefined;
+
+  private isShowingInfo: boolean = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -70,6 +75,8 @@ export class TabMapComponent {
     event.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(this.search.el);
     event.controls[google.maps.ControlPosition.BOTTOM_RIGHT].push(this.refreshBuss.el);
     event.controls[google.maps.ControlPosition.TOP_LEFT].push(this.currentBuss.el);
+    event.controls[google.maps.ControlPosition.TOP_RIGHT].push(this.info.el);
+    event.controls[google.maps.ControlPosition.TOP_RIGHT].push(this.infoList.el);
   }
 
   public async findBus(): Promise<void> {
@@ -94,12 +101,18 @@ export class TabMapComponent {
     if (!this.linha) return;
 
     this.isLoading = true;
-    this.dfTransService.watchBusLocation(this.linha).pipe(
-      finalize(() => this.isLoading = false),
-    ).subscribe((res: any) => {
-      this.busCurrentPosition = ObjectsToBusCoordinates(res);
-      this.noBusFoundHandle();
-    });
+    this.subscription.push(
+      this.dfTransService.watchBusLocation(this.linha).pipe(
+        finalize(() => this.isLoading = false),
+      ).subscribe((res: any) => {
+        this.busCurrentPosition = ObjectsToBusCoordinates(res);
+        this.noBusFoundHandle();
+      }),
+    );
+  }
+
+  public showInfo(): void {
+    this.isShowingInfo = !this.isShowingInfo;
   }
 
   private watchBusLocation(): void {
@@ -115,9 +128,9 @@ export class TabMapComponent {
           );
         }),
       ).subscribe(res => {
-          this.busCurrentPosition = ObjectsToBusCoordinates(res);
-          this.noBusFoundHandle();
-        }),
+        this.busCurrentPosition = ObjectsToBusCoordinates(res);
+        this.noBusFoundHandle();
+      }),
     );
   }
 
