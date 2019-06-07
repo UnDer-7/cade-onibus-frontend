@@ -18,7 +18,7 @@
       #currentBuss
       margin
       [color]="appColor">
-      ÔNIBUS ATUAL: {{ busCurrentPosition[0]?.properties?.linha }}
+      {{ linha ? 'ÔNIBUS ATUAL: ' + linha : 'NENHUM ÔNIBUS SELECIONADO'}}
     </ion-badge>
 
     <ion-button

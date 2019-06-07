@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ToastController } from '@ionic/angular';
+import { ToastButton } from '@ionic/core';
 
 @Injectable()
 export class UtilService {
@@ -11,10 +12,21 @@ export class UtilService {
 
   public async showToast(
     message: string,
-    color: string = 'dark',
+    color: 'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger' | 'light' | 'medium' | 'dark' = 'dark',
     duration: number = 1850,
-    position: string = 'bottom',
-    showCloseButton: boolean = false): Promise<any> {
+    position: 'bottom' | 'middle' | 'top' = 'bottom',
+    showCloseButton: boolean = false,
+    closeButtonText?: string,
+    buttons?: Array<string | ToastButton>,
+    cssClass: string | string[] = 'toastCss',
+    header?: string,
+    translucent: boolean = false,
+    keyboardClose: boolean = false,
+    mode?: 'ios' | 'md',
+    animated: boolean = true,
+    leaveAnimation?: ((Animation: Animation, baseEl: any, opts?: any) => Promise<Animation>),
+    enterAnimation?: ((Animation: Animation, baseEl: any, opts?: any) => Promise<Animation>),
+    ): Promise<any> {
     // @ts-ignore
     const toast = await this.toastCtrl.create({
       message: message,
@@ -23,7 +35,16 @@ export class UtilService {
       // @ts-ignore
       position: position,
       showCloseButton: showCloseButton,
-      translucent: true,
+      closeButtonText: closeButtonText,
+      buttons: buttons,
+      cssClass: cssClass,
+      header: header,
+      translucent: translucent,
+      keyboardClose: keyboardClose,
+      mode: mode,
+      leaveAnimation: leaveAnimation,
+      enterAnimation: enterAnimation,
+      animated: animated,
     });
     toast.present();
   }

@@ -176,7 +176,7 @@ export class TabMapComponent {
 
   private noBusFoundHandle(): void {
     if (!this.busCurrentPosition || this.busCurrentPosition.length <= 0) {
-      this.utilService.showToast('Nenhum ônibus encontrado', 'danger', 99999);
+      this.utilService.showToast('Nenhum ônibus encontrado', 'danger' );
     }
   }
 }

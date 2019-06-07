@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { environment } from '../../../environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tabs',
@@ -7,4 +8,11 @@ import { environment } from '../../../environments/environment';
 })
 export class TabsPage {
   public readonly appColor: string = environment.contentColor;
+  constructor(
+    private router: Router,
+  ) { }
+
+  private navigateTo(whereTo: string): void {
+    this.router.navigateByUrl('/app/tabs/' + whereTo);
+  }
 }
