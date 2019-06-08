@@ -1,5 +1,5 @@
 import * as jwtDecode from 'jwt-decode';
-import { Token } from '../models/token.model';
+import { Token } from '../model/token.model';
 
 export function saveJWT(jwt: string): void {
   localStorage.setItem('token', jwt);

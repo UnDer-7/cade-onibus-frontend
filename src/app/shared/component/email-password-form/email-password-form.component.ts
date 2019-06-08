@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { environment } from '../../../../environments/environment';
-import { User } from '../../../models/user.model';
+import { User } from '../../../model/user.model';
 
 @Component({
   selector: 'app-email-password-form',

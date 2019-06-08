@@ -3,7 +3,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { AlertController, ModalController } from '@ionic/angular';
 import { environment } from '../../../../environments/environment';
 import { SessionHandler } from '../../../auth/session.handler';
-import { Bus } from '../../../models/bus.model';
+import { Bus } from '../../../model/bus.model';
 import { DfTransService } from '../../../resource/df-trans.service';
 import { UtilService } from '../../../utils/util.service';
 import { finalize } from 'rxjs/operators';

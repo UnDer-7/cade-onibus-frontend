@@ -14,7 +14,7 @@ import { CanLogInGuard } from './guard/can-log-in.guard';
 import { IsLoggedInGuard } from './guard/is-logged-in.guard';
 import { ErrorInterceptor } from './interceptor/error.interceptor';
 import { TokenInterceptor } from './interceptor/token.interceptor';
-import { ModalModule } from './pages/modal/modal.module';
+import { ModalModule } from './component/modal/modal.module';
 import { SessionService } from './resource/session.service';
 import { UtilService } from './utils/util.service';
 import { ServiceWorkerModule } from '@angular/service-worker';

@@ -4,7 +4,7 @@ import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { finalize } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { SessionHandler } from '../../auth/session.handler';
-import { SocialUserToUser, User } from '../../models/user.model';
+import { SocialUserToUser, User } from '../../model/user.model';
 import { UtilService } from '../../utils/util.service';
 
 @Component({

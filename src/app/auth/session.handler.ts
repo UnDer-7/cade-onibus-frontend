@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
-import { User } from '../models/user.model';
+import { User } from '../model/user.model';
 import { SessionService } from '../resource/session.service';
 import { ServerErrorMessages } from '../utils/server-error.messages';
 import { UtilService } from '../utils/util.service';

@@ -7,17 +7,17 @@ export const routes: Routes = [
 
   {
     path: 'login',
-    loadChildren: './pages/login/login.module#LoginModule',
+    loadChildren: './component/login/login.module#LoginModule',
     canActivate: [CanLogInGuard],
   },
   {
     path: 'new-account',
-    loadChildren: './pages/new-account/new-account.module#NewAccountModule',
+    loadChildren: './component/new-account/new-account.module#NewAccountModule',
     canActivate: [CanLogInGuard],
   },
   {
     path: 'app',
-    loadChildren: './pages/tabs/tabs.module#TabsPageModule',
+    loadChildren: './component/tabs/tabs.module#TabsPageModule',
     canActivate: [IsLoggedInGuard],
   },
 

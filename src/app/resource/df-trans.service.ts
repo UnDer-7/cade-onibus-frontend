@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { Bus } from '../models/bus.model';
+import { Bus } from '../model/bus.model';
 
 @Injectable()
 export class DfTransService {
