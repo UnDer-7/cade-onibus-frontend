@@ -50,7 +50,9 @@ export class TabHomeComponent implements OnInit {
 
   public doReorder(ev: any): void {
     this.user.bus = ev.detail.complete(this.user.bus);
-    this.userService.updateUser(this.user).subscribe();
+    this.userService.updateUser(this.user).subscribe(res => {
+      this.user = res;
+    });
   }
 
   public async deleteBus(b: Bus): Promise<void> {
