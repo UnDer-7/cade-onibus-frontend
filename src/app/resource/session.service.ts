@@ -18,4 +18,8 @@ export class SessionService {
   public loginWithEmail(user: User): Observable<string> {
     return this.http.post<string>(`${this.resourceUrl}/email`, user);
   }
+
+  public refreshToken(token: {}): Observable<string> {
+    return this.http.post<string>(`${this.resourceUrl}/refresh`, token);
+  }
 }

@@ -19,6 +19,7 @@ import { SessionService } from './resource/session.service';
 import { UtilService } from './utils/util.service';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { RefreshTokenInterceptor } from './interceptor/refresh-token.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -51,6 +52,11 @@ import { environment } from '../environments/environment';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RefreshTokenInterceptor,
       multi: true,
     },
   ],
