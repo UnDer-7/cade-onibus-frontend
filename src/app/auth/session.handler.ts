@@ -81,7 +81,6 @@ export class SessionHandler {
     observable.subscribe(
       res => {
         saveJWT(res);
-        console.log('ROUTE SAVE: ', this.utilService.blockedUrl);
         this.router.navigateByUrl('/home');
       },
       (err: HttpErrorResponse) => {
