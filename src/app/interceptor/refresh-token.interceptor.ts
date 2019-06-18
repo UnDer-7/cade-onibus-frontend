@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { decodeJWT } from '../auth/jwt.handler';
 import { SessionHandler } from '../auth/session.handler';
-import { environment } from '../../environments/environment';
 
 @Injectable()
 export class RefreshTokenInterceptor implements HttpInterceptor {
@@ -12,22 +11,20 @@ export class RefreshTokenInterceptor implements HttpInterceptor {
   ) { }
 
   public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const url = req.url.substring(0, req.url.search('api') + 3);
-    if (url !== environment.apiUrl) {
-      return next.handle(req);
-    }
-
-    if (req.url.includes('/session')) {
+    if (req.url.includes('/session/refresh')) {
       return next.handle(req);
     }
 
     if (this.canRefreshToken()) {
       this.sessionHandler.refreshToken();
     }
+
     return next.handle(req);
   }
 
   private canRefreshToken(): boolean {
+    if (!this.sessionHandler.isLoggedIn()) return false;
+
     const expirationDate = new Date(decodeJWT().exp * 1000);
     const currentDate = new Date();
 

@@ -35,6 +35,7 @@ export class SessionHandler {
     ).subscribe(
       res => {
         saveJWT(res);
+        console.log('NAVIGATE');
         this.router.navigateByUrl('/home');
       },
       (err: HttpErrorResponse) => {

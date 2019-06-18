@@ -44,8 +44,14 @@ export class NewAccountComponent {
 
     if (bus && bus.length > 0) {
       this.blockUi.start();
-      await this.socialService.signIn(GoogleLoginProvider.PROVIDER_ID).catch(this.blockUi.stop);
-      this.createGoogleUser(bus);
+      try {
+        await this.socialService.signIn(GoogleLoginProvider.PROVIDER_ID);
+        this.createGoogleUser(bus);
+      } catch (err) {
+        console.log('Error while trying to login with google\n', err);
+        // tslint:disable-next-line:no-unused-expression
+        this.blockUi.stop();
+      }
     }
   }
 
