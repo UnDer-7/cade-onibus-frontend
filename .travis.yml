@@ -21,7 +21,7 @@ deploy:
   token: $FIREBASE_TOKEN
   local_dir: dist/
   on:
-    repo: UnDer-7/cade-onibus-frontend-playstore
+    repo: UnDer-7/cade-onibus-frontend
     branch: master
 after_deploy:
   - echo "URL -> https://cadeonibus.web.app"
