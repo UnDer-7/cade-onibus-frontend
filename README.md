@@ -1,3 +1,5 @@
+[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
+
 # DEPRECATED
 ⛔️ DEPRECATED new version of Cadê Ônibus can be found here ->
 
