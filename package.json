@@ -6,7 +6,10 @@
     "start": "ng serve --baseHref=/ --open=true --poll 200",
     "build-prod": "ng build --prod --configuration=production --base-href=/",
     "lint": "ng lint",
-    "test-modules": "snyk test --severity-threshold=medium"
+    "test-modules": "snyk test --severity-threshold=medium",
+    "snyk-protect": "snyk protect",
+    "snyk-wizard": "snyk wizard",
+    "prepare": "npm run snyk-protect"
   },
   "private": true,
   "dependencies": {
