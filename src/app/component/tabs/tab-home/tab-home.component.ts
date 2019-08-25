@@ -34,7 +34,7 @@ export class TabHomeComponent implements OnInit {
 
   public getUser(onRefresh?: any): void {
     this.isLoading = true;
-    this.userService.getUser(decodeJWT().email).pipe(
+    this.userService.getUser().pipe(
       finalize(() => {
         if (onRefresh) onRefresh.target.complete();
         this.isLoading = false;
