@@ -15,7 +15,7 @@ export class UserService {
   ) { }
 
   public createUser(user: User): Observable<User> {
-    return this.http.post<User>(this.resourceUrl, user);
+    return this.http.post<User>(this.resourceUrl + '/web', user);
   }
 
   public addBus(user: Bus[]): Observable<User> {
