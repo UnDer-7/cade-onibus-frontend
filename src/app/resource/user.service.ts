@@ -18,9 +18,18 @@ export class UserService {
     return this.http.post<User>(this.resourceUrl, user);
   }
 
-  public updateUser(user: User): Observable<any> {
-    console.log('USER TO SAVE: ', user);
-    return this.http.put<any>(this.resourceUrl, user);
+  public addBus(user: Bus[]): Observable<User> {
+    return this.http.post<User>(this.resourceUrl + '/web', user)
+      .pipe(
+        map((item) => this.convertUser(item)),
+      );
+  }
+
+  public removeBus(bus: Bus): Observable<User> {
+    return this.http.delete<User>(this.resourceUrl + `/web/${bus.numero}`)
+      .pipe(
+        map((item) => this.convertUser(item)),
+      );
   }
 
   public getUser(): Observable<User> {
