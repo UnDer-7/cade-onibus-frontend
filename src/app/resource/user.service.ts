@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { User } from '../model/user.model';
+import { map } from 'rxjs/operators';
+import { Bus } from '../model/bus.model';
 
 @Injectable()
 export class UserService {
@@ -13,14 +15,42 @@ export class UserService {
   ) { }
 
   public createUser(user: User): Observable<User> {
-    return this.http.post<User>(this.resourceUrl, user);
+    return this.http.post<User>(this.resourceUrl + '/web', user);
   }
 
-  public updateUser(user: User): Observable<any> {
-    return this.http.put<any>(this.resourceUrl, user);
+  public addBus(user: Bus[]): Observable<User> {
+    return this.http.post<User>(this.resourceUrl + '/web/add-bus', user)
+      .pipe(
+        map((item) => this.convertUser(item)),
+      );
   }
 
-  public getUser(email: string): Observable<User> {
-    return this.http.get(`${this.resourceUrl}/${email}`);
+  public removeBus(bus: Bus): Observable<User> {
+    return this.http.delete<User>(this.resourceUrl + `/web/${bus.numero}`)
+      .pipe(
+        map((item) => this.convertUser(item)),
+      );
+  }
+
+  public getUser(): Observable<User> {
+    return this.http.get(`${this.resourceUrl}`)
+      .pipe(
+        map((item) => this.convertUser(item)),
+      );
+  }
+
+  private convertUser(user: User): User {
+    // tslint:disable-next-line:no-non-null-assertion
+    user.bus = user.bus!.map((item) => {
+      return {
+        descricao: item.descricao,
+        numero: item.numero,
+        faixaTarifaria: {
+          // @ts-ignore
+          tarifa: item.tarifa,
+        },
+      } as Bus;
+    });
+    return user;
   }
 }

@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, ModalController } from '@ionic/angular';
-import { finalize } from 'rxjs/operators';
+import { catchError, finalize } from 'rxjs/operators';
 import { environment } from '../../../../environments/environment';
-import { decodeJWT } from '../../../auth/jwt.handler';
 import { Bus } from '../../../model/bus.model';
-import { ObjectToUser, User } from '../../../model/user.model';
+import { User } from '../../../model/user.model';
 import { UserService } from '../../../resource/user.service';
 import { UtilService } from '../../../utils/util.service';
 import { BusSelectionModalComponent } from '../../modal/bus-selection-modal/bus-selection-modal.component';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ServerErrorMessages } from '../../../utils/server-error.messages';
 
 @Component({
   selector: 'app-tab-home',
@@ -34,7 +35,7 @@ export class TabHomeComponent implements OnInit {
 
   public getUser(onRefresh?: any): void {
     this.isLoading = true;
-    this.userService.getUser(decodeJWT().email).pipe(
+    this.userService.getUser().pipe(
       finalize(() => {
         if (onRefresh) onRefresh.target.complete();
         this.isLoading = false;
@@ -50,9 +51,9 @@ export class TabHomeComponent implements OnInit {
 
   public doReorder(ev: any): void {
     this.user.bus = ev.detail.complete(this.user.bus);
-    this.userService.updateUser(this.user).subscribe(res => {
-      this.user = res;
-    });
+    // this.userService.updateUser(this.user).subscribe(res => {
+    //   this.user = res;
+    // });
   }
 
   public async deleteBus(b: Bus): Promise<void> {
@@ -61,10 +62,20 @@ export class TabHomeComponent implements OnInit {
     const user = Object.assign({}, this.user);
     if (!user.bus) return;
 
-    user.bus = user.bus.filter(item => {
-      return item.numero !== b.numero;
-    });
-    this.updateUser(user);
+    this.userService.removeBus(b)
+      .pipe(
+        catchError((err: HttpErrorResponse, _) => {
+          if (err.status === 400 && err.error === ServerErrorMessages.NOT_FOUND) {
+            this.utilService.showToast(
+              'Esse ônibus só pode ser deletado pelo app',
+              'danger',
+              2050,
+            );
+          }
+          throw err;
+        }),
+      )
+      .subscribe((res) => this.user = res);
   }
 
   public async onAddingBus(): Promise<void> {
@@ -105,17 +116,9 @@ export class TabHomeComponent implements OnInit {
   }
 
   private addBus(bus: Bus[]): void {
-    const user = ObjectToUser(this.user);
-    bus.forEach(item => {
-      user.bus!.push(item);
-    });
-    this.updateUser(user);
-  }
-
-  private updateUser(user: User): void {
     this.isLoading = true;
-    this.userService.updateUser(user).pipe(
+    this.userService.addBus(bus).pipe(
       finalize(() => this.isLoading = false),
-    ).subscribe(res => this.user = res);
+    ).subscribe((res: User) => this.user = res);
   }
 }

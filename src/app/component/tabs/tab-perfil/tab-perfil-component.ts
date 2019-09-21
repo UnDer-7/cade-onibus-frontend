@@ -42,7 +42,7 @@ export class TabPerfilComponent implements OnInit {
 
   private getUser(): void {
     this.isLoading = true;
-    this.userService.getUser(decodeJWT().email).pipe(
+    this.userService.getUser().pipe(
       finalize(() => this.isLoading = false),
     ).subscribe(res => this.user = res);
   }
