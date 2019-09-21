@@ -19,7 +19,7 @@ export class UserService {
   }
 
   public addBus(user: Bus[]): Observable<User> {
-    return this.http.post<User>(this.resourceUrl + '/web', user)
+    return this.http.post<User>(this.resourceUrl + '/web/add-bus', user)
       .pipe(
         map((item) => this.convertUser(item)),
       );
