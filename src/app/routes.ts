@@ -6,6 +6,10 @@ export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
 
   {
+    path: 'forgot-password',
+    loadChildren: './component/forgot-password/forgot-password.module#ForgotPasswordModule',
+  },
+  {
     path: 'login',
     loadChildren: './component/login/login.module#LoginModule',
     canActivate: [CanLogInGuard],
