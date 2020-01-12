@@ -11,14 +11,13 @@ import { SocialUserToUser, User } from '../../model/user.model';
 import { UserService } from '../../resource/user.service';
 import { UtilService } from '../../utils/util.service';
 import { BusSelectionModalComponent } from '../modal/bus-selection-modal/bus-selection-modal.component';
+import { ComponentsUtils } from '../../utils/components-utils';
 
 @Component({
   selector: 'app-new-account',
   templateUrl: './new-account.component.html',
 })
-export class NewAccountComponent {
-  public readonly contentColor: string = environment.contentColor;
-  public readonly appName: string = environment.appName;
+export class NewAccountComponent extends ComponentsUtils {
 
   @BlockUI() private blockUi!: NgBlockUI;
 
@@ -28,7 +27,7 @@ export class NewAccountComponent {
     private sessionHandler: SessionHandler,
     private modalCtrl: ModalController,
     private utilService: UtilService,
-  ) { }
+  ) { super(); }
 
   public async saveEmailPassword(user: User): Promise<void> {
     const bus = await this.busSelection();

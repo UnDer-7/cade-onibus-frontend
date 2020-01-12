@@ -1,14 +1,13 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { environment } from '../../../../environments/environment';
 import { User } from '../../../model/user.model';
+import { ComponentsUtils } from '../../../utils/components-utils';
 
 @Component({
   selector: 'app-email-password-form',
   templateUrl: './email-password-form.component.html',
 })
-export class EmailPasswordFormComponent implements OnInit {
-  public readonly contentColor: string = environment.contentColor;
+export class EmailPasswordFormComponent extends ComponentsUtils implements OnInit {
 
   @Input() public isCreation: boolean = true;
   @Output() public userSubmitted: EventEmitter<User> = new EventEmitter();
@@ -21,7 +20,7 @@ export class EmailPasswordFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-  ) { }
+  ) { super(); }
 
   public ngOnInit(): void {
     if (this.isCreation) {

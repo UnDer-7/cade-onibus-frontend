@@ -6,14 +6,13 @@ import { environment } from '../../../environments/environment';
 import { SessionHandler } from '../../auth/session.handler';
 import { SocialUserToUser, User } from '../../model/user.model';
 import { UtilService } from '../../utils/util.service';
+import { ComponentsUtils } from '../../utils/components-utils';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
 })
-export class LoginComponent {
-  public readonly contentColor: string = environment.contentColor;
-  public readonly appName: string = environment.appName;
+export class LoginComponent extends ComponentsUtils {
 
   public isEmailPassword: boolean = false;
 
@@ -23,8 +22,7 @@ export class LoginComponent {
     private socialService: AuthService,
     private utilService: UtilService,
     private sessionHandler: SessionHandler,
-  ) {
-  }
+  ) { super(); }
 
   public async google(): Promise<void> {
     this.blockUi.start();

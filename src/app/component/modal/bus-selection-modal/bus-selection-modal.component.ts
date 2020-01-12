@@ -1,20 +1,18 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { AlertController, ModalController } from '@ionic/angular';
-import { environment } from '../../../../environments/environment';
 import { SessionHandler } from '../../../auth/session.handler';
 import { Bus } from '../../../model/bus.model';
 import { DfTransService } from '../../../resource/df-trans.service';
 import { UtilService } from '../../../utils/util.service';
 import { finalize } from 'rxjs/operators';
+import { ComponentsUtils } from '../../../utils/components-utils';
 
 @Component({
   selector: 'app-bus-selection-modal',
   templateUrl: './bus-selection-modal.component.html',
 })
-export class BusSelectionModalComponent implements OnInit {
-  public readonly appColor: string = environment.contentColor;
-  public readonly appName: string = environment.appName;
+export class BusSelectionModalComponent extends ComponentsUtils implements OnInit {
 
   @Input() public multiSelect: boolean = true;
   public isLoading: boolean = false;
@@ -31,8 +29,7 @@ export class BusSelectionModalComponent implements OnInit {
     private alertCtrl: AlertController,
     private modalCtrl: ModalController,
     private sessionHandler: SessionHandler,
-  ) {
-  }
+  ) { super(); }
 
   public ngOnInit(): void {
     if (this.sessionHandler.isLoggedIn()) {
