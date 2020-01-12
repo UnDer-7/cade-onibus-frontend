@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, ModalController } from '@ionic/angular';
 import { catchError, finalize } from 'rxjs/operators';
-import { environment } from '../../../../environments/environment';
 import { Bus } from '../../../model/bus.model';
 import { User } from '../../../model/user.model';
 import { UserService } from '../../../resource/user.service';

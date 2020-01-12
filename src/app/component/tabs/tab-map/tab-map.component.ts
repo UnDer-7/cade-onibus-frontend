@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { Subscription, timer } from 'rxjs';
 import { finalize, flatMap } from 'rxjs/operators';
-import { environment } from '../../../../environments/environment';
 import { BusCoordinates, ObjectsToBusCoordinates } from '../../../model/bus-coordinates.model';
 import { Bus } from '../../../model/bus.model';
 import { Coordinates } from '../../../model/coordinates.model';

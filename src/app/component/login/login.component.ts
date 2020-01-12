@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { AuthService, GoogleLoginProvider } from 'angularx-social-login';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { finalize } from 'rxjs/operators';
-import { environment } from '../../../environments/environment';
 import { SessionHandler } from '../../auth/session.handler';
 import { SocialUserToUser, User } from '../../model/user.model';
 import { UtilService } from '../../utils/util.service';

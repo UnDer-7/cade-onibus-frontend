@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { finalize } from 'rxjs/operators';
-import { environment } from '../../../../environments/environment';
-import { decodeJWT } from '../../../auth/jwt.handler';
 import { User } from '../../../model/user.model';
 import { UserService } from '../../../resource/user.service';
 import { PopoverController } from '@ionic/angular';
