@@ -8,10 +8,12 @@ import { ServerErrorMessages } from '../../utils/server-error.messages';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TokenForgotPassword } from '../../model/token-forgot-password.model';
 import { ComponentsUtils } from '../../utils/components-utils';
+import { UserService } from '../../resource/user.service';
 
 @Component({
   selector: 'forgot-password',
   templateUrl: './forgot-password.component.html',
+  styleUrls: ['./forgot-password.style.scss'],
 })
 export class ForgotPasswordComponent extends ComponentsUtils implements OnInit {
   public isLoading: boolean = true;
@@ -26,7 +28,8 @@ export class ForgotPasswordComponent extends ComponentsUtils implements OnInit {
   constructor(
     private readonly router: ActivatedRoute,
     private readonly sessionService: SessionService,
-    public readonly loadingController: LoadingController,
+    private readonly userService: UserService,
+    private readonly loadingController: LoadingController,
     private readonly formBuilder: FormBuilder,
   ) {
     super();
@@ -46,12 +49,10 @@ export class ForgotPasswordComponent extends ComponentsUtils implements OnInit {
   }
 
   public submit(): void {
-    console.log('Enviar');
-  }
-
-  public get passwordIcon(): string {
-    if (this.showPassword) return 'eye-off';
-    return 'eye';
+    if (this.form.invalid) return;
+    this.userService
+      .updatePassword(this.form.value.newPassword, this.tokenForgotPassword.tokenEncoded)
+      .subscribe(res => console.log('res ', res));
   }
 
   public onPasswordIconClick(): void {
@@ -64,6 +65,29 @@ export class ForgotPasswordComponent extends ComponentsUtils implements OnInit {
     }
   }
 
+  public get passwordIcon(): string {
+    if (this.showPassword) return 'eye-off';
+    return 'eye';
+  }
+
+  get passwordValidations(): string | undefined {
+    const password = this.form.controls.newPassword.errors;
+
+    if (!password) return;
+
+    if (password.hasOwnProperty('required')) {
+      return 'Senha é obrigatorio';
+    }
+
+    if (password.hasOwnProperty('minlength')) {
+      return 'Tamanho mínimo 5 caracteres';
+    }
+
+    if (password.hasOwnProperty('maxlength')) {
+      return 'Tamanho máximo 50 caracteres';
+    }
+  }
+
   private onQueryParamsSuccess = (params: any) => {
     const token = params.token;
 
@@ -72,8 +96,7 @@ export class ForgotPasswordComponent extends ComponentsUtils implements OnInit {
       this.dismissLoading();
       return;
     }
-
-    setTimeout(() =>     this.sessionService.verifyForgotPasswordToken(token)
+    this.sessionService.verifyForgotPasswordToken(token)
       .pipe(finalize(this.dismissLoading))
       .subscribe(
         res => {
@@ -81,7 +104,7 @@ export class ForgotPasswordComponent extends ComponentsUtils implements OnInit {
           this.updateEmail();
         },
         this.onError,
-      ), 3000);
+      );
   }
 
   private onError = (err: any): void => {
