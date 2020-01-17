@@ -66,8 +66,8 @@ export class ForgotPasswordComponent extends ComponentsUtils implements OnInit {
   }
 
   public get passwordIcon(): string {
-    if (this.showPassword) return 'eye-off';
-    return 'eye';
+    if (this.showPassword) return 'eye';
+    return 'eye-off';
   }
 
   get passwordValidations(): string | undefined {
@@ -76,7 +76,7 @@ export class ForgotPasswordComponent extends ComponentsUtils implements OnInit {
     if (!password) return;
 
     if (password.hasOwnProperty('required')) {
-      return 'Senha é obrigatorio';
+      return 'Senha é obrigatoria';
     }
 
     if (password.hasOwnProperty('minlength')) {

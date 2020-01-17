@@ -100,7 +100,7 @@ export class EmailPasswordFormComponent extends ComponentsUtils implements OnIni
     if (!this.formControls.password.errors) return;
 
     if (this.formControls.password.errors.hasOwnProperty('required')) {
-      return 'Senha é obrigatorio';
+      return 'Senha é obrigatoria';
     }
 
     if (this.formControls.password.errors.hasOwnProperty('minlength')) {
