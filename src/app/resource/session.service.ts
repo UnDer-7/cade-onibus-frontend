@@ -29,4 +29,11 @@ export class SessionService {
 
     return this.http.post<TokenForgotPassword>(`${this.resourceUrl}/forgot-password-valid`, jsonToken);
   }
-}
+
+  public forgotPassword(email: string): Observable<void> {
+    const body = {email};
+
+    return this.http.post<void>(`${this.resourceUrl}/recovery`, body);
+  }
+
+ }

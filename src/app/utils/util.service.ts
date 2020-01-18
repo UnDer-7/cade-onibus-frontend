@@ -16,7 +16,7 @@ export class UtilService {
     duration: number = 1850,
     position: 'bottom' | 'middle' | 'top' = 'bottom',
     showCloseButton: boolean = false,
-    closeButtonText?: string,
+    closeButtonText: string = 'Fechar',
     buttons?: Array<string | ToastButton>,
     cssClass: string | string[] = 'toastCss',
     header?: string,
