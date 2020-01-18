@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../../model/user.model';
 import { ComponentsUtils } from '../../../utils/components-utils';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-email-password-form',
@@ -20,6 +21,7 @@ export class EmailPasswordFormComponent extends ComponentsUtils implements OnIni
 
   constructor(
     private fb: FormBuilder,
+    private readonly router: Router,
   ) { super(); }
 
   public ngOnInit(): void {
@@ -45,6 +47,10 @@ export class EmailPasswordFormComponent extends ComponentsUtils implements OnIni
       this.passwordIcon = 'eye-off';
       this.passwordType = 'password';
     }
+  }
+
+  public navigateToForgotPassword(): void {
+    this.router.navigateByUrl('/forgot-password?noMsg=true');
   }
 
   get buttonText(): string {
