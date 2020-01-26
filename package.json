@@ -1,6 +1,6 @@
 {
   "name": "cade-onibus-frontend",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --baseHref=/ --open=true --poll 200",
@@ -8,8 +8,7 @@
     "lint": "ng lint",
     "test-modules": "snyk test --severity-threshold=medium",
     "snyk-protect": "snyk protect",
-    "snyk-wizard": "snyk wizard",
-    "prepare": "npm run snyk-protect"
+    "snyk-wizard": "snyk wizard"
   },
   "private": true,
   "dependencies": {
