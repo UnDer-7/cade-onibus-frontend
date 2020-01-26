@@ -18,6 +18,17 @@ export class UserService {
     return this.http.post<User>(this.resourceUrl + '/web', user);
   }
 
+  public updatePassword(password: string, forgotPasswordToken: string): Observable<void> {
+    const headers = {
+      forgotPasswordToken,
+    };
+    const body = {
+      password,
+    };
+    console.log('1: ', password);
+    return this.http.post<void>(`${this.resourceUrl}/update-password`, body, { headers });
+  }
+
   public addBus(user: Bus[]): Observable<User> {
     return this.http.post<User>(this.resourceUrl + '/web/add-bus', user)
       .pipe(

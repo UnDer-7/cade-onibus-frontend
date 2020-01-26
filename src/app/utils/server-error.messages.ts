@@ -8,4 +8,5 @@ export class ServerErrorMessages {
   public static readonly WRONG_GOOGLE_ID: string = 'wrong-google-id';
   public static readonly UNEXPECTED_ERROR: string = 'something-unexpected-has-happened';
   public static readonly ASSIGN_ERROR: string = 'unable-to-assign-interface';
+  public static readonly TOKEN_EXPIRED: string = 'token-is-expired';
 }

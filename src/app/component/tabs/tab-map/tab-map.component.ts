@@ -3,13 +3,13 @@ import { ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { Subscription, timer } from 'rxjs';
 import { finalize, flatMap } from 'rxjs/operators';
-import { environment } from '../../../../environments/environment';
 import { BusCoordinates, ObjectsToBusCoordinates } from '../../../model/bus-coordinates.model';
 import { Bus } from '../../../model/bus.model';
 import { Coordinates } from '../../../model/coordinates.model';
 import { DfTransService } from '../../../resource/df-trans.service';
 import { UtilService } from '../../../utils/util.service';
 import { BusSelectionModalComponent } from '../../modal/bus-selection-modal/bus-selection-modal.component';
+import { ComponentsUtils } from '../../../utils/components-utils';
 
 declare const google: any;
 
@@ -17,9 +17,7 @@ declare const google: any;
   selector: 'app-tab-map',
   templateUrl: 'tab-map.component.html',
 })
-export class TabMapComponent {
-  public readonly appName: string = environment.appName;
-  public readonly appColor: string = environment.contentColor;
+export class TabMapComponent extends ComponentsUtils {
 
   public userCurrentPosition: Coordinates = {} as Coordinates;
   public userPosition: Coordinates = {} as Coordinates;
@@ -53,8 +51,7 @@ export class TabMapComponent {
     private dfTransService: DfTransService,
     private modalCtr: ModalController,
     private utilService: UtilService,
-  ) {
-  }
+  ) { super(); }
 
   public ionViewWillEnter(): void {
     this.initializeVariables();

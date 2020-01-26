@@ -1,14 +1,14 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { environment } from '../../../../environments/environment';
 import { User } from '../../../model/user.model';
+import { ComponentsUtils } from '../../../utils/components-utils';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-email-password-form',
   templateUrl: './email-password-form.component.html',
 })
-export class EmailPasswordFormComponent implements OnInit {
-  public readonly contentColor: string = environment.contentColor;
+export class EmailPasswordFormComponent extends ComponentsUtils implements OnInit {
 
   @Input() public isCreation: boolean = true;
   @Output() public userSubmitted: EventEmitter<User> = new EventEmitter();
@@ -21,7 +21,8 @@ export class EmailPasswordFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-  ) { }
+    private readonly router: Router,
+  ) { super(); }
 
   public ngOnInit(): void {
     if (this.isCreation) {
@@ -46,6 +47,10 @@ export class EmailPasswordFormComponent implements OnInit {
       this.passwordIcon = 'eye-off';
       this.passwordType = 'password';
     }
+  }
+
+  public navigateToForgotPassword(): void {
+    this.router.navigateByUrl('/forgot-password?noMsg=true');
   }
 
   get buttonText(): string {
@@ -101,7 +106,7 @@ export class EmailPasswordFormComponent implements OnInit {
     if (!this.formControls.password.errors) return;
 
     if (this.formControls.password.errors.hasOwnProperty('required')) {
-      return 'Senha é obrigatorio';
+      return 'Senha é obrigatoria';
     }
 
     if (this.formControls.password.errors.hasOwnProperty('minlength')) {

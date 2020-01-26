@@ -22,6 +22,11 @@ agm-map {
   position: fixed;
   top: -54px;
 }
+.alert-head {
+  h2 {
+    color: #7e57ff !important;
+  }
+}
 
 .gmnoprint a, .gmnoprint span, .gm-style-cc {
 display:none;

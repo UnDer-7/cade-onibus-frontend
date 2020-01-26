@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, ModalController } from '@ionic/angular';
 import { catchError, finalize } from 'rxjs/operators';
-import { environment } from '../../../../environments/environment';
 import { Bus } from '../../../model/bus.model';
 import { User } from '../../../model/user.model';
 import { UserService } from '../../../resource/user.service';
@@ -9,14 +8,13 @@ import { UtilService } from '../../../utils/util.service';
 import { BusSelectionModalComponent } from '../../modal/bus-selection-modal/bus-selection-modal.component';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ServerErrorMessages } from '../../../utils/server-error.messages';
+import { ComponentsUtils } from '../../../utils/components-utils';
 
 @Component({
   selector: 'app-tab-home',
   templateUrl: 'tab-home.component.html',
 })
-export class TabHomeComponent implements OnInit {
-  public readonly appName: string = environment.appName;
-  public readonly appColor: string = environment.contentColor;
+export class TabHomeComponent extends ComponentsUtils implements OnInit {
 
   public user: User = {} as User;
   public isLoading: boolean = false;
@@ -26,8 +24,7 @@ export class TabHomeComponent implements OnInit {
     private utilService: UtilService,
     private modalCtrl: ModalController,
     private alertCtrl: AlertController,
-  ) {
-  }
+  ) { super(); }
 
   public ngOnInit(): void {
     this.getUser();
