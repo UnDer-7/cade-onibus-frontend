@@ -1,0 +1,47 @@
+<block-ui>
+</block-ui>
+<ion-header>
+  <ion-toolbar>
+    <ion-title text-center [color]="appColor">
+      {{ appName }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding [color]="appColor">
+  <ion-grid>
+    <ion-row>
+      <ion-col
+        sizeSm="12"
+        sizeMd="6" offsetMd="3"
+        sizeLg="4.3" offsetLg="3.8"
+        sizeXl="3" offsetXl="4.5">
+      <ion-card padding text-center style="margin-top: 50%" color="white">
+          <ion-card-title>ENTRAR</ion-card-title>
+          <ion-card-content>
+            <ion-button expand="block" fill="outline" color="primary" (click)="google()">
+              <ion-icon name="logo-google"></ion-icon>
+            </ion-button>
+            <div margin-top>
+              <app-email-password-form [isCreation]="false" *ngIf="isEmailPassword" (userSubmitted)="email($event)"></app-email-password-form>
+            </div>
+
+            <ion-label *ngIf="!isEmailPassword">OU</ion-label>
+
+            <ion-button expand="block" fill="clear" color="primary" (click)="onEmailSelection()" *ngIf="!isEmailPassword">
+              EMAIL E SENHA
+            </ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button expand="block" fill="clear" color="success" routerLink="/new-account">
+      NOVA CONTA
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

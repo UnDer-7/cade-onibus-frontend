@@ -1,0 +1,20 @@
+<ion-tabs>
+
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="home" selected="true" (click)="navigateTo('home')">
+      <ion-icon name="home" [color]="appColor"></ion-icon>
+      <ion-label>HOME</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="map" (click)="navigateTo('map')">
+      <ion-icon name="locate" [color]="appColor"></ion-icon>
+      <ion-label>MAPA</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="perfil" (click)="navigateTo('perfil')">
+      <ion-icon name="person" [color]="appColor"></ion-icon>
+      <ion-label>PERFIL</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+
+</ion-tabs>

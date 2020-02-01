@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title [color]="appColor" text-center>
+      {{ appName }}
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button slot="icon-only" expand="block" (click)="showOptions()">
+        <ion-icon name="settings" [color]="appColor"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-progress-bar type="indeterminate" [color]="appColor" *ngIf="isLoading"></ion-progress-bar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [color]="appColor">
+  <ion-card color="white" text-center *ngIf="!isLoading">
+    <div padding-top>
+      <ion-card-title text-uppercase>{{ user?.name }}</ion-card-title>
+      <ion-card-subtitle>{{ user.email }}</ion-card-subtitle>
+    </div>
+
+    <div padding-top>
+      <ion-card-content>
+        <ion-item>
+          <ion-title margin-top text-center text-wrap>MEUS ÔNIBUS</ion-title>
+        </ion-item>
+        <div *ngFor="let b of user.bus; let last = last">
+          <ion-list>
+            <ion-item slot="start" [lines]="canShowLine(last)">
+              <ion-badge style="margin-right: 10px" color="dark">{{ b.numero }}</ion-badge>
+              <ion-label text-wrap text-center>{{ b.descricao }}</ion-label>
+              <ion-text
+                style="margin-left: 10px"
+                color="danger">
+                {{ b.faixaTarifaria.tarifa |  currency: 'R$ '}}
+              </ion-text>
+            </ion-item>
+          </ion-list>
+        </div>
+      </ion-card-content>
+    </div>
+  </ion-card>
+</ion-content>

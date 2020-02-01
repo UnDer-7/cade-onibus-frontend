@@ -1,0 +1,39 @@
+<block-ui>
+</block-ui>
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title [color]="appColor">
+      {{ appName }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding [color]="appColor">
+  <ion-grid>
+    <ion-row>
+      <ion-col
+        sizeSm="12"
+        sizeMd="6" offsetMd="3"
+        sizeLg="4.3" offsetLg="3.8"
+        sizeXl="3" offsetXl="4.5">
+        <ion-card padding text-center style="margin-top: 27%" color="white">
+          <ion-title>NOVA CONTA</ion-title>
+          <ion-card-content>
+            <app-email-password-form (userSubmitted)="saveEmailPassword($event)"></app-email-password-form>
+
+            <div margin-vertical>
+              <ion-label>OU</ion-label>
+            </div>
+
+            <ion-button expand="block" fill="outline" color="primary" (click)="saveGoogle()">
+              <ion-icon name="logo-google"></ion-icon>
+            </ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
