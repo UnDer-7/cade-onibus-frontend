@@ -1,7 +1,0 @@
-{
-  "name": "cade-onibus",
-  "type": "angular",
-  "integrations": {
-    "cordova": {}
-  },
-}
