@@ -1,10 +1,17 @@
 [![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
 
-# DEPRECATED
-⛔️ DEPRECATED new version of Cadê Ônibus can be found here ->
+# ⛔️ DEPRECATED
+Use the lateast version of Cadê Ônibus
 
-## Frontend: https://github.com/UnDer-7/cade-onibus-frontend-playstore
+[![Build Status](https://travis-ci.com/UnDer-7/cade-onibus-frontend.svg?branch=master)](https://travis-ci.com/UnDer-7/cade-onibus-frontend)
+[![Known Vulnerabilities](https://snyk.io/test/github/UnDer-7/cade-onibus-frontend/badge.svg)](https://snyk.io/test/github/UnDer-7/cade-onibus-frontend)
+# cade-onibus-frontend
+## url -> https://cadeonibus.web.app
 
-## Backend: https://github.com/UnDer-7/cade-onibus-backend-playstore
+Frontend for the Cadê Ônibus project.
 
-I made a new version because I wasn't happy with the project and it was easier to make a new one
+It's a project made to track Brasília's buses (capital of Brazil)
+
+## Technologies
+-  Ionic 3
+-  Angular 5
