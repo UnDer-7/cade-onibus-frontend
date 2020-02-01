@@ -1,54 +1,60 @@
-import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import {ProfilePage} from "../pages/profile/profile";
-import {AuthService} from "../service/securityService/auth.service";
+import { Component } from '@angular/core';
+
+import { Platform } from '@ionic/angular';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { environment } from '../environments/environment';
+import { Router } from '@angular/router';
+import { SessionService } from './auth/session.service';
+import { TokenService } from './auth/token.service';
 
 @Component({
-  templateUrl: 'app.html'
+  selector: 'app-root',
+  templateUrl: 'app.component.html'
 })
-export class MyApp {
-  @ViewChild(Nav) nav: Nav;
+export class AppComponent {
+  public appName: string = environment.appName;
 
-  rootPage: string = 'LoginPage';
-
-  pages: Array<{title: string, component: string}>;
+  public appPages: Array<Object> = [
+    {
+      title: 'Home',
+      url: '/home',
+      icon: 'home'
+    },
+    {
+      title: 'Perfil',
+      url: '/perfil',
+      icon: 'person'
+    },
+    {
+      title: 'Loja',
+      url: '/loja',
+      icon: 'logo-bitcoin'
+    }
+  ];
 
   constructor(
-    public platform: Platform,
-    public statusBar: StatusBar,
-    public splashScreen: SplashScreen,
-    private authService: AuthService) {
+    private platform: Platform,
+    private splashScreen: SplashScreen,
+    private statusBar: StatusBar,
+    private router: Router,
+    private sessionService: SessionService,
+  ) {
     this.initializeApp();
-
-    // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'Home', component: 'HomePage' },
-      {title: 'Perfil', component: 'ProfilePage'}
-    ];
-
   }
 
-  initializeApp() {
+  public initializeApp(): void {
     this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      this.statusBar.styleDefault();
+      this.statusBar.styleBlackTranslucent();
       this.splashScreen.hide();
     });
   }
 
-  openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+  public logout(): void {
+    this.sessionService.logout();
   }
 
-  public sair() {
-    this.authService.logout().then(() => {
-      this.nav.setRoot('LoginPage');
-      localStorage.clear();
-    });
+  get canShowMenu(): boolean {
+    return this.router.url === ('/login' || '/');
   }
 }

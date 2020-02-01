@@ -1,49 +1,74 @@
-import { Geolocation } from '@ionic-native/geolocation';
-import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import {NgModule} from '@angular/core';
+import { BrowserModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import { RouteReuseStrategy } from '@angular/router';
 
-import { MyApp } from './app.component';
+import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
 
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
+import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+import { FindBusPageModule } from './pages/modals/find-bus/find-bus.module';
+import { UtilService } from './util/util.service';
+import { TokenService } from './auth/token.service';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import { TokenInterceptor } from './Interceptors/token.interceptor';
+import {registerLocaleData} from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+import { UserFormModule } from './pages/modals/user-form/user-form.module';
+import { MapsPageModule } from './pages/modals/maps/maps.module';
+import { SharingLocationService } from './util/sharing-location.service';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
+import { IonicGestureConfig } from './util/ionic-gesture-config';
+import { ErrorInterceptor } from './Interceptors/error.interceptor';
+import { AuthGuard } from './guards/auth-guard.guard';
+import { LoginGuard } from './guards/login-guard.guard';
+import { MoedasModule } from './pages/modals/moedas/moedas.module';
 
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabaseModule } from 'angularfire2/database'
-import { FIREBASE_CONFIG } from '../config/config';
-import { GoogleMaps} from '@ionic-native/google-maps'
-import {AuthService} from "../service/securityService/auth.service";
-import {StorageService} from "../service/securityService/storage.service";
-import {UserService} from "../service/modelService/user.service";
-import {PasswordModelPage} from "../pages/password-model/password-model";
+registerLocaleData(localePt, 'pt-BR');
 
 @NgModule({
-  declarations: [
-    MyApp,
-    PasswordModelPage
-  ],
+  declarations: [AppComponent],
+  entryComponents: [],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
-    AngularFireModule.initializeApp(FIREBASE_CONFIG.fire),
-    AngularFireDatabaseModule
-  ],
-  bootstrap: [IonicApp],
-  entryComponents: [
-    MyApp,
-    PasswordModelPage
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    HttpClientModule,
+    FindBusPageModule,
+    MapsPageModule,
+    UserFormModule,
+    MoedasModule,
+    AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AngularFireAuth,
-    GoogleMaps,
-    Geolocation,
-    AuthService,
-    StorageService,
-    UserService
-  ]
+    UtilService,
+    SharingLocationService,
+    TokenService,
+    AuthGuard,
+    LoginGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true
+    },
+    {
+      provide: RouteReuseStrategy,
+      useClass: IonicRouteStrategy
+    },
+    {
+      provide: HAMMER_GESTURE_CONFIG,
+      useClass: IonicGestureConfig
+    }
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

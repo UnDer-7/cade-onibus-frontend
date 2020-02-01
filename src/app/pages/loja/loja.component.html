@@ -1,0 +1,67 @@
+<block-ui></block-ui>
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-card text-center padding>
+    <ion-card-title>
+      <ion-text color="dark">SEU SALDO: </ion-text>
+      <ion-text color="success">{{ user.moedas }}</ion-text>
+      <ion-text color="medium"> MOEDAS</ion-text>
+    </ion-card-title>
+  </ion-card>
+    <ion-card>
+      <div margin-top margin-start *ngIf="user?.pacote?.quantosDias === 3">
+        <ion-badge color="tertiary">COMPRADO</ion-badge>
+      </div>
+      <ion-item>
+        <ion-badge color="success" margin-end>10 MOEDAS</ion-badge>
+        <ion-label text-center>3 Dias</ion-label>
+        <ion-button fill="outline" slot="end" (click)="buyItem(3)" [disabled]="!successLoading">Comprar</ion-button>
+      </ion-item>
+      <ion-card-content>
+        3 Dias sem anuncios
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <div margin-top margin-start *ngIf="user?.pacote?.quantosDias === 5">
+        <ion-badge color="tertiary">COMPRADO</ion-badge>
+      </div>
+      <ion-item>
+        <ion-badge color="success" margin-end>15 MOEDAS</ion-badge>
+        <ion-label text-center>5 Dias</ion-label>
+        <ion-button fill="outline" slot="end" (click)="buyItem(5)" [disabled]="!successLoading">Comprar</ion-button>
+      </ion-item>
+      <ion-card-content>
+        5 Dias sem anuncios
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <div margin-top margin-start *ngIf="user?.pacote?.quantosDias === 7">
+        <ion-badge color="tertiary">COMPRADO</ion-badge>
+      </div>
+      <ion-item>
+        <!-- <ion-icon name="logo-usd" slot="start"></ion-icon> -->
+        <ion-badge color="success" margin-end>18 MOEDAS</ion-badge>
+        <ion-label text-center>7 DIAS</ion-label>
+        <ion-button fill="outline" slot="end" (click)="buyItem(7)" [disabled]="!successLoading">Comprar</ion-button>
+      </ion-item>
+      <ion-card-content>
+        7 Dis sem anuncios
+      </ion-card-content>
+    </ion-card>
+  <ion-button margin-top expand="block" fill="outline" color="warning" (click)="buyMoedas()" [disabled]="!successLoading">COMPRAR MOEDAS</ion-button>
+</ion-content>
