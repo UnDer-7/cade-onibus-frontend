@@ -26,5 +26,5 @@ Frontend for the Cadê Ônibus project.
 It's a project made to track Brasília's buses (capital of Brazil)
 
 ## Technologies
--  Ionic 3
--  Angular 5
+-  Ionic 4
+-  Angular 7
