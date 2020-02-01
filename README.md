@@ -1,2 +1,10 @@
-# cade-onibus-frontend
-[![Build Status](https://travis-ci.com/cade-onibus/cade-onibus-frontend.svg?branch=development)](https://travis-ci.com/cade-onibus/cade-onibus-frontend)
+[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
+
+# DEPRECATED
+⛔️ DEPRECATED new version of Cadê Ônibus can be found here ->
+
+## Frontend: https://github.com/UnDer-7/cade-onibus-frontend-playstore
+
+## Backend: https://github.com/UnDer-7/cade-onibus-backend-playstore
+
+I made a new version because I wasn't happy with the project and it was easier to make a new one
