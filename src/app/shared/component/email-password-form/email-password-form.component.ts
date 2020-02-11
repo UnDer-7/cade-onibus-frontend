@@ -127,7 +127,7 @@ export class EmailPasswordFormComponent extends ComponentsUtils implements OnIni
       ]],
       password: ['', [
         Validators.required,
-        Validators.minLength(5),
+        Validators.minLength(3),
         Validators.maxLength(50),
       ]],
     });
@@ -147,7 +147,7 @@ export class EmailPasswordFormComponent extends ComponentsUtils implements OnIni
       ]],
       password: ['', [
         Validators.required,
-        Validators.minLength(5),
+        Validators.minLength(3),
         Validators.maxLength(50),
       ]],
     });

@@ -211,7 +211,7 @@ export class ForgotPasswordComponent extends ComponentsUtils implements OnInit {
       ]],
       newPassword: ['', [
         Validators.required,
-        Validators.minLength(5),
+        Validators.minLength(3),
         Validators.maxLength(50),
       ]],
     });
