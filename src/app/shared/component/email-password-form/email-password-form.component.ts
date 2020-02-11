@@ -110,7 +110,7 @@ export class EmailPasswordFormComponent extends ComponentsUtils implements OnIni
     }
 
     if (this.formControls.password.errors.hasOwnProperty('minlength')) {
-      return 'Tamanho mínimo 5 caracteres';
+      return 'Tamanho mínimo 3 caracteres';
     }
 
     if (this.formControls.password.errors.hasOwnProperty('maxlength')) {

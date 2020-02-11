@@ -112,7 +112,7 @@ export class ForgotPasswordComponent extends ComponentsUtils implements OnInit {
     }
 
     if (password.hasOwnProperty('minlength')) {
-      return 'Tamanho mínimo 5 caracteres';
+      return 'Tamanho mínimo 3 caracteres';
     }
 
     if (password.hasOwnProperty('maxlength')) {
