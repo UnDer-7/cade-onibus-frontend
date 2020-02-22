@@ -25,7 +25,6 @@ export class UserService {
     const body = {
       password,
     };
-    console.log('1: ', password);
     return this.http.post<void>(`${this.resourceUrl}/update-password`, body, { headers });
   }
 
