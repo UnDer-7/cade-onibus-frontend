@@ -3,13 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  apiUrl: 'http://localhost:8080/api',
-  dfTrans: 'https://www.sistemas.dftrans.df.gov.br',
-  clientID: '83439041810-bnmf6jsjl2ep6f5l0uqqlv5ikdfq9usr.apps.googleusercontent.com',
-  googleApiKey: 'AIzaSyD3cRYuq1jOs_veHDMinQ5sPB3vkgP2YOQ',
-  contentColor: 'tertiary',
-  appName: 'Cadê Ônibus',
+  production: false
 };
 
 /*
