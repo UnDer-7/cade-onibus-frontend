@@ -1,11 +1,12 @@
 import React from 'react';
 
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Redirect, Route, RouteComponentProps, Switch } from 'react-router-dom';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
 
 import './app.css';
 
-import Home from './pages/home/Home';
+import HomeRoutes from './pages/home/HomeRoutes';
+import AuthenticatedRoute from './components/ProtectedRoute';
 import AuthRoutes from './pages/auth/AuthRoutes';
 import EnvVariables from './utils/environmentVariables';
 
@@ -21,11 +22,19 @@ const theme = createMuiTheme({
 });
 
 export default function App() {
+  function renderHomeRoutes(props: RouteComponentProps) {
+    const { match, location, history } = props;
+
+    return (<HomeRoutes history={ history } location={ location } match={ match }/>);
+  }
+
   return (
-    <MuiThemeProvider theme={theme}>
+    <MuiThemeProvider theme={ theme }>
       <Router>
         <Switch>
-          <Route path="/" exact component={ Home }/>
+          <Redirect to='/home' from='/' exact/>
+
+          <AuthenticatedRoute path='/home' render={ renderHomeRoutes } exact/>
           <Route path="/auth" component={ AuthRoutes }/>
         </Switch>
       </Router>
