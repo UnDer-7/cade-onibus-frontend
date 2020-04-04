@@ -9,7 +9,7 @@ export default class EnvVariables {
 
   private static getVariable(name: string): string {
     const env = process.env[name];
-    if (!env) throw new Error(`Environment Variable [${name}] Not Fount`);
+    if (!env) throw new Error(`Environment Variable [${ name }] Not Fount`);
     return env;
   }
 }

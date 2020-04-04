@@ -1,6 +1,10 @@
 import React from 'react';
 
-import { Redirect, Route, RouteComponentProps } from 'react-router-dom';
+import {
+  Redirect,
+  Route,
+  RouteComponentProps,
+} from 'react-router-dom';
 
 interface AuthenticatedRoutePros {
   render: Function;
@@ -18,7 +22,7 @@ export default function AuthenticatedRoute(props: AuthenticatedRoutePros) {
     const redirectState = { pathname: redirect, state: { from: location } };
 
     if (isAuthenticated) return render({ match, location, history });
-    return (<Redirect to={ redirectState } />);
+    return (<Redirect to={ redirectState }/>);
   }
 
   return (

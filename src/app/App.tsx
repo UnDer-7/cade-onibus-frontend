@@ -1,13 +1,22 @@
+import {
+  createMuiTheme,
+  MuiThemeProvider,
+} from '@material-ui/core';
 import React from 'react';
 
-import { BrowserRouter as Router, Redirect, Route, RouteComponentProps, Switch } from 'react-router-dom';
-import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  RouteComponentProps,
+  Switch,
+} from 'react-router-dom';
 
 import './app.css';
-
-import HomeRoutes from './pages/home/HomeRoutes';
 import AuthenticatedRoute from './components/ProtectedRoute';
 import AuthRoutes from './pages/auth/AuthRoutes';
+
+import HomeRoutes from './pages/home/HomeRoutes';
 import EnvVariables from './utils/environmentVariables';
 
 const theme = createMuiTheme({
@@ -16,8 +25,8 @@ const theme = createMuiTheme({
       main: EnvVariables.PRIMARY_COLOR,
     },
     secondary: {
-      main: '#fbfff7'
-    }
+      main: '#fbfff7',
+    },
   },
 });
 

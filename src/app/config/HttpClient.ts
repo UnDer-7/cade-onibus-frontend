@@ -1,4 +1,8 @@
-import Axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
+import Axios, {
+  AxiosInstance,
+  AxiosRequestConfig,
+} from 'axios';
+
 import EnvVariables from '../utils/environmentVariables';
 
 export default class HttpClient {
@@ -28,7 +32,7 @@ export default class HttpClient {
   }
 
   public getResourceURL(resource: string): string {
-    return `${EnvVariables.BASE_URL}/api/${resource}`;
+    return `${ EnvVariables.BASE_URL }/api/${ resource }`;
   };
 
   public async get<T>(url: string, config?: AxiosRequestConfig): Promise<T> {

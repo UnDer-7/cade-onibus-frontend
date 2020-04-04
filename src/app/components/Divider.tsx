@@ -1,4 +1,5 @@
 import React, { CSSProperties } from 'react';
+
 import { Grid } from '@material-ui/core';
 
 interface Props {
@@ -13,8 +14,8 @@ const style: CSSProperties = {
 
 export default function Divider({ size }: Props) {
   return (
-    <Grid item container xs={size}>
-      <hr style={style}/>
+    <Grid item container xs={ size }>
+      <hr style={ style }/>
     </Grid>
   );
 }

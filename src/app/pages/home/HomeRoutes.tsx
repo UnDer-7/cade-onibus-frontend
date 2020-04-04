@@ -3,8 +3,9 @@ import React from 'react';
 import {
   BrowserRouter as Router,
   Route,
+  RouteComponentProps,
   Switch,
-  RouteComponentProps } from 'react-router-dom';
+} from 'react-router-dom';
 
 import Home from './Home';
 
@@ -14,7 +15,7 @@ export default function HomeRoutes({ match }: RouteComponentProps) {
   return (
     <Router>
       <Switch>
-        <Route path={`${path}`} component={Home} />
+        <Route path={ `${ path }` } component={ Home }/>
       </Switch>
     </Router>
   );

@@ -5,13 +5,13 @@ export interface LoginWithEmail {
   password: string
 }
 
-class SessionResource extends AbstractResource{
+class SessionResource extends AbstractResource {
   constructor() {
     super('session');
   }
 
   public loginWithEmail(data: LoginWithEmail): Promise<string> {
-    const url = `${ this.BASE_URL}/email`;
+    const url = `${ this.BASE_URL }/email`;
 
     return this.HTTP.post<string>(url, data);
   }

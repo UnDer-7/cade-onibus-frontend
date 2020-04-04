@@ -1,14 +1,20 @@
 import React from 'react';
 
-import { useForm } from 'react-hook-form';
-import { Button, Grid, makeStyles, TextField, Typography } from '@material-ui/core';
+import {
+  Button,
+  Grid,
+  makeStyles,
+  TextField,
+  Typography,
+} from '@material-ui/core';
 
-import Validations from '../../utils/validations';
-import EnvVariables from '../../utils/environmentVariables';
-import InputInvalid from '../../components/InputInvalid';
+import { useForm } from 'react-hook-form';
 import GoogleIcon from '../../components/CustonIcons';
 import Divider from '../../components/Divider';
+import InputInvalid from '../../components/InputInvalid';
 import SessionResource, { LoginWithEmail } from '../../resources/SessionResource';
+import EnvVariables from '../../utils/environmentVariables';
+import Validations from '../../utils/validations';
 
 const useStyles = makeStyles({
   minHeight: { minHeight: '100vh' },
@@ -118,7 +124,7 @@ export default function SignIn() {
                     variant="contained"
                     color="secondary"
                     type='submit'
-                    onClick={newAccount}
+                    onClick={ newAccount }
             >
               Criar conta
             </Button>
