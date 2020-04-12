@@ -3,7 +3,7 @@ import Axios, {
   AxiosRequestConfig,
 } from 'axios';
 
-import EnvVariables from '../utils/environmentVariables';
+import EnvVariables from '../utils/EnvironmentVariables';
 
 export default class HttpClient {
   private static instance: HttpClient;

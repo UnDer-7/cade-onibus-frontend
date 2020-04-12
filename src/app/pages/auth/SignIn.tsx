@@ -13,8 +13,8 @@ import GoogleIcon from '../../components/CustonIcons';
 import Divider from '../../components/Divider';
 import InputInvalid from '../../components/InputInvalid';
 import SessionResource, { LoginWithEmail } from '../../resources/SessionResource';
-import EnvVariables from '../../utils/environmentVariables';
-import Validations from '../../utils/validations';
+import EnvVariables from '../../utils/EnvironmentVariables';
+import Validations from '../../utils/Validations';
 
 const useStyles = makeStyles({
   minHeight: { minHeight: '100vh' },
@@ -162,9 +162,4 @@ function Header() {
       </Typography>
     </Grid>
   );
-}
-
-interface SignInModel {
-  email: string;
-  password: string;
 }

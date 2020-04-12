@@ -1,4 +1,4 @@
-import { User } from '../models/UserModel';
+import { User } from '../models/User';
 import AbstractResource from './AbstractResource';
 
 class UserResource extends AbstractResource {
