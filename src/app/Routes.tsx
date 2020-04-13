@@ -7,8 +7,8 @@ import AuthRoutes from './pages/auth/AuthRoutes';
 import HomeRoutes from './pages/home/HomeRoutes';
 
 export default function Routes() {
-  function renderHomeRoutes(props: RouteComponentProps) {
-    const { match, location, history } = props;
+  function renderHomeRoutes(propsRender: RouteComponentProps) {
+    const { match, location, history } = propsRender;
 
     return (<HomeRoutes history={ history } location={ location } match={ match }/>);
   }
@@ -17,7 +17,7 @@ export default function Routes() {
     <Switch>
       <Redirect to='/home' from='/' exact/>
 
-      <AuthenticatedRoute path='/home' render={ renderHomeRoutes } exact/>
+      <AuthenticatedRoute path='/home' render={ renderHomeRoutes } exact />
       <Route path="/auth" component={ AuthRoutes }/>
     </Switch>
   );

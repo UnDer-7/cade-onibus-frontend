@@ -6,6 +6,8 @@ import {
   RouteComponentProps,
 } from 'react-router-dom';
 
+import AuthService from '../services/AuthService';
+
 interface AuthenticatedRoutePros {
   render: Function;
   path: string;
@@ -15,13 +17,12 @@ interface AuthenticatedRoutePros {
 
 export default function AuthenticatedRoute(props: AuthenticatedRoutePros) {
   const { path, exact, redirect, render } = props;
-
-  const isAuthenticated = true;
+  const authService = AuthService;
 
   function handleRender({ match, location, history }: RouteComponentProps) {
     const redirectState = { pathname: redirect, state: { from: location } };
 
-    if (isAuthenticated) return render({ match, location, history });
+    if (authService.isAuthenticated()) return render({ match, location, history });
     return (<Redirect to={ redirectState }/>);
   }
 

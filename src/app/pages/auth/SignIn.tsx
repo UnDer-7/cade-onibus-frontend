@@ -1,32 +1,31 @@
 import React from 'react';
 
-import {
-  Button,
-  Grid,
-  makeStyles,
-  TextField,
-  Typography,
-} from '@material-ui/core';
-
+import { Button, Grid, makeStyles, TextField, Typography, } from '@material-ui/core';
+import { RouteComponentProps } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+
+import { SignInWithEmail } from '../../models/types/SignInWithEmail';
 import GoogleIcon from '../../components/CustonIcons';
 import Divider from '../../components/Divider';
 import InputInvalid from '../../components/InputInvalid';
-import SessionResource, { LoginWithEmail } from '../../resources/SessionResource';
 import EnvVariables from '../../utils/EnvironmentVariables';
 import Validations from '../../utils/Validations';
+import AuthService from '../../services/AuthService';
 
 const useStyles = makeStyles({
   minHeight: { minHeight: '100vh' },
 });
 
-export default function SignIn() {
+export default function SignIn({ history }: RouteComponentProps) {
   const classes = useStyles();
-  const { register, handleSubmit, errors } = useForm<LoginWithEmail>();
+  const { register, handleSubmit, errors } = useForm<SignInWithEmail>();
 
-  async function onSubmit(data: LoginWithEmail) {
-    const res = await SessionResource.loginWithEmail(data);
-    console.log('RES: ', res);
+  function onSignInWithEmail(data: SignInWithEmail) {
+    AuthService.signInWithEmail(data)
+      .then(() => {
+        console.log('HISTORY: ', history);
+        history.push('/home');
+      });
   }
 
   function onSignInWithGoogle() {
@@ -45,7 +44,7 @@ export default function SignIn() {
   }
 
   return (
-    <form onSubmit={ handleSubmit(onSubmit) } noValidate>
+    <form onSubmit={ handleSubmit(onSignInWithEmail) } noValidate>
       <Grid container
             className={ classes.minHeight }
             item
@@ -147,6 +146,7 @@ export default function SignIn() {
 }
 
 function Header() {
+  console.log('HEADER');
   return (
     <Grid container
           item
