@@ -1,6 +1,6 @@
 import AbstractResource from './AbstractResource';
 
-import { SignInWithEmail } from '../../app/types/SignInWithEmail';
+import { SignInWithEmail } from '../../ui/types/SignInWithEmail';
 
 class SessionResource extends AbstractResource {
   constructor() {
