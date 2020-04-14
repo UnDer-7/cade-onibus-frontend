@@ -4,13 +4,13 @@ import { Button, Grid, makeStyles, TextField, Typography, } from '@material-ui/c
 import { RouteComponentProps } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
-import { SignInWithEmail } from '../../models/types/SignInWithEmail';
+import { SignInWithEmail } from '../../types/SignInWithEmail';
 import GoogleIcon from '../../components/CustonIcons';
 import Divider from '../../components/Divider';
 import InputInvalid from '../../components/InputInvalid';
-import EnvVariables from '../../utils/EnvironmentVariables';
-import Validations from '../../utils/Validations';
-import AuthService from '../../services/AuthService';
+import EnvVariables from '../../../core/utils/EnvironmentVariables';
+import Validations from '../../../core/utils/Validations';
+import AuthService from '../../../core/services/AuthService';
 
 const useStyles = makeStyles({
   minHeight: { minHeight: '100vh' },

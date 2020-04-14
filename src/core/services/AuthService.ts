@@ -1,4 +1,4 @@
-import { SignInWithEmail } from '../models/types/SignInWithEmail';
+import { SignInWithEmail } from '../../app/types/SignInWithEmail';
 import SessionResource from '../resources/SessionResource';
 import LocalStorageService, { Key } from './LocalStorageService';
 

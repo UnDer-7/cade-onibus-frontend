@@ -1,5 +1,5 @@
 import { createMuiTheme } from '@material-ui/core';
-import EnvVariables from '../utils/EnvironmentVariables';
+import EnvVariables from '../../core/utils/EnvironmentVariables';
 
 const materialConfig = createMuiTheme({
   palette: {
