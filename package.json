@@ -6,12 +6,14 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "lint": "eslint 'src/ui/**/*.tsx'"
+    "lint": "eslint 'src/app/**/*.tsx'"
   },
   "dependencies": {
     "@material-ui/core": "^4.9.4",
     "@material-ui/icons": "^4.9.1",
+    "@types/lodash-es": "^4.17.3",
     "axios": "^0.19.2",
+    "lodash-es": "^4.17.15",
     "node-sass": "^4.13.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",

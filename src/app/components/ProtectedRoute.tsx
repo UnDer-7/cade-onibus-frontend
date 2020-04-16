@@ -6,7 +6,7 @@ import {
   RouteComponentProps,
 } from 'react-router-dom';
 
-import AuthService from '../../core/services/AuthService';
+import AuthService from '../services/AuthService';
 
 interface AuthenticatedRoutePros {
   render: Function;
