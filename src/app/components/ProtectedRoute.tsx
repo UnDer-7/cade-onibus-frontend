@@ -8,8 +8,10 @@ import {
 
 import AuthService from '../services/AuthService';
 
+import { Function } from '../models/types/Functions';
+
 interface AuthenticatedRoutePros {
-  render: Function;
+  render: Function<RouteComponentProps , React.ReactElement<RouteComponentProps>>;
   path: string;
   exact?: boolean;
   redirect?: string;

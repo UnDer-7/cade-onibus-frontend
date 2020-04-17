@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import {
   BrowserRouter as Router,
@@ -9,7 +9,7 @@ import {
 
 import SignIn from './SignIn';
 
-export default function AuthRoutes({ match }: RouteComponentProps) {
+export default function AuthRoutes({ match }: RouteComponentProps): ReactElement<RouteComponentProps> {
   const { path } = match;
 
   return (

@@ -6,8 +6,8 @@ import AuthenticatedRoute from './components/ProtectedRoute';
 import AuthRoutes from './pages/auth/AuthRoutes';
 import HomeRoutes from './pages/home/HomeRoutes';
 
-export default function Routes() {
-  function renderHomeRoutes(propsRender: RouteComponentProps) {
+export default function Routes(): React.ReactElement {
+  function renderHomeRoutes(propsRender: RouteComponentProps): React.ReactElement<RouteComponentProps> {
     const { match, location, history } = propsRender;
 
     return (<HomeRoutes history={ history } location={ location } match={ match }/>);

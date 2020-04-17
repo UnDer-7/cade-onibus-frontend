@@ -1,5 +1,7 @@
-import AbstractResource from './AbstractResource';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
+import AbstractResource from './AbstractResource';
 import { SignInWithEmail } from '../models/types/SignInWithEmail';
 
 class SessionResource extends AbstractResource {
@@ -7,10 +9,13 @@ class SessionResource extends AbstractResource {
     super('session');
   }
 
-  public loginWithEmail(data: SignInWithEmail): Promise<string> {
+  public loginWithEmail(data: SignInWithEmail): Observable<string> {
     const url = `${ this.BASE_URL }/email`;
 
-    return this.HTTP.post<string>(url, data);
+    return this.HTTP.post<string>(url, data)
+      .pipe(
+        map((value) => value.data)
+      );
   }
 }
 

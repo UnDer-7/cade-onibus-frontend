@@ -1,7 +1,7 @@
-import { createMuiTheme } from '@material-ui/core';
+import { createMuiTheme, Theme } from '@material-ui/core';
 import EnvVariables from '../utils/EnvironmentVariables';
 
-const materialConfig = createMuiTheme({
+const materialConfig: Theme = createMuiTheme({
   palette: {
     primary: {
       main: EnvVariables.PRIMARY_COLOR,

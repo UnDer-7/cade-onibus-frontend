@@ -1,3 +1,5 @@
+import Assert from './Assert';
+
 export default class EnvVariables {
   public static readonly APP_NAME: string = 'Cadê Ônibus';
 
@@ -9,7 +11,9 @@ export default class EnvVariables {
 
   private static getVariable(name: string): string {
     const env = process.env[name];
-    if (!env) throw new Error(`Environment Variable [${ name }] Not Fount`);
+    Assert.notBlank(env, { errorMessage: `Environment Variable [${ name }] Not Fount` });
+
+    // @ts-ignore
     return env;
   }
 }

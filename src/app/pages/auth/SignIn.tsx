@@ -21,11 +21,7 @@ export default function SignIn({ history }: RouteComponentProps) {
   const { register, handleSubmit, errors } = useForm<SignInWithEmail>();
 
   function onSignInWithEmail(data: SignInWithEmail) {
-    AuthService.signInWithEmail(data)
-      .then(() => {
-        console.log('HISTORY: ', history);
-        history.push('/home');
-      });
+    AuthService.signInWithEmail(data, history.push);
   }
 
   function onSignInWithGoogle() {

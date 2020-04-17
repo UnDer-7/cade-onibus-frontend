@@ -1,14 +1,13 @@
-import Axios, {
-  AxiosInstance,
-  AxiosRequestConfig,
-} from 'axios';
+import Axios from 'axios-observable';
+import { AxiosRequestConfig } from 'axios';
+import { AxiosObservable } from 'axios-observable/dist/axios-observable.interface';
 
 import EnvVariables from '../utils/EnvironmentVariables';
 
 export default class HttpClient {
   private static instance: HttpClient;
 
-  private axiosInstance: AxiosInstance;
+  private axiosInstance: Axios;
 
   private constructor() {
     this.axiosInstance = Axios.create({
@@ -35,13 +34,11 @@ export default class HttpClient {
     return `${ EnvVariables.BASE_URL }/api/${ resource }`;
   };
 
-  public async get<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
-    const res = await this.axiosInstance.get<T>(url, config);
-    return res.data;
+  public get<T>(url: string, config?: AxiosRequestConfig): AxiosObservable<T> {
+    return this.axiosInstance.get<T>(url, config);
   }
 
-  public async post<T>(url: string, body: any, config?: AxiosRequestConfig): Promise<T> {
-    const res = await this.axiosInstance.post(url, body, config);
-    return res.data;
+  public post<T>(url: string, body: any, config?: AxiosRequestConfig): AxiosObservable<T> {
+    return this.axiosInstance.post(url, body, config);
   }
 }

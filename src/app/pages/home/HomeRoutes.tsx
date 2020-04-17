@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import {
   BrowserRouter as Router,
@@ -9,7 +9,8 @@ import {
 
 import Home from './Home';
 
-export default function HomeRoutes({ match }: RouteComponentProps) {
+export default function HomeRoutes({ match }: RouteComponentProps): ReactElement<RouteComponentProps> {
+  console.log('matech: ', match);
   const { path } = match;
 
   return (
