@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import { Button, Grid, makeStyles, TextField, Typography, } from '@material-ui/core';
-import { RouteComponentProps } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
 import { SignInWithEmail } from '../../models/types/SignInWithEmail';
@@ -16,26 +16,28 @@ const useStyles = makeStyles({
   minHeight: { minHeight: '100vh' },
 });
 
-export default function SignIn({ history }: RouteComponentProps) {
+export default function SignIn(): ReactElement {
   const classes = useStyles();
   const { register, handleSubmit, errors } = useForm<SignInWithEmail>();
+  const history = useHistory();
 
-  function onSignInWithEmail(data: SignInWithEmail) {
+  function onSignInWithEmail(data: SignInWithEmail): void {
     AuthService.signInWithEmail(data, history.push);
   }
 
-  function onSignInWithGoogle() {
+  function onSignInWithGoogle(): void {
+    console.log('---- SIGN WITH GOOGLE ----');
   }
 
-  function onShowMaps() {
+  function onShowMaps(): void {
     console.log('---- SHOW MAPS ----');
   }
 
-  function forgotPassword() {
+  function forgotPassword(): void {
     console.log('---- FORGOT PASSWORD ----');
   }
 
-  function newAccount() {
+  function newAccount(): void {
     console.log('---- NEW ACCOUNT ----');
   }
 
@@ -141,8 +143,7 @@ export default function SignIn({ history }: RouteComponentProps) {
   );
 }
 
-function Header() {
-  console.log('HEADER');
+function Header(): ReactElement {
   return (
     <Grid container
           item

@@ -1,11 +1,6 @@
 import React, { ReactElement } from 'react';
 
-import {
-  BrowserRouter as Router,
-  Redirect,
-  Route,
-  RouteComponentProps,
-} from 'react-router-dom';
+import { Redirect, Route, RouteComponentProps, Switch } from 'react-router-dom';
 
 import SignIn from './SignIn';
 
@@ -13,10 +8,15 @@ export default function AuthRoutes({ match }: RouteComponentProps): ReactElement
   const { path } = match;
 
   return (
-    <Router>
+    <>
       <Redirect to={ `${ path }/signin` } from={ path }/>
+      <Switch>
 
-      <Route path={ `${ path }/signin` } component={ SignIn }/>
-    </Router>
+        <Route
+          path={ `${ path }/signin` }
+          component={ SignIn }
+        />
+      </Switch>
+    </>
   );
 }
