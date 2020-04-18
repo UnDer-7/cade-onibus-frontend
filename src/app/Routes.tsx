@@ -17,7 +17,8 @@ export default function Routes(): React.ReactElement {
     <Switch>
       <Redirect to='/home' from='/' exact/>
 
-      <AuthenticatedRoute path='/home' render={ renderHomeRoutes } exact />
+      {/*<AuthenticatedRoute path='/home' render={ renderHomeRoutes } exact />*/}
+      <Route path="/home" component={ HomeRoutes }/>
       <Route path="/auth" component={ AuthRoutes }/>
     </Switch>
   );
