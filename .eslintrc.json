@@ -23,6 +23,8 @@
     "semi": ["error", "always"],
     "quotes": ["error", "single"],
     "class-methods-use-this": "off",
+    "no-useless-constructor": "off",
+    "max-classes-per-file": "off",
     "import/extensions": [
       "error",
       "ignorePackages",

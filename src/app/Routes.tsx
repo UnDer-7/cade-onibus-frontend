@@ -1,25 +1,19 @@
 import React from 'react';
 
-import { Redirect, Route, RouteComponentProps, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 
 import AuthenticatedRoute from './components/ProtectedRoute';
-import AuthRoutes from './pages/auth/AuthRoutes';
-import HomeRoutes from './pages/home/HomeRoutes';
+import AuthRoutes, { AUTH_PATH_PREFIX } from './pages/auth/AuthRoutes';
+import HomeRoutes, { HOME_PATH_PREFIX } from './pages/home/HomeRoutes';
 
 export default function Routes(): React.ReactElement {
-  function renderHomeRoutes(propsRender: RouteComponentProps): React.ReactElement<RouteComponentProps> {
-    const { match, location, history } = propsRender;
 
-    return (<HomeRoutes history={ history } location={ location } match={ match }/>);
-  }
-
-  return (
+    return (
     <Switch>
       <Redirect to='/home' from='/' exact/>
 
-      {/*<AuthenticatedRoute path='/home' render={ renderHomeRoutes } exact />*/}
-      <Route path="/home" component={ HomeRoutes }/>
-      <Route path="/auth" component={ AuthRoutes }/>
+      <AuthenticatedRoute path={HOME_PATH_PREFIX} component={ HomeRoutes } />
+      <Route path={AUTH_PATH_PREFIX} component={ AuthRoutes }/>
     </Switch>
   );
 }

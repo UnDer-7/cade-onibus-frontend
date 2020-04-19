@@ -1,7 +1,6 @@
 import React, { ReactElement } from 'react';
 
 import { Button, Grid, makeStyles, TextField, Typography, } from '@material-ui/core';
-import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
 import { SignInWithEmail } from '../../models/types/SignInWithEmail';
@@ -19,10 +18,9 @@ const useStyles = makeStyles({
 export default function SignIn(): ReactElement {
   const classes = useStyles();
   const { register, handleSubmit, errors } = useForm<SignInWithEmail>();
-  const history = useHistory();
 
   function onSignInWithEmail(data: SignInWithEmail): void {
-    AuthService.signInWithEmail(data, history.push);
+    AuthService.signInWithEmail(data);
   }
 
   function onSignInWithGoogle(): void {

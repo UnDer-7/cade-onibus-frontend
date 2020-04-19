@@ -5,7 +5,7 @@ export enum Key {
 }
 
 class LocalStorageService {
-  public save(key: Key, value: string): void {
+  public set(key: Key, value: string): void {
     localStorage.setItem(key, value);
   }
 
@@ -15,6 +15,10 @@ class LocalStorageService {
       Assert.notNull(value, 'LocalStorage Value is Null');
     }
     return value;
+  }
+
+  public remove(key: Key): void {
+    localStorage.removeItem(key);
   }
 }
 

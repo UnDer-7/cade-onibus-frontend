@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ComponentType, ReactElement } from 'react';
 
 import {
   Redirect,
@@ -8,23 +8,13 @@ import {
 
 import AuthService from '../services/AuthService';
 
-import { Function } from '../models/types/Functions';
+export default function AuthenticatedRoute(props: AuthenticatedRoutePros): ReactElement {
+  const { path, exact, redirect, component } = props;
 
-interface AuthenticatedRoutePros {
-  render: Function<RouteComponentProps , React.ReactElement<RouteComponentProps>>;
-  path: string;
-  exact?: boolean;
-  redirect?: string;
-}
-
-export default function AuthenticatedRoute(props: AuthenticatedRoutePros) {
-  const { path, exact, redirect, render } = props;
-  const authService = AuthService;
-
-  function handleRender({ match, location, history }: RouteComponentProps) {
+  function handleRender({ location }: RouteComponentProps) {
     const redirectState = { pathname: redirect, state: { from: location } };
 
-    if (authService.isAuthenticated()) return render({ match, location, history });
+    if (AuthService.isAuthenticated()) return React.createElement(component as any, props);
     return (<Redirect to={ redirectState }/>);
   }
 
@@ -35,6 +25,13 @@ export default function AuthenticatedRoute(props: AuthenticatedRoutePros) {
       render={ handleRender }
     />
   );
+}
+
+interface AuthenticatedRoutePros {
+  component: ComponentType | ReactElement;
+  path: string;
+  exact?: boolean;
+  redirect?: string;
 }
 
 AuthenticatedRoute.defaultProps = {
