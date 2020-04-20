@@ -2,8 +2,10 @@ import React, { ReactElement } from 'react';
 
 import { Button, Grid, makeStyles, TextField, Typography, } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
+import { useHistory } from 'react-router-dom';
 
 import { SignInWithEmail } from '../../models/types/SignInWithEmail';
+import { NEW_ACCOUNT_PATH } from './AuthRoutes';
 import GoogleIcon from '../../components/CustonIcons';
 import Divider from '../../components/Divider';
 import InputInvalid from '../../components/InputInvalid';
@@ -16,9 +18,12 @@ const useStyles = makeStyles({
 });
 
 export default function SignIn(): ReactElement {
+  // HOOKS
   const classes = useStyles();
   const { register, handleSubmit, errors } = useForm<SignInWithEmail>();
+  const history = useHistory();
 
+  // FUNCTIONS
   function onSignInWithEmail(data: SignInWithEmail): void {
     AuthService.signInWithEmail(data);
   }
@@ -36,7 +41,7 @@ export default function SignIn(): ReactElement {
   }
 
   function newAccount(): void {
-    console.log('---- NEW ACCOUNT ----');
+    history.push(NEW_ACCOUNT_PATH);
   }
 
   return (
