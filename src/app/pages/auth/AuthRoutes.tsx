@@ -2,9 +2,9 @@ import React, { ReactElement } from 'react';
 
 import { Redirect, Route, RouteComponentProps, Switch } from 'react-router-dom';
 
-import SignIn from './SignIn';
-import NewAccount from './NewAccount';
-import ForgotPassword from './ForgotPassword';
+import SignIn from './sign-in/SignIn';
+import NewAccount from './new-account/NewAccount';
+import ForgotPassword from './forgot-password/ForgotPassword';
 
 export const AUTH_PATH_PREFIX: string = '/auth';
 

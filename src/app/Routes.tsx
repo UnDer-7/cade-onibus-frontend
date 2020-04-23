@@ -7,7 +7,6 @@ import AuthRoutes, { AUTH_PATH_PREFIX } from './pages/auth/AuthRoutes';
 import HomeRoutes, { HOME_PATH_PREFIX } from './pages/home/HomeRoutes';
 
 export default function Routes(): React.ReactElement {
-
     return (
     <Switch>
       <Redirect to='/home' from='/' exact/>

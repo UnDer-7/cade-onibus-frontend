@@ -14,7 +14,6 @@ export default class JWT {
     function setDate(value: number): dayjs.Dayjs {
       return dayjs(new Date(value * 1000), { locale: 'pt-br'});
     }
-
     Assert.notNull(decoded, 'JWT decodificado esta null');
 
     const { token, email, iat, exp } = decoded;

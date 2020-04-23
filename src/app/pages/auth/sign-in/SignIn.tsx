@@ -3,15 +3,16 @@ import React, { ReactElement } from 'react';
 import { Button, Grid, makeStyles, TextField, Typography, } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
+import GoogleLogin, { GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login';
 
-import { SignInWithEmail } from '../../models/types/SignInWithEmail';
-import { NEW_ACCOUNT_PATH } from './AuthRoutes';
-import GoogleIcon from '../../components/CustonIcons';
-import Divider from '../../components/Divider';
-import InputInvalid from '../../components/InputInvalid';
-import EnvVariables from '../../utils/EnvironmentVariables';
-import Validations from '../../utils/Validations';
-import AuthService from '../../services/AuthService';
+import { SignInWithEmail } from '../../../models/types/SignInWithEmail';
+import { FORGOT_PASSWORD_PATH, NEW_ACCOUNT_PATH } from '../AuthRoutes';
+import GoogleIcon from '../../../components/CustonIcons';
+import Divider from '../../../components/Divider';
+import InputInvalid from '../../../components/InputInvalid';
+import EnvVariables from '../../../utils/EnvironmentVariables';
+import Validations from '../../../utils/Validations';
+import AuthService from '../../../services/AuthService';
 
 const useStyles = makeStyles({
   minHeight: { minHeight: '100vh' },
@@ -20,16 +21,20 @@ const useStyles = makeStyles({
 export default function SignIn(): ReactElement {
   // HOOKS
   const classes = useStyles();
-  const { register, handleSubmit, errors } = useForm<SignInWithEmail>();
   const history = useHistory();
+  const { register, handleSubmit, errors } = useForm<SignInWithEmail>();
 
   // FUNCTIONS
   function onSignInWithEmail(data: SignInWithEmail): void {
     AuthService.signInWithEmail(data);
   }
 
-  function onSignInWithGoogle(): void {
-    console.log('---- SIGN WITH GOOGLE ----');
+  function onSuccessSignInWithGoogle(response: GoogleLoginResponse | GoogleLoginResponseOffline): void {
+    AuthService.signInWithGoogle(response as GoogleLoginResponse);
+  }
+
+  function onFailureSignInWithGoogle(response: GoogleLoginResponse | GoogleLoginResponseOffline): void {
+    console.log('FAILURE ', response);
   }
 
   function onShowMaps(): void {
@@ -37,7 +42,7 @@ export default function SignIn(): ReactElement {
   }
 
   function forgotPassword(): void {
-    console.log('---- FORGOT PASSWORD ----');
+    history.push(FORGOT_PASSWORD_PATH);
   }
 
   function newAccount(): void {
@@ -66,14 +71,21 @@ export default function SignIn(): ReactElement {
         >
           <Header/>
           <Grid container sm={ 6 } item>
-            <Button fullWidth
-                    variant='outlined'
-                    color='primary'
-                    onClick={ onSignInWithGoogle }
-                    startIcon={ <GoogleIcon/> }
-            >
-              Entrar com Google
-            </Button>
+            <GoogleLogin
+              clientId={ EnvVariables.GOOGLE_CLIENT_ID }
+              onSuccess={ onSuccessSignInWithGoogle }
+              onFailure={ onFailureSignInWithGoogle }
+              render={(renderProps) => (
+                <Button fullWidth
+                        variant='outlined'
+                        color='primary'
+                        onClick={ renderProps.onClick }
+                        startIcon={ <GoogleIcon/> }
+                >
+                  Entrar com Google
+                </Button>
+              )}
+            />
           </Grid>
 
           <Divider size={ 6 }/>

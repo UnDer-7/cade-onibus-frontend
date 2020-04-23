@@ -1,6 +1,7 @@
 import JWT_DECODE from 'jwt-decode';
+import { GoogleLoginResponse } from 'react-google-login';
 
-import { SignInWithEmail } from '../models/types/SignInWithEmail';
+import { SignInWithEmail, SignInWithGoogle } from '../models/types/SignInWithEmail';
 import LocalStorageService, { Key } from './LocalStorageService';
 import JWT from '../models/JWT';
 import SessionResource from '../resources/SessionResource';
@@ -10,21 +11,24 @@ import { SIGN_IN_PATH } from '../pages/auth/AuthRoutes';
 import { JWTInvalidException } from '../utils/Exceptions';
 
 class AuthService {
-  private readonly resource = SessionResource;
-
-  private readonly localStorageService = LocalStorageService;
-
   public signInWithEmail(data: SignInWithEmail): void {
-    this.resource
-      .loginWithEmail(data)
-      .subscribe((token) => {
-        this.onSignInSuccess(token);
-        history.push(HOME_PATH);
-      });
+    SessionResource.signInWithEmail(data)
+      .subscribe(this.onSignInSuccess);
+  }
+
+  public signInWithGoogle(data: GoogleLoginResponse): void {
+    const payload: SignInWithGoogle = {
+      google_id: data.googleId,
+      email: data.getBasicProfile().getEmail(),
+      name: data.getBasicProfile().getName(),
+    };
+
+    SessionResource.signInWithGoogle(payload)
+      .subscribe(this.onSignInSuccess);
   }
 
   public signOut(): void {
-    this.localStorageService.remove(Key.TOKEN);
+    LocalStorageService.remove(Key.TOKEN);
     history.push(SIGN_IN_PATH);
   }
 
@@ -37,22 +41,21 @@ class AuthService {
   }
 
   public getJWT(): JWT | null {
-    const token = this.localStorageService.get(Key.TOKEN);
+    const token = LocalStorageService.get(Key.TOKEN);
     if (!token) return null;
 
     try {
       const decoded = JWT_DECODE(token) as any;
       decoded.token = token;
-
       return new JWT(decoded);
     } catch (e) {
-      this.signOut();
       throw new JWTInvalidException('Error ao decodificar JWT', e);
     }
   }
 
   private onSignInSuccess(token: string): void {
-    this.localStorageService.set(Key.TOKEN, token);
+    LocalStorageService.set(Key.TOKEN, token);
+    history.push(HOME_PATH);
   }
 }
 
