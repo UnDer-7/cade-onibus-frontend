@@ -1,18 +1,28 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useState } from 'react';
 
-import { Button, Grid, makeStyles, TextField, Typography, } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import GoogleLogin, { GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login';
+import BlockUi from 'react-block-ui';
+import {
+  Button,
+  Grid,
+  TextField,
+  Typography,
+  makeStyles,
+} from '@material-ui/core';
 
 import { SignInWithEmail } from '../../../models/types/SignInWithEmail';
 import { FORGOT_PASSWORD_PATH, NEW_ACCOUNT_PATH } from '../AuthRoutes';
-import GoogleIcon from '../../../components/CustonIcons';
-import Divider from '../../../components/Divider';
-import InputInvalid from '../../../components/InputInvalid';
 import EnvVariables from '../../../utils/EnvironmentVariables';
 import Validations from '../../../utils/Validations';
 import AuthService from '../../../services/AuthService';
+import {
+  GoogleIcon,
+  Divider,
+  InputInvalid,
+  Toast,
+} from '../../../components';
 
 const useStyles = makeStyles({
   minHeight: { minHeight: '100vh' },
@@ -23,6 +33,8 @@ export default function SignIn(): ReactElement {
   const classes = useStyles();
   const history = useHistory();
   const { register, handleSubmit, errors } = useForm<SignInWithEmail>();
+  const [ isBlockingUI, setIsBlockingUI ] = useState<boolean>(false);
+  const [ googleSignInFailed, setGoogleSignInFailed ] = useState<boolean>(false);
 
   // FUNCTIONS
   function onSignInWithEmail(data: SignInWithEmail): void {
@@ -30,11 +42,17 @@ export default function SignIn(): ReactElement {
   }
 
   function onSuccessSignInWithGoogle(response: GoogleLoginResponse | GoogleLoginResponseOffline): void {
+    setIsBlockingUI(false);
     AuthService.signInWithGoogle(response as GoogleLoginResponse);
   }
 
-  function onFailureSignInWithGoogle(response: GoogleLoginResponse | GoogleLoginResponseOffline): void {
-    console.log('FAILURE ', response);
+  function onFailureSignInWithGoogle(response: any): void {
+    setIsBlockingUI(false);
+    if (response?.error !== 'popup_closed_by_user') {
+      setGoogleSignInFailed(true);
+      // eslint-disable-next-line no-console
+      console.error(`Google sign in erro: \n${response}`);
+    }
   }
 
   function onShowMaps(): void {
@@ -50,111 +68,124 @@ export default function SignIn(): ReactElement {
   }
 
   return (
-    <form onSubmit={ handleSubmit(onSignInWithEmail) } noValidate>
-      <Grid container
-            className={ classes.minHeight }
-            item
-            xs={ 12 }
-            spacing={ 1 }
-            justify="center"
-            alignItems="center"
-      >
-        <Grid container
-              className={ classes.minHeight }
-              item
-              md={ 8 }
-              sm={ 12 }
-              spacing={ 1 }
-              direction='column'
-              alignItems='center'
-              justify='center'
-        >
-          <Header/>
-          <Grid container sm={ 6 } item>
-            <GoogleLogin
-              clientId={ EnvVariables.GOOGLE_CLIENT_ID }
-              onSuccess={ onSuccessSignInWithGoogle }
-              onFailure={ onFailureSignInWithGoogle }
-              render={(renderProps) => (
+    <>
+      <Toast
+        show={googleSignInFailed}
+        setShow={setGoogleSignInFailed}
+        message='Erro ao realizar login com Google'
+        type='error'
+      />
+      <BlockUi tag='div' blocking={isBlockingUI}>
+        <form onSubmit={ handleSubmit(onSignInWithEmail) } noValidate>
+          <Grid container
+                className={ classes.minHeight }
+                item
+                xs={ 12 }
+                spacing={ 1 }
+                justify="center"
+                alignItems="center"
+          >
+            <Grid container
+                  className={ classes.minHeight }
+                  item
+                  md={ 8 }
+                  sm={ 12 }
+                  spacing={ 1 }
+                  direction='column'
+                  alignItems='center'
+                  justify='center'
+            >
+              <Header/>
+              <Grid container sm={ 6 } item>
+                <GoogleLogin
+                  clientId={ EnvVariables.GOOGLE_CLIENT_ID }
+                  onSuccess={ onSuccessSignInWithGoogle }
+                  onFailure={ onFailureSignInWithGoogle }
+                  render={(renderProps) => (
+                    <Button fullWidth
+                            variant='outlined'
+                            color='primary'
+                            onClick={ () => {
+                              renderProps.onClick();
+                              setIsBlockingUI(true);
+                            } }
+                            startIcon={ <GoogleIcon/> }
+                    >
+                      Entrar com Google
+                    </Button>
+                  )}
+                />
+              </Grid>
+
+              <Divider size={ 6 }/>
+
+              <Grid container sm={ 6 } item>
+                <TextField fullWidth
+                           required
+                           name='email'
+                           id="id_auth_form_email"
+                           label="E-mail"
+                           variant="outlined"
+                           type='email'
+                           inputRef={ register(Validations.EMAIL) }
+                />
+                <InputInvalid errors={ errors } inputName='email'/>
+              </Grid>
+              <Grid container sm={ 6 } item>
+                <TextField fullWidth
+                           required
+                           name='password'
+                           id="id_auth_form_password"
+                           label="Senha"
+                           variant="outlined"
+                           type='password'
+                           inputRef={ register(Validations.PASSWORD) }
+                />
+                <InputInvalid errors={ errors } inputName='password'/>
+              </Grid>
+              <Grid container sm={ 6 } justify='flex-end' item>
+                <Button variant='text'
+                        color="primary"
+                        onClick={ forgotPassword }
+                >
+                  Esqueceu a senha?
+                </Button>
+              </Grid>
+              <Grid container sm={ 6 } item>
+                <Button fullWidth
+                        variant="contained"
+                        color="primary"
+                        type='submit'
+                >
+                  Entrar
+                </Button>
+              </Grid>
+              <Grid container sm={ 6 } item>
+                <Button fullWidth
+                        variant="contained"
+                        color="secondary"
+                        type='submit'
+                        onClick={ newAccount }
+                >
+                  Criar conta
+                </Button>
+              </Grid>
+              <Divider size={ 6 }/>
+              <Grid container item sm={ 6 }>
                 <Button fullWidth
                         variant='outlined'
                         color='primary'
-                        onClick={ renderProps.onClick }
-                        startIcon={ <GoogleIcon/> }
+                        onClick={ onShowMaps }
                 >
-                  Entrar com Google
+                  Só quero procurar um ônibus
                 </Button>
-              )}
-            />
-          </Grid>
+              </Grid>
+            </Grid>
 
-          <Divider size={ 6 }/>
-
-          <Grid container sm={ 6 } item>
-            <TextField fullWidth
-                       required
-                       name='email'
-                       id="id_auth_form_email"
-                       label="E-mail"
-                       variant="outlined"
-                       type='email'
-                       inputRef={ register(Validations.EMAIL) }
-            />
-            <InputInvalid errors={ errors } inputName='email'/>
           </Grid>
-          <Grid container sm={ 6 } item>
-            <TextField fullWidth
-                       required
-                       name='password'
-                       id="id_auth_form_password"
-                       label="Senha"
-                       variant="outlined"
-                       type='password'
-                       inputRef={ register(Validations.PASSWORD) }
-            />
-            <InputInvalid errors={ errors } inputName='password'/>
-          </Grid>
-          <Grid container sm={ 6 } justify='flex-end' item>
-            <Button variant='text'
-                    color="primary"
-                    onClick={ forgotPassword }
-            >
-              Esqueceu a senha?
-            </Button>
-          </Grid>
-          <Grid container sm={ 6 } item>
-            <Button fullWidth
-                    variant="contained"
-                    color="primary"
-                    type='submit'
-            >
-              Entrar
-            </Button>
-          </Grid>
-          <Grid container sm={ 6 } item>
-            <Button fullWidth
-                    variant="contained"
-                    color="secondary"
-                    type='submit'
-                    onClick={ newAccount }
-            >
-              Criar conta
-            </Button>
-          </Grid>
-          <Divider size={ 6 }/>
-          <Grid container item sm={ 6 }>
-            <Button fullWidth
-                    variant='outlined'
-                    color='primary'
-                    onClick={ onShowMaps }
-            >
-              Só quero procurar um ônibus
-            </Button>
-          </Grid>
-        </Grid>
-
-      </Grid>
-    </form>
+        </form>
+      </BlockUi>
+    </>
   );
 }
 

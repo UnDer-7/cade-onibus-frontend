@@ -11,6 +11,7 @@
   "dependencies": {
     "@material-ui/core": "^4.9.4",
     "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.51",
     "@types/lodash-es": "^4.17.3",
     "axios": "^0.19.2",
     "axios-observable": "^1.1.3",
