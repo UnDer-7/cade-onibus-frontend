@@ -3,6 +3,7 @@ import React, { ReactElement, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import GoogleLogin, { GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login';
+import { AxiosResponse } from 'axios';
 import {
   Button,
   Grid,
@@ -23,6 +24,7 @@ import {
   Toast,
   BlockUI,
 } from '../../../components';
+import ServerErrorMessages from '../../../utils/ServerErrorMessages';
 
 const useStyles = makeStyles({
   minHeight: { minHeight: '100vh' },
@@ -34,11 +36,29 @@ export default function SignIn(): ReactElement {
   const history = useHistory();
   const { register, handleSubmit, errors } = useForm<SignInWithEmail>();
   const [ isBlockingUI, setIsBlockingUI ] = useState<boolean>(false);
-  const [ googleSignInFailed, setGoogleSignInFailed ] = useState<boolean>(false);
+  const [ isShowingErrorToast, setIsShowingErrorToast ] = useState<boolean>(false);
+  const [ errorToastMsg, setErrorToastMsg ] = useState<string>('');
 
   // FUNCTIONS
   function onSignInWithEmail(data: SignInWithEmail): void {
-    AuthService.signInWithEmail(data);
+    function onError(err: AxiosResponse<string>): void {
+      function setErro(msg: string): void {
+        setErrorToastMsg(msg);
+        setIsShowingErrorToast(true);
+      }
+
+      if (err.status === 404) {
+        setErro('Usuário não encontrado');
+      } else if (err.status === 400 && err.data === ServerErrorMessages.INVALID_CREDENTIALS) {
+        setErro('Credenciais inválidas');
+      } else if (err.status === 400 && err.data === ServerErrorMessages.EMAIL_USED_ON_GOOGLE) {
+        throw new Error('IMPLEMENTAR ESSA MERDA!!!');
+      }
+    }
+    const onComplete = () => setIsBlockingUI(false);
+    setIsBlockingUI(true);
+
+    AuthService.signInWithEmail({ data, onComplete, onError });
   }
 
   function onSuccessSignInWithGoogle(response: GoogleLoginResponse | GoogleLoginResponseOffline): void {
@@ -49,7 +69,8 @@ export default function SignIn(): ReactElement {
   function onFailureSignInWithGoogle(response: any): void {
     setIsBlockingUI(false);
     if (response?.error !== 'popup_closed_by_user') {
-      setGoogleSignInFailed(true);
+      setIsShowingErrorToast(true);
+      setErrorToastMsg('Erro ao realizar login com Google');
       // eslint-disable-next-line no-console
       console.error(`Google sign in erro: \n${response}`);
     }
@@ -70,9 +91,9 @@ export default function SignIn(): ReactElement {
   return (
     <>
       <Toast
-        show={googleSignInFailed}
-        setShow={setGoogleSignInFailed}
-        message='Erro ao realizar login com Google'
+        show={isShowingErrorToast}
+        setShow={setIsShowingErrorToast}
+        message={errorToastMsg}
         type='error'
       />
       <BlockUI show={isBlockingUI}>

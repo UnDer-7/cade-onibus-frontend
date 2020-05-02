@@ -1,12 +1,20 @@
-export type Consumer<T> = (t: T) => void;
-export type BiConsumer<T, U> = (t: T, u: U) => void;
+export type Consumer<Param> = (t: Param) => void;
+export type BiConsumer<ParamA, ParamB> = (t: ParamA, u: ParamB) => void;
 
-export type Function<T, R> = (t: T) => R;
-export type BiFunction<T, U, R> = (t: T, u: U) => R;
+export type Function<Param, Return> = (t: Param) => Return;
+export type BiFunction<ParamA, ParamB, Return> = (t: ParamA, u: ParamB) => Return;
 
-export type UnaryOperator<T> = Function<T, T>;
+export type UnaryOperator<ParamReturn> = Function<ParamReturn, ParamReturn>;
 
-export type Predicate<T> = (t: T) => boolean;
-export type BiPredicate<T, U> = (t: T, u: U) => boolean;
+export type Predicate<Param> = (t: Param) => boolean;
+export type BiPredicate<ParamA, ParamB> = (t: ParamA, u: ParamB) => boolean;
 
-export type Supplier<T> = () => T;
+export type Supplier<Return> = () => Return;
+export type Runnable = () => void;
+
+
+// Dummy functions to use as fallBack
+
+// eslint-disable-next-line no-unused-vars
+export const ConsumerImpl: Consumer<any> = (_) => {};
+export const RunnableImpl: Runnable = () => {};

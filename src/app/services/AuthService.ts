@@ -1,5 +1,7 @@
 import JWT_DECODE from 'jwt-decode';
 import { GoogleLoginResponse } from 'react-google-login';
+import { finalize } from 'rxjs/operators';
+import { AxiosResponse } from 'axios';
 
 import { SignInWithEmail, SignInWithGoogle } from '../models/types/SignInWithEmail';
 import LocalStorageService, { Key } from './LocalStorageService';
@@ -9,11 +11,23 @@ import history from '../config/History';
 import { HOME_PATH } from '../pages/home/HomeRoutes';
 import { SIGN_IN_PATH } from '../pages/auth/AuthRoutes';
 import { JWTInvalidException } from '../utils/Exceptions';
+import { Runnable, Consumer, RunnableImpl, ConsumerImpl } from '../models/types/Functions';
 
 class AuthService {
-  public signInWithEmail(data: SignInWithEmail): void {
+  public signInWithEmail(
+    {
+      data,
+      onComplete = RunnableImpl,
+      onError = ConsumerImpl,
+    }: CommonProps<SignInWithEmail>): void {
     SessionResource.signInWithEmail(data)
-      .subscribe(this.onSignInSuccess);
+      .pipe(
+        finalize(onComplete),
+      )
+      .subscribe(
+        (success) => this.onSignInSuccess(success),
+        (error) => onError(error.response),
+      );
   }
 
   public signInWithGoogle(data: GoogleLoginResponse): void {
@@ -57,6 +71,12 @@ class AuthService {
     LocalStorageService.set(Key.TOKEN, token);
     history.push(HOME_PATH);
   }
+}
+
+interface CommonProps<T> {
+  data: T,
+  onComplete?: Runnable;
+  onError?: Consumer<AxiosResponse<string>>
 }
 
 export default new AuthService();
