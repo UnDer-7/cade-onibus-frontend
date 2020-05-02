@@ -3,7 +3,6 @@ import React, { ReactElement, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import GoogleLogin, { GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login';
-import BlockUi from 'react-block-ui';
 import {
   Button,
   Grid,
@@ -22,6 +21,7 @@ import {
   Divider,
   InputInvalid,
   Toast,
+  BlockUI,
 } from '../../../components';
 
 const useStyles = makeStyles({
@@ -75,7 +75,7 @@ export default function SignIn(): ReactElement {
         message='Erro ao realizar login com Google'
         type='error'
       />
-      <BlockUi tag='div' blocking={isBlockingUI}>
+      <BlockUI show={isBlockingUI}>
         <form onSubmit={ handleSubmit(onSignInWithEmail) } noValidate>
           <Grid container
                 className={ classes.minHeight }
@@ -184,7 +184,7 @@ export default function SignIn(): ReactElement {
 
           </Grid>
         </form>
-      </BlockUi>
+      </BlockUI>
     </>
   );
 }
