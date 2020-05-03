@@ -109,7 +109,8 @@ export default function SignIn(): ReactElement {
             <Grid container
                   className={ classes.minHeight }
                   item
-                  md={ 8 }
+                  lg={ 5 }
+                  md={ 10 }
                   sm={ 12 }
                   spacing={ 1 }
                   direction='column'
