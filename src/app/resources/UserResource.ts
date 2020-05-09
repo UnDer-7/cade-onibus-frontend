@@ -1,5 +1,4 @@
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 import { User } from '../models/User';
 import AbstractResource from './AbstractResource';
@@ -12,10 +11,21 @@ class UserResource extends AbstractResource {
   public getUser(email: string): Observable<User> {
     const url = `${ this.BASE_URL }/${ email }`;
 
-    return this.HTTP.get<User>(url)
-      .pipe(
-        map((value) => value.data)
-      );
+    return this.getResponseBody<User>(
+      this.HTTP.get(url)
+    );
+  }
+
+  public updatePassword({password, token}: {password: string, token: string}): Observable<void> {
+    const url = `${this.BASE_URL}/update-password`;
+
+    return this.getResponseBody<void>(
+      this.HTTP.post(url, { password }, {
+        headers: {
+          forgotPasswordToken: token,
+        },
+      })
+    );
   }
 }
 

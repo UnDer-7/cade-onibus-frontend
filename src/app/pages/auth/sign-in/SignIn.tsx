@@ -12,7 +12,7 @@ import {
   makeStyles,
 } from '@material-ui/core';
 
-import { SignInWithEmail } from '../../../models/types/SignInWithEmail';
+import { PasswordWithEmail } from '../../../models/types/SignInTypes';
 import { FORGOT_PASSWORD_PATH, NEW_ACCOUNT_PATH } from '../AuthRoutes';
 import EnvVariables from '../../../utils/EnvironmentVariables';
 import Validations from '../../../utils/Validations';
@@ -34,13 +34,13 @@ export default function SignIn(): ReactElement {
   // HOOKS
   const classes = useStyles();
   const history = useHistory();
-  const { register, handleSubmit, errors } = useForm<SignInWithEmail>();
+  const { register, handleSubmit, errors } = useForm<PasswordWithEmail>();
   const [ isBlockingUI, setIsBlockingUI ] = useState<boolean>(false);
   const [ isShowingErrorToast, setIsShowingErrorToast ] = useState<boolean>(false);
   const [ errorToastMsg, setErrorToastMsg ] = useState<string>('');
 
   // FUNCTIONS
-  function onSignInWithEmail(data: SignInWithEmail): void {
+  function onSignInWithEmail(data: PasswordWithEmail): void {
     function onError(err: AxiosResponse<string>): void {
       function setErro(msg: string): void {
         setErrorToastMsg(msg);

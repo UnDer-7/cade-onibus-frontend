@@ -1,17 +1,17 @@
 import JWT_DECODE from 'jwt-decode';
 import { GoogleLoginResponse } from 'react-google-login';
-import { finalize } from 'rxjs/operators';
-import { AxiosResponse } from 'axios';
+import { finalize, map } from 'rxjs/operators';
 
-import { SignInWithEmail, SignInWithGoogle } from '../models/types/SignInWithEmail';
+import { PasswordWithEmail, GoogleIdWithEmail } from '../models/types/SignInTypes';
 import LocalStorageService, { Key } from './LocalStorageService';
-import JWT from '../models/JWT';
+import JWT, { RecoveryPayload } from '../models/JWT';
 import SessionResource from '../resources/SessionResource';
 import history from '../config/History';
 import { HOME_PATH } from '../pages/home/HomeRoutes';
 import { SIGN_IN_PATH } from '../pages/auth/AuthRoutes';
 import { JWTInvalidException } from '../utils/Exceptions';
-import { Runnable, Consumer, RunnableImpl, ConsumerImpl } from '../models/types/Functions';
+import { RunnableImpl, ConsumerImpl } from '../models/types/Functions';
+import { CommonProps } from './index';
 
 class AuthService {
   public signInWithEmail(
@@ -19,7 +19,7 @@ class AuthService {
       data,
       onComplete = RunnableImpl,
       onError = ConsumerImpl,
-    }: CommonProps<SignInWithEmail>): void {
+    }: CommonProps<PasswordWithEmail, string>): void {
     SessionResource.signInWithEmail(data)
       .pipe(
         finalize(onComplete),
@@ -31,7 +31,7 @@ class AuthService {
   }
 
   public signInWithGoogle(data: GoogleLoginResponse): void {
-    const payload: SignInWithGoogle = {
+    const payload: GoogleIdWithEmail = {
       google_id: data.googleId,
       email: data.getBasicProfile().getEmail(),
       name: data.getBasicProfile().getName(),
@@ -46,6 +46,45 @@ class AuthService {
     history.push(SIGN_IN_PATH);
   }
 
+  public sendRecoveryEmail(
+    {
+      data,
+      onComplete = RunnableImpl,
+      onError = ConsumerImpl,
+      onSuccess = ConsumerImpl,
+    }: CommonProps<string, any>
+  ): void {
+    SessionResource.sendPasswordRecoveryEmail(data)
+      .pipe(
+        finalize(onComplete)
+      ).subscribe(
+        onSuccess,
+        (err) => (onError(err.response))
+      );
+  }
+
+  public isRecoveryPasswordTokenValid(
+    {
+      data,
+      onComplete = RunnableImpl,
+      onError = ConsumerImpl,
+      onSuccess = ConsumerImpl,
+    }: CommonProps<string, any>
+  ): void {
+    SessionResource.isRecoveryPasswordTokenValid(data)
+      .pipe(
+        finalize(onComplete),
+        map((res) => {
+          res.token = res.tokenEncoded;
+          delete res.tokenEncoded;
+          return new JWT<RecoveryPayload>(res);
+        }),
+      ).subscribe(
+        onSuccess,
+        (err) => (onError(err.response))
+    );
+  }
+
   public isAuthenticated(): boolean {
     const jwt = this.getJWT();
 
@@ -54,14 +93,15 @@ class AuthService {
     return jwt.isExpired();
   }
 
-  public getJWT(): JWT | null {
+  public getJWT(): JWT<string> | null {
     const token = LocalStorageService.get(Key.TOKEN);
     if (!token) return null;
 
     try {
       const decoded = JWT_DECODE(token) as any;
       decoded.token = token;
-      return new JWT(decoded);
+      decoded.payload = decoded.email;
+      return  new JWT<string>(decoded);
     } catch (e) {
       throw new JWTInvalidException('Error ao decodificar JWT', e);
     }
@@ -71,12 +111,6 @@ class AuthService {
     LocalStorageService.set(Key.TOKEN, token);
     history.push(HOME_PATH);
   }
-}
-
-interface CommonProps<T> {
-  data: T,
-  onComplete?: Runnable;
-  onError?: Consumer<AxiosResponse<string>>
 }
 
 export default new AuthService();

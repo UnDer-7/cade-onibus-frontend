@@ -15,7 +15,7 @@ export default function BlockUI(
   }: PropsWithChildren<BlockUIProps>): ReactElement<PropsWithChildren<BlockUIProps>> {
   return (
     <BlockUi blocking={show} loader={loader}>
-      {children}
+      {children || (<div style={{minHeight: '100vh'}}/>)}
     </BlockUi>
   );
 }

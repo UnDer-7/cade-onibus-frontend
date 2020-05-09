@@ -1,10 +1,15 @@
 import dayjs from 'dayjs';
 import Assert from '../utils/Assert';
 
-export default class JWT {
+export interface RecoveryPayload {
+  email: string;
+  id: string;
+}
+
+export default class JWT<T> {
   public readonly token: string;
 
-  public readonly email: string;
+  public readonly payload: T;
 
   public readonly expirationDate: dayjs.Dayjs;
 
@@ -16,14 +21,14 @@ export default class JWT {
     }
     Assert.notNull(decoded, 'JWT decodificado esta null');
 
-    const { token, email, iat, exp } = decoded;
+    const { token, payload, iat, exp } = decoded;
     Assert.notBlank(token);
-    Assert.notBlank(email);
+    Assert.notNull(payload);
     Assert.notBlank(iat);
     Assert.notBlank(exp);
 
     this.token = token;
-    this.email = email;
+    this.payload = payload;
     this.expirationDate = setDate(exp);
     this.issuedAt = setDate(iat);
   }
