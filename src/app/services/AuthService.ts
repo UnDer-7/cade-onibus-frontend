@@ -25,8 +25,14 @@ class AuthService {
         finalize(onComplete),
       )
       .subscribe(
-        (success) => this.onSignInSuccess(success),
-        (error) => onError(error.response),
+        (success) => {
+          console.log('1: ', success);
+          this.onSignInSuccess(success);
+        },
+        (error) => {
+          console.log('2: ', error);
+          onError(error.response);
+        },
       );
   }
 

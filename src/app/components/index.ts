@@ -6,3 +6,5 @@ export { default as Toast } from './Toast';
 export { default as Loading } from './Loading';
 export { default as BlockUI } from './BlockUI';
 export { default as TextFieldWithError } from './TextFieldWithError';
+export { default as Header } from './Header';
+export { default as GoogleButton } from './GoogleButton';

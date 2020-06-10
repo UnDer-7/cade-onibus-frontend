@@ -1,4 +1,5 @@
 import { AssertException } from './Exceptions';
+import Verify from './Verify';
 
 export default abstract class Assert {
   public static notNull(value: any, errorMessage?: string): void {

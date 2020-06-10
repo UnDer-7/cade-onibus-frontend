@@ -1,7 +1,9 @@
 import { Observable } from 'rxjs';
+import QueryString from 'query-string';
 
 import { User } from '../models/User';
 import AbstractResource from './AbstractResource';
+import { GoogleIdWithEmail } from '../models/types/SignInTypes';
 
 class UserResource extends AbstractResource {
   constructor() {
@@ -13,6 +15,13 @@ class UserResource extends AbstractResource {
 
     return this.getResponseBody<User>(
       this.HTTP.get(url)
+    );
+  }
+
+  public createUserWithGoogle(data: GoogleIdWithEmail): Observable<string> {
+    const url = this.createUrlWithQueryParams(this.BASE_URL, { type: 'google' });
+    return this.getResponseBody<string>(
+      this.HTTP.post<string>(url, data)
     );
   }
 

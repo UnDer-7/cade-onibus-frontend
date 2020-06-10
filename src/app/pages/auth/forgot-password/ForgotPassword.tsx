@@ -38,9 +38,7 @@ export default function ForgotPassword(): ReactElement {
 
   // STATE
   const [isBlockingUI, setIsBlockingUI] = useState<boolean>(false);
-  const [toastType, setToastType] = useState<Color>('error');
   const [isShowingToast, setIsShowingToast] = useState<boolean>(false);
-  const [toastMsg, setToastMsg] = useState<string>('');
   const [recoveryJWT, setRecoveryJWT] = useState<JWT<RecoveryPayload> | null>(null);
 
   const inputLabelProps: Partial<InputLabelProps> = recoveryJWT
@@ -74,28 +72,7 @@ export default function ForgotPassword(): ReactElement {
   }, [reset, token]);
 
   function sendEmail(recoveryEmail: string): void {
-    function onError(err: AxiosResponse): void {
-      function setErro(msg: string): void {
-        setIsShowingToast(true);
-        setToastMsg(msg);
-      }
-
-      switch (err?.status) {
-        case 500:
-          setErro('Não foi possivel enviar o email');
-          break;
-        case 404:
-          setErro('Nenhum usuário encontrado com esse email');
-          break;
-        default:
-          setErro('Algo deu errado');
-          break;
-      }
-    }
-
     function onSuccess(): void {
-      setToastType('success');
-      setToastMsg('E-mail enviado com sucesso');
       setIsShowingToast(true);
     }
 
@@ -103,7 +80,6 @@ export default function ForgotPassword(): ReactElement {
     AuthService.sendRecoveryEmail({
       data: recoveryEmail,
       onComplete,
-      onError,
       onSuccess,
     });
   }
@@ -129,8 +105,8 @@ export default function ForgotPassword(): ReactElement {
     <>
       <Toast show={ isShowingToast }
              setShow={ setIsShowingToast }
-             message={ toastMsg }
-             type={ toastType }
+             message='E-mail enviado com sucesso'
+             type='success'
       />
       <BlockUI show={ isBlockingUI }>
         { (!isBlockingUI || !token) && (
