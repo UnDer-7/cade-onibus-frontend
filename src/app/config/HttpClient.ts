@@ -23,6 +23,12 @@ export default class HttpClient {
     this.axiosInstance = Axios.create({
       responseType: 'json',
     });
+
+    this.buildRequestInterceptor(props);
+    this.buildResponseInterceptor(props);
+  }
+
+  private buildRequestInterceptor(props: HttpClientConstructorProps | null | undefined): void {
     this.axiosInstance
       .interceptors
       .request
@@ -44,6 +50,9 @@ export default class HttpClient {
           return Promise.reject(config);
         }
       );
+  }
+
+  private buildResponseInterceptor(props: HttpClientConstructorProps | null | undefined): void {
     this.axiosInstance
       .interceptors
       .response

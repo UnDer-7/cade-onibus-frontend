@@ -17,7 +17,7 @@ export default abstract class Assert {
     let errorMessage = options?.errorMessage;
     const handleNull = options?.handleNull || true;
 
-    if (handleNull) Assert.notNull(value);
+    if (handleNull) Assert.notNull(value, errorMessage);
 
     if (!value!.toString().replace(/\s/g, '').length) {
       if (!errorMessage) {
