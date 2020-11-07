@@ -2,8 +2,6 @@ import React, { ReactElement, useEffect, useState } from 'react';
 
 import { Button, Grid, InputLabelProps, makeStyles, Paper, Typography, } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
-import { AxiosResponse } from 'axios';
-import { Color } from '@material-ui/lab';
 
 import Validations from '../../../utils/Validations';
 import { BlockUI, TextFieldWithError, Toast } from '../../../components';

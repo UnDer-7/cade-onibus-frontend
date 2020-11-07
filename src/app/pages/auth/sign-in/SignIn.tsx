@@ -1,7 +1,6 @@
 import React, { ReactElement, useState } from 'react';
 
 import { useForm } from 'react-hook-form';
-import { useHistory } from 'react-router-dom';
 import { GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login';
 import { AxiosResponse } from 'axios';
 import {
@@ -11,7 +10,6 @@ import {
 } from '@material-ui/core';
 
 import { PasswordWithEmail } from '../../../models/types/SignInTypes';
-import { FORGOT_PASSWORD_PATH, NEW_ACCOUNT_PATH } from '../AuthRoutes';
 import Validations from '../../../utils/Validations';
 import AuthService from '../../../services/AuthService';
 import {
@@ -23,6 +21,7 @@ import {
 } from '../../../components';
 import { withBlockUI, WithBlockUIProps } from '../../../components/HOC';
 import ServerErrorMessages from '../../../utils/ServerErrorMessages';
+import { useRoutes } from '../../../hooks';
 
 const useStyles = makeStyles({
   minHeight: { minHeight: '100vh' },
@@ -31,7 +30,11 @@ const useStyles = makeStyles({
 function SignIn({ setIsBlockingUI }: WithBlockUIProps): ReactElement {
   // HOOKS
   const classes = useStyles();
-  const history = useHistory();
+  const {
+    goToSignUp,
+    goToForgotPassword,
+  } = useRoutes();
+
   const { register, handleSubmit, errors } = useForm<PasswordWithEmail>();
   const [ isShowingErrorToast, setIsShowingErrorToast ] = useState<boolean>(false);
   const [ errorToastMsg, setErrorToastMsg ] = useState<string>('');
@@ -60,7 +63,7 @@ function SignIn({ setIsBlockingUI }: WithBlockUIProps): ReactElement {
       setIsShowingErrorToast(true);
       setErrorToastMsg('Erro ao realizar login com Google');
       // eslint-disable-next-line no-console
-      console.error(`Google sign in erro: \n${response}`);
+      console.error(`Google sign in erro: `, response);
     }
   }
 
@@ -69,11 +72,11 @@ function SignIn({ setIsBlockingUI }: WithBlockUIProps): ReactElement {
   }
 
   function forgotPassword(): void {
-    history.push(FORGOT_PASSWORD_PATH);
+    goToForgotPassword();
   }
 
   function newAccount(): void {
-    history.push(NEW_ACCOUNT_PATH);
+    goToSignUp();
   }
 
   return (

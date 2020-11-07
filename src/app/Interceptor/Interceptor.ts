@@ -1,6 +1,6 @@
 import { Color } from '@material-ui/lab';
+import { Consumer } from '@cade-tecnologia/essentials';
 
-import { Consumer } from '../models/types/Functions';
 
 export default abstract class Interceptor {
   protected static showToast: Consumer<boolean>;

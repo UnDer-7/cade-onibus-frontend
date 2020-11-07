@@ -3,22 +3,27 @@ import { GoogleLoginResponse } from 'react-google-login';
 
 import { UserResource } from '../resources';
 import { CommonProps } from './index';
-import { RunnableImpl } from '../models/types/Functions';
 import { GoogleIdWithEmail } from '../models/types/SignInTypes';
+import { ConsumerImpl, RunnableImpl } from '@cade-tecnologia/essentials';
 
 class UserService {
   public updatePassword(
     {
       data,
       onComplete = RunnableImpl,
-    }: CommonProps<{password: string, token: string}, any>
+    }: CommonProps<{ password: string, token: string }, any>
   ): void {
     UserResource.updatePassword(data)
       .pipe(finalize(onComplete))
       .subscribe();
   }
 
-  public createAccountWithGoogle(data: GoogleLoginResponse): void {
+  public createAccountWithGoogle({
+                                   data,
+                                   onComplete = RunnableImpl,
+                                   onError = ConsumerImpl,
+                                   onSuccess = ConsumerImpl,
+                                 }: CommonProps<GoogleLoginResponse, any>): void {
     const payload: GoogleIdWithEmail = {
       google_id: data.googleId,
       email: data.getBasicProfile().getEmail(),
@@ -26,7 +31,11 @@ class UserService {
     };
 
     UserResource.createUserWithGoogle(payload)
-      .subscribe((res) => console.log('CREATE RES: ', res));
+      .pipe(finalize(onComplete))
+      .subscribe(
+        onSuccess,
+        onError,
+      );
   }
 
 }

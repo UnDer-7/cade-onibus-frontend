@@ -3,13 +3,13 @@ import React, { ReactElement } from 'react';
 import { Redirect, Route, RouteComponentProps, Switch } from 'react-router-dom';
 
 import SignIn from './sign-in/SignIn';
-import NewAccount from './new-account/NewAccount';
+import SignUp from './sign-up/SignUp';
 import ForgotPassword from './forgot-password/ForgotPassword';
 
 export const AUTH_PATH_PREFIX: string = '/auth';
 
-export const SIGN_IN_PATH: string = `${ AUTH_PATH_PREFIX }/signin`;
-export const NEW_ACCOUNT_PATH: string = `${ AUTH_PATH_PREFIX }/new-account`;
+export const SIGN_IN_PATH: string = `${ AUTH_PATH_PREFIX }/sign-in`;
+export const SIGN_UP_PATH: string = `${ AUTH_PATH_PREFIX }/sign-up`;
 export const FORGOT_PASSWORD_PATH: string = `${ AUTH_PATH_PREFIX }/forgot-password`;
 
 export default function AuthRoutes({ match, location }: RouteComponentProps): ReactElement<RouteComponentProps> {
@@ -32,8 +32,8 @@ export default function AuthRoutes({ match, location }: RouteComponentProps): Re
       />
       <Route
         exact
-        path={ NEW_ACCOUNT_PATH }
-        component={ NewAccount }
+        path={ SIGN_UP_PATH }
+        component={ SignUp }
       />
       <Route
         exact

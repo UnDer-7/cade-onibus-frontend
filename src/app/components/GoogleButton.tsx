@@ -5,7 +5,7 @@ import { Button, PropTypes } from '@material-ui/core';
 
 import { GoogleIcon } from './index';
 import EnvVariables from '../utils/EnvironmentVariables';
-import { Consumer, Runnable } from '../models/types/Functions';
+import { Consumer, Runnable } from '@cade-tecnologia/essentials';
 
 type props = {
   onSuccess: Consumer<GoogleLoginResponse | GoogleLoginResponseOffline>,

@@ -1027,6 +1027,13 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
+"@cade-tecnologia/essentials@^1.0.17":
+  version "1.0.17"
+  resolved "https://npm.pkg.github.com/download/@cade-tecnologia/essentials/1.0.17/54e04df9a1773be0b030dac417109fda510217d56ef51a5f771faf2f88b42cf5#cfcb8dc7a0d6bfb2c86c82556a870c0be0f23348"
+  integrity sha512-vEEIXCDDkVcCzMm3q3+pyHOGVzXWTKMQUC0YtsJpsZX5TrH1+Tgvcjh19eIakfkfUBZnQazwcIx0jjfmHdxcdg==
+  dependencies:
+    lodash "^4.17.15"
+
 "@cnakazawa/watch@^1.0.3":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@cnakazawa/watch/-/watch-1.0.4.tgz#f864ae85004d0fcab6f50be9141c4da368d1656a"

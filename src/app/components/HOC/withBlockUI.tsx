@@ -1,6 +1,6 @@
 import React, { ReactElement, useState } from 'react';
 import { BlockUI } from '../index';
-import { Consumer } from '../../models/types/Functions';
+import { Consumer } from '@cade-tecnologia/essentials';
 
 export interface WithBlockUIProps {
   isBlockingUI: boolean,

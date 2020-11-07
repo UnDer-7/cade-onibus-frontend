@@ -13,7 +13,6 @@ import './App.scss';
 import { Toast } from './components';
 import { Interceptor } from './Interceptor';
 
-
 export default function App() {
   const [ isShowing, setShow ] = useState<boolean>(false);
   const [ message, setMessage ] = useState<string>('');

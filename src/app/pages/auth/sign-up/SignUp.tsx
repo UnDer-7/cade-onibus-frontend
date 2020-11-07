@@ -17,6 +17,7 @@ import {
 import Validations from '../../../utils/Validations';
 import UserService from '../../../services/UserService';
 import { WithBlockUIProps, withBlockUI } from '../../../components/HOC';
+import { User } from '../../../models/User';
 
 const useStyles = makeStyles({
   minHeight: {
@@ -24,13 +25,19 @@ const useStyles = makeStyles({
   },
 });
 
-function NewAccount({ setIsBlockingUI }: WithBlockUIProps): React.ReactElement {
+function SignUp({ setIsBlockingUI }: WithBlockUIProps): React.ReactElement {
   const style = useStyles();
   const { register, handleSubmit, errors } = useForm();
 
+  function onSuccess(user: User): void {
+
+  }
+  
   function onSuccessSignInWithGoogle(response: GoogleLoginResponse | GoogleLoginResponseOffline): void {
     setIsBlockingUI(false);
-    UserService.createAccountWithGoogle(response as GoogleLoginResponse);
+    UserService.createAccountWithGoogle({
+      data: response as GoogleLoginResponse
+    });
   }
 
   function onFailureSignInWithGoogle(response: any): void {
@@ -106,5 +113,5 @@ function NewAccount({ setIsBlockingUI }: WithBlockUIProps): React.ReactElement {
   );
 }
 
-export default withBlockUI(NewAccount);
+export default withBlockUI(SignUp);
 

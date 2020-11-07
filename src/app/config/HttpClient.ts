@@ -1,7 +1,7 @@
 import Axios from 'axios-observable';
 import { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { AxiosObservable } from 'axios-observable/dist/axios-observable.interface';
-import { Consumer } from '../models/types/Functions';
+import { Consumer } from '@cade-tecnologia/essentials';
 
 interface HttpClientConstructorProps {
   request?: {

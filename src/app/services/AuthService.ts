@@ -10,8 +10,8 @@ import history from '../config/History';
 import { HOME_PATH } from '../pages/home/HomeRoutes';
 import { SIGN_IN_PATH } from '../pages/auth/AuthRoutes';
 import { JWTInvalidException } from '../utils/Exceptions';
-import { RunnableImpl, ConsumerImpl } from '../models/types/Functions';
 import { CommonProps } from './index';
+import { ConsumerImpl, RunnableImpl } from '@cade-tecnologia/essentials';
 
 class AuthService {
   public signInWithEmail(

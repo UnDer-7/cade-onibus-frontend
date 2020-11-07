@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 
 import { Slide, Snackbar } from '@material-ui/core';
 import { Alert, Color } from '@material-ui/lab';
-import { Consumer } from '../models/types/Functions';
+import { Consumer } from '@cade-tecnologia/essentials';
 
 interface ToastProps {
   show: boolean,

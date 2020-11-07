@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { useHistory } from 'react-router-dom';
+import { useRoutes } from '../../hooks';
 
 export default function Home() {
-  const history = useHistory();
+  const { goToSignIn } = useRoutes();
 
   function goTo() {
-    history.replace('/auth/signin');
+    goToSignIn();
   }
 
   return (
